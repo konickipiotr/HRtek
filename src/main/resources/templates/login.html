@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" media="all" href="/css/login_style.css" />
+
+</head>
+<body>
+	<div th:if="${param.error}" class="alert alert-danger"> Błąd logowania</div>
+	<div class="row">
+	
+		<div id="flags">
+			<a th:href="@{/?lang=pl}"><img class="flag" alt="" th:src="@{/images/poland.png}"></a>
+			<a th:href="@{/?lang=en}"><img class="flag" alt="" th:src="@{/images/wb.png}"></a>
+			<a th:href="@{/?lang=uk}"><img class="flag" alt="" th:src="@{/images/ukraine.png}"></a>
+		</div>
+		
+		<form class="login_form" th:action="@{/login}" method="post">
+		    <h1>HRtek Login</h1>
+			<div class="form-group">
+				<label for="username">username</label><br>
+				<input type="text" id="username" name="username" value="superadmin"><br>
+			</div> 
+			<div class="form-group">
+				<label for="passowrd">hasło</label><br>
+				<input type="password" id="passowrd" name="password" value="123"><br><br>
+			</div>
+			<div class="form-group">
+				<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"/> -->
+				<button type="submit" class="btn btn-success btn-block">Zaloguj</button><br>
+				<input type="checkbox" id="remember-me" name="remember-me">
+				<label for="remember-me">Zapamiętaj mnie</label><br>
+	 			<a th:href="@{/remember}"></a> 
+			</div>
+		</form>
+	  </div>
+
+  
+
+</body>
+</html>

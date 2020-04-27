@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+body{
+	background: url('../images/photo.jpg') no-repeat; 
+	position: relative;
+	font-family: Arial, sans-serif;
+	font-weight: 900;
+	color: #555753;
+	 background-image:      url(files/Tlo.jpg);
+     PADDING-RIGHT:       0px;
+     PADDING-LEFT:        0px;
+     PADDING-TOP:         0px;
+     PADDING-BOTTOM:      0px;
+     MARGIN:              0px;
+     background-color: #d5f3e8;
+}
+.row{
+	display: block;
+	border:0px solid #fff; 
+	padding:5vh 6vh; 
+	margin-top:20vh;
+	margin-left:70vh;
+	margin-right:70vh;
+    -webkit-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.75);
+    box-shadow: -1px 4px 26px 11px rgba(0,0,0,0.75);
+         background-color: #d3d7cf;
+}
+h1{
+	font-family: Arial, sans-serif;
+	color: #2e3436;
+}
+a{
+	text-decoration: none;
+	color: #3465a4;
+}
+a:hover {
+  text-decoration: underline;
+}
+.form-group{
+	padding-top: 1vh;
+}
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=chekbox] {
+  margin-top: 5vh;
+}
+
+button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #45a049;
+}
+@media screen and (max-width: 1920px){
+ .row {
+    width: 30%;
+    height: 25%;
+    margin: auto;
+    margin-top: 5%;
+  }
+
+
+
+.flag{
+	margin-top: 10px;
+	width: 35px;
+	height: 20px;
+}
+
+#flags{
+	 margin-right: 5px; 
+}

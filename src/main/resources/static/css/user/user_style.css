@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+
+#container{
+	width: 95%;
+	margin: auto;
+	background-color:  #d5eeee;
+	min-height: 500px;
+	height: auto;
+	
+}
+

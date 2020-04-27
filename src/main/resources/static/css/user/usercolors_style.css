@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+
+#container{
+	background-color:  #204a87;
+}
+
+th{
+	background-color: #204a87;
+}
+
+a:link.tdbutton{
+	background-color: #204a87;
+}
+
+a:visited.tdbutton{
+	background-color: #204a87;
+}
+
+a:hover.tdbutton{
+	background-color: #204a87;
+}
+
+a:link.button_new{
+	
+	background-color: #204a87;
+}
+
+a:visited.button_new{
+	background-color: #204a87;
+}
+
+a:hover.button_new{
+	background-color: #204a87;
+}

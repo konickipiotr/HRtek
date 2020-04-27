@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+body{
+	color: #555753;
+	background-color: #fffffff;
+	font-family: Arial, Helvetica, Verdana, sans-serif 
+}
+
+header{
+	background-color: #555753;
+	height: 45px;
+	width: 100%;
+	border-radius: 3px;
+}
+
+footer{
+	background-color: #d3d7cf;
+	width: 100%;
+	color: #6f6f6f;
+	text-align: center;
+    bottom: 0;
+}
+
+nav{
+	margin: auto;
+	margin-top: 10px;
+	width: 95%;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	background-color: #2e3436;
+	height: 50px;
+}
+
+.flag{
+	width: 35px;
+	height: 20px;
+}
+
+.top-right-icon{
+	margin-top: 5px;
+	margin-right: 5px;
+	float: right;
+}
+
+#container{
+	width: 95%;
+	margin: auto;
+	min-height: 500px;
+	height: auto;
+}
+
+
+

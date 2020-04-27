@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/factory_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="admin/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+
+	 <div class="button_container">
+			<a class="button_new" href="">Nowa Fabryka</a>
+		</div>
+		
+		<div class="header_container">
+			<h1 class="header">Lista fabryk</h1>
+		</div>
+		
+		<table>
+			<tr>
+				<th class="td_lp">Lp.</th>
+				<th>pkd</th>
+				<th>nip</th>
+				<th>krs</th>
+				<th>Short name</th>
+				<th>full name</th>
+				<th>hourly rate</th>
+				<th class="numberofworker">Num of woker</th>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="pkd"></td>
+				<td class="nip"></td>
+				<td class="krs"></td>
+				<td></td>
+				<td></td>
+				<td class="hourlyrate"></td>
+				<td class="numberofworker"></td>
+				
+				
+			</tr>
+		</table>
+		
+		
+	
+		
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

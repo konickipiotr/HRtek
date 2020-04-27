@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	<nav th:fragment="menu">
+		<ul>
+			<li><a href="">Home</a></li>
+			<li><a th:href="@{/admin/employees}">Pracownicy</a></li>
+			<li><a href="">Agenci</a></li>
+			<li><a th:href="@{/admin/factory}">Fabryki</a></li>
+			<li><a href="">Inne</a></li>
+		</ul>
+	</nav>
+</body>
+</html>
