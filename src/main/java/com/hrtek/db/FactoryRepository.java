@@ -8,4 +8,8 @@ import com.hrtek.model.Factory;
 @Repository
 public interface FactoryRepository extends JpaRepository<Factory, Long> {
 
+	boolean existsByNip(String nip);
+	boolean existsByKrs(String krs);
+	boolean existsByShortname(String shortname);
+	boolean existsByFullname(String fulname);
 }

@@ -1,12 +1,16 @@
 @charset "UTF-8";
 
 
-#container{
-	width: 95%;
-	margin: auto;
-	background-color:  #d5eeee;
-	min-height: 500px;
-	height: auto;
-	
+
+.header-container{
+	background-color: #204a87;
 }
 
+.form-container{
+	background-color: #204a87;
+	margin: auto;
+	margin-bottom: 20px;
+	width: 90%;
+	color: white;
+	font-weight: bold;
+}

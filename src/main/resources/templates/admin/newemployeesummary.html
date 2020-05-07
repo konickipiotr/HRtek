@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/employee_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="admin/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+
+		<div class="header-container">
+			<h1 class="header-header">Nowy pracownik</h1>
+		</div>
+		
+		<h2>Podsumownanie</h2>
+		
+		
+		<p th:text="${newEmployeeModel.firstname}">
+		<p th:text="${newEmployeeModel.lastname}">
+		<p th:text="${newEmployeeModel.email}">
+		<p th:text="${newEmployeeModel.phone}">
+		<p th:text="${newEmployeeModel.sex}">
+		
+		<p th:text="${newEmployeeModel.username}">
+		<p th:text="${newEmployeeModel.password}">
+	
+		
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

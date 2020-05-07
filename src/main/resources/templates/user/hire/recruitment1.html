@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/recruitment_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Rekrutacja</h1>
+		</div>
+		
+		<a href="">Faza 1</a>
+		<a href="">Faza 2</a>
+		
+		<p th:text="${success_msg}" class="success_message"></p>
+		
+		<div class="form-container">
+			<form th:action="@{/recruitment}" method="post" th:object="${candidate}">
+			
+				<div class="row">
+					<div class="collinput">
+						<div class="label-div">
+							<label for="firstname">Imię</label>
+						</div>
+						<div class="input-div">
+							<input type="text" minlength="2" id="firstname" name="firstname" th:field="*{firstname}" required><br>
+						</div>
+					</div>
+					
+					<div class="collinput">
+						<div class="label-div">
+							<label for="lastname">Nazwisko</label>
+						</div>
+						<div class="input-div">
+							<input type="text" minlength="2" id="lastname" name="lastname" th:field="*{lastname}" required><br>
+						</div>
+					</div>
+				</div>
+				<!-- -------------------------------------------------- -->
+				
+				<div class="center-coll">
+					<span>płeć:  </span>
+					<label for="sexM">Male</label>
+					<input type="radio" id="sexM" name="sex" value="M" checked>
+					<label for="sexF">Female</label>
+					<input type="radio" id="sexM" name="sex" value="F" >
+				</div>
+				
+				
+				<!-- -------------------------------------------------- -->
+				<div class="row">
+					<p th:text="${message_contact}" class="error_message"></p>
+					<div class="row">
+						<div class="collinput">
+							<div class="label-div">
+								<label for="email">email</label>
+							</div>
+							<div class="input-div">
+								<input type="email" id="email" name="email" th:field="*{email}"><br>
+							</div>
+						</div>
+						<div class="collinput">
+							<div class="label-div">
+								<label for="phone">phone</label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="phone" name="phone" th:field="*{phone}"><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- -------------------------------------------------- -->
+				
+				<div class="center-coll">
+					<label for="recruterid">rekruter</label>
+					<select id="recruterid" name="recruterid">
+						<option th:each="r : ${recruiters}" th:value="${r.id}" th:text="${r.value}"></option>			
+					</select><br>
+				</div>
+				
+				<!-- -------------------------------------------------- -->
+				
+				<div class="note-div">
+					<label for="note">Notatki</label>
+					<textarea id="note" name="note" rows="3" cols="20"></textarea>
+				</div>
+				
+				
+				<div class="row">
+					<button type="submit" id="savebutton" name="action" value="save">Zapis</button>
+					<button type="submit" id="saveandnext" name="action" value="saveandnext">Zapis i przejdź dalej</button>
+				</div>
+			</form>
+			
+		</div>	
+		
+		<div class="table-div">
+			<table>
+				<tr>
+					<th>Lp</th>
+					<th>Imię</th>
+					<th>Nazwisko</th>
+					<th>płeć</th>
+					<th>rekruter</th>
+					<th>email</th>
+					<th>phone</th>
+					<th>uwagi</th>
+					<th></th>
+				</tr>
+				<tr th:each="i, it : ${candidate_list}">
+					<td th:text="${it.count}" class="td_lp"></td>
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.sex}" class="td_sex"></td>
+					<td th:text="${i.recruiter}"></td>
+					<td th:text="${i.email}"></td>
+					<td th:text="${i.phone}"></td>
+					<td th:text="${i.note}"></td>
+					<td class="td_short_button">
+						<a th:href="@{'/recruitment/' + ${i.id}}" class="tdbutton">usuń</a>
+					</td>
+				</tr>
+				
+				
+			</table>
+		</div>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script type="text/javascript" src="/scripts/recruitment3.js"></script>
+</html>

@@ -1,8 +1,13 @@
 package com.hrtek.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import com.hrtek.admin.employee.NewEmployeeModel;
+import com.hrtek.enums.UserStatus;
 
 @Entity
 public class User {
@@ -13,16 +18,24 @@ public class User {
 	private String username;
 	private String password;
 	private String roles;
-	private int status;
+	@Enumerated(EnumType.ORDINAL)
+	private UserStatus status;
 	
 	public User() {
 	}
 
-	public User(String username, String password, String roles, int status) {
+	public User(String username, String password, String roles, UserStatus status) {
 		this.username = username;
 		this.password = password;
 		this.roles = roles;
 		this.status = status;
+	}
+
+	public User(NewEmployeeModel n) {
+		this.username = n.getUsername();
+		this.password = n.getPassword();
+		this.roles = "USER";
+		this.status = UserStatus.FIRSTLOGIN;
 	}
 
 	public Long getId() {
@@ -57,13 +70,15 @@ public class User {
 		this.roles = roles;
 	}
 
-	public int getStatus() {
+	public UserStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
+
+
 
 	@Override
 	public String toString() {

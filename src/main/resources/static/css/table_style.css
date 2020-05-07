@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
-tr:nth-child(2n) {
+tr:nth-child(odd) {
   background-color: #d4d4c3;
 }
 
 table{
 	margin: auto;
-	width: 95%;
+	margin-bottom: 30px;
+	width: 98%;
 	background-color: #edf0f5;
 	border: 1px solid;
 	border-collapse: collapse;
@@ -17,10 +18,11 @@ th{
 	background-color: #01255e;
 	color: white;
 	padding: 3px;
+	border: 1px solid #888a85;
 }
 
 td{
-	border: 1px solid black;
+	border: 1px solid #888a85;
 	padding: 8px;
 }
 
@@ -35,6 +37,14 @@ td{
 
 .td_short_button{
 	width: 30px;
+}
+
+.td_tickettype{
+	width: 50px;
+}
+
+.td_who{
+	width: 50px;
 }
 
 a:link.tdbutton{
@@ -80,6 +90,11 @@ a:hover.tdbutton{
 }
 
 a:link.button_new{
+	width: 30%;
+	margin: auto;
+	margin-bottom: 30px;
+	text-align: center;
+	display:block;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
@@ -90,6 +105,11 @@ a:link.button_new{
 }
 
 a:visited.button_new{
+	width: 30%;
+	margin: auto;
+	margin-bottom: 30px;
+	text-align: center;
+	display:block;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
@@ -100,6 +120,11 @@ a:visited.button_new{
 }
 
 a:hover.button_new{
+	width: 30%;
+	margin: auto;
+	margin-bottom: 30px;
+	text-align: center;
+	display:block;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
@@ -112,22 +137,9 @@ a:hover.button_new{
 
 .button_container{
 	margin:auto;
-	width: 300px;
+	width: 100%;;
 	overflow:hidden;
 	height:1%;
-	padding: 25px;
 }
 
-.header_container{
-	margin-left: 0;
-  	margin-right: 0;
-	overflow:hidden;
-	height:1%;
-	padding: 25px;
 
-}
-
-.header{
-	text-align: center;
-	width: 70%;
-}

@@ -14,6 +14,7 @@ import com.hrtek.db.UserRepository;
 import com.hrtek.model.Log;
 import com.hrtek.model.UserInfo;
 import com.hrtek.model.UserPostions;
+import com.hrtek.settings.GlobalSettings;
 
 @Service
 public class EmployeeService {
@@ -31,6 +32,17 @@ public class EmployeeService {
 		this.userRepo = userRepo;
 		this.logRepo = logRepo;
 	}
+	
+	public List<UserPostions> getEmployeePositions(){
+		List<UserPostions> upl = userPositionRepo.findAll();
+		for(int i = 0; i < upl.size(); i++ ) {
+			if(upl.get(i).getPosition().equals(GlobalSettings.boss)) {
+				upl.remove(i);
+				i--;
+			}
+		}
+		return upl;
+	}
 
 	public List<EmployeeView> getEmployeeViewList() {
 		List<EmployeeView> employeeViewList = new ArrayList<EmployeeView>();
@@ -42,9 +54,10 @@ public class EmployeeService {
 			Optional<UserPostions> foundposition = userPositionRepo.findById(e.getPosition());
 			if(foundposition.isPresent()) {
 				UserPostions positon = foundposition.get();
-				if(positon.getPosition().equals("Admin") || positon.getPosition().equals("Boss"))
+				if(positon.getPosition().equals(GlobalSettings.boss))
 					continue;
 				ev.setPosition(positon.getPosition());
+				ev.setLogin(userRepo.findById(e.getId()).get().getUsername());
 			}else {
 				this.logRepo.save(new Log("SYSTEM_ERROR", "Unknown position for "+ e.getId()+" - " + e.getFirstname()+ " " + e.getLastname()));
 				ev.setPosition("UNKNOWN");
@@ -69,7 +82,9 @@ public class EmployeeService {
 		this.userRepo.deleteById(id);
 	}
 	
-	public void updateUser(UserInfo userinfo) {
+	public void updateUser(UserInfo ui) {
+		UserInfo userinfo = this.userInfoRepo.findById(ui.getId()).get();
+		userinfo.update(ui);
 		this.userInfoRepo.save(userinfo);
 	}
 	

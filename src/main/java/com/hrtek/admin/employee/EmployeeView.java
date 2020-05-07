@@ -5,6 +5,7 @@ import com.hrtek.model.UserInfo;
 public class EmployeeView {
 	
 	private Long id;
+	private String login;
 	private String firstname;
 	private String lastname;
 	private String position;
@@ -33,6 +34,14 @@ public class EmployeeView {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getFirstname() {
@@ -85,7 +94,7 @@ public class EmployeeView {
 
 	@Override
 	public String toString() {
-		return "EmployeeView [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", position="
-				+ position + ", email=" + email + ", phone=" + phone + ", sex=" + sex + "]";
+		return "EmployeeView [id=" + id + ", login=" + login + ", firstname=" + firstname + ", lastname=" + lastname
+				+ ", position=" + position + ", email=" + email + ", phone=" + phone + ", sex=" + sex + "]";
 	}
 }

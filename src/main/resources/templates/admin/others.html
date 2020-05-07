@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/factory_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="admin/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Inne</h1>
+		</div>
+		
+		<div class="item-container">
+			<h2>Dział</h2>
+			<div class="table-container">
+				<table>
+					<tr>
+						<th>Lp.</th>
+						<th>Department</th>
+						<th></th>
+					</tr>
+					<tr th:each="i, it : ${dep_list}">
+						<td th:text="${it.count}" class="td_lp"></td>
+						<td th:text="${i.department}"></td>
+						<td class="td_short_button">
+							<a th:href="@{'/admin/others/removedepartment/' + ${i.id}}" class="tdbutton">Usuń</a>
+						</td>
+					</tr>
+				</table>
+			</div>	
+			<div class="form-container">
+				<h3>Dodaj dział</h3>
+				<p th:text="${department_msg}" class="error_message"></p>
+				<form th:action="@{/admin/others/adddepartment}" method="post">
+					<div class='input-container'>
+						<label for="department" class="white_label">Department</label>
+						<input type="text" name="department" id="department">
+						<button class="button_add" type="submit">Dodaj</button>
+					</div>
+				</form>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		<!-- -------------------------------------------------------------------- -->
+		
+		<div class="item-container">
+			<h2>Obywatelstwo</h2>
+			<div class="table-container">
+				<table>
+					<tr>
+						<th>Lp.</th>
+						<th>Obywatelstwo</th>
+						<th></th>
+					</tr>
+					<tr th:each="i, it : ${citiz_list}">
+						<td th:text="${it.count}" class="td_lp"></td>
+						<td th:text="${i.name}"></td>
+						<td class="td_short_button">
+							<a th:href="@{'/admin/others/removecitizenship/' + ${i.id}}" class="tdbutton">Usuń</a>
+						</td>
+					</tr>
+				</table>
+			</div>	
+			<div class="form-container">
+				<h3>Dodaj dział</h3>
+				<p th:text="${citiz_msg}" class="error_message"></p>
+				<form th:action="@{/admin/others/addcitizenship}" method="post">
+					<div class='input-container'>
+						<label for="citizenship" class="white_label">Obywatelstwo</label>
+						<input type="text" name="citizenship" id="citizenship">
+						<button class="button_add" type="submit">Dodaj</button>
+					</div>
+				</form>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		<!-- -------------------------------------------------------------------- -->
+		
+		<div class="item-container">
+			<h2>Stanowisko</h2>
+			<div class="table-container">
+				<table>
+					<tr>
+						<th>Lp.</th>
+						<th>Stanowisko</th>
+						<th></th>
+					</tr>
+					<tr th:each="i, it : ${emp_pos}">
+						<td th:text="${it.count}" class="td_lp"></td>
+						<td th:text="${i.position}"></td>
+						<td class="td_short_button">
+							<a th:href="@{'/admin/others/removeposition/' + ${i.id}}" class="tdbutton">Usuń</a>
+						</td>
+					</tr>
+				</table>
+			</div>	
+			<div class="form-container">
+				<h3>Dodaj stanowsko</h3>
+				<p th:text="${position_msg}" class="error_message"></p>
+				<form th:action="@{/admin/others/addposition}" method="post">
+					<div class='input-container'>
+						<label for="userposition"  class="white_label">Stanowsko</label>
+						<input type="text" name="userposition" id="userposition">
+						<button class="button_add" type="submit">Dodaj</button>
+					</div>
+				</form>
+			</div>
+			<div class="clear"></div>
+		</div>
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

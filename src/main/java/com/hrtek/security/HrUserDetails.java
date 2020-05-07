@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.hrtek.enums.UserStatus;
 import com.hrtek.model.User;
 
 public class HrUserDetails implements UserDetails {
@@ -22,6 +23,11 @@ public class HrUserDetails implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+ user.getRoles());
+		if(user.getStatus() == UserStatus.ACTIVE) {
+			authorities.add(new SimpleGrantedAuthority("ACCESS_" + "ACTIVE"));
+		}else if(user.getStatus() == UserStatus.FIRSTLOGIN) {
+			authorities.add(new SimpleGrantedAuthority("ACCESS_" + "FIRSTLOGIN"));
+		}
 		authorities.add(authority);
 		return authorities;
 	}
@@ -53,6 +59,6 @@ public class HrUserDetails implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return user.getStatus() == 2;
+		return user.getStatus() == UserStatus.ACTIVE || user.getStatus() == UserStatus.FIRSTLOGIN;
 	}
 }

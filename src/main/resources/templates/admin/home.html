@@ -6,7 +6,9 @@
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/factory_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
 </head>
 <body>
@@ -14,7 +16,32 @@
 	<nav th:replace="admin/fragments/menu :: menu"></nav>
 	<section id="container">
 	<!-- ************************************************************************* -->
-	
+		<div class="header-container">
+			<h1 class="header-header">Tickety</h1>
+		</div>
+		
+		<table>
+			<tr>
+				<th class="td_lp">Lp</th>
+				<th>type</th>
+				<th>who</th>
+				<th>remarks</th>
+				<th>Action</th>
+				<th></th>
+			</tr>
+			<tr th:each="i, it : ${tiket_list}">
+				<td th:text="${it.count}" class="td_lp"></td>
+				<td th:text="${i.event}" class="td_tickettype"></td>
+				<td th:text="${i.login}" class="td_who"></td>
+				<td th:text="${i.remarks}"></td>
+				<td class="td_short_button">
+					<a th:href="@{'/admin/ticket/action/'+ ${i.event} + '/' + ${i.id}}" class="tdbutton">action</a>
+				</td>
+				<td class="td_short_button">
+					<a th:href="@{'/admin/ticket/delete/' + ${i.id}}" class="tdbutton">Usuń</a>
+				</td>
+			</tr>
+		</table>
 	<!-- ************************************************************************* -->
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>

@@ -1,35 +1,37 @@
 @charset "UTF-8";
 
-
+/* 
+d5eeee 
+*/
 #container{
-	background-color:  #204a87;
+	background-color:  #d5eeee;
 }
 
 th{
-	background-color: #204a87;
+	background-color: #5b7cb0;
 }
 
 a:link.tdbutton{
-	background-color: #204a87;
+	background-color: #5b7cb0;
 }
 
 a:visited.tdbutton{
-	background-color: #204a87;
+	background-color: #5b7cb0;
 }
 
 a:hover.tdbutton{
-	background-color: #204a87;
+	background-color: #5b7cb0;
 }
 
 a:link.button_new{
 	
-	background-color: #204a87;
+	background-color: #5b7cb0;
 }
 
 a:visited.button_new{
-	background-color: #204a87;
+	background-color: #5b7cb0;
 }
 
 a:hover.button_new{
-	background-color: #204a87;
+	background-color: #5b7cb0;
 }

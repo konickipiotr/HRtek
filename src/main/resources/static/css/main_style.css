@@ -25,8 +25,8 @@ nav{
 	margin: auto;
 	margin-top: 10px;
 	width: 95%;
-	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
 	background-color: #2e3436;
 	height: 50px;
 }
@@ -47,7 +47,35 @@ nav{
 	margin: auto;
 	min-height: 500px;
 	height: auto;
+	overflow: auto;
 }
 
+.error_message{
+	color: red;
+	font-weight: bold;
+	text-align: center;
+}
 
+.warning_message{
+	color: #fce94f;
+	font-weight: bold;
+	text-align: center;
+}
+
+.success_message{
+	color: #037135;
+	font-weight: bold;
+	text-align: center;
+}
+
+.header-container{
+	width: 100%;
+}
+
+.header-header{
+	margin-top: 0px;
+	text-align:center;
+	font-size: 30px;
+	color: white;
+}
 

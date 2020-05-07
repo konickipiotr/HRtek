@@ -9,11 +9,12 @@
 <body>
 	<nav th:fragment="menu">
 		<ul>
-			<li><a href="">Home</a></li>
+			<li><a th:href="@{/admin}">Home</a></li>
 			<li><a th:href="@{/admin/employees}">Pracownicy</a></li>
-			<li><a href="">Agenci</a></li>
 			<li><a th:href="@{/admin/factory}">Fabryki</a></li>
-			<li><a href="">Inne</a></li>
+			<li><a th:href="@{/admin/company}">Firmy</a></li>
+			<li><a th:href="@{/admin/others}">Inne</a></li>
+			<li><a href="">Logi</a></li>
 		</ul>
 	</nav>
 </body>

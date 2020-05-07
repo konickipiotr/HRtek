@@ -7,5 +7,6 @@ import com.hrtek.model.UserPostions;
 
 @Repository
 public interface UserPositonsRepository extends JpaRepository<UserPostions, Integer> {
-
+	boolean existsByPosition(String position);
+	UserPostions findByPosition(String position);
 }

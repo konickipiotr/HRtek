@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/employee_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="admin/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+
+		<div class="header-container">
+			<h1 class="header-header">Nowy pracownik</h1>
+		</div>
+		
+		<p th:text="${warning_message}" class="warning_message"></p>
+		<p class="error_message"></p>
+	 	
+	 	<div>
+	 		<form th:action="@{/admin/newemployee/add}" method="post" th:object="${newEmployeeModel}">
+	 			
+	 			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" />
+	 			<label for="username">login</label>
+	 			<input type="text" minlength="3"  id="username" name="username" th:field="*{username}" required>
+	 			
+	 			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
+	 			<label for="password"> hasło</label>
+	 			<input type="password" minlength="6" id="password" name="password" required>
+	 			
+	 			<label for="password2">Powtórz hasło</label>
+	 			<input type="password" minlength="6" id="password2" name="password2" required>
+
+				<input type="hidden" name="firstname" th:field="*{firstname}">
+				<input type="hidden" name="lastname" th:field="*{lastname}">
+				<input type="hidden" name="email" th:field="*{email}">
+				<input type="hidden" name="phone" th:field="*{phone}">
+				<input type="hidden" name="sex" th:field="*{sex}">
+				<input type="hidden" name="position" th:field="*{position}">
+	 			<button type="submit" >Dalej</button>
+	 		</form>
+	 	</div>
+		
+	
+		
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

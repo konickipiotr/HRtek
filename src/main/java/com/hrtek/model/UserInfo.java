@@ -5,6 +5,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.hrtek.admin.employee.NewEmployeeModel;
+
 @Entity
 public class UserInfo {
 	
@@ -34,6 +36,30 @@ public class UserInfo {
 		this.email = email;
 		this.phone = phone;
 		this.sex = sex;
+	}
+	
+	public void update(UserInfo n) {
+		this.firstname = n.getFirstname();
+		this.lastname = n.getLastname();
+		this.imgphoto = "";
+		this.position = n.getPosition();
+		this.email = n.getEmail();
+		this.phone = n.getPhone();
+	}
+	
+	public UserInfo(NewEmployeeModel n, User u) {
+		this.id = u.getId();
+		this.firstname = n.getFirstname();
+		this.lastname = n.getLastname();
+		this.imgphoto = "";
+		this.position = n.getPosition();
+		this.email = n.getEmail();
+		this.phone = n.getPhone();
+		this.sex = n.getSex().equals("F") ? 0 : 1;
+	}
+	
+	public String getName() {
+		return firstname + " " + lastname;
 	}
 
 	public Long getId() {

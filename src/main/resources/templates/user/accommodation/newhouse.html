@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Now Zakwaterowanie</h1>
+		</div>
+
+	 <div>
+	 	<form th:action="@{/accommodation/rooms}" method="post" th:object="${house}">
+	 		<label for="address">address</label>
+	 		<input type="text" name="address" id="address" th:field="*{address}" required>
+	 		
+	 		<label for="postcode">postcode</label>
+	 		<input type="text" name="postcode" id="postcode" th:field="*{postcode}" required>
+	 		
+	 		<label for="city">city</label>
+	 		<input type="text" name="city" id="city" th:field="*{city}" required>
+	 		
+	 		<label for="noofrooms">noofrooms</label>
+	 		<input type="number" min="1" step="1" name="noofrooms" id="noofrooms" th:field="*{noofrooms}" required>
+	 		
+	 		<p th:text="${wrong_capacity}"></p>
+	 		<label for="capacity">ilość miejsc</label>
+	 		<input type="number" min="1" step="1" name="capacity" id="capacity" th:field="*{capacity}" required>
+	 		
+	 		<label for="rent">czynsz</label>
+	 		<input type="number" min="0" step="0.01" name="rent" id="rent" th:field="*{rent}">
+	 		
+	 		<label for="media">media</label>
+	 		<input type="number" min="0" step="0.01"  name="media" id="media" th:field="*{media}">
+	 		
+	 		<span>koszt na osobę</span>
+	 		<label for="typecostrent">Czynsz</label>
+	 		<input type="radio" id="typecostrent" name="typecost" value="rent" checked>
+	 		<label for="typecostrentmedia">czynsz + media</label>
+	 		<input type="radio" id="typecostrentmedia" name="typecost" value="rentmedia">
+	 		<label for="typecostrentmedia">koszt na osobę</label>
+	 		<input type="radio" id="typecostperperson" name="typecost" value="perperson">
+	 		
+	 		<label for="perperson">perperson</label>
+	 		<input type="number" min="0" step="0.01"  name="perperson" id="perperson" th:field="*{perperson}" disabled>
+	 		
+	 		<label for="periodofnotice">Okres wypowiedzenia</label>
+	 		<input type="number" min="0" step="1" name="periodofnotice" id="periodofnotice" th:field="*{periodofnotice}">
+	 		
+	 		<label for="deposit">deposit</label>
+	 		<input type="text" min="0" step="0.01" name="deposit" id="deposit" th:field="*{deposit}">
+	 		
+<!-- 	 		
+	 		<label for=""></label>
+	 		<input type="text" name="" id="" th:field="*{}">
+	 		
+	 		<label for=""></label>
+	 		<input type="text" name="" id="" th:field="*{}">
+	 		 -->
+	 		 
+	 		 <label for="remark">remark</label>
+	 		 <textarea id="remark" name="remark" rows="" cols=""></textarea>
+	 		 <button type="submit">Dalej</button>
+	 	</form>
+	 </div>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script type="text/javascript">
+
+document.getElementById("typecostperperson").onchange = function(){
+	if(document.getElementById("typecostperperson").checked == true){
+		document.getElementById("perperson").disabled = false;
+	}else{
+		document.getElementById("perperson").disabled = true;
+	}
+}
+
+</script>
+</html>

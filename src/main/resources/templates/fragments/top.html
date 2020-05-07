@@ -11,6 +11,10 @@
 		<div style="float: left; margin-left: 5px">
 			<a href=""><img src="/images/logo.png" width="150" height="80"></a>
 		</div>
+		
+		<a th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/}">Panel użytkownika</a>
+		<a th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/admin}">Panel admin</a>
+		<a th:if="${session.ROLE == 'BOSS'}" th:href="@{/boss}">Panel szefa</a>
 		<div class="top-right-icon">
 			<a th:href="@{/user/home?lang=pl}"><img class="flag" alt="" th:src="@{/images/poland.png}"></a>
 			<a th:href="@{/user/home?lang=en}"><img class="flag" alt="" th:src="@{/images/wb.png}"></a>

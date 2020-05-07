@@ -16,13 +16,8 @@ public class HomeController {
 		return "user/home";
 	}
 	
-	@GetMapping("/boss/")
+	@GetMapping("/boss")
 	public String toBossHome() {
 		return "boss/home";
-	}
-	
-	@GetMapping("/admin/")
-	public String toAdminHome() {
-		return "admin/home";
 	}
 }

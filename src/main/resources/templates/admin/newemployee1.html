@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/employee_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="admin/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+
+		<div class="header-container">
+			<h1 class="header-header">Nowy pracownik</h1>
+		</div>
+
+	 	
+	 	<div class="newemployee-outer-container">
+	 		<form th:action="@{/admin/newemployee}" method="post" th:object="${newEmployeeModel}">
+	 			<div class="box">
+		 			<div>
+	 					<label for="firstname">firstname</label>
+	 					<input type="text" minlength="2" id="firstname" name="firstname" th:field="*{firstname}" required><br>
+		 		
+		 				<label for="phone">phone</label>
+		 				<input type="text" id="phone" name="phone" th:field="*{phone}"><br>
+		 		
+		 				<span>Sex:   </span>
+		 				<label for="sexM">M</label>
+		 				<input type="radio" id="sexM" name="sex" value="M" checked>
+		 				<label for="sexF">F</label>
+		 				<input type="radio" id="sexF" name="sex" value="F">
+		 			</div>
+		 			<div>
+		 				<label for="lastname">lastname</label>
+		 				<input type="text" minlength="2" id="lastname" name="lastname" th:field="*{lastname}" required><br>
+		 				
+		 				<label for="email">email</label>
+		 				<input type="email" id="email" name="email" th:field="*{email}"><br>
+		 				
+		 				<label for="position">Stanowisko</label>
+		 				<select id="position" name="position">
+		 					<option th:each="i : ${positions}" th:value="${i.id}" th:text="${i.position}"></option>
+		 				</select>
+		 			</div>
+	 			</div>
+
+	 			<button type="submit">Dalej</button>
+	 		</form>
+	 	</div>
+		
+	
+		
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script type="text/javascript">
+	document.getElementById("position").onchange = function(){
+		var selected = document.getElementById("position");
+		console.log(selected)
+		if(selected.options[selected.selectedIndex].text == "Agent"){
+			document.getElementById("phone").required = true;
+		}else{
+			document.getElementById("phone").required = false;
+		}
+	}
+</script>
+</html>

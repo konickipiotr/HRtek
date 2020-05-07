@@ -39,7 +39,28 @@ h3{
 	float: left;
 }
 
-input{
-	float: right;
+
+
+.newemployee-outer-container{
+	margin: auto;
+	width: 90%;
+	height: 100px;
+	overflow: auto;
+	background-color: #037135;
+	padding: 2%;
+	color: white;
+	font-weight: bold;
+	
+	
+}
+.box{
+	display: flex;
+    justify-content: space-between;
+}
+
+.aa{
+	display: flex;
+	align-content: space-between;
+    justify-content: space-between;
 }
 

@@ -17,19 +17,18 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 
-	 <div class="button_container">
-			<a class="button_new" href="">Nowy pracownik</a>
+		<div class="header-container">
+			<h1 class="header-header">Pracownicy</h1>
 		</div>
-		
-		<div class="header_container">
-			<h1 class="header">Lista pracowników</h1>
+
+	 	<div class="button_container">
+			<a class="button_new" th:href="@{/admin/newemployee}">Nowy pracownik</a>
 		</div>
 		
 		<div th:if="${edit == 'E'}" id="form-edit-employee-container">
 			<h3>Edytuj</h3>
-			<form action="" method="post">
+			<form th:action="@{/admin/employees/modify}" method="post">
 				<input type="hidden" name="id" th:value="${emp.id}">
-				<input type="hidden" name="sex" th:value="${emp.sex}">
 				
 				<div class="edit-column">
 					<div class="input-div">
@@ -64,6 +63,7 @@
 		<table>
 			<tr>
 				<th class="td_lp">Lp.</th>
+				<th>login</th>
 				<th>First name</th>
 				<th>Last name</th>
 				<th>Position</th>
@@ -75,6 +75,7 @@
 			</tr>
 			<tr th:each="i, it : ${employeeList}">
 				<td th:text="${it.count}" class="td_lp"></td>
+				<td th:text="${i.login}"></td>
 				<td th:text="${i.firstname}"></td>
 				<td th:text="${i.lastname}"></td>
 				<td th:text="${i.position}"></td>

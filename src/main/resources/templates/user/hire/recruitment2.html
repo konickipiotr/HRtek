@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/recruitment_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Rekrutacja</h1>
+		</div>
+		
+		<a href="">Faza 1</a>
+		<a href="">Faza 2</a>
+		
+		<p th:text="${success_msg}" class="success_message"></p>
+		
+		<div>
+			<form>
+				<div class="row">
+					<div class="collinput">
+						<div class="label-div">
+							<label for="firstname">Imię</label>
+						</div>
+						<div class="input-div">
+							<input type="text" minlength="2" id="firstname" name="firstname" th:field="*{firstname}" required><br>
+						</div>
+					</div>
+					
+					<div class="collinput">
+						<div class="label-div">
+							<label for="lastname">Nazwisko</label>
+						</div>
+						<div class="input-div">
+							<input type="text" minlength="2" id="lastname" name="lastname" th:field="*{lastname}" required><br>
+						</div>
+					</div>
+				</div>
+				<!-- -------------------------------------------------- -->
+				<div class="row">
+					<div class="collinput">
+						<div class="label-div">
+							<label for=""></label>
+						</div>
+						<div class="input-div">
+						
+						</div>
+					</div>
+					
+					<div class="collinput">
+						<div class="label-div">
+							<label for=""></label>
+						</div>
+						<div class="input-div">
+						</div>
+					</div>
+				</div>
+				
+				
+				<!-- -------------------------------------------------- -->
+				<div class="row">
+					<div class="collinput">
+						<div class="label-div">
+							<label for=""></label>
+						</div>
+						<div class="input-div">
+						
+						</div>
+					</div>
+					
+					<div class="collinput">
+						<div class="label-div">
+							<label for=""></label>
+						</div>
+						<div class="input-div">
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				<!-- -------------------------------------------------- -->
+				
+				
+				
+				<!-- -------------------------------------------------- -->
+				
+				
+				
+				<!-- -------------------------------------------------- -->
+			</form>
+		</div>
+	
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script type="text/javascript" src="/scripts/recruitment3.js"></script>
+</html>

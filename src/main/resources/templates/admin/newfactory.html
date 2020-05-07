@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/factory_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="admin/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+
+		<div class="header-container">
+			<h1 class="header-header">Nowa fabryka</h1>
+		</div>
+		
+		<p th:text="${message}"></p>
+		
+		<div>
+			<form th:action="@{/admin/newfactory}" method="post" th:object="${factory}">
+				<input type="hidden" name="type" th:value="${type}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="numberofwokers" th:field="*{numberofwokers}">
+			
+				<p th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" />
+				<label for="fullname">fullname</label>
+				<input type="text" id="fullname" name="fullname" th:field="*{fullname}" required>
+				
+				<p th:if="${#fields.hasErrors('shortname')}" th:errors="*{shortname}" />
+				<label for="shortname">shortname</label>
+				<input type="text" id="shortname" name="shortname" th:field="*{shortname}" required>
+				
+				<label for="pkd">pkd</label>
+				<input type="text" size="5" minlength="5" maxlength="5" id="pkd" name="pkd" th:field="*{pkd}" required>
+				
+				<p th:if="${#fields.hasErrors('nip')}" th:errors="*{nip}" />
+				<label for="nip">nip</label>
+				<input type="number" min="1000000000" max="9999999999" maxlength="10" step="1" size="10" id="nip" name="nip" th:field="*{nip}" required>
+				
+				<p th:if="${#fields.hasErrors('krs')}" th:errors="*{krs}" />
+				<label for="krs">krs</label>
+				<input type="number" min="0" max="9999999999" step="1" size="10"  id="krs" name="krs" th:field="*{krs}" required>
+				
+				<label for="hourlyrate">hourlyrate</label>
+				<input type="number" min="0" step="0.01" size="10" id="hourlyrate" name="hourlyrate" th:field="*{hourlyrate}" required>
+				
+				<label for="address">address</label>
+				<input type="text" id="address" name="address" th:field="*{address}">
+				
+				<label for="city">city</label>
+				<input type="text" id="city" name="city" th:field="*{city}">
+				
+				<label for="postcode">postcode</label>
+				<input type="text" id="postcode" name="postcode" th:field="*{postcode}">
+			
+				<button type="submit">Dodaj</button>
+			</form>
+		
+		</div>
+		
+		
+	
+		
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

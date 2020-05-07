@@ -8,10 +8,11 @@
 </head>
 <body>
 	<nav th:fragment="menu">
-		<a><div class="menu-button">
-			Home
-		</div></a>
-
+		<ul>
+			<li><a th:href="@{/}">Home</a></li>
+			<li><a th:href="@{/recruitment}">Zatrudnij</a></li>
+			<li><a th:href="@{/accommodation}">Zakwaterowanie</a></li>
+		</ul>
 	</nav>
 </body>
 </html>

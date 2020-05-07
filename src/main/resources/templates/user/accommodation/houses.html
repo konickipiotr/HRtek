@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Zakwaterowanie</h1>
+		</div>
+
+	 	<div class="button_container">
+			<a class="button_new" th:href="@{/accommodation/newaccommodation}">Nowy dom</a>
+		</div>
+		
+
+		<div>
+			<table>
+				<tr>
+					<th>Lp</th>
+					<th>Address</th>
+					<th>Miasto</th>
+					<th>Pojemność</th>
+					<th>Zajęte</th>
+					<th>Wolne</th>
+					<th>czynsz+media</th>
+					<th>cena/os</th>
+					<th></th>
+				</tr>
+				<tr th:each="i, it : ${houses}">
+					<td th:text="${it.count}"></td>
+					<td th:text="${i.address}"></td>
+					<td th:text="${i.city}"></td>
+					<td th:text="${i.capacity}"></td>
+					<td th:text="${i.occupied}"></td>
+					<td th:text="${i.capacity - i.occupied}"></td>
+					<td th:text="${i.rent + i.media}"></td>
+					<td th:text="${i.rent / i.occupied}"></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script type="text/javascript" src="/scripts/recruitment3.js"></script>
+</html>
