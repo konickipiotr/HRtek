@@ -26,23 +26,22 @@
 	 		<form th:action="@{/admin/newemployee}" method="post" th:object="${newEmployeeModel}">
 	 			<div class="box">
 		 			<div>
-	 					<label for="firstname">firstname</label>
+	 					<label for="firstname">Firstname</label>
 	 					<input type="text" minlength="2" id="firstname" name="firstname" th:field="*{firstname}" required><br>
 		 		
-		 				<label for="phone">phone</label>
+		 				<label for="phone">Phone</label>
 		 				<input type="text" id="phone" name="phone" th:field="*{phone}"><br>
 		 		
-		 				<span>Sex:   </span>
-		 				<label for="sexM">M</label>
+		 				<label for="sexM">Male</label>
 		 				<input type="radio" id="sexM" name="sex" value="M" checked>
-		 				<label for="sexF">F</label>
+		 				<label for="sexF">Female</label>
 		 				<input type="radio" id="sexF" name="sex" value="F">
 		 			</div>
 		 			<div>
-		 				<label for="lastname">lastname</label>
+		 				<label for="lastname">Lastname</label>
 		 				<input type="text" minlength="2" id="lastname" name="lastname" th:field="*{lastname}" required><br>
 		 				
-		 				<label for="email">email</label>
+		 				<label for="email">E-mail</label>
 		 				<input type="email" id="email" name="email" th:field="*{email}"><br>
 		 				
 		 				<label for="position">Stanowisko</label>

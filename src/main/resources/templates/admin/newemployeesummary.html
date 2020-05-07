@@ -21,19 +21,22 @@
 			<h1 class="header-header">Nowy pracownik</h1>
 		</div>
 		
-		<h2>Podsumownanie</h2>
-		
-		
-		<p th:text="${newEmployeeModel.firstname}">
-		<p th:text="${newEmployeeModel.lastname}">
-		<p th:text="${newEmployeeModel.email}">
-		<p th:text="${newEmployeeModel.phone}">
-		<p th:text="${newEmployeeModel.sex}">
-		
-		<p th:text="${newEmployeeModel.username}">
-		<p th:text="${newEmployeeModel.password}">
-	
-		
+		<div class = "H">
+				<h2>Podsumownanie</h2>
+		</div>
+		<div class="SummaryNewemployee-outer-container">
+			<div class ="SummaryNewemployee-outer-containerPart1">
+				<p> <span>Imie:</span> <span th:text="${newEmployeeModel.firstname}"></span></p>
+				<p> <span>Nazwisko:</span> <span th:text="${newEmployeeModel.lastname}"></span></p>
+				<p> <span>E-mail:</span> <span th:text="${newEmployeeModel.email}"></span></p>
+				<p> <span>Tel:</span> <span th:text="${newEmployeeModel.phone}"></span></p>
+			</div>
+			<div class ="SummaryNewemployee-outer-containerPart2">
+				<p><span>Płeć:</span> <span th:text="${newEmployeeModel.sex}"></span></p>	
+				<p><span>Login:</span> <span th:text="${newEmployeeModel.username}"></span></p>
+				<p><span>Hasło:</span> <span th:text="${newEmployeeModel.password}"></span></p>
+			</div>
+		</div>
 	<!-- ************************************************************************* -->
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>

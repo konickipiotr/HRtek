@@ -7,7 +7,6 @@
 	background-color:  #e4ffd9;
 	min-height: 500px;
 	height: auto;
-	
 }
 
 #form-edit-employee-container{
@@ -37,30 +36,88 @@ h3{
 	height: 30px;
 	overflow: auto;
 	float: left;
+	margin: auto;
 }
-
-
 
 .newemployee-outer-container{
 	margin: auto;
-	width: 90%;
-	height: 100px;
+	width: 70%;
+	height: 130px;
 	overflow: auto;
 	background-color: #037135;
 	padding: 2%;
 	color: white;
 	font-weight: bold;
-	
+	border: 3px groove mediumseagreen;
+}
+.newemployee-outer-container2{
+	margin: auto;
+	width: 50%;
+	height: 130px;
+	overflow: auto;
+	background-color: #037135;
+	padding: 2%;
+	color: white;
+	font-weight: bold;
+	border: 3px groove mediumseagreen;
+}
+.newemployee-outer-container2 div{
+	margin-left: 20%;
+}
+.SummaryNewemployee-outer-container{
+	display: flex;
+	justify-content: space-evenly;
+	margin: auto;
+	width: 50%;
+	height: 130px;
+	overflow: auto;
+	background-color: #0ea762;
+	padding: 2%;
+	color: white;
+	font-weight: bold;
+	border: 3px groove mediumseagreen;
+}
+.SummaryNewemployee-outer-containerPart1, .SummaryNewemployee-outer-containerPart2{
+	margin-top: -35px;
+}
+.SummaryNewemployee-outer-container p{
+	font-size: 16px;
+	padding-top: 5px;
+}
+.H{
+	border: 3px groove mediumseagreen;
+	background-color: #096f41;
+	width: 54%;
+	color: #dddddd;
+	margin: auto;
 	
 }
 .box{
 	display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    margin-top: -20px;
 }
+label {
+      width: 100px;
+      margin: 5px 0;
+      float: left;
+      clear: left;
+      }
+input, textarea, select {float: left; margin-top: 10px;}
 
-.aa{
-	display: flex;
-	align-content: space-between;
-    justify-content: space-between;
+button{
+	margin-left: 45%;
 }
-
+.buttonNewEmployee2{
+		margin-left: 5%;
+		margin-top: 1%;
+}
+.passNewEmployee2{
+	margin-top: 10px;
+}
+.newemployee-outer-container2 p{
+	margin-top: -25px;
+	color: red;
+	margin-left:1%;
+	padding-top:5px;
+}
