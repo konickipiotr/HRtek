@@ -17,8 +17,11 @@ import com.hrtek.model.Ticket;
 import com.hrtek.model.User;
 import com.hrtek.model.UserInfo;
 import com.hrtek.model.UserPostions;
+import com.hrtek.model.accommodation.Bed;
 import com.hrtek.model.accommodation.House;
+import com.hrtek.model.accommodation.Room;
 import com.hrtek.settings.GlobalSettings;
+import com.hrtek.user.accommodation.Bedstatus;
 
 @Service
 public class DBInit implements CommandLineRunner {
@@ -99,6 +102,58 @@ public class DBInit implements CommandLineRunner {
 		this.roomRepo.deleteAll();
 		this.bedRepo.deleteAll();
 
+		House h1 = new House();
+		h1.setAddress("Chłopska 3");
+		h1.setCapacity(10);
+		h1.setNoofrooms(3);
+		h1.setPostcode("33-222");
+		h1.setCity("Smolec");
+		h1.setDeposit(3000);
+		h1.setRent(6000);
+		h1.setMedia(1500);
+		h1.setPeriodofnotice(3);
+		h1.setRemark("elo");
+		h1.setTypecost("rentmedia");
+		h1.setPerperson((6000+1500)/35);
+		this.houseRepo.save(h1);
+		
+		Room h1_r1 = new Room();
+		h1_r1.setCapacity(4);
+		h1_r1.setHouseid(h1.getId());
+		h1_r1.setOccupied(0);
+		h1_r1.setRoomname("100");
+		h1_r1.setRemark("prawa strona");
+		this.roomRepo.save(h1_r1);
+		
+		this.bedRepo.save(new Bed(h1_r1.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		this.bedRepo.save(new Bed(h1_r1.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		this.bedRepo.save(new Bed(h1_r1.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		this.bedRepo.save(new Bed(h1_r1.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		
+		Room h1_r2 = new Room();
+		h1_r2.setCapacity(4);
+		h1_r2.setHouseid(h1.getId());
+		h1_r2.setOccupied(0);
+		h1_r2.setRoomname("101");
+		h1_r2.setRemark("lewa strona");
+		this.roomRepo.save(h1_r2);
+		
+		this.bedRepo.save(new Bed(h1_r2.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		this.bedRepo.save(new Bed(h1_r2.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		this.bedRepo.save(new Bed(h1_r2.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		this.bedRepo.save(new Bed(h1_r2.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		
+		Room h1_r3 = new Room();
+		h1_r3.setCapacity(2);
+		h1_r3.setHouseid(h1.getId());
+		h1_r3.setOccupied(0);
+		h1_r3.setRoomname("101");
+		h1_r3.setRemark("środkek strona");
+		this.roomRepo.save(h1_r2);
+		
+		this.bedRepo.save(new Bed(h1_r3.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		this.bedRepo.save(new Bed(h1_r3.getId(), h1.getId(), null, null, Bedstatus.FREE));
+		
 	}
 
 }

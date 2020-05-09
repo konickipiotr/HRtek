@@ -84,4 +84,11 @@ public class Room {
 	public void setBedlist(List<Bed> bedlist) {
 		this.bedlist = bedlist;
 	}
+
+	@Override
+	public String toString() {
+		return "Room [id=" + id + ", houseid=" + houseid + ", roomname=" + roomname + ", capacity=" + capacity
+				+ ", occupied=" + occupied + ", remark=" + remark + ", bedlist=" + bedlist + "]";
+	}
+	
 }

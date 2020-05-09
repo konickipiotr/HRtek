@@ -31,6 +31,20 @@ public class House {
 	
 	public House() {
 	}
+	
+	public void changeAddress(AddressForm af) {
+		this.address = af.getAddress();
+		this.postcode = af.getPostcode();
+		this.city = af.getCity();
+	}
+	
+	public void changeFinance(FinanceForm ff) {
+		this.rent = ff.getRent();
+		this.media = ff.getMedia();
+		this.deposit = ff.getDeposit();
+		this.perperson = ff.getPerperson();
+		this.typecost = ff.getTypecost();
+	}
 
 	public Long getId() {
 		return id;

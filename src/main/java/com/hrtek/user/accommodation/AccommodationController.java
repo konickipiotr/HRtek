@@ -20,7 +20,8 @@ public class AccommodationController {
 	private AccommodationService accommodationService;
 	
 	@GetMapping
-	public String showAllHouses(Model model) {
+	public String showAllHouses(Model model, String message) {
+		model.addAttribute("error_msg", message);
 		model.addAttribute("houses", accommodationService.getAllHouses());
 		return "user/accommodation/houses";
 	}
