@@ -24,18 +24,18 @@
 		<p th:text="${warning_message}" class="warning_message"></p>
 		<p class="error_message"></p>
 	 	
-	 	<div>
+	 	<div class="newemployee-outer-container2">
 	 		<form th:action="@{/admin/newemployee/add}" method="post" th:object="${newEmployeeModel}">
-	 			
+	 			<div>
 	 			<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" />
-	 			<label for="username">login</label>
+	 			<label class="passNewEmployee2" for="username">login</label>
 	 			<input type="text" minlength="3"  id="username" name="username" th:field="*{username}" required>
 	 			
 	 			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
-	 			<label for="password"> hasło</label>
+	 			<label class="passNewEmployee2" for="password"> hasło</label>
 	 			<input type="password" minlength="6" id="password" name="password" required>
 	 			
-	 			<label for="password2">Powtórz hasło</label>
+	 			<label class="passNewEmployee2" for="password2">Powtórz hasło</label>
 	 			<input type="password" minlength="6" id="password2" name="password2" required>
 
 				<input type="hidden" name="firstname" th:field="*{firstname}">
@@ -44,7 +44,8 @@
 				<input type="hidden" name="phone" th:field="*{phone}">
 				<input type="hidden" name="sex" th:field="*{sex}">
 				<input type="hidden" name="position" th:field="*{position}">
-	 			<button type="submit" >Dalej</button>
+	 			<button class = "buttonNewEmployee2" type="submit" >Dalej</button>
+	 			</div>
 	 		</form>
 	 	</div>
 		
