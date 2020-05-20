@@ -66,7 +66,6 @@ public class BasicService {
 		bv.setCitizenship(citizenshipRepo.findById(wb.getCitizenship()).get().getName());
 		bv.setFactory(factoryRepo.findById(w.getFactoryid()).get().getShortname());
 		bv.setCompany(companyRepo.findById(w.getCompanyid()).get().getShortname());
-		System.out.println(bv.getStatus());
 		return bv;
 	}
 }

@@ -27,108 +27,6 @@
 			<div class="table-div">
 				<table id="basic-table">
 					<tr>
-						<td class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td class="td_noP">
-							<!-- profil -->
-						</td>
-						<td class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bDateofbirth == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bSex == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bCitizenship == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bPesel == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bPaszport == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bBbiopaszport == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bCompany == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bFactory == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bStartWork == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bStartZus == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bEndZus == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						<td th:if="${fd.bEndWork == true}" class="td_noP">
-							<form action="">
-								<button class="sort-button">&#8659;</button>
-								<button class="sort-button">&#8657;</button>
-							</form>
-						</td>
-						
-					</tr>
-					<tr>
 						<th>lp</th>
 						<th>status</th>
 						<th>profil</th>
@@ -146,6 +44,118 @@
 						<th th:if="${fd.bStartZus == true}">Starty Zus</th>
 						<th th:if="${fd.bEndZus == true}">Koniec Zus</th>
 						<th th:if="${fd.bEndWork == true}" >Koniec Pracy</th>
+					</tr>
+					<tr>
+						<td class="td_noP">
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="STATUS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<!-- profil -->
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="FIRSTNAME">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="LASTNAME">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="DATEOFBIRTH">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="SEX">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="CITIZENSHIP">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="PESEL">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="PASZPORT">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="BIOPASZPORT">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="COMPANY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="FACTORY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="STARTWORK">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="STARTZUS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="ENDZUS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showbasic/sort}" method="post">
+								<input type="hidden" name="field" value="ENDWORK">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
 					</tr>
 					<tr th:each="i, it : ${bv_list}">
 						<td th:text="${it.count}"></td>
