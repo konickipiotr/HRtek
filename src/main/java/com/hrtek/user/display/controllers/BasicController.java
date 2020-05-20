@@ -23,16 +23,13 @@ public class BasicController {
 	public String showbasci(Model model) {
 		
 		model.addAttribute("bv_list", basicService.getBasicViewList());
-		model.addAttribute("fd", new BasicShowedField());
+		
+		model.addAttribute("fd", new BasicShowedField(true));
 		return "user/display/basic";
 	}
 	
 	@PostMapping(path = "/showhide")
-	public String showHideColummn(Model model, @ModelAttribute BasicShowedField fd) {
-		System.out.println(fd);
-
-		System.out.println("tuuu");
-
+	public String showHideColummn(Model model, BasicShowedField fd) {
 		model.addAttribute("bv_list", basicService.getBasicViewList());
 		model.addAttribute("fd", fd);
 		return "user/display/basic";

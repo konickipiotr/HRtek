@@ -5,17 +5,36 @@ import lombok.Data;
 @Data
 public class BasicShowedField {
 
-	private boolean bDateofbirth = true;
-	private boolean bSex = true;
-	private boolean bCitizenship = true;
-	private boolean bPesel = true;
-	private boolean bPaszport = true;
-	private boolean bBbiopaszport = true;
-	private boolean bCompany = true;
-	private boolean bFactory = true;
-	private boolean bStartWork = true;
-	private boolean bStartZus = true;
-	private boolean bEndZus = true;
-	private boolean bEndWork = true;
+	private boolean bDateofbirth;
+	private boolean bSex;
+	private boolean bCitizenship;
+	private boolean bPesel;
+	private boolean bPaszport;
+	private boolean bBbiopaszport;
+	private boolean bCompany;
+	private boolean bFactory;
+	private boolean bStartWork;
+	private boolean bStartZus;
+	private boolean bEndZus;
+	private boolean bEndWork;
+	
+	public BasicShowedField() {
+		
+	}
+	
+	public BasicShowedField(boolean val) {
+		bDateofbirth = val;
+		bSex = val;
+		bCitizenship = val;
+		bPesel = val;
+		bPaszport = val;
+		bBbiopaszport = val;
+		bCompany = val;
+		bFactory = val;
+		bStartWork = val;
+		bStartZus = val;
+		bEndZus = val;
+		bEndWork = val;
+	}
 	
 }
