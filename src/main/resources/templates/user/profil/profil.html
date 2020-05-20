@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Podstawowe</h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		<section class="content-row">
+			<div class="data-double-block">
+				<div class="data-block">
+					<div class="section-header">
+						<h3>Podstowowe</h3>
+					</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Status: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wv.status}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+							
+								</div>
+								<div class="data-content">
+									
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Imię: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wv.firstname}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Nazwisko: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wv.lastname}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Firma: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wv.company}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Fabryka: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wv.factory}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Rekruter: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wv.recruiter}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div>
+						<div class="button-bar">
+							<a th:if="${av.worker == null}" th:href="@{'/profiledit/WORKER/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.worker == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.worker != null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.worker != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.worker != null}" class="war" th:text="${av.worker.username}"> </span>
+								<span th:if="${av.worker != null}" class="war"> max do: </span>
+								<span th:if="${av.worker != null}" class="war" th:text="${av.worker.expired}"> </span>
+							</p>
+						</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- ################ BLOCKA #################  -->
+				<div class="data-block">
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Data urodzenia: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wb.dateofbirth}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Płeć: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wb.sex}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Numer konta: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wb.accountnr}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>PESEL: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wb.pesel}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Numer pracowniak: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wb.workerNo}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Dział: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wb.department}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Obywatelstwo: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wb.citizenship}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.basic == null}" th:href="@{'/profiledit/BASIC/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.basic == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.basic != null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.basic != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.basic != null}" class="war" th:text="${av.basic.username}"> </span>
+								<span th:if="${av.basic != null}" class="war"> max do: </span>
+								<span th:if="${av.basic != null}" class="war" th:text="${av.basic.expired}"> </span>
+							</p>
+						</div>
+					</div>
+				</div>
+				
+				<!-- ################ BLOCKA #################  -->
+				<div class="data-block">
+					<div class="section-header">
+						<h3>Finanse</h3>
+					</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Stawka netto/h: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wf.hourlyrate}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Bonus: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wf.bonus}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.finance == null}" th:href="@{'/profiledit/FINANCE/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.finance == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.finance != null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.finance != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.finance != null}" class="war" th:text="${av.finance.username}"> </span>
+								<span th:if="${av.finance != null}" class="war"> max do: </span>
+								<span th:if="${av.finance != null}"class="war" th:text="${av.finance.expired}"> </span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!-- ################ BLOCKA #################  -->
+			</div>
+			<div class="menu-bar">
+				<div class="menu-inner">
+					<div class="section-header">
+						<h3>Menu</h3>
+					</div>
+					<form action="">
+						<div>
+							<label for="workerNote">Notaki</label>
+						</div>
+						<div>
+							<textarea id="workerNote" name="workerNote" th:text="${workerNote.text}"></textarea>
+						</div>
+						<div>
+							<button type="submit">Zapisz</button>
+						</div>
+					</form>
+					
+					<form action="">
+					<div>
+						<label for="doc">Dokumenty</label>
+					</div>
+					<div>
+						<select>
+							<option></option>
+						</select>
+					</div>
+					<button type="submit">Generuj</button>
+					</form>
+					
+				</div>
+			</div>
+			
+			
+			<!-- ################ DOUBLE BLOCKA #################  -->
+		</section>
+		
+		
+		<section class="content-row">
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>Oświadczenie</h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Typ oświadczenia </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${ps.statementType}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Oświadczenie: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${ps.statement}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Ważne od:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${ps.statementValidFrom}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Ważne do: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${ps.statementValidTo}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.statement == null}" th:href="@{'/profiledit/STATEMENT/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.statement == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.statement != null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.statement != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.statement != null}" class="war" th:text="${av.statement.username}"> </span>
+								<span th:if="${av.statement != null}" class="war"> max do: </span>
+								<span th:if="${av.statement != null}"class="war" th:text="${av.statement.expired}"> </span>
+							</p>
+						</div>
+					</div>
+			</div>
+			<!-- ################ BLOCKA #################  -->
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>Zezwolenie</h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Zezwolenie: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${ps.permit}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Inne: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${ps.other}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Ważne od: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${ps.permitValidFrom}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Ważne do: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${ps.permitValidTo}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.permit == null}" th:href="@{'/profiledit/PERMIT/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.permit == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.permit != null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.permit != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.permit != null}" class="war" th:text="${av.permit.username}"> </span>
+								<span th:if="${av.permit != null}" class="war"> max do: </span>
+								<span th:if="${av.permit != null}"class="war" th:text="${av.permit.expired}"> </span>
+							</p>
+						</div>
+					</div>
+			</div>
+			<!-- ################ BLOCKA #################  -->
+		</section>
+			<!-- ################ BLOCKA #################  -->
+		<section class="content-row">
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>Daty</h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Start Zus:: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wd.startZus}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>End Zus</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wd.endZus}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Start work: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wd.startWork}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>End work: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" >???</span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Start Badania: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wd.startMedicalExams}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>End Badania: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wd.endMedicalExams}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>W systemie: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wd.addToSystem}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.date == null}" th:href="@{'/profiledit/DATE/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.date == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.date != null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.date != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.date != null}" class="war" th:text="${av.date.username}"> </span>
+								<span th:if="${av.date != null}" class="war"> max do: </span>
+								<span th:if="${av.date != null}"class="war" th:text="${av.date.expired}"> </span>
+							</p>
+						</div>
+					</div>
+			</div>
+			<!-- ################ BLOCKA #################  -->
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>zzzz</h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Paszport biometryczny:  </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${re.biopassport}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Paszport</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${re.passport}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Wiza </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${re.visa}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Ważna od: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${re.visaValidFrom}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Ważna do: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${re.visaValidTo}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.residency == null}" th:href="@{'/profiledit/RESIDENCY/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.residency == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.residency != null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.residency != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.residency != null}" class="war" th:text="${av.residency.username}"> </span>
+								<span th:if="${av.residency != null}" class="war"> max do: </span>
+								<span th:if="${av.residency != null}"class="war" th:text="${av.residency.expired}"> </span>
+							</p>
+						</div>
+					</div>
+			</div>
+			<!-- ################ BLOCK #################  -->
+		</section>
+		
+		<section class="content-row">
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>Dane kontaktowe</h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span>Telefon </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${cv.phone}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>email: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${cv.email}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.contact == null}" th:href="@{'/profiledit/CONTACT/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.contact == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.contact!= null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.contact != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.contact != null}" class="war" th:text="${av.contact.username}"> </span>
+								<span th:if="${av.contact != null}" class="war"> max do: </span>
+								<span th:if="${av.contact != null}"class="war" th:text="${av.contact.expired}"> </span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!-- ################ BLOCK #################  -->
+				<div class="data-block-50">
+				<div class="section-header">
+					<h3>Adres PL</h3>
+				</div>
+					<div class="border-div">
+							
+							<div th:if="${cv.houseid != null}">
+								<div  class="data-col">
+									<div class="data-label">
+									<span>Typ: </span>
+									</div>
+									<div class="data-content">
+										<span class="data">Firmowe</span>
+									</div>
+								</div>
+							</div>
+							<div th:unless="${cv.houseid != null}">
+								<div  class="data-col">
+									<div class="data-label">
+									<span>Typ: </span>
+									</div>
+									<div class="data-content">
+										<span class="data">Własne</span>
+									</div>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>adres: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${cv.pladdress}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Kod pocztowy: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${cv.plpostcode}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Miasto: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${cv.plcity}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+							
+							<div th:if="${cv.houseid != null}">
+								<div  class="data-col">
+									<div class="data-label">
+									<span>Dom: </span>
+									</div>
+									<div class="data-content">
+										<span class="data" th:text="${cv.house}"></span>
+									</div>
+								</div>
+								<div  class="data-col">
+									<div class="data-label">
+										<span>Pokój: </span>
+									</div>
+									<div class="data-content">
+										<span class="data" th:text="${cv.room}"></span>
+									</div>
+								</div>
+								<div  class="data-col">
+									<div class="data-label">
+										<span>Do: </span>
+									</div>
+									<div class="data-content">
+										<span class="data" th:text="${cv.expire}"></span>
+									</div>
+								</div>
+							
+							</div>
+
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.addresspl == null}" th:href="@{'/profiledit/ADDRESSPL/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.addresspl == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.addresspl != null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.addresspl != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.addresspl != null}" class="war" th:text="${av.addresspl.username}"> </span>
+								<span th:if="${av.addresspl != null}" class="war"> max do: </span>
+								<span th:if="${av.addresspl != null}"class="war" th:text="${av.addresspl.expired}"> </span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!-- ################ BLOCK #################  -->
+				<div class="data-block-50">
+				<div class="section-header">
+					<h3>Adres zag</h3>
+				</div>
+					<div class="border-div">
+						<div class="data-col">
+								<div class="data-label">
+									<span>adres: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${cv.address}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Kod pocztowy: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${cv.postcode}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span>Miasto: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${cv.city}"></span>
+								</div>
+							</div>
+						<!-- ####### ROW ######  -->
+						<div class="button-bar">
+							<a th:if="${av.address == null}" th:href="@{'/profiledit/ADDRESS/' + ${wv.id}}" class="button" >Zmień</a>
+							<a th:unless="${av.address == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+					
+							<span th:if="${av.address!= null}" class="dot"></span> 
+							<p>
+								<span th:if="${av.address != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.address != null}" class="war" th:text="${av.address.username}"> </span>
+								<span th:if="${av.address != null}" class="war"> max do: </span>
+								<span th:if="${av.address != null}"class="war" th:text="${av.address.expired}"> </span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<!-- ################ BLOCK #################  -->
+		</section>
+		<section class="content-row">
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>Pliki</h3>
+				</div>
+			</div>
+		</section>
+<!-- 		<br>
+					<p><span>Telefon: </span><span class="data" th:text="${cv.phone}"></span></p>
+					<p><span>email: </span><span class="data" th:text="${cv.email}"></span></p>
+					<p><span>Adres: </span><span class="data" th:text="${cv.address}"></span></p>
+					<p><span>Kod pocztowy: </span><span class="data" th:text="${cv.postcode}"></span></p>
+					<p><span>Miasto: </span><span class="data" th:text="${cv.city}"></span></p>
+					
+					<br>
+					<p><span>Adres PL: </span><span class="data" th:text="${cv.pladdress}"></span></p>
+					<p><span>Kod pocztowy PL: </span><span class="data" th:text="${cv.plpostcode}"></span></p>
+					<p><span>Miasto PL: </span><span class="data" th:text="${cv.plcity}"></span></p>
+					
+					<br>
+					<div  th:if="${cv.houseid != null}">
+						<p><span>Dom: </span><span class="data" th:text="${cv.house}"></span></p>
+						<p><span>Pokój: </span><span class="data" th:text="${cv.room}"></span></p>
+						<p><span>Do: </span><span class="data" th:text="${cv.expire}"></span></p>
+					</div> -->
+<!-- 					<p><span>Status: </span><span class="data" th:text="${wv.status}"></span></p>
+					<p><span>Imię: </span><span class="data" th:text="${wv.firstname}"></span></p>
+					<p><span>Nazwisko: </span><span class="data" th:text="${wv.lastname}"></span></p>
+					<p><span>Firma: </span><span class="data" th:text="${wv.company}"></span></p>
+					<p><span>Fabryka: </span><span class="data" th:text="${wv.factory}"></span></p>
+					<p><span>rekruter: </span><span class="data" th:text="${wv.recruiter}"></span></p> -->
+	<!-- 				
+					<br>
+					<p><span>Dział: </span><span class="data" th:text="${wb.department}"></span></p>
+					<p><span>Obywatelstwo: </span><span class="data" th:text="${wb.citizenship}"></span></p>
+					<p><span>Data urodzenia: </span><span class="data" th:text="${wb.dateofbirth}"></span></p>
+					<p><span>Płeć: </span><span class="data" th:text="${wb.sex}"></span></p>
+					<p><span>Numer konta: </span><span class="data" th:text="${wb.accountnr}"></span></p>
+					<p><span>PESEL</span><span class="data" th:text="${wb.pesel}"></span></p>
+					<p><span>Numer pracowniak: </span><span class="data" th:text="${wb.workerNo}"></span></p> -->
+					
+					<!-- <br>
+					<p><span>Start Zus: </span><span class="data" th:text="${wd.startZus}"></span></p>
+					<p><span>End Zus: </span><span class="data" th:text="${wd.endZus}"></span></p>
+					<p><span>Start work:  </span><span class="data" th:text="${wd.startWork}"></span></p>
+					<p><span>Start Badania: </span><span class="data" th:text="${wd.startMedicalExams}"></span></p>
+					<p><span>End Badania: </span><span class="data" th:text="${wd.endMedicalExams}"></span></p>
+					<p><span>W systemie: </span><span class="data" th:text="${wd.addToSystem}"></span></p>
+					
+					<br>
+					<p><span>Typ oświadczenia: </span><span class="data" th:text="${ps.statementType}"></span></p>
+					<p><span>Oświadczenie: </span><span class="data" th:text="${ps.statement}"></span></p>
+					<p><span>Ważne od: </span><span class="data" th:text="${ps.statementValidFrom}"></span></p>
+					<p><span>Ważme do: </span><span class="data" th:text="${ps.statementValidTo}"></span></p>
+					<p><span>Zezwolenie: </span><span class="data" th:text="${ps.permit}"></span></p>
+					<p><span>Ważne od: </span><span class="data" th:text="${ps.permitValidFrom}"></span></p>
+					<p><span>Ważne do: </span><span class="data" th:text="${ps.permitValidTo}"></span></p>
+					<p><span>Inne</span><span class="data" th:text="${ps.other}"></span></p> -->
+					
+		<!-- 			<br>
+					<p><span>Paszport biometryczny: </span><span class="data" th:text="${re.biopassport}"></span></p>
+					<p><span>Paszport: </span><span class="data" th:text="${re.passport}"></span></p>
+					<p><span>Wiza</span><span class="data" th:text="${re.visa}"></span></p>
+					<p><span>Ważna od: </span><span class="data" th:text="${re.visaValidFrom}"></span></p>
+					<p><span>Ważna do: </span><span class="data" th:text="${re.visaValidTo}"></span></p> -->
+	<!-- 				
+					<br>
+					<p><span>Stawka netto/h:</span><span class="data" th:text="${wf.hourlyrate}"></span></p>
+					<p><span>bonus: </span><span class="data" th:text="${wf.bonus}"></span></p>
+					 -->
+					
+		
+			
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

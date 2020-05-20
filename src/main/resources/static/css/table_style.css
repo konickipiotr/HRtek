@@ -26,6 +26,17 @@ td{
 	padding: 8px;
 }
 
+.td_noP{
+	padding: 0px;
+	margin: 0px;
+}
+
+.sort-button{
+	width: 50%;
+	height: 100%;
+	float: left;
+	padding: 0px;
+}
 
 .td_lp{
 	width: 40px;
@@ -37,6 +48,7 @@ td{
 
 .td_short_button{
 	width: 30px;
+	font-weight: bolder;
 }
 
 .td_tickettype{

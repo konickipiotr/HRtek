@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body onload="enableReadOnly()">
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">EDYTUJ</h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		
+			<form th:action="@{/profiledit}" method="post" th:object="${workerDate}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="type" value="DATE">
+				
+				<label for="startWork">Strat work</label>
+				<input type="date" id="startWork" name="startWork" th:field="*{startWork}"><br>
+
+				<label for="startZus">Umowa od(zus?)</label>
+				<input type="date" id="startZus" name="startZus" th:field="*{startZus}"><br>
+				
+				<label for="endZus">Umowa do(zus?)</label>
+				<input type="date" id="endZus" name="endZus" th:field="*{endZus}"><br>
+
+				<label for="startMedicalExams">Badania lekarskie od</label>
+				<input type="date" id="startMedicalExams" name="startMedicalExams" th:field="*{startMedicalExams}"><br>
+				
+				<label for="endMedicalExams">Badania lekarskie do</label>
+				<input type="date" id="endMedicalExams" name="endMedicalExams" th:field="*{endMedicalExams}"><br>
+
+				<button type="submit">Zapisz</button>
+			</form>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

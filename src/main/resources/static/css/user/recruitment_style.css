@@ -1,158 +1,196 @@
 @charset "UTF-8";
 
 
-
-.header-container{
-	background-color: #5b7cb0;
+.content{
+	width: 88%;
+	margin:auto;
+	margin-bottom: 2%;
+	padding: 1%;
+	background-color: #a7bfd9;
+	border-radius: 5px;
+	overflow: auto;
 }
 
-.form-container{
-	background-color: #5b7cb0;
-	margin: auto;
-	margin-bottom: 20px;
+.mini-content{
 	width: 50%;
+	margin:auto;
+	margin-bottom: 2%;
+	padding: 1%;
+	background-color: #a7bfd9;
+	border-radius: 5px;
+	overflow: auto;
+}
+
+
+
+.button{
+	background-color: #204a87;
+	margin-right: 5px;
+	min-width: 100px;
 	color: white;
+	font-weight: bold;
+	font-size: 1.2em;
+	border: 1px solid white;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.button:disabled{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+
+.section-header{
+	width: 100%;
+	/* background-color: #204a87; */
+	background-color: #204a87;
+	color: white;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-bottom: 15px;
+}
+
+.row{
+	margin-bottom: 20px;
+	overflow: auto;
+	clear: both;	
+}
+
+.row-buttons{
+	margin: auto;
+	margin-bottom: 10px;
+	margin-top: 40px;
+	display: flex; 
+	justify-content: center;
+	overflow: auto;
+	clear: both;	
+}
+
+.col{
+	width: 25%;
+	float: left;
+}
+
+.col-a{
+	width: 33%;
+	float: left;
+	overflow: auto;
+}
+
+.col-b{
+	width: 50%;
+	float: left;
+	overflow: auto;
+}
+
+
+label{
+	color: black;;
 	font-weight: bold;
 }
 
+h3{
+	margin-top: 0px;
+	text-align:center;
+	font-size: 24px;
+	color: white;
+}
 
-.row{
-	padding: 1%;
-	clear: both;
-	width: 98%;
-	overflow: auto; 
+h2{
+	margin-top: 0px;
+	text-align:center;
+	font-size: 0.8em;
+	color: white;
+}
+select{
+	padding: 5px;
+	border-radius: 3px;
+}
+select:hover{
+	padding: 5px;
+	border: 1px solid #204a87;
+	border-radius: 3px;
 }
 
 
-.collinput{
+textarea{
 	width: 50%;
-	float: left;
+	min-height: 40px;
 }
 
-.label-div{
-	padding-left: 10%;
-	width: 20%;
-	height: 100%;
-	float: left;
+.note-80{
+	width: 80%;
+	min-height: 60px;
 }
 
-.input-div{
-	width: 70%;
-	float: left;	
-}
-.input-div input{
-	width: 100%;
-	height: 100%;
-}
-
-.center-coll{
-	width: 200px;
-	margin: auto;
-	padding: 15px;
-}
-
-.note-div{
+/* .note-div{
 	width: 78%;
 	margin: auto;
 	padding: 2%;
+} */
+
+/*  ----- Stage -------- */
+.stage-container{
+	width: 50%;
+	height: auto;
+	margin: auto;
+	overflow: auto;
+	display: flex;
+	justify-content: space-between;
 }
 
-#savebutton{
-	width: 38%;
-	height: 50px;
+
+a:link.stage-button{
+	width: 49%;
+	text-align: center;
+	margin-right: 2px;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	
+	padding: 15px;
+	text-decoration: none;
+	border-radius: 2px;
+	overflow: auto;
+	background-color: #204a87;
+	border: 3px solid #204a87;
+	float: left;
+	
+
+}
+a:visited.stage-button{
+	width: 49%;
+	text-align: center;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	text-decoration: none;
+	margin-right: 2px;
+
+	border-radius: 2px;
+	padding: 15px;
+	overflow: auto;
+	background-color: #204a87;
+	float: left;
+	border: 3px solid #204a87;
 }
 
-#saveandnext{
-	width: 58%;
-	height: 50px;
-	float: right;;
-	clear: both;
+a:hover.stage-button{
+	width: 49%;
+	text-align: center;
+	color: white;
+	font-size: 18px;
+	display: inline-block;
+	margin-right: 2px;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 15px;
+	border-radius: 2px;
+	overflow: auto;
+	background-color: #3465a4;
+	float: left;
+	border: 3px solid black;
 }
 
-#note{
-	width: 100%;
-	height: 50px;
-}
-
-@media screen and (max-width: 1400px){
-  .form-container{
-  width: 95%;
-  }
-  
-    .table-div{
-  		overflow-x:scroll;
-  }
-}
-
-@media screen and (max-width: 990px){
-	.form-container{
-	 	width: 98%;
-	}
-	.label-div{
-		width: 100%;
-	}
-	
-	.center-coll{
-		padding-left: 0px;
-		width: 100%;
-	}
-
-} 
-
-
-
-@media only screen and (max-width: 510px){
- 	.form-container{
- 		width: 100%;
-  	}
-
-  	
-  	table {
-		width:100%;
-		font-size: 0.7em;
-		/* table-layout: fixed; */
-	}
-	
-	.collinput{
-		width: 100%;
-		clear: both;
-	}
-	
-
-	.input-div{
-		width: 100%;
-		margin-top: 2px;
-		margin-bottom: 10px;
-		height: 35px;
-	}
-	.input-div input{
-		height: 100%
-	}
-	
- 	.label-div{
- 		font-size: 2em;
- 		padding-left: 0px;
-		width: 100%;
-	}
-	
-	.center-coll{
-		padding-left: 0px;
-		width: 100%;
-	}
-	 
-	#note{
-		width: 98%;
-	}
-	
-	#savebutton{
-		width: 38%;
-		height: 50px;
-	}
-	
-	#saveandnext{
-		width: 58%;
-		height: 50px;
-		float: right;;
-		clear: both;
-	}
-}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body onload="enableReadOnly()">
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">EDYTUJ</h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		
+			<form th:action="@{/profiledit}" method="post" th:object="${worker}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="type" value="WORKER">
+				<label for="firstname" ></label>
+				<input type="text" name="firstname" id="firstname" th:field="*{firstname}" required><br>
+				
+				<label for="lastname" ></label>
+				<input type="text" name="lastname" id="lastname" th:field="*{lastname}" required><br>
+				
+				<label for="company" ></label>
+				<select name="companyid" id="company">
+					<option th:each="c : ${companies}" th:value="${c.id}" th:text="${c.shortname}"></option>
+				</select><br>
+				
+				<label for="factoryid" ></label>
+				<select name="factoryid" id="factoryid">
+					<option th:each="f : ${factories}" th:value="${f.id}" th:text="${f.shortname}"></option>
+				</select><br>
+				
+				<label for="recruiter" ></label>
+				<select name="recruiter" id="recruiter">
+					<option th:each="r : ${recruiters}" th:value="${r.id}" th:text="${r.value}"></option>
+				</select><br>
+				
+				<button type="submit">Zapisz</button>
+			</form>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

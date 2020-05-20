@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body onload="enableReadOnly()">
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">EDYTUJ</h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		
+			<form th:action="@{/profiledit}" method="post" th:object="${contact}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="type" value="CONTACT">
+				
+				<label for="phone" ></label>
+				<input type="text" name=phone id="phone" th:field="*{phone}"><br>
+				
+				<label for="email" ></label>
+				<input type="email" name="email" id="email" th:field="*{email}"><br>
+
+				
+				<button type="submit">Zapisz</button>
+			</form>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

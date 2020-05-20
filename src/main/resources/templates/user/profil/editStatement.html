@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body onload="enableReadOnly()">
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">EDYTUJ</h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		
+			<form th:action="@{/profiledit}" method="post" th:object="${permitStatement}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="type" value="STATEMENT">
+				
+				<label for="statementType">Typ Oświadczenia</label>
+				<select id="statementType" name="statementType" required>
+					<option></option>
+					<option value="VISA">VISA</option>
+					<option value="WORK">WORK</option>
+				</select>
+				
+				<label for="statement">Oświadczenie</label>
+				<input type="text" name="statement" id="statement" th:field="*{statement}"><br>
+				
+				<label for="statementValidFrom" ></label>
+				<input type="date" name="statementValidFrom" id="statementValidFrom" th:field="*{statementValidFrom}" required><br>
+				
+				<label for="statementValidTo" ></label>
+				<input type="date" name="statementValidTo" id="statementValidTo" th:field="*{statementValidTo}" required><br>
+				
+				<button type="submit">Zapisz</button>
+			</form>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

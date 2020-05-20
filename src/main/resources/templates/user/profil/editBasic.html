@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body onload="enableReadOnly()">
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">EDYTUJ</h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		
+			<form th:action="@{/profiledit}" method="post" th:object="${workerBacic}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="type" value="BASIC">
+				<label for="dateofbirth" ></label>
+				<input type="date" name="dateofbirth" id="dateofbirth" th:field="*{dateofbirth}" required><br>
+				
+				<span>Sex: </span>
+				<label for="sexM" >Male</label>
+				<input th:if="${workerBacic.sex == 'M'}" type="radio" name="sex" id="sexM" value="M" checked>
+				<input th:unless="${workerBacic.sex == 'M'}" type="radio" name="sex" id="sexM" value="M">
+				<label for="sexF" >Female</label>
+				<input th:if="${workerBacic.sex == 'F'}" type="radio" name="sex" id="sexM" value="F" checked>
+				<input th:unless="${workerBacic.sex == 'F'}" type="radio" name="sex" id="sexM" value="F">
+				<br>
+				
+				<label for="pesel">PESEL</label>
+				<input type="text" name="pesel" id="pesel" th:field="*{pesel}"><br>
+				
+				<label for="accountnr">Numer konta</label>
+				<input type="text" name="accountnr" id="accountnr" th:field="*{accountnr}"><br>
+				
+				<label for="workerNo">Numer pracownika</label>
+				<input type="text" name="workerNo" id="workerNo" th:field="*{workerNo}"><br>
+				
+				<label for="department" ></label>
+				<select name="department" id="department">
+					<option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.department}"></option>
+				</select><br>
+				
+				<label for="citizenship" ></label>
+				<select name="citizenship" id="citizenship">
+					<option th:each="c : ${citizenships}" th:value="${c.id}" th:text="${c.name}"></option>
+				</select><br>
+				
+				<button type="submit">Zapisz</button>
+			</form>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

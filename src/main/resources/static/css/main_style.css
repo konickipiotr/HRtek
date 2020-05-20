@@ -100,6 +100,11 @@ a:hover.button_new{
 	text-align: center;
 }
 
+.wronginput{
+	color: red;
+	font-weight: bold;
+}
+
 .warning_message{
 	color: #fce94f;
 	font-weight: bold;
@@ -132,4 +137,20 @@ a:hover.button_new{
 }
 a:hover {
   background-color: #111;
+}
+
+form{
+	padding: 1%;
+	/* border: 1px solid #037135; */
+	border-radius: 8px;
+}
+
+input {
+	border-radius: 4px;
+	padding: 5px;
+	font-size: 16px;
+}
+
+label{
+	font-size: 16px;
 }

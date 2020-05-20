@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body onload="enableReadOnly()">
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">EDYTUJ</h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		
+			<form th:action="@{/profiledit}" method="post" th:object="${residency}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="type" value="RESIDENCY">
+			
+				<label for="biopassport">Paszport biometryczny</label>
+				<input type="text" id="biopassport" name="biopassport" th:field="*{biopassport}">
+				<br>
+				<label for="passport">Paszport</label>
+				
+				<button type="submit">Zapisz</button>
+				<input type="text" id="passport" name="passport" th:field="*{passport}">
+				<br>
+				
+				<label for="visa">Visa No</label>
+				<input type="text" id="visa" name="visa" th:field="*{visa}">
+				<br>
+				<label for="visaValidFrom">ważne od</label>
+				<input type="date" id="visaValidFrom" name="visaValidFrom" th:field="*{visaValidFrom}">
+				<br>
+				<label for="visaValidTo">ważne od</label>
+				<input type="date" id="visaValidTo" name="visaValidTo" th:field="*{visaValidTo}">
+				<br>
+				<button type="submit">Zapisz</button>
+			</form>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>

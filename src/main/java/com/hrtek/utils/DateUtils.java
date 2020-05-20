@@ -1,6 +1,7 @@
 package com.hrtek.utils;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class DateUtils {
 	public static boolean checkIsBefore(Date toCompare, String to) {
@@ -26,7 +27,11 @@ public class DateUtils {
 	public static Date convertDate(String sdate) {
 		if(!(sdate == null || sdate.isBlank())) 
 			return Date.valueOf(sdate);
-		
 		return null;
+	}
+	
+	public static String dateToString(LocalDate date) {
+		if(date != null) return date.toString();
+		return "";
 	}
 }

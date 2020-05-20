@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Profil</h1>
+		</div>
+
+		<div class="showedFields"  th:replace="user/display/fragments/showedfields :: showedfields"></div>	
+
+		<div>
+			<div class="table-div">
+				<table id="basic-table">
+					<tr>
+						<td class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<!-- profil -->
+						</td>
+						<td class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bDateofbirth == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bSex == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bCitizenship == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPesel == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPaszport == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bBbiopaszport == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bCompany == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bFactory == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStartWork == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStartZus == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bEndZus == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bEndWork == true}" class="td_noP">
+							<form action="">
+								<button class="sort-button">&#8659;</button>
+								<button class="sort-button">&#8657;</button>
+							</form>
+						</td>
+						
+					</tr>
+					<tr>
+						<th>lp</th>
+						<th>status</th>
+						<th>profil</th>
+						<th>Imię</th>
+						<th>Nazwisko</th>
+						<th th:if="${fd.bDateofbirth == true}" >Data Urodzenia</th>
+						<th th:if="${fd.bSex == true}" >Płeć</th>
+						<th th:if="${fd.bCitizenship == true}">Obywatelstow</th>
+						<th th:if="${fd.bPesel == true}">pesel</th>
+						<th th:if="${fd.bPaszport == true}">paszport</th>
+						<th th:if="${fd.bBbiopaszport == true}">biopasz</th>
+						<th th:if="${fd.bCompany == true}">firma</th>
+						<th th:if="${fd.bFactory == true}">fabryka</th>
+						<th th:if="${fd.bStartWork == true}">Start pracy</th>
+						<th th:if="${fd.bStartZus == true}">Starty Zus</th>
+						<th th:if="${fd.bEndZus == true}">Koniec Zus</th>
+						<th th:if="${fd.bEndWork == true}" >Koniec Pracy</th>
+					</tr>
+					<tr th:each="i, it : ${bv_list}">
+						<td th:text="${it.count}"></td>
+						<td>
+							<span th:if="${i.status == 1}" class="dot-green"></span> 
+							<span th:unless="${i.status == 1}" class="dot"></span>
+						</td>
+						<td>
+							<a th:href="@{'/profil/'+ ${i.id}}">[ico]</a>
+						</td>
+						<td th:text="${i.firstname}"></td>
+						<td th:text="${i.lastname}"></td>
+						<td th:if="${fd.bDateofbirth == true}"  th:text="${i.dateofbirth}"></td>
+						<td th:if="${fd.bSex == true}"  th:text="${i.sex}"></td>
+						<td  th:if="${fd.bCitizenship == true}"th:text="${i.citizenship}"></td>
+						<td th:if="${fd.bPesel == true}" th:text="${i.pesel}"></td>
+						<td th:if="${fd.bPaszport == true}" th:text="${i.paszport}"></td>
+						<td th:if="${fd.bBbiopaszport == true}" th:text="${i.biopaszport}"></td>
+						<td th:if="${fd.bCompany == true}" th:text="${i.company}"></td>
+						<td th:if="${fd.bFactory == true}" th:text="${i.factory}"></td>
+						<td th:if="${fd.bStartWork == true}" th:text="${i.startWork}"></td>
+						<td th:if="${fd.bStartZus == true}" th:text="${i.startZus}"></td>
+						<td th:if="${fd.bEndZus == true}" th:text="${i.endZus}"></td>
+						<td th:if="${fd.bEndWork == true}"  th:text="${i.endWork}"></td>
+						
+					</tr>
+				</table>
+			</div>
+		
+		</div>
+		
+		basic
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script src="/scripts/BasicViewScript.js">
+
+</script>
+</html>

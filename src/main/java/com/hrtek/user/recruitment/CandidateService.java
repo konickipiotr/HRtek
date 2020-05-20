@@ -34,8 +34,6 @@ public class CandidateService {
 		int coordinatorsid = userPositionRepo.findByPosition(GlobalSettings.coordinator).getId();
 		List<UserInfo> agentsAndcoordinators = userInfoRepo.getAgentsAndCoordinators(agenid, coordinatorsid);
 		
-		agentsAndcoordinators.forEach(i -> System.out.println(i)); //TEST
-		
 		for(UserInfo u : agentsAndcoordinators) {
 			String position = u.getPosition() == agenid ? GlobalSettings.agent : GlobalSettings.coordinator;
 			recruiters.add(new ListModel(u.getId(), u.getName()+" - " + position));
@@ -49,7 +47,7 @@ public class CandidateService {
 		
 		for(Candidate c :allCandidate) {
 			CandidateView cv = new CandidateView(c);
-			cv.setRecruiter(userInfoRepo.findById(c.getRecruterid()).get().getName());
+			cv.setRecruiter(userInfoRepo.findById(c.getRecruiter()).get().getName());
 			candidates.add(cv);
 		}	
 		return candidates;

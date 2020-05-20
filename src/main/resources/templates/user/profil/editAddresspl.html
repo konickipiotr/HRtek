@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body onload="enableReadOnly()">
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">EDYTUJ</h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		
+			<form th:action="@{/profiledit}" method="post" th:object="${contact}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="type" value="ADDRESSPL">
+				
+				<div class="lab-div">
+					<label for="bedid">Nasze</label>
+					<label for="workerAll">(Inne)</label>
+					<input th:if="${contact.isOhter == true}" type="checkbox" name="isOhter" id="isOhter" checked>
+					<input th:unless="${contact.isOhter == true}" type="checkbox" name="isOhter" id="isOhter">
+				</div>
+				<div class="input-div">
+					<select id="bedid" name="bedid" required>
+						<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}"></option>
+					</select>
+				</div>
+				
+				<label for="pladdress" >Address</label>
+				<input type="text" name="pladdress" id="pladdress" th:field="*{pladdress}"><br>
+				
+				<label for="plpostcode">Kod poczt</label>
+				<input type="text" name="postcode" id="plpostcode" th:field="*{plpostcode}"><br>
+				
+				<label for="plcity">Miasto</label>
+				<input type="text" name="plcity" id="plcity" th:field="*{plcity}"><br>
+				<br>
+				
+				
+				<button type="submit">Zapisz</button>
+			</form>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script type="text/javascript" src="/scripts/recruitment2.js">
+
+</script>
+<script th:inline="javascript">
+var status = [[${status}]];
+</script>
+</html>

@@ -1,6 +1,6 @@
 package com.hrtek.model.accommodation;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,8 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.hrtek.user.accommodation.Bedstatus;
-import com.hrtek.utils.DateUtils;
 
 @Entity
 public class Bed {
@@ -21,14 +22,15 @@ public class Bed {
 	private Long roomid;
 	private Long houseid;
 	private Long workerid;
-	private Date expire;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate expire;
 	@Enumerated(EnumType.STRING)
 	private Bedstatus bedstatus;
 	
 	public Bed() {
 	}
 
-	public Bed(Long roomid, Long houseid, Long workerid, Date expire, Bedstatus bedStatus) {
+	public Bed(Long roomid, Long houseid, Long workerid, LocalDate expire, Bedstatus bedStatus) {
 		this.roomid = roomid;
 		this.houseid = houseid;
 		this.workerid = workerid;
@@ -37,14 +39,14 @@ public class Bed {
 	}
 	
 	public void setFree() {
-		this.workerid = 0l;
+		this.workerid = null;
 		this.expire = null;
 		this.bedstatus = Bedstatus.FREE;
 	}
 	
-	public void setOccupied(Long id, String expire) {
+	public void setOccupied(Long id, LocalDate expire) {
 		this.workerid = id;
-		this.expire = DateUtils.convertDate(expire);
+		this.expire = expire;
 		this.bedstatus = Bedstatus.OCCUPIED;
 	}
 
@@ -80,11 +82,11 @@ public class Bed {
 		this.workerid = workerid;
 	}
 
-	public Date getExpire() {
+	public LocalDate getExpire() {
 		return expire;
 	}
 
-	public void setExpire(Date expire) {
+	public void setExpire(LocalDate expire) {
 		this.expire = expire;
 	}
 

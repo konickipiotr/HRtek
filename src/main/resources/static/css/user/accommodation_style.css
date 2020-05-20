@@ -131,6 +131,12 @@ label{
 
 }
 
+.row{
+	background-color: fuchsia;
+}
 
+.col{
+	background-color: silver;
+}
 
 

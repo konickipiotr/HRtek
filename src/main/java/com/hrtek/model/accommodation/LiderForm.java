@@ -16,6 +16,7 @@ public class LiderForm {
 		this.liderbonus = liderbonus;
 	}
 
+
 	public Long getId() {
 		return id;
 	}

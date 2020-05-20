@@ -32,6 +32,14 @@ public class House {
 	public House() {
 	}
 	
+	public void addPerson() {
+		this.occupied++;
+	}
+	
+	public void removePerson() {
+		this.occupied--;
+	}
+	
 	public void changeAddress(AddressForm af) {
 		this.address = af.getAddress();
 		this.postcode = af.getPostcode();

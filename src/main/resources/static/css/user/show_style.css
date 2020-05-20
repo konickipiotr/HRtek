@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+
+}
+
+.dot-green {
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+
+}
+
+form{
+	padding: 0px;
+	margin: 0px;
+}
+
+
+.showedFields{
+	display: flex;
+	justify-content: space-around;
+	height: 25px;
+}
+
+.check-div{
+	display: flex;	
+	font-weight: bold;
+}
+
+
+

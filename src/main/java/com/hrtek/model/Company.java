@@ -41,8 +41,18 @@ public class Company {
 		this.numberofwokers = numberofwokers;
 		this.nettorate = nettorate;
 	}
+	
+	public String agreementData() {
+		return fullname + ", " + address + ", " + postcode + " " + city + ", NIP " + nip + ", KRAZ " + kraz;
+	}
 
-
+	public void addPerson() {
+		this.numberofwokers++;
+	}
+	
+	public void removePerson() {
+		this.numberofwokers--;
+	}
 
 	public Long getId() {
 		return id;

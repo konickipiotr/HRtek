@@ -28,6 +28,14 @@ public class Room {
 
 	public Room() {
 	}
+	
+	public void addPerson() {
+		this.occupied++;
+	}
+	
+	public void removePerson() {
+		this.occupied--;
+	}
 
 	public Long getId() {
 		return id;

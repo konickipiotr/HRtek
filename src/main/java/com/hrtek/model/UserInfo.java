@@ -62,6 +62,7 @@ public class UserInfo {
 		return firstname + " " + lastname;
 	}
 
+
 	public Long getId() {
 		return id;
 	}

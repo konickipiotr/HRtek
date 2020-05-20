@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="showedFields"  th:fragment="showedfields">
+			<div>
+			
+				Pokaż kolumny:
+			
+			</div>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bDateofbirth">Data urodzenia</label>
+					<input th:if="${fd.bDateofbirth == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bDateofbirth == true}" type="hidden" name="bDateofbirth" value="false">
+					<input th:unless="${fd.bDateofbirth == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bDateofbirth == true}" type="hidden" name="bDateofbirth" value="true">			
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bSex">Płeć</label>
+					<input th:if="${fd.bSex == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bSex == true}" type="hidden" name="bSex" value="false">
+					<input th:unless="${fd.bSex == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bSex == true}" type="hidden" name="bSex" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bCitizenship">Obywatelstwo</label>
+					<input th:if="${fd.bCitizenship == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bCitizenship == true}" type="hidden" name="bCitizenship" value="false">
+					<input th:unless="${fd.bCitizenship == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bCitizenship == true}" type="hidden" name="bCitizenship" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bPesel">PESEL</label>
+					<input th:if="${fd.bPesel == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bPesel == true}" type="hidden" name="bPesel" value="false">
+					<input th:unless="${fd.bPesel == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bPesel == true}" type="hidden" name="bPesel" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bPaszport">Paszport</label>
+					<input th:if="${fd.bPaszport == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bPaszport == true}" type="hidden" name="bPaszport" value="false">
+					<input th:unless="${fd.bPaszport == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bPaszport == true}" type="hidden" name="bPaszport" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bBbiopaszport">Paszport Bio</label>
+					<input th:if="${fd.bBbiopaszport == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bBbiopaszport == true}" type="hidden" name="bBbiopaszport" value="false">
+					<input th:unless="${fd.bBbiopaszport == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bBbiopaszport == true}" type="hidden" name="bBbiopaszport" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bCompany">Firma</label>
+					<input th:if="${fd.bCompany == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bCompany == true}" type="hidden" name="bCompany" value="false">
+					<input th:unless="${fd.bCompany == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bCompany == true}" type="hidden" name="bCompany" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bFactory">Fabryka</label>
+					<input th:if="${fd.bFactory == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bFactory == true}" type="hidden" name="bFactory" value="false">
+					<input th:unless="${fd.bFactory == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bFactory == true}" type="hidden" name="bFactory" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bStartWork">Start Praca</label>
+					<input th:if="${fd.bStartWork == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bStartWork == true}" type="hidden" name="bStartWork" value="false">
+					<input th:unless="${fd.bStartWork == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bStartWork == true}" type="hidden" name="bStartWork" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bStartZus">Start zus</label>
+					<input th:if="${fd.bStartZus == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bStartZus == true}" type="hidden" name="bStartZus" value="false">
+					<input th:unless="${fd.bStartZus == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bStartZus == true}" type="hidden" name="bStartZus" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bEndZus">koniec zus</label>
+					<input th:if="${fd.bEndZus == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bEndZus == true}" type="hidden" name="bEndZus" value="false">
+					<input th:unless="${fd.bEndZus == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bEndZus == true}" type="hidden" name="bEndZus" value="true">
+				</div>
+			</form>
+			<form th:action="@{/showbasic/showhide}" method="post">
+				<div class="check-div">
+					<label for="bEndWork">koniec zus</label>
+					<input th:if="${fd.bEndWork == true}" type="checkbox" onclick="this.form.submit()" checked>
+					<input th:if="${fd.bEndWork == true}" type="hidden" name="bEndWork" value="false">
+					<input th:unless="${fd.bEndWork == true}" type="checkbox" onclick="this.form.submit()" >
+					<input th:unless="${fd.bEndWork == true}" type="hidden" name="bEndWork" value="true">
+				</div>
+			</form>			
+	</div>
+</body>
+</html>

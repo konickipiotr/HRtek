@@ -36,6 +36,14 @@ public class Factory {
 		this.numberofwokers = numberofwokers;
 		this.hourlyrate = hourlyrate;
 	}
+	
+	public void addPerson() {
+		this.numberofwokers++;
+	}
+	
+	public void removePerson() {
+		this.numberofwokers--;
+	}
 
 	public Long getId() {
 		return id;
