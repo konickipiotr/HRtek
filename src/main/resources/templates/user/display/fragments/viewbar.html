@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	<div  th:fragment="viewbar">
+			
+			<div class="viewbar-container">
+				
+					<a class="viewbar-button" th:href="@{/showbasic}">Podstawowe</a>
+					<a class="viewbar-button" th:href="@{/showwork}">Praca</a>
+					<a class="viewbar-button" th:href="@{/showresidency}">Pobyt</a>
+					<a class="viewbar-button" th:href="@{/showcontact}">Kontakt</a>
+					<a class="viewbar-button" th:href="@{/showdata}">Inne</a>
+		
+			</div>
+		
+			
+			
+	</div>
+</body>
+
+</html>

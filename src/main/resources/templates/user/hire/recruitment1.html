@@ -22,8 +22,8 @@
 		</div>
 		
 		<div class="stage-container">
-			<a class="stage-button" th:href="@{/canditate}">Faza 1</a>
-			<a class="stage-button" th:href="@{/recruitment}">Faza 2</a>
+			<a class="stage-button" th:href="@{/canditate}">Etap 1</a>
+			<a class="stage-button" th:href="@{/recruitment}">Etap 2</a>
 		</div>
 		
 		<p th:text="${success_msg}" class="success_message"></p>
@@ -105,7 +105,7 @@
 							<label for="note">Notatki</label>
 						</div>
 						<div class="input-div">
-							<textarea id="note" name="note" rows="3" cols="20"></textarea>
+							<textarea class="note" name="note"></textarea>
 						</div>
 					</div>
 					<div class="col-a">

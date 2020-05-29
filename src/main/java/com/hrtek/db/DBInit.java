@@ -30,6 +30,7 @@ import com.hrtek.model.User;
 import com.hrtek.model.UserInfo;
 import com.hrtek.model.UserPostions;
 import com.hrtek.model.accommodation.Bed;
+import com.hrtek.model.accommodation.CostType;
 import com.hrtek.model.accommodation.House;
 import com.hrtek.model.accommodation.Room;
 import com.hrtek.model.worker.Contact;
@@ -192,7 +193,7 @@ public class DBInit implements CommandLineRunner {
 		h1.setMedia(1500);
 		h1.setPeriodofnotice(3);
 		h1.setRemark("elo");
-		h1.setTypecost("rentmedia");
+		h1.setCostType(CostType.MEDIARENT);
 		h1.setPerperson((6000+1500)/35);
 		this.houseRepo.save(h1);
 		

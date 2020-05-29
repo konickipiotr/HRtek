@@ -6,11 +6,13 @@
 <title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
-	<!-- <link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" /> -->
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" /> 
 	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/accommodation_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	
+	 <script src="https://kit.fontawesome.com/7ccfa6815b.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
@@ -104,15 +106,15 @@
 	 				</div>
 	 				<div class="input-div">
 	 					<label for="typecostrent">Czynsz</label>
-				 		<input th:if="${house.typecost == 'rent'}" type="radio" id="typecostrent" name="typecost" value="rent" disabled checked>
-				 		<input th:unless="${house.typecost == 'rent'}" type="radio" id="typecostrent" name="typecost" value="rent" disabled>
+				 		<input th:if="${house.costType.name() == 'RENT'}" type="radio" id="typecostrent" name="costType" value="RENT" disabled checked>
+				 		<input th:unless="${house.costType.name() == 'RENT'}" type="radio" id="typecostrent" name="costType" value="RENT" disabled>
 				 		
 				 		<label for="typecostrentmedia">czynsz + media</label>
-				 		<input th:if="${house.typecost == 'rentmedia'}" type="radio" id="typecostrentmedia" name="typecost" value="rentmedia" disabled checked>
-				 		<input th:unless="${house.typecost == 'rentmedia'}" type="radio" id="typecostrentmedia" name="typecost" value="rentmedia" disabled>
+				 		<input th:if="${house.costType.name() == 'MEDIARENT'}" type="radio" id="typecostrentmedia" name="costType" value="MEDIARENT" disabled checked>
+				 		<input th:unless="${house.costType.name() == 'MEDIARENT'}" type="radio" id="typecostrentmedia" name="costType" value="MEDIARENT" disabled>
 				 		<label for="typecostrentmedia">koszt na osobę</label>
-				 		<input th:if="${house.typecost == 'perperson'}" type="radio" id="typecostperperson" name="typecost" value="perperson" disabled checked>
-				 		<input th:unless="${house.typecost == 'perperson'}" type="radio" id="typecostperperson" name="typecost" value="perperson" disabled>
+				 		<input th:if="${house.costType.name() == 'PERPERSON'}" type="radio" id="typecostperperson" name="costType" value="PERPERSON" disabled checked>
+				 		<input th:unless="${house.costType.name() == 'PERPERSON'}" type="radio" id="typecostperperson" name="costType" value="PERPERSON" disabled>
 	 				</div>
 	 			</div>
 	 			<!-- ----------------------------- -->
@@ -165,7 +167,7 @@
 			 			</div>
 		 				<div class="input-div"> 
 		 					<select id="liderid" name="liderid" disabled>
-		 						<option></option>
+		 						<option th:each="i : ${houshold}" th:value="${i.id}" th:text="${i.value}"></option>
 		 					</select>
 		 				</div>
 		 				<div class="label-div">
@@ -212,13 +214,19 @@
 	
 	<!-- ************************************************************************* -->
 		 <div class="button_container">
-			<a class="button_new" href="">Nowy Pokój</a>
+			<a class="button_new"   th:href="@{'/accomoperation/addroom/' + ${house.id}} ">Nowy Pokój</a>
 		</div>
 	<!-- ************************************************************************* -->
 	<div class="rooms-container">
 		<div class="room" th:each="r : ${rooms}">
 			<div class="room-header">
-				<p class="room-header-header" th:text="${'room: ' + r.roomname}"></p>
+				<div class="room-header-div">
+					<span class="room-header-header"  th:text="${'room: ' + r.roomname + ' (' + r.occupied + '/' + r.capacity + ')'}"></span>	
+				</div>
+				<div class="room-buttons-div">
+					<a class="icon-right-top" th:href="@{'/accomoperation/addbed/' + ${r.id}}"><i class="fas fa-plus"></i></a>
+					<a  onclick="return confirm('Are you sure?')" class="icon-right-top" th:href="@{'/accomoperation/removeroom/' + ${r.id}}"><i class="fas fa-trash-alt"></i></a>
+				</div>
 			</div>
 			
 			<div class="room-content">
@@ -229,30 +237,44 @@
 						<th></th>
 						<th></th>
 					</tr>
-					<tr th:each="b : ${r.bedlist}">
-						<td th:if="${bedstatus == FREE}">FREE</td>
+					<tr th:each="b : ${r.bedViewList}">
+						<td th:if="${b.bedstatus.name() == 'FREE'}">FREE</td>
+						<td th:unless="${b.bedstatus.name() == 'FREE'}" th:text="${b.workername}"></td>
 						<td th:text="${b.expire}"></td>
-						<td>
-							<a href="">zakwateruj</a>
+						<td class="ico-td" th:if="${b.bedstatus.name() == 'FREE'}">
+							<a th:href="@{'/accomoperation/addPerson/' + ${b.id}}"><i class="fas fa-user-plus"></i></a>
 						</td>
-						<td>
-							<a href="">zwolnij</a>
+						<td class="ico-td" onclick="return confirm('Are you sure?')" th:unless="${b.bedstatus.name() == 'FREE'}">
+							<a th:href="@{'/accomoperation/removePerson/' + ${b.id}}"><i class="fas fa-user-minus"></i></a>
 						</td>
-						<td>
-							<a href="">usuń</a>
+						<td class="ico-td">
+							<a th:href="@{'/accomoperation/removebed/' + ${b.id} }" onclick="return confirm('Are you sure?')"><i class="fas fa-minus"></i></a>
 						</td>
 					</tr>
 				</table>
 			</div>
-			
-			<div class="add-bed">
-				<a href="">dodaj miejsce</a>
+			<div class="room-note">
+				<form th:action="@{/accomoperation/saveroomnote}" method="post">
+					<input type="hidden" name="roomid" th:value="${r.id}">
+					<input type="hidden" name="houseid" th:value="${house.id}">
+					<div>
+						<label style="color: black" for="remark">Uwagi</label>
+					</div>
+					<div style="padding: 5px;">
+						<textarea id="remark" name="remark" style="resize: none" th:text="${r.remark}"></textarea>
+					</div>
+					<div>
+						<button class="savebutton" type="submit">Zapisz</button>
+					</div>
+				</form>
 			</div>
+
 		</div>
-	
+
 	</div>
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
 <script type="text/javascript" src="/scripts/housedetils.js"></script>
+
 </html>

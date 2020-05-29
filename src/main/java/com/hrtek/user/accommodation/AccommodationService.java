@@ -9,6 +9,7 @@ import com.hrtek.db.accommodation.BedRepository;
 import com.hrtek.db.accommodation.HouseRepository;
 import com.hrtek.db.accommodation.RoomRepository;
 import com.hrtek.model.accommodation.Bed;
+import com.hrtek.model.accommodation.CostType;
 import com.hrtek.model.accommodation.House;
 import com.hrtek.model.accommodation.Room;
 
@@ -32,10 +33,10 @@ public class AccommodationService {
 	}
 	
 	public void saveHouse(House house){
-		String type = house.getTypecost();
-		if(type.equals("rent")) {
+		CostType type = house.getCostType();
+		if(type.equals(CostType.RENT)) {
 			house.setPerperson(house.getRent()/house.getCapacity());
-		}else if(type.equals("rentmedia")) {
+		}else if(type.equals(CostType.MEDIARENT)) {
 			double result = (house.getRent() + house.getMedia()) / house.getCapacity();
 			house.setPerperson(result);
 		}

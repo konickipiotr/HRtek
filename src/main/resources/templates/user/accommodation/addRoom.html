@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" /> 
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/accommodation_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	
+	 <script src="https://kit.fontawesome.com/7ccfa6815b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Dodaj Pokój</h1>
+		</div>
+		<div style="display: flex; justify-content: center;">
+			<form th:action="@{/accomoperation/addroom}" method="post">
+			<input type="hidden" name="houseid" th:value="${houseid}">
+				<div class="min-container">
+					
+					<div>
+						<label for="text">Nazwa</label>
+					</div>
+					<div>
+						<input type="text" name="roomname" required>
+					</div>
+					<div>
+						<label for="text">Pojemność</label>
+					</div>
+					<div>
+						<input type="number" min="1" step="1" name="capacity" required>
+					</div>
+					<div style="display: flex; justify-content: center; margin-top: 20px">
+						<div>
+							<button class="savebutton" type="submit">Dodaj</button>
+						</div>
+					</div>
+				
+				</div>
+			
+			</form>
+		</div>
+	
+		 
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script type="text/javascript" src="/scripts/housedetils.js"></script>
+
+</html>

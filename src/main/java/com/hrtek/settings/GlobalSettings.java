@@ -10,5 +10,7 @@ public class GlobalSettings {
 	public static String hrtekRoot = "/HRtekfiles";
 	public static String hrtekWorkersDir = "/WorkersData/";
 	
-	public static int lockupminue = 5;
+	public static int lockupminue = 5; //zablokowana edycja danych an tyle minut
+	public static int numoffirstletters = 3; //filtrowanie po x pierwszych literach
+	
 }

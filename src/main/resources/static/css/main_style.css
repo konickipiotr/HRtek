@@ -24,7 +24,7 @@ footer{
 nav{
 	margin: auto;
 	margin-top: 10px;
-	width: 95%;
+	width: 99%;
 	background-color: #2e3436;
 	height: 50px;
 }
@@ -87,7 +87,7 @@ a:hover.button_new{
 }
 
 #container{
-	width: 95%;
+	width: 99%;
 	margin: auto;
 	min-height: 500px;
 	height: auto;

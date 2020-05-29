@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="showedFields"  th:fragment="contactfieldshideshow">
+			
+			<form th:action="@{/showcontact/showhide}" method="post">
+			<div class="sort-bar">
+				<div>
+				
+					Pokaż kolumny:
+				
+				</div>
+				<div>
+					<button class="button-small" type="submit">zapisz</button>
+				</div>
+				<div class="check-div">
+					<label for="bDateofbirth">Data urodzenia</label>
+					<input th:if="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth"  checked>
+					<input th:unless="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth"  >		
+				</div>
+				<div class="check-div">
+					<label for="bCompany">Firma</label>
+					<input th:if="${fd.bCompany == true}" type="checkbox" name="bCompany" id="bCompany" checked>
+					<input th:unless="${fd.bCompany == true}" type="checkbox"  name="bCompany"  id="bCompany">
+				</div>
+				<div class="check-div">
+					<label for="bFactory">Fabryka</label>
+					<input th:if="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory" checked>
+					<input th:unless="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory">
+				</div>
+				<div class="check-div">
+					<label for="bPhone">Phone</label>
+					<input th:if="${fd.bPhone == true}" type="checkbox" name="bPhone" id="bPhone" checked>
+					<input th:unless="${fd.bPhone == true}" type="checkbox" name="bPhone" id="">
+				</div>
+				<div class="check-div">
+					<label for="bEmail">Email</label>
+					<input th:if="${fd.bEmail == true}" type="checkbox" name="bEmail" id="bEmail" checked>
+					<input th:unless="${fd.bEmail == true}" type="checkbox" name="bEmail" id="bEmail">
+				</div>
+				<div class="check-div">
+
+				</div>
+				<div class="check-div">
+					<label for="bPladdress">Pladdress</label>
+					<input th:if="${fd.bPladdress == true}" type="checkbox" name="bPladdress" id="bPladdress" checked>
+					<input th:unless="${fd.bPladdress == true}" type="checkbox" name="bPladdress" id="bPladdress">
+				</div>
+				<div class="check-div">
+					<label for="bPlpostcode">Plpostcode</label>
+					<input th:if="${fd.bPlpostcode == true}" type="checkbox" name="bPlpostcode" id="bPlpostcode" checked>
+					<input th:unless="${fd.bPlpostcode == true}" type="checkbox" name="bPlpostcode" id="bPlpostcode">
+				</div>
+				<div class="check-div">
+					<label for="bPlcity">Plcity</label>
+					<input th:if="${fd.bPlcity == true}" type="checkbox" name="bPlcity" id="bPlcity" checked>
+					<input th:unless="${fd.bPlcity == true}" type="checkbox" name="bPlcity" id="bPlcity">
+				</div>
+				<div class="check-div">
+					<label for="bAddress">Address</label>
+					<input th:if="${fd.bAddress == true}" type="checkbox" name="bAddress" id="bAddress" checked>
+					<input th:unless="${fd.bAddress == true}" type="checkbox" name="bAddress" id="bAddress">
+				</div>
+				<div class="check-div">
+					<label for="bPostcode">Postcode</label>
+					<input th:if="${fd.bPostcode == true}" type="checkbox" name="bPostcode" id="bPostcode" checked>
+					<input th:unless="${fd.bPostcode == true}" type="checkbox" name="bPostcode" id="bPostcode">
+				</div>
+				<div class="check-div">
+					<label for="bCity">bCity</label>
+					<input th:if="${fd.bCity == true}" type="checkbox" name="bCity" id="bCity" checked>
+					<input th:unless="${fd.bCity == true}" type="checkbox" name="bCity" id="bCity">
+				</div>
+			</div>
+			
+			</form>			
+	</div>
+</body>
+</html>

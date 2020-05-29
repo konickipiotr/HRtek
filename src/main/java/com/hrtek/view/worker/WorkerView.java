@@ -5,6 +5,7 @@ import javax.persistence.Enumerated;
 
 import com.hrtek.model.worker.StatusWorker;
 import com.hrtek.model.worker.Worker;
+import com.hrtek.model.worker.WorkerDate;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +28,5 @@ public class WorkerView {
 		this.lastname = w.getLastname();
 		this.status = w.getStatus();
 	}
+
 }

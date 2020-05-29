@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
@@ -18,10 +18,13 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Profil</h1>
+			<h1 class="header-header">Podstawowe</h1>
 		</div>
-
-		<div class="showedFields"  th:replace="user/display/fragments/showedfields :: showedfields"></div>	
+		<div th:replace="user/display/fragments/viewbar:: viewbar"></div>
+		
+		
+		<div th:replace="user/display/fragments/basicFilters :: basicFilters"></div>
+		<div class="showedFields"  th:replace="user/display/fragments/basicfieldshideshow :: basicfieldshideshow"></div>	
 
 		<div>
 			<div class="table-div">
@@ -72,84 +75,84 @@
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bDateofbirth == true}"  class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="DATEOFBIRTH">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bSex == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="SEX">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bCitizenship == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="CITIZENSHIP">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bPesel == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="PESEL">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bPaszport == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="PASZPORT">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bBbiopaszport == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="BIOPASZPORT">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bCompany == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="COMPANY">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bFactory == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="FACTORY">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td  th:if="${fd.bStartWork == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="STARTWORK">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bStartZus == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="STARTZUS">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bEndZus == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="ENDZUS">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
 								<button class="sort-button" name="sortT" value="up">&#8657;</button>
 							</form>
 						</td>
-						<td class="td_noP">
+						<td th:if="${fd.bEndWork == true}" class="td_noP">
 							<form th:action="@{/showbasic/sort}" method="post">
 								<input type="hidden" name="field" value="ENDWORK">
 								<button class="sort-button" name="sortT" value="down">&#8659;</button>
@@ -186,14 +189,12 @@
 			</div>
 		
 		</div>
-		
-		basic
 	
 	<!-- ************************************************************************* -->
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
-<script src="/scripts/BasicViewScript.js">
 
-</script>
+<script src="/scripts/BasicViewScript.js"></script>
+<script src="/scripts/ViewCommon.js"></script>
 </html>

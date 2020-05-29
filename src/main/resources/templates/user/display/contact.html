@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Podstawowe</h1>
+		</div>
+
+		<div th:replace="user/display/fragments/viewbar:: viewbar"></div>
+		
+		<div th:replace="user/display/fragments/contactFilters :: contactFilters"></div>
+		<div class="showedFields"  th:replace="user/display/fragments/contactfieldshideshow :: contactfieldshideshow"></div>	
+
+		<div> 
+			<div class="table-div">
+				<table id="basic-table">
+					<tr>
+						<th>lp</th>
+						<th>profil</th>
+						<th>Imię</th>
+						<th>Nazwisko</th>
+						<th th:if="${fd.bDateofbirth == true}" >Data Urodzenia</th>
+						<th th:if="${fd.bCompany == true}" >Company</th>
+						<th th:if="${fd.bFactory == true}" >Factory</th>
+						<th th:if="${fd.bPhone == true}" >Phone</th>
+						<th th:if="${fd.bEmail == true}" >bEmail</th>
+						<th></th>
+						<th th:if="${fd.bPladdress == true}" >Pladdress</th>
+						<th th:if="${fd.bPlpostcode == true}" >Plpostcode</th>
+						<th th:if="${fd.bPlcity == true}" >Plcity</th>
+						<th th:if="${fd.bAddress == true}" >Address</th>
+						<th th:if="${fd.bPostcode == true}" >Postcode</th>
+						<th th:if="${fd.bCity == true}" >City</th>
+					</tr>
+					<tr>
+						<td class="td_noP">
+						</td>
+						<td class="td_noP">
+							<!-- profil -->
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="FIRSTNAME">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="LASTNAME">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bDateofbirth == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="DATEOFBIRTH">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bCompany == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="COMPANY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bFactory == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="FACTORY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPhone == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="PHONE">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bEmail == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="EMAIL">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td  class="td_noP">
+						</td>
+						<td th:if="${fd.bPladdress == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="PLADDRESS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPlpostcode == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="PLPOSTCODE">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPlcity == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="PLCITY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bAddress == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="ADDRESS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPostcode == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="POSTCODE">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bCity == true}"  class="td_noP">
+							<form th:action="@{/showcontact/sort}" method="post">
+								<input type="hidden" name="field" value="CITY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+	
+					
+					</tr>
+					<tr th:each="i, it : ${cv_list}">
+						<td th:text="${it.count}"></td>
+						<td>
+							<a th:href="@{'/profil/'+ ${i.id}}">[ico]</a>
+						</td>
+						<td th:text="${i.firstname}"></td>
+						<td th:text="${i.lastname}"></td>
+						<td th:if="${fd.bDateofbirth == true}"  th:text="${i.dateofbirth}"></td>
+						<td th:if="${fd.bCompany == true}"  th:text="${i.company}"></td>
+						<td th:if="${fd.bFactory== true}"  th:text="${i.factory}"></td>
+						<td th:if="${fd.bPhone == true}"  th:text="${i.phone}"></td>
+						<td th:if="${fd.bEmail == true}"  th:text="${i.email}"></td>
+						<td>
+							<span th:if="${i.houseid == null and i.pladdress == ''}">Brak</span>
+							<span th:if="${i.houseid == null and i.pladdress != ''}">Własne</span>
+							<a th:if="${i.houseid != null}" th:href="@{'/accdetail/' + ${i.houseid}}">Firmowy</a> 
+						</td>
+						<td th:if="${fd.bPladdress == true}"  th:text="${i.pladdress}"></td>
+						<td th:if="${fd.bPlpostcode == true}"  th:text="${i.plpostcode}"></td>
+						<td th:if="${fd.bPlcity == true}"  th:text="${i.plcity}"></td>
+						<td th:if="${fd.bAddress == true}"  th:text="${i.address}"></td>
+						<td th:if="${fd.bPostcode == true}"  th:text="${i.postcode}"></td>
+						<td th:if="${fd.bCity == true}"  th:text="${i.city}"></td>
+
+					</tr>
+				</table>
+			</div>
+		
+		</div>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+<script src="/scripts/ConatctViewScript.js"></script>
+<script src="/scripts/ViewCommon.js"></script>
+</html>

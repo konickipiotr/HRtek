@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="showedFields"  th:fragment="basicfieldshideshow">
+			
+			<form th:action="@{/showbasic/showhide}" method="post">
+			<div class="sort-bar">
+				<div>
+				
+					Pokaż kolumny:
+				
+				</div>
+				<div>
+					<button class="button-small" type="submit">zapisz</button>
+				</div>
+				<div class="check-div">
+					<label for="bDateofbirth">Data urodzenia</label>
+					<input th:if="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth"  checked>
+					<input th:unless="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth"  >		
+				</div>
+				<div class="check-div">
+					<label for="bSex">Płeć</label>
+					<input th:if="${fd.bSex == true}" type="checkbox" name="bSex" id="bSex"   checked>
+					<input th:unless="${fd.bSex == true}" type="checkbox" name="bSex" id="bSex" >
+				</div>
+				<div class="check-div">
+					<label for="bCitizenship">Obywatelstwo</label>
+					<input th:if="${fd.bCitizenship == true}" type="checkbox" name="bCitizenship" id="bCitizenship" checked>
+					<input th:unless="${fd.bCitizenship == true}" type="checkbox" name="bCitizenship" id="bCitizenship">
+				</div>
+				<div class="check-div">
+					<label for="bPesel">PESEL</label>
+					<input th:if="${fd.bPesel == true}" type="checkbox" name="bPesel" id="bPesel" checked>
+					<input th:unless="${fd.bPesel == true}" type="checkbox" name="bPesel" id="bPesel" >
+				</div>
+				<div class="check-div">
+					<label for="bPaszport">Paszport</label>
+					<input th:if="${fd.bPaszport == true}" type="checkbox" name="bPaszport" id="bPaszport" checked>
+					<input th:unless="${fd.bPaszport == true}" type="checkbox" name="bPaszport" id="bPaszport">
+				</div>
+				<div class="check-div">
+					<label for="bBbiopaszport">Paszport Bio</label>
+					<input th:if="${fd.bBbiopaszport == true}" type="checkbox" name="bBbiopaszport" id="bBbiopaszport" checked>
+					<input th:unless="${fd.bBbiopaszport == true}" type="checkbox" name="bBbiopaszport" id="bBbiopaszport">
+				</div>
+				<div class="check-div">
+					<label for="bCompany">Firma</label>
+					<input th:if="${fd.bCompany == true}" type="checkbox" name="bCompany" id="bCompany" checked>
+					<input th:unless="${fd.bCompany == true}" type="checkbox"  name="bCompany"  id="bCompany">
+				</div>
+				<div class="check-div">
+					<label for="bFactory">Fabryka</label>
+					<input th:if="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory" checked>
+					<input th:unless="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory">
+				</div>
+				<div class="check-div">
+					<label for="bStartWork">Start Praca</label>
+					<input th:if="${fd.bStartWork == true}" type="checkbox" name="bStartWork" id="bStartWork" checked>
+					<input th:unless="${fd.bStartWork == true}" type="checkbox" name="bStartWork" id="bStartWork">
+				</div>
+				<div class="check-div">
+					<label for="bStartZus">Start zus</label>
+					<input th:if="${fd.bStartZus == true}" type="checkbox" name="bStartZus" id="bStartZus" checked>
+					<input th:unless="${fd.bStartZus == true}" type="checkbox" name="bStartZus" id="bStartZus" >
+				</div>
+				<div class="check-div">
+					<label for="bEndZus">koniec zus</label>
+					<input th:if="${fd.bEndZus == true}" type="checkbox" name="bEndZus" id="bEndZus" checked>
+					<input th:unless="${fd.bEndZus == true}" type="checkbox" name="bEndZus" id="bEndZus" >
+				</div>
+				<div class="check-div">
+					<label for="bEndWork">koniec pracy</label>
+					<input th:if="${fd.bEndWork == true}" type="checkbox" name="bEndWork" id="bEndWork" checked>
+					<input th:unless="${fd.bEndWork == true}" type="checkbox" name="bEndWork" id="bEndWork">
+				</div>
+			</div>
+			
+			</form>			
+	</div>
+</body>
+</html>

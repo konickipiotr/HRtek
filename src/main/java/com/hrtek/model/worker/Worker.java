@@ -53,4 +53,8 @@ public class Worker {
 		this.companyid = company;
 		this.recruiter = recruiter;
 	}
+	
+	public String getName() {
+		return firstname + " " + lastname;
+	}
 }

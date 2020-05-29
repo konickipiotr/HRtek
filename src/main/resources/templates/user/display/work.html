@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Podstawowe</h1>
+		</div>
+		
+		<div th:replace="user/display/fragments/viewbar:: viewbar"></div>
+
+		<div th:replace="user/display/fragments/workFilters :: workFilters"></div> 
+		<div class="showedFields"  th:replace="user/display/fragments/workfieldshideshow :: workfieldshideshow"></div>
+
+		
+		<div>
+			<div class="table-div">
+				<table id="basic-table">
+					<tr>
+						<th>lp</th>
+						<th>status</th>
+						<th>profil</th>
+						<th>Imię</th>
+						<th>Nazwisko</th>
+						<th th:if="${fd.bDateofbirth == true}" >Data urodzenia</th>
+						<th th:if="${fd.bRecruiter == true}">rekruter</th>
+						<th th:if="${fd.bCompany == true}">firma</th>
+						<th th:if="${fd.bFactory == true}">fabryka</th>
+						<th th:if="${fd.bStartWork == true}">start work</th>
+						<th th:if="${fd.bStartZus == true}">start zus</th>
+						<th th:if="${fd.bEndWork == true}">end work</th>
+						<th th:if="${fd.bEndZus == true}">end zus</th>
+						<th th:if="${fd.bStatementType == true}">typ o</th>
+						<th th:if="${fd.bStatement == true}">oświad</th>
+						<th th:if="${fd.bStatementValidFrom == true}">o od</th>
+						<th th:if="${fd.bStatementValidTo == true}">o do</th>
+						<th th:if="${fd.bPermit == true}">pozwolenia</th>
+						<th th:if="${fd.bPermitValidFrom == true}">p od</th>
+						<th th:if="${fd.bPermitValidTo == true}">p do</th>
+						<th th:if="${fd.bOther == true}">other</th>
+					</tr>
+					
+					<tr>
+						<td class="td_noP">
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="STATUS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							profil
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="FIRSTNAME">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="LASTNAME">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bDateofbirth == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="DATEOFBIRTH">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bRecruiter == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="RECRUITER">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bCompany == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="COMPANY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bFactory == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="FACTORY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStartWork == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="STARTWORK">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStartZus == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="STARTZUS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bEndWork == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="ENDWORK">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bEndZus == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="ENDZUS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStatementType == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="STATEMENTTYPE">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStatement == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="STATEMENT">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStatementValidFrom == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="STATEMENTFROM">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStatementValidTo == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="STATEMENTTO">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPermit == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="PERMIT">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPermitValidFrom == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="PERMITFROM">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPermitValidTo == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="PERMITTO">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bOther == true}"  class="td_noP">
+							<form th:action="@{/showwork/sort}" method="post">
+								<input type="hidden" name="field" value="OTHER">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+					</tr>
+					
+					<tr th:each="i, it : ${wv_list}">
+						<td th:text="${it.count}"></td>
+						<td>
+							<span th:if="${i.status == 1}" class="dot-green"></span> 
+							<span th:unless="${i.status == 1}" class="dot"></span>
+						</td>
+						<td>
+							<a th:href="@{'/profil/'+ ${i.id}}">[ico]</a>
+						</td>
+						<td th:text="${i.firstname}"></td>
+						<td th:text="${i.lastname}"></td>
+						<td th:if="${fd.bDateofbirth == true}"  th:text="${i.dateofbirth}"></td>
+						<td th:if="${fd.bRecruiter == true}" th:text="${i.recruiter}"></td>
+						<td th:if="${fd.bCompany == true}"  th:text="${i.company}"></td>
+						<td th:if="${fd.bFactory == true}" th:text="${i.factory}"></td>
+						<td th:if="${fd.bStartWork == true}" th:text="${i.startWork}"></td>
+						<td th:if="${fd.bStartZus == true}" th:text="${i.startZus}"></td>
+						<td th:if="${fd.bEndWork == true}" th:text="${i.endWork}"></td>
+						<td th:if="${fd.bEndZus == true}" th:text="${i.endZus}"></td>
+						<td th:if="${fd.bStatementType == true}" th:text="${i.statementType}"></td>
+						<td th:if="${fd.bStatement == true}" th:text="${i.statement}"></td>
+						<td th:if="${fd.bStatementValidFrom == true}" th:text="${i.statementValidFrom}"></td>
+						<td th:if="${fd.bStatementValidTo == true}" th:text="${i.statementValidTo}"></td>
+						<td th:if="${fd.bPermit == true}"  th:text="${i.permit}"></td>
+						<td th:if="${fd.bPermitValidFrom == true}" th:text="${i.permitValidFrom}"></td>
+						<td th:if="${fd.bPermitValidTo == true}" th:text="${i.permitValidTo}"></td>
+						<td th:if="${fd.bOther == true}" th:text="${i.other}"></td>
+						
+					</tr>
+				</table>
+			</div>
+		
+		</div>
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+<script src="/scripts/WorkViewScript.js"></script>
+<script src="/scripts/ViewCommon.js"></script>
+</html>

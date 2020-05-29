@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.hrtek.db.CitizenshipRepository;
 import com.hrtek.db.CompanyRepository;
@@ -43,6 +44,12 @@ public class BasicService {
 		this.companyRepo = companyRepo;
 		this.citizenshipRepo = citizenshipRepo;
 		this.factoryRepo = factoryRepo;
+	}
+	
+	public void setModel(Model model) {
+		model.addAttribute("citizenships", citizenshipRepo.findAll());
+		model.addAttribute("companies", companyRepo.findAll());
+		model.addAttribute("factories", factoryRepo.findAll());
 	}
 
 	public List<BasicView> getBasicViewList(){

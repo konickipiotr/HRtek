@@ -46,11 +46,11 @@
 	 		
 	 		<span>koszt na osobę</span>
 	 		<label for="typecostrent">Czynsz</label>
-	 		<input type="radio" id="typecostrent" name="typecost" value="rent" checked>
+	 		<input type="radio" id="typecostrent" name="costType" value="RENT" checked>
 	 		<label for="typecostrentmedia">czynsz + media</label>
-	 		<input type="radio" id="typecostrentmedia" name="typecost" value="rentmedia">
+	 		<input type="radio" id="typecostrentmedia" name="costType" value="MEDIARENT">
 	 		<label for="typecostrentmedia">koszt na osobę</label>
-	 		<input type="radio" id="typecostperperson" name="typecost" value="perperson">
+	 		<input type="radio" id="typecostperperson" name="costType" value="PERPERSON">
 	 		
 	 		<label for="perperson">perperson</label>
 	 		<input type="number" min="0" step="0.01"  name="perperson" id="perperson" th:field="*{perperson}" disabled>

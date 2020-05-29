@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="showedFields"  th:fragment="workfieldshideshow">
+			
+			<form th:action="@{/showwork/showhide}" method="post">
+			<div class="sort-bar">
+				<div>
+				
+					Pokaż kolumny:
+				
+				</div>
+				<div>
+					<button class="button-small" type="submit">zapisz</button>
+				</div>
+				<div class="check-div">
+					<label for="bDateofbirth">Data urodzenia</label>
+					<input th:if="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth" checked>
+					<input th:unless="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth" >		
+				</div>
+				<div class="check-div">
+					<label for="bRecruiter">Rekruter</label>
+					<input th:if="${fd.bRecruiter == true}" type="checkbox" name="bRecruiter" id="bRecruiter" checked>
+					<input th:unless="${fd.bRecruiter == true}" type="checkbox" name="bRecruiter" id="bRecruiter" >
+				</div>
+				<div class="check-div">
+					<label for="bCompany">Firma</label>
+					<input th:if="${fd.bCompany == true}" type="checkbox" name="bCompany" id="bCompany" checked>
+					<input th:unless="${fd.bCompany == true}" type="checkbox"  name="bCompany" id="bCompany" >
+				</div>
+				<div class="check-div">
+					<label for="bFactory">Fabryka</label>
+					<input th:if="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory" checked>
+					<input th:unless="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory">
+				</div>
+				<div class="check-div">
+					<label for="bStartWork">Start Praca</label>
+					<input th:if="${fd.bStartWork == true}" type="checkbox" name="bStartWork" id="bStartWork" checked>
+					<input th:unless="${fd.bStartWork == true}" type="checkbox" name="bStartWork" id="bStartWork">
+				</div>
+				<div class="check-div">
+					<label for="bStartZus">Start zus</label>
+					<input th:if="${fd.bStartZus == true}" type="checkbox" name="bStartZus" id="bStartZus" checked>
+					<input th:unless="${fd.bStartZus == true}" type="checkbox" name="bStartZus" id="bStartZus" >
+				</div>
+				<div class="check-div">
+					<label for="bEndWork">koniec pracy</label>
+					<input th:if="${fd.bEndWork == true}" type="checkbox" name="bEndWork"  id="bEndWork" checked>
+					<input th:unless="${fd.bEndWork == true}" type="checkbox" name="bEndWork" id="bEndWork">
+				</div>
+				<div class="check-div">
+					<label for="bEndZus">koniec zus</label>
+					<input th:if="${fd.bEndZus == true}" type="checkbox" name="bEndZus" id="bEndZus" checked>
+					<input th:unless="${fd.bEndZus == true}" type="checkbox" name="bEndZus" id="bEndZus" >
+				</div>
+				
+				<div class="check-div">
+					<label for="bStatementType">T Ośiwadczenia</label>
+					<input th:if="${fd.bStatementType == true}" type="checkbox" name="bStatementType" id="bStatementType" checked>
+					<input th:unless="${fd.bStatementType == true}" type="checkbox" name="bStatementType" id="bStatementType">
+				</div>
+				<div class="check-div">
+					<label for="bStatement">Oświadczenie</label>
+					<input th:if="${fd.bStatement == true}" type="checkbox" name="bStatement" id="bStatement"  checked>
+					<input th:unless="${fd.bStatement == true}" type="checkbox" name="bStatement" id="bStatement" >
+				</div>
+				<div class="check-div">
+					<label for="bStatementValidFrom">o Od</label>
+					<input th:if="${fd.bStatementValidFrom == true}" type="checkbox" name="bStatementValidFrom" id="bStatementValidFrom" checked>
+					<input th:unless="${fd.bStatementValidFrom == true}" type="checkbox" name="bStatementValidFrom" id="bStatementValidFrom" >
+				</div>
+				<div class="check-div">
+					<label for="bStatementValidTo">o Do</label>
+					<input th:if="${fd.bStatementValidTo == true}" type="checkbox" name="bStatementValidTo" id="bStatementValidTo" checked>
+					<input th:unless="${fd.bStatementValidTo == true}" type="checkbox" name="bStatementValidTo" id="bStatementValidTo">
+				</div>
+				<div class="check-div">
+					<label for="bPermit">Permit</label>
+					<input th:if="${fd.bPermit == true}" type="checkbox" name="bPermit" id="bPermit" checked>
+					<input th:unless="${fd.bPermit == true}" type="checkbox" name="bPermit" id="bPermit" >
+				</div>
+				<div class="check-div">
+					<label for="bPermitValidFrom">p Od</label>
+					<input th:if="${fd.bPermitValidFrom == true}" type="checkbox" name="bPermitValidFrom" id="bPermitValidFrom" checked>
+					<input th:unless="${fd.bPermitValidFrom == true}" type="checkbox" name="bPermitValidFrom" id="bPermitValidFrom">
+				</div>
+				<div class="check-div">
+					<label for="bPermitValidTo">p Do</label>
+					<input th:if="${fd.bPermitValidTo == true}" type="checkbox" name="bPermitValidTo" id="bPermitValidTo" checked>
+					<input th:unless="${fd.bPermitValidTo == true}" type="checkbox" name="bPermitValidTo" id="bPermitValidTo" >
+				</div>
+				<div class="check-div">
+					<label for="bOther">inne</label>
+					<input th:if="${fd.bOther == true}" type="checkbox" name="bOther" id="bOther" checked>
+					<input th:unless="${fd.bOther == true}" type="checkbox" name="bOther" id="bOther" >
+				</div>
+				
+				
+			</div>
+			
+			</form>			
+	</div>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	<div  th:fragment="contactFilters">
+			
+			<form th:action="@{/showcontact/filter}" method="post" th:object="${contactFilters}">
+			<div class="filter-bar">
+				<div class="type-filter">
+					<div class="header-filter">
+						<label for="bytext">TEXT</label>
+						<input th:if="${contactFilters.bytext == true}" type="checkbox" name="bytext" id="bytext" checked>
+						<input th:unless="${contactFilters.bytext == true}" type="checkbox" name="bytext" id="bytext">
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							<input th:if="${contactFilters.searchingMethod.name() == 'EQUAL'}" type="radio" name="searchingMethod" id="textequal" value="EQUAL"  checked>
+							<input th:unless="${contactFilters.searchingMethod.name() == 'EQUAL'}" type="radio" name="searchingMethod" id="textequal" value="EQUAL" >
+							
+							<label for="textequal">dokładnie</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${contactFilters.searchingMethod.name() == 'CONTAINS'}" type="radio" name="searchingMethod" id="textcontains" value="CONTAINS" checked>
+							<input th:unless="${contactFilters.searchingMethod.name() == 'CONTAINS'}" type="radio" name="searchingMethod" id="textcontains" value="CONTAINS">
+							<label for="textcontains">zawiera</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${contactFilters.searchingMethod.name() == 'FIRSTS'}" type="radio" name="searchingMethod" id="textfirst" value="FIRSTS" checked>
+							<input th:unless="${contactFilters.searchingMethod.name() == 'FIRSTS'}" type="radio" name="searchingMethod" id="textfirst" value="FIRSTS">
+							<label for="textfirst">3 pierwsze litery</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchingMethod.name() == 'EMPTY'}" type="radio" name="searchingMethod" id="emptytext" value="EMPTY" checked>
+							<input th:unless="${contactFilters.searchingMethod.name() == 'EMPTY'}" type="radio" name="searchingMethod" id="emptytext" value="EMPTY">
+							<label for="emptytext">Puste</label>
+						</div>
+					</div>
+					<div class="fields-groups">
+						<div class="check-div">
+							<label for="texttosearch">text</label>
+						</div>
+						<div class="check-div">	
+							<input type="text" name="texttosearch" id="texttosearch" >
+						</div>
+					</div>
+				</div>
+				
+				<div class="type-filter">
+					<div class="fields-groups">
+					
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'FIRSTNAME'}" type="radio" name="searchbyfield" id="firstname" value="FIRSTNAME" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'FIRSTNAME'}" type="radio" name="searchbyfield" id="firstname" value="FIRSTNAME">
+							<label for="firstname">Imię</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'LASTNAME'}" type="radio" name="searchbyfield" id="lastname" value="LASTNAME" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'LASTNAME'}" type="radio" name="searchbyfield" id="lastname" value="LASTNAME">
+							<label for="lastname">Nazwisko</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'NAME'}" type="radio" name="searchbyfield" id="name" value="NAME" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'NAME'}" type="radio" name="searchbyfield" id="name" value="NAME">
+							<label for="name">imię i nazwisko</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'EMAIL'}" type="radio" name="searchbyfield" id="email" value="EMAIL" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'EMAIL'}" type="radio" name="searchbyfield" id="email" value="EMAIL">
+							<label for="email">email</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'PHONE'}" type="radio" name="searchbyfield" id="phone" value="PHONE" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'PHONE'}" type="radio" name="searchbyfield" id="phone" value="PHONE">
+							<label for="phone">phone</label>
+						</div>
+					</div>
+					
+				</div>
+				<div class="type-filter">
+					<div class="fields-groups">
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'PLADDRESS'}" type="radio" name="searchbyfield" id="pladdress" value="PLADDRESS" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'PLADDRESS'}" type="radio" name="searchbyfield" id="pladdress" value="PLADDRESS">
+							<label for="pladdress">pladdress</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'PLPOSTCODE'}" type="radio" name="searchbyfield" id="plpostcode" value="PLPOSTCODE" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'PLPOSTCODE'}" type="radio" name="searchbyfield" id="plpostcode" value="PLPOSTCODE">
+							<label for="plpostcode">plpostcode</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'PLCITY'}" type="radio" name="searchbyfield" id="plcity" value="PLCITY" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'PLCITY'}" type="radio" name="searchbyfield" id="plcity" value="PLCITY">
+							<label for="plcity">plcity</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'ADDRESS'}" type="radio" name="searchbyfield" id="address" value="ADDRESS" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'ADDRESS'}" type="radio" name="searchbyfield" id="address" value="ADDRESS">
+							<label for="address">address</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'POSTCODE'}" type="radio" name="searchbyfield" id="postcode" value="POSTCODE" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'POSTCODE'}" type="radio" name="searchbyfield" id="postcode" value="POSTCODE">
+							<label for="postcode">postcode</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${contactFilters.searchbyfield.name() == 'CITY'}" type="radio" name="searchbyfield" id="city" value="CITY" checked>
+							<input th:unless="${contactFilters.searchbyfield.name() == 'CITY'}" type="radio" name="searchbyfield" id="city" value="CITY">
+							<label for="city">city</label>
+						</div>
+					</div>
+				</div>
+	 			
+			<!-- 	********************************************************** -->
+				<div class="type-filter">
+					<div class="header-filter">
+						<label for="bydateofbirth">DATA URODZENIA</label>
+						<input th:if="${contactFilters.bydateofbirth == true}" type="checkbox" name="bydateofbirth" id="bydateofbirth" checked>
+						<input th:unless="${contactFilters.bydateofbirth == true}" type="checkbox" name="bydateofbirth" id="bydateofbirth">
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							<input th:if="${contactFilters.dateofbirthMethod.name() == 'EQUAL'}" type="radio" name="dateofbirthMethod" id="birthEqual" value="EQUAL" checked>
+							<input th:unless="${contactFilters.dateofbirthMethod.name() == 'EQUAL'}" type="radio" name="dateofbirthMethod" id="birthEqual" value="EQUAL" >
+							<label for="birthEqual">dokładnie</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${contactFilters.dateofbirthMethod.name() == 'RANGE'}" type="radio" name="dateofbirthMethod" id="birthRange" value="RANGE" checked>
+							<input th:unless="${contactFilters.dateofbirthMethod.name() == 'RANGE'}" type="radio" name="dateofbirthMethod" id="birthRange" value="RANGE">
+							<label for="birthRange">zawiera</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${contactFilters.dateofbirthMethod.name() == 'LESS26'}" type="radio" name="dateofbirthMethod" id="birthLess" value="LESS26" checked>
+							<input th:unless="${contactFilters.dateofbirthMethod.name() == 'LESS26'}" type="radio" name="dateofbirthMethod" id="birthLess" value="LESS26">
+							<label for="birthLess">ponizej 26</label>
+						</div>
+						<div class="radio-div">
+							<label for="dateofbirth" id="labelbirthfrom">Od</label>
+							<label for="dateofbirth" id="lablebirthequal">Data:</label>
+						</div>
+						<div class="radio-div">							
+							<input type="date" name="dateofbirth" id="dateofbirth" th:field="*{dateofbirth}">
+						</div>
+						<div class="radio-div">
+							<label for="dateofbirthTo">do</label>
+						</div>
+						<div class="radio-div">
+							
+							<input type="date" name="dateofbirthTo" id="dateofbirthTo" th:field="*{dateofbirthTo}">
+						</div>
+					</div>
+				</div>
+				
+<!-- 				********************************************************** -->
+		
+				
+			<!-- 	********************************************************** -->
+
+				<div class="type-filter">
+					
+					<div class="header-filter">
+						<label>Firma</label>
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							&nbsp;
+						</div>
+						<div class="radio-div">
+							<select id="byCompany" name="byCompany">
+								<option></option>
+								<option th:each="c : ${companies}" th:value="${c.shortname}" th:text="${c.shortname}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="header-filter">
+						<label>Fabryka</label>
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							&nbsp;
+						</div>
+						<div class="radio-div">
+							<select id="byFactory" name="byFactory">
+								<option></option>
+								<option th:each="c : ${factories}" th:value="${c.shortname}" th:text="${c.shortname}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="header-filter">
+						<label>Dom</label>
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							&nbsp;
+						</div>
+						<div class="radio-div">
+							<select id="byHouse" name="byHouse">
+								<option></option>
+								<option value="-1">Własny</option>
+								<option th:each="c : ${houses}" th:value="${c.id}" th:text="${c.value}"></option>
+							</select>
+						</div>
+					</div>
+				
+				</div>
+				
+				<!--#########################################################  -->
+				</div> 
+
+				<div class="button-bar">
+					<button class="button" name="filter" value="new" type="submit">Filtruj od nowa </button>
+					<button class="button" name="filter" value="next" type="submit">Filtruj dalej </button>
+					<button class="button" name="filter" value="reset" type="submit">Reset </button>
+				</div>
+			</form>
+			
+	</div>
+</body>
+
+</html>

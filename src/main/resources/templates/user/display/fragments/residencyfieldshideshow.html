@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="showedFields"  th:fragment="residencyfieldshideshow">
+			
+			<form th:action="@{/showresidency/showhide}" method="post">
+			<div class="sort-bar">
+				<div>
+				
+					Pokaż kolumny:
+				
+				</div>
+				<div>
+					<button class="button-small" type="submit">zapisz</button>
+				</div>
+				<div class="check-div">
+					<label for="bDateofbirth">Data urodzenia</label>
+					<input th:if="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth" checked>
+					<input th:unless="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth" >		
+				</div>
+				<div class="check-div">
+					<label for="bCompany">Firma</label>
+					<input th:if="${fd.bCompany == true}" type="checkbox" name="bCompany" id="bCompany" checked>
+					<input th:unless="${fd.bCompany == true}" type="checkbox"  name="bCompany" id="bCompany" >
+				</div>
+				<div class="check-div">
+					<label for="bFactory">Fabryka</label>
+					<input th:if="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory" checked>
+					<input th:unless="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory">
+				</div>
+				<div class="check-div">
+					<label for="bPassport">Paszport</label>
+					<input th:if="${fd.bPassport == true}" type="checkbox" name="bPassport" id="bPassport" checked>
+					<input th:unless="${fd.bPassport == true}" type="checkbox" name="bPassport" id="bPassport">
+				</div>
+				<div class="check-div">
+					<label for="bBiopassport">Paszport bio</label>
+					<input th:if="${fd.bBiopassport == true}" type="checkbox" name="bBiopassport" id="bBiopassport" checked>
+					<input th:unless="${fd.bBiopassport == true}" type="checkbox" name="bBiopassport" id="bBiopassport" >
+				</div>
+				<div class="check-div">
+					<label for="bVisa">Visa</label>
+					<input th:if="${fd.bVisa == true}" type="checkbox" name="bVisa"  id="bVisa" checked>
+					<input th:unless="${fd.bVisa == true}" type="checkbox" name="bVisa" id="bVisa">
+				</div>
+				<div class="check-div">
+					<label for="bVisaValidFrom">Od</label>
+					<input th:if="${fd.bVisaValidFrom == true}" type="checkbox" name="bVisaValidFrom" id="bVisaValidFrom" checked>
+					<input th:unless="${fd.bVisaValidFrom == true}" type="checkbox" name="bVisaValidFrom" id="bVisaValidFrom" >
+				</div>
+				
+				<div class="check-div">
+					<label for="bVisaValidTo">Do</label>
+					<input th:if="${fd.bVisaValidTo == true}" type="checkbox" name="bVisaValidTo" id="bVisaValidTo" checked>
+					<input th:unless="${fd.bVisaValidTo == true}" type="checkbox" name="bVisaValidTo" id="bVisaValidTo">
+				</div>
+			</div>
+			
+			</form>			
+	</div>
+</body>
+</html>

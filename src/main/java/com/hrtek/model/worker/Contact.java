@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+import com.hrtek.model.accommodation.House;
 import com.hrtek.user.recruitment.NewWorker;
 import com.hrtek.user.recruitment.WorkerAll;
 
@@ -75,5 +76,20 @@ public class Contact {
 	
 	public Contact(Worker w){
 		this.id = w.getId();
+	}
+	
+	public void removePersonFromHouse() {
+		this.pladdress = "";
+		this.plpostcode = "";
+		this.plcity = "";
+		this.houseid = null;
+		this.bedid = null;
+		this.roomid = null;
+	}
+	
+	public void addFromHouse(House h) {
+		this.pladdress = h.getAddress();
+		this.postcode = h.getPostcode();
+		this.plcity = h.getCity();
 	}
 }

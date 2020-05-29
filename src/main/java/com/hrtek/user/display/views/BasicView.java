@@ -2,7 +2,6 @@ package com.hrtek.user.display.views;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import com.hrtek.model.worker.Residency;
@@ -10,10 +9,15 @@ import com.hrtek.model.worker.StatusWorker;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
 import com.hrtek.model.worker.WorkerDate;
+import com.hrtek.utils.FieldsComparator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BasicView implements Comparable<BasicView> {
 
 	private int status;
@@ -53,91 +57,40 @@ public class BasicView implements Comparable<BasicView> {
 		this.startWork = wd.getStartWork();
 		this.startZus = wd.getStartZus();
 		this.endZus = wd.getEndZus();
+		this.endWork = wd.getEndWork();
 	}
 	
 	public void setFromResidency(Residency re) {
 		this.paszport = re.getPassport();
 		this.biopaszport = re.getBiopassport();
 	}
-
 	
-	public enum Field{
-		STATUS,
-		FIRSTNAME,
-		LASTNAME,
-		DATEOFBIRTH,
-		SEX,
-		CITIZENSHIP,
-		PESEL,
-		PASZPORT,
-		BIOPASZPORT,
-		COMPANY,
-		FACTORY,
-		STARTWORK,
-		STARTZUS,
-		ENDZUS,
-		ENDWORK
-	}
-	
-	public static boolean up = false;
-	public static Field field = Field.FIRSTNAME;
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.FIRSTNAME;
 	
 	@Override
 	public int compareTo(BasicView o) {
 		
 		switch (field) {
-		case STATUS: return compareStatus(o);
-		case FIRSTNAME: return compareText(this.firstname, o.getFirstname());
-		case LASTNAME: return compareText(this.firstname, o.getLastname());
-		case DATEOFBIRTH: return compareDate(this.dateofbirth, o.getDateofbirth());
-		case SEX: return compareText(this.sex, o.getSex());
-		case CITIZENSHIP: return compareText(this.citizenship, o.getCitizenship());
-		case PESEL: return compareText(this.pesel, o.getPesel());
-		case PASZPORT: return compareText(this.paszport, o.getPaszport());
-		case BIOPASZPORT: return compareText(this.biopaszport, o.getBiopaszport());
-		case COMPANY: return compareText(this.company, o.getCompany());
-		case FACTORY: return compareText(this.factory, o.getFactory());
-		case STARTWORK: return compareDate(this.startWork, o.getStartWork());
-		case STARTZUS: return compareDate(this.startZus, o.getStartZus());
-		case ENDZUS: return compareDate(this.endZus, o.getEndZus());
-		case ENDWORK: return compareDate(this.endWork, o.getEndWork());
+		case STATUS: return FieldsComparator.compareNumber(this.status, o.getStatus(), isup);
+		case FIRSTNAME: return FieldsComparator.compareText(this.firstname, o.getFirstname(), isup);
+		case LASTNAME: return FieldsComparator.compareText(this.firstname, o.getLastname(), isup);
+		case DATEOFBIRTH: return FieldsComparator.compareDate(this.dateofbirth, o.getDateofbirth(), isup);
+		case COMPANY: return FieldsComparator.compareText(this.company, o.getCompany(), isup);
+		case FACTORY: return FieldsComparator.compareText(this.factory, o.getFactory(), isup);
+		case STARTWORK: return FieldsComparator.compareDate(this.startWork, o.getStartWork(), isup);
+		case STARTZUS: return FieldsComparator.compareDate(this.startZus, o.getStartZus(), isup);
+		case ENDZUS: return FieldsComparator.compareDate(this.endZus, o.getEndZus(), isup);
+		case ENDWORK: return FieldsComparator.compareDate(this.endWork, o.getEndWork(), isup);
+		
+		case SEX: return FieldsComparator.compareText(this.sex, o.getSex(), isup);
+		case CITIZENSHIP: return FieldsComparator.compareText(this.citizenship, o.getCitizenship(), isup);
+		case PESEL: return FieldsComparator.compareText(this.pesel, o.getPesel(), isup);
+		case PASZPORT: return FieldsComparator.compareText(this.paszport, o.getPaszport(), isup);
+		case BIOPASZPORT: return FieldsComparator.compareText(this.biopaszport, o.getBiopaszport(), isup);
 		default:
 			break;
 		}
-		return 0;
-	}
-	
-	
-	private int compareDate(LocalDate member, LocalDate o) {
-		if(up) {
-			if(member == null) return 1;
-			if(o == null) return -1;
-			return member.compareTo(o);
-		}
-		if(member == null) return -1;
-		if(o == null) return 1;
-		return -member.compareTo(o);
-	}
-	
-	private int compareText(String member, String o) {
-		if(up) {
-			if(member == null) return 1;
-			if(o == null) return -1;
-			return member.compareToIgnoreCase(o);
-		}
-		if(member == null) return -1;
-		if(o == null) return 1;
-		return -member.compareToIgnoreCase(o);
-	}
-	
-	private int compareStatus(BasicView o) {
-		if(up) {
-			if(this.status > o.status) return -1;
-			if(this.status < o.status) return 1;
-			return 0;
-		}
-		if(this.status < o.status) return -1;
-		if(this.status > o.status) return 1;
 		return 0;
 	}
 }

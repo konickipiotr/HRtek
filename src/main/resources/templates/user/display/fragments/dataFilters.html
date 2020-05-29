@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	<div  th:fragment="dataFilters">
+			
+			<form th:action="@{/showdata/filter}" method="post" th:object="${dataFilters}">
+			<div class="filter-bar">
+				<div class="type-filter">
+					<div class="header-filter">
+						<label for="bytext">TEXT</label>
+						<input th:if="${dataFilters.bytext == true}" type="checkbox" name="bytext" id="bytext" checked>
+						<input th:unless="${dataFilters.bytext == true}" type="checkbox" name="bytext" id="bytext">
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							<input th:if="${dataFilters.searchingMethod.name() == 'EQUAL'}" type="radio" name="searchingMethod" id="textequal" value="EQUAL"  checked>
+							<input th:unless="${dataFilters.searchingMethod.name() == 'EQUAL'}" type="radio" name="searchingMethod" id="textequal" value="EQUAL" >
+							
+							<label for="textequal">dokładnie</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.searchingMethod.name() == 'CONTAINS'}" type="radio" name="searchingMethod" id="textcontains" value="CONTAINS" checked>
+							<input th:unless="${dataFilters.searchingMethod.name() == 'CONTAINS'}" type="radio" name="searchingMethod" id="textcontains" value="CONTAINS">
+							<label for="textcontains">zawiera</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.searchingMethod.name() == 'FIRSTS'}" type="radio" name="searchingMethod" id="textfirst" value="FIRSTS" checked>
+							<input th:unless="${dataFilters.searchingMethod.name() == 'FIRSTS'}" type="radio" name="searchingMethod" id="textfirst" value="FIRSTS">
+							<label for="textfirst">3 pierwsze litery</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${dataFilters.searchingMethod.name() == 'EMPTY'}" type="radio" name="searchingMethod" id="emptytext" value="EMPTY" checked>
+							<input th:unless="${dataFilters.searchingMethod.name() == 'EMPTY'}" type="radio" name="searchingMethod" id="emptytext" value="EMPTY">
+							<label for="emptytext">Puste</label>
+						</div>
+					</div>
+					<div class="fields-groups">
+					
+						<div class="radio-div">							
+							<input th:if="${dataFilters.searchbyfield.name() == 'FIRSTNAME'}" type="radio" name="searchbyfield" id="firstname" value="FIRSTNAME" checked>
+							<input th:unless="${dataFilters.searchbyfield.name() == 'FIRSTNAME'}" type="radio" name="searchbyfield" id="firstname" value="FIRSTNAME">
+							<label for="firstname">Imię</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${dataFilters.searchbyfield.name() == 'LASTNAME'}" type="radio" name="searchbyfield" id="lastname" value="LASTNAME" checked>
+							<input th:unless="${dataFilters.searchbyfield.name() == 'LASTNAME'}" type="radio" name="searchbyfield" id="lastname" value="LASTNAME">
+							<label for="lastname">Nazwisko</label>
+						</div>
+						<div class="radio-div">							
+							<input th:if="${dataFilters.searchbyfield.name() == 'NAME'}" type="radio" name="searchbyfield" id="name" value="NAME" checked>
+							<input th:unless="${dataFilters.searchbyfield.name() == 'NAME'}" type="radio" name="searchbyfield" id="name" value="NAME">
+							<label for="name">imię i nazwisko</label>
+						</div>
+					</div>
+					<div class="fields-groups">
+						<div class="check-div">
+							<label for="texttosearch">text</label>
+						</div>
+						<div class="check-div">	
+							<input type="text" name="texttosearch" id="texttosearch" >
+						</div>
+					</div>
+				</div>
+	 			
+			<!-- 	********************************************************** -->
+				<div class="type-filter">
+					<div class="header-filter">
+						<label for="bydateofbirth">DATA URODZENIA</label>
+						<input th:if="${dataFilters.bydateofbirth == true}" type="checkbox" name="bydateofbirth" id="bydateofbirth" checked>
+						<input th:unless="${dataFilters.bydateofbirth == true}" type="checkbox" name="bydateofbirth" id="bydateofbirth">
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							<input th:if="${dataFilters.dateofbirthMethod.name() == 'EQUAL'}" type="radio" name="dateofbirthMethod" id="birthEqual" value="EQUAL" checked>
+							<input th:unless="${dataFilters.dateofbirthMethod.name() == 'EQUAL'}" type="radio" name="dateofbirthMethod" id="birthEqual" value="EQUAL" >
+							<label for="birthEqual">dokładnie</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.dateofbirthMethod.name() == 'RANGE'}" type="radio" name="dateofbirthMethod" id="birthRange" value="RANGE" checked>
+							<input th:unless="${dataFilters.dateofbirthMethod.name() == 'RANGE'}" type="radio" name="dateofbirthMethod" id="birthRange" value="RANGE">
+							<label for="birthRange">zawiera</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.dateofbirthMethod.name() == 'LESS26'}" type="radio" name="dateofbirthMethod" id="birthLess" value="LESS26" checked>
+							<input th:unless="${dataFilters.dateofbirthMethod.name() == 'LESS26'}" type="radio" name="dateofbirthMethod" id="birthLess" value="LESS26">
+							<label for="birthLess">ponizej 26</label>
+						</div>
+						<div class="radio-div">
+							<label for="dateofbirth" id="labelbirthfrom">Od</label>
+							<label for="dateofbirth" id="lablebirthequal">Data:</label>
+						</div>
+						<div class="radio-div">							
+							<input type="date" name="dateofbirth" id="dateofbirth" th:field="*{dateofbirth}">
+						</div>
+						<div class="radio-div">
+							<label for="dateofbirthTo">do</label>
+						</div>
+						<div class="radio-div">
+							
+							<input type="date" name="dateofbirthTo" id="dateofbirthTo" th:field="*{dateofbirthTo}">
+						</div>
+					</div>
+					
+					<div class="header-filter">
+						<label>Status</label>
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							<input th:if="${dataFilters.byStatus == 'ALL'}" type="radio" name="byStatus" id="all" value="ALL" checked>
+							<input th:unless="${dataFilters.byStatus == 'ALL'}" type="radio" name="byStatus" id="all" value="ALL">
+							<label for="all">All</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.byStatus == '1'}" type="radio" name="byStatus" id="active" value="1" checked>
+							<input th:unless="${dataFilters.byStatus == '1'}" type="radio" name="byStatus" id="active" value="1">
+							<label for="active">aktywni</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.byStatus == '0'}" type="radio" name="byStatus" id="inactive" value="0" checked>
+							<input th:unless="${dataFilters.byStatus == '0'}" type="radio" name="byStatus" id="inactive" value="0">
+							<label for="inactive">nieaktywni</label>
+						</div>
+					</div>
+
+				</div>
+				
+<!-- 				**********************************************************
+				
+				*********************** START WORK*********************************** -->
+				<div class="type-filter">
+					<div class="header-filter">
+						<label for="byStartMedicalFrom">BADANIA OD</label>
+						<input th:if="${dataFilters.byStartMedicalFrom == true}" type="checkbox" name="byStartMedicalFrom" id="byStartMedicalFrom"  checked>
+						<input th:unless="${dataFilters.byStartMedicalFrom == true}" type="checkbox" name="byStartMedicalFrom" id="byStartMedicalFrom" >
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							<input th:if="${dataFilters.startMedicalFromMethod.name() == 'EQUAL'}" type="radio" name="startMedicalFromMethod" id="startMedicalEqual" value="EQUAL" checked>
+							<input th:unless="${dataFilters.startMedicalFromMethod.name() == 'EQUAL'}" type="radio" name="startMedicalFromMethod" id="startMedicalEqual" value="EQUAL" >
+							<label for="startMedicalEqual">dokładnie</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.startMedicalFromMethod.name() == 'RANGE'}" type="radio" name="startMedicalFromMethod" id="startMedicalRange" value="RANGE" checked>
+							<input th:unless="${dataFilters.startMedicalFromMethod.name() == 'RANGE'}" type="radio" name="startMedicalFromMethod" id="startMedicalRange" value="RANGE">
+							<label for="startMedicalRange">zawiera</label>
+						</div>
+						<div class="radio-div">
+							<label for="startMedicalFromFrom" id="labelstartmedicalfrom">Od</label>
+							<label for="startMedicalFromFrom" id="labelestartmedicalequal">Data:</label>
+						</div>
+						<div class="radio-div">							
+							<input type="date" name="startMedicalFromFrom" id="startMedicalFromFrom" th:field="*{startMedicalFromFrom}">
+						</div>
+						<div class="radio-div">
+							<label for="startMedicalFromTo">do</label>
+						</div>
+						<div class="radio-div">
+							<input type="date" name="startMedicalFromTo" id="startMedicalFromTo" th:field="*{startMedicalFromTo}">
+						</div>
+					</div>
+				</div>
+<!-- 				**********************************************************
+				*********************** START ZUS*********************************** -->
+				<div class="type-filter">
+					<div class="header-filter">
+						<label for="byStartMedicalTo">BADANIA DO</label>
+						<input th:if="${dataFilters.byStartMedicalTo == true}" type="checkbox" name="byStartMedicalTo" id="byStartMedicalTo" checked>
+						<input th:unless="${dataFilters.byStartMedicalTo == true}" type="checkbox" name="byStartMedicalTo" id="byStartMedicalTo">
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							<input th:if="${dataFilters.endMedicalToMethod.name() == 'EQUAL'}" type="radio" name="endMedicalToMethod" id="endMedicalEqual" value="EQUAL" checked>
+							<input th:unless="${dataFilters.endMedicalToMethod.name() == 'EQUAL'}" type="radio" name="endMedicalToMethod" id="endMedicalEqual" value="EQUAL">
+							<label for="endMedicalEqual">dokładnie</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.endMedicalToMethod.name() == 'RANGE'}" type="radio" name="endMedicalToMethod" id="endMedicalRange" value="RANGE" checked>
+							<input th:unless="${dataFilters.endMedicalToMethod.name() == 'RANGE'}" type="radio" name="endMedicalToMethod" id="endMedicalRange" value="RANGE">
+							<label for="endMedicalRange">zawiera</label>
+						</div>
+						<div class="radio-div">
+							<label for="endMedicalFrom" id="labelendmedicalfrom">Od</label>
+							<label for="endMedicalFrom" id="lablendmedicalequal">Data:</label>
+						</div>
+						<div class="radio-div">							
+							<input type="date" name="endMedicalFrom" id="endMedicalFrom" th:field="*{endMedicalFrom}">
+						</div>
+						<div class="radio-div">
+							<label for="endMedicalTo">do</label>
+						</div>
+						<div class="radio-div">
+							<input type="date" name="endMedicalTo" id="endMedicalTo" th:field="*{endMedicalTo}">
+						</div>
+					</div>
+					
+					
+				</div>
+				
+			<!-- 	********************************************************** -->
+
+				<div class="type-filter">
+					<div class="header-filter">
+						<label for="byAddToSystem">W SYSTEMIE</label>
+						<input th:if="${dataFilters.byAddToSystem == true}" type="checkbox" name="byAddToSystem" id="byAddToSystem" checked>
+						<input th:unless="${dataFilters.byAddToSystem == true}" type="checkbox" name="byAddToSystem" id="byAddToSystem">
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							<input th:if="${dataFilters.addToSystemMethod.name() == 'EQUAL'}" type="radio" name="addToSystemMethod" id="addToSystemEqual" value="EQUAL" checked>
+							<input th:unless="${dataFilters.addToSystemMethod.name() == 'EQUAL'}" type="radio" name="addToSystemMethod" id="addToSystemEqual" value="EQUAL" >
+							<label for="addToSystemEqual">dokładnie</label>
+						</div>
+						<div class="radio-div">
+							<input th:if="${dataFilters.addToSystemMethod.name() == 'RANGE'}" type="radio" name="addToSystemMethod" id="addToSystemRange" value="RANGE" checked>
+							<input th:unless="${dataFilters.addToSystemMethod.name() == 'RANGE'}" type="radio" name="addToSystemMethod" id="addToSystemRange" value="RANGE">
+							<label for="addToSystemRange">zawiera</label>
+						</div>
+						<div class="radio-div">
+							<label for="addToSystemFrom" id="labeladtosystemfrom">Od</label>
+							<label for="addToSystemFrom" id="labladtosystemequal">Data:</label>
+						</div>
+						<div class="radio-div">							
+							<input type="date" name="addToSystemFrom" id="addToSystemFrom" th:field="*{addToSystemFrom}">
+						</div>
+						<div class="radio-div">
+							<label for="addToSystemTo">do</label>
+						</div>
+						<div class="radio-div">
+							<input type="date" name="addToSystemTo" id="addToSystemTo" th:field="*{addToSystemTo}">
+						</div>
+					</div>
+					
+					
+				</div>
+					
+				<div class="type-filter">
+					<div class="header-filter">
+						<label>Firma</label>
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							&nbsp;
+						</div>
+						<div class="radio-div">
+							<select id="byCompany" name="byCompany">
+								<option></option>
+								<option th:each="c : ${companies}" th:value="${c.shortname}" th:text="${c.shortname}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="header-filter">
+						<label>Fabryka</label>
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							&nbsp;
+						</div>
+						<div class="radio-div">
+							<select id="byFactory" name="byFactory">
+								<option></option>
+								<option th:each="c : ${factories}" th:value="${c.shortname}" th:text="${c.shortname}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="header-filter">
+						<label>Rekruter</label>
+					</div>
+					<div class="fields-groups">
+						<div class="radio-div">
+							&nbsp;
+						</div>
+						<div class="radio-div">
+							<select id="byRecruiter" name="byRecruiter">
+								<option></option>
+								<option th:each="c : ${recruiters}" th:value="${c.value}" th:text="${c.value}"></option>
+							</select>
+						</div>
+					</div>
+				</div>				
+				
+				<!--#########################################################  -->
+				</div> 
+
+				<div class="button-bar">
+					<button class="button" name="filter" value="new" type="submit">Filtruj od nowa </button>
+					<button class="button" name="filter" value="next" type="submit">Filtruj dalej </button>
+					<button class="button" name="filter" value="reset" type="submit">Reset </button>
+				</div>
+			</form>
+			
+	</div>
+</body>
+
+</html>

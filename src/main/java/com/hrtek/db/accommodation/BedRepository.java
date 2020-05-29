@@ -12,5 +12,6 @@ import com.hrtek.user.accommodation.Bedstatus;
 public interface BedRepository extends JpaRepository<Bed, Long> {
 	
 	List<Bed> findByBedstatus(Bedstatus bedstatus);
+	List<Bed> findByBedstatusAndHouseid(Bedstatus bedstatus, Long houseid);
 
 }
