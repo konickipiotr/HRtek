@@ -8,17 +8,24 @@
 </head>
 <body>
 	<header th:fragment="top">
-		<div style="float: left; margin-left: 5px">
+		<div style="flex: 1; margin-left: 5px;">
 			<a href=""><img src="/images/logo.png" width="150" height="80"></a>
 		</div>
-		
-		<a class = "navUserPanel" th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/}">Panel użytkownika</a>
-		<a class = "navUserPanel" th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/admin}">Panel admin</a>
-		<a th:if="${session.ROLE == 'BOSS'}" th:href="@{/boss}">Panel szefa</a>
+		<div class="username">
+			<span th:text="${session.user.firstname + ' ' + session.user.lastname}"></span>
+		</div>
+		<div class="role-panel">
+			<a class = "navUserPanel" th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/}">Panel użytkownika</a>
+			<a class = "navUserPanel" th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/admin}">Panel admin</a>
+			<a class = "navUserPanel" th:if="${session.ROLE == 'BOSS'}" th:href="@{/boss}">Panel szefa</a>
+		</div>
 		<div class="top-right-icon">
 			<a th:href="@{/user/home?lang=pl}"><img class="flag" alt="" th:src="@{/images/poland.png}"></a>
 			<a th:href="@{/user/home?lang=en}"><img class="flag" alt="" th:src="@{/images/wb.png}"></a>
 			<a th:href="@{/user/home?lang=uk}"><img class="flag" alt="" th:src="@{/images/ukraine.png}"></a>
+			
+		</div>
+		<div style="display: flex; ">
 			<a th:href="@{/logout}"><img src="/images/log.png" width="30" height="30"></a>
 		</div>
 	</header>

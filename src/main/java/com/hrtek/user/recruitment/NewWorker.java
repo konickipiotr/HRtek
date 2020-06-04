@@ -35,6 +35,8 @@ public class NewWorker {
 	private String pladdress;
 	private String plpostcode;
 	private String plcity;
+	private double wage;
+	private String sWage;
 	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate startZus;

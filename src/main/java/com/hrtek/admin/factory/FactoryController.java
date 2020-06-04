@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hrtek.db.FactoryRepository;
 import com.hrtek.model.Factory;
+import com.hrtek.model.StatusFC;
 
 @Controller
 @RequestMapping("/admin/factory")
@@ -25,10 +26,32 @@ public class FactoryController {
 		return "admin/factory";
 	}
 	
-	@GetMapping(path = "/delete/{id}")
-	public String deleteFactory(@PathVariable("id") Long id) {
-		this.factoryRepo.deleteById(id);
-		//TODO usunąć fabrykę z workersów
+	@GetMapping(path = "/enable/{id}")
+	public String enableFactory(@PathVariable("id") Long id) {
+		Optional<Factory> oFactory = this.factoryRepo.findById(id);
+		if(oFactory.isPresent()) {
+			Factory factory = oFactory.get();
+			factory.setStatus(StatusFC.ENABLED);
+			this.factoryRepo.save(factory);
+		}
+
+		return "redirect:/admin/factory";
+	}
+	
+	@GetMapping(path = "/disable/{id}")
+	public String disablleFactory(@PathVariable("id") Long id, Model model) {
+		Optional<Factory> oFactory = this.factoryRepo.findById(id);
+		if(oFactory.isPresent()) {
+			Factory factory = oFactory.get();
+			if(factory.getNumberofwokers() == 0) {
+				factory.setStatus(StatusFC.DISABLED);
+				this.factoryRepo.save(factory);
+			}
+			else
+				model.addAttribute("error_msg", "Nie można dezaktywować fabryki dopóki pracuje w niej co najmniej jeden pracownik");
+			
+		}
+
 		return "redirect:/admin/factory";
 	}
 	

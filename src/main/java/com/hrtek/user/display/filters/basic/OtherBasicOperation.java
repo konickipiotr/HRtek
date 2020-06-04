@@ -61,6 +61,7 @@ public class OtherBasicOperation extends OtherFilterOperation<BasicView, BasicFi
 		if(bf.getByCitizenship() == null || bf.getByCitizenship().isBlank()) return list;
 		List<BasicView> newList = new ArrayList<BasicView>();
 		for(BasicView b : list) {
+			if(b.getCitizenship() == null) continue;
 			if(b.getCitizenship().equals(bf.getByCitizenship()))
 				newList.add(b);
 		}

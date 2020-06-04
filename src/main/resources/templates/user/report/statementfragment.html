@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<div  th:fragment="statementfragment">
+		<!--*************** CASE ************************ -->
+		<div th:case="'STATEMENTVISA'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Start work</th>
+					<th>Start statement</th>
+					
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.startWork}"></td>
+					<td th:text="${i.startStatement}"></td>
+				</tr>
+			</table>
+		</div>	
+		
+		<!--*************** CASE ************************ -->
+		<div th:case="'STATEMENTWORK'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Start work</th>
+					<th>Start statement</th>
+					
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.startWork}"></td>
+					<td th:text="${i.startStatement}"></td>
+				</tr>
+			</table>
+		</div>	
+		
+	</div>
+</body>
+</html>

@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.hrtek.files.FilesService;
+import com.hrtek.model.worker.Worker;
 
 @Controller
 @RequestMapping("/recruitment")
@@ -15,11 +19,14 @@ public class OtherDataController {
 	
 	private HireService hireService;
 	private RecruitmentService recruitmentService;
-	
+	private FilesService filesService;
+
 	@Autowired
-	public OtherDataController(HireService hireService, RecruitmentService recruitmentService) {
+	public OtherDataController(HireService hireService, RecruitmentService recruitmentService,
+			FilesService filesService) {
 		this.hireService = hireService;
 		this.recruitmentService = recruitmentService;
+		this.filesService = filesService;
 	}
 
 	@PostMapping(params = "action=other")
@@ -33,7 +40,7 @@ public class OtherDataController {
 	}
 	
 	@PostMapping(params = "action=saveothers")
-	public String saveOthers(@ModelAttribute("workerAll") WorkerAll workerAll, Model model, BindingResult result) {
+	public String saveOthers(@ModelAttribute("workerAll") WorkerAll workerAll, Model model, BindingResult result, @RequestParam("uploadFiles") MultipartFile[] uploadFiles) {
 		System.out.println(workerAll);
 		new AllWorkerDataValidator().validate(workerAll, result);
 		model.addAttribute("workerAll", workerAll);
@@ -42,7 +49,9 @@ public class OtherDataController {
 			recruitmentService.setOtherDataModel(model, workerAll);
 			return "user/hire/recruitment3";
 		}else {
-			hireService.updateWorker(workerAll);
+			Worker worker = hireService.updateWorker(workerAll);
+			if(worker != null)
+				filesService.uploadWorkerFiles(uploadFiles, worker);
 			return "redirect:/profil/" + workerAll.getId();
 		}
 	}

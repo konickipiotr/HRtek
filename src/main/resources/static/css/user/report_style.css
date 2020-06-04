@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+#container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button-panel{
+	display: flex;
+	justify-content: space-around;
+	background-color: #99aabc;
+	padding: 5px;
+	width: 90%;;
+}
+
+.common-bpanel{
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+	width: 40%;
+}
+
+form{
+	margin: 0px;
+	padding: 0px;
+}
+
+select{
+	width: 100%;
+	font-size: 1.1em;
+	border-radius: 3px;
+}
+
+.mont-bpanel{
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	
+}
+
+.zus-bpanel{
+	display: flex;
+	flex-direction: column;
+	width: 20%;	
+}
+
+.row{
+	display: flex;
+	justify-content: center;
+}
+
+
+
+button{
+	background-color: #204a87;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.col{
+	display: flex;
+	flex-direction: column;
+}
+
+.cell{
+	height: 50%;
+	margin: 5px;
+}
+
+.cell button{
+	width: 100%;
+	height: 40px;
+}
+
+.tiles{
+	width: 100px;
+	height: 100px;
+}
+
+.tiles button{
+	width: 100px;
+	height: 100px;
+}
+
+.bdownload{
+	width: 300px;
+	height: 40px;
+	background-color: #682727;
+}
+
+.bdownload:disabled{
+	width: 300px;
+	height: 40px;
+	background-color: #babdb6;
+}
+
+.div-switch{
+	margin-top: 20px;
+	width: 100%;
+}
+

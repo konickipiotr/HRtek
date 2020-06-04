@@ -55,7 +55,7 @@ public class CandidateController {
 	
 	@PostMapping(params = "action=saveandnext")
 	public String saveAndNextCandidate(@ModelAttribute("candidate") Candidate candidate, Model model) {
-		if(candidate.getPhone().isBlank() || candidate.getEmail().isBlank()) {
+		if(candidate.getPhone().isBlank() && candidate.getEmail().isBlank()) {
 			model.addAttribute("message_contact", "Pole telefon lub email musi zostać wypełnione");
 			model.addAttribute("candidate", candidate);
 			return "user/hire/recruitment1";

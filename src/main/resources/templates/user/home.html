@@ -7,16 +7,199 @@
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/home_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
 	<nav th:replace="user/fragments/menu :: menu"></nav>
 	<section id="container">
+	<div class="header-container">
+			<h1 class="header-header">Home</h1>
+		</div>
 	<!-- ************************************************************************* -->
 	
+	<div class="content">
+		<div class="left-content">
+			<div class="section-header">
+				<h3>Zadania od szefa</h3>
+			</div>
+			<div class="boss-tasks">
+			<table>
+				<tr>
+					<th style="width: 30px"></th>
+					<th>Zadaie</th>
+					<th>Opis</th>
+					<th style="width: 100px" >Priorytet</th>
+					<th style="width: 110px" >Deadline</th>
+					<th style="width: 70px">Status</th>
+					<th style="width: 70px"></th>
+					<th style="width: 70px"></th>
+				</tr>
+				<tr th:class="${'tr-' + t.status.name()}" th:each="t, it : ${tasks}">
+	
+					<td style="width: 30px" th:text="${it.count}"></td>
+					<td th:text="${t.taskname}"></td>
+					<td th:text="${t.description}"></td>
+					<td style="width: 100px" th:text="${t.priority}"></td>
+					<td style="width: 110px" th:text="${t.deadlinedate}"></td>
+					<td style="width: 70px" th:text="${t.status}"></td>
+					<td style="width: 70px">
+						<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}" th:href="@{'/task/DONE/' +  ${t.id}}">done</a>
+					</td>
+					<td style="width: 70px">
+						<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/FAIL/' +  ${t.id}}">[fail]</a>
+					</td>
+				</tr>
+			</table>
+			</div>
+			
+			
+			<div class="section-header">
+				<h3>Moja todo lista</h3>
+			</div>
+			<div class="boss-tasks">
+			<table>
+				<tr>
+					<th style="width: 30px"></th>
+					<th>Zadaie</th>
+					<th>Opis</th>
+					<th style="width: 100px" >Priorytet</th>
+					<th style="width: 110px" >Deadline</th>
+					<th style="width: 70px">Status</th>
+					<th style="width: 70px"></th>
+					<th style="width: 70px"></th>
+					<th style="width: 70px"></th>
+				</tr>
+				<tr th:class="${'tr-' + t.status.name()}" th:each="t, it : ${myTasks}">
+					<td style="width: 30px" th:text="${it.count}"></td>
+					<td th:text="${t.taskname}"></td>
+					<td th:text="${t.description}"></td>
+					<td style="width: 100px" th:text="${t.priority}"></td>
+					<td style="width: 110px" th:text="${t.deadlinedate}"></td>
+					<td style="width: 70px" th:text="${t.status}"></td>
+					<td style="width: 70px">
+						<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/DONE/' +  ${t.id}}">done</a>
+					</td>
+					<td style="width: 70px">
+						<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/FAIL/' +  ${t.id}}">[fail]</a>
+					</td>
+					<td style="width: 70px">
+						<a th:href="@{'task/del/' + ${t.id}}">[del]</a>
+					</td>
+				</tr>
+			</table>
+			</div>
+		</div>
+		<aside class="right-content">
+			<div class="aside-box">
+				<form th:action="@{/savenote}" method="post" th:object="${myNote}">
+				<input type="hidden" name="id" th:field="*{id}">
+				<div>
+					<label for="mynote">Notaki</label>
+				</div>
+				<div>
+					<textarea id="mynote" name="text" th:text="${myNote.text}"></textarea>
+				</div>
+				<div>
+					<button class="savebutton" type="submit">Zapisz</button>
+				</div>
+				</form>
+			</div>
+			
+			<div class="aside-box" style="margin-top: 10px;">
+				<form th:action="@{/task}" method="post" th:object="${task}">
+				<input type="hidden" name="employeeid" th:value="${session.user.id}">
+				<input type="hidden" name="owner" value="ME">
+				<input type="hidden" name="status" value="ONGOING">
+				<div class="t-label">
+					<label for="mynote">Nazwa</label>
+				</div>
+				<div>
+					<input type="text" name="taskname" id="taskname" required>
+				</div>
+				<div class="t-label">
+					<label for="description">opis</label>
+				</div>
+				<div>
+					<textarea id="description" name="description"></textarea>
+				</div>
+				<div class="t-label">
+					<label for="priority">Priorytet</label>
+				</div>
+				<div class="radio-buttons">
+						<div>
+							<label for="priorityN">Normal</label>
+							<input type="radio" name="priority" id="priorityN" value="NORMAL" checked>
+						</div>
+						<div>
+							<label for="priorityH">High</label>
+							<input type="radio" name="priority" id="priorityH" value="HIGH">
+						</div>
+						<div>
+							<label for="priorityL">Low</label>
+							<input type="radio" name="priority" id="priorityL" value="LOW">
+						</div>
+					</div>
+					
+					<div class="t-label">
+						<label for="deadline">Termin</label>
+					</div>
+					<div class="radio-buttons">
+						<div>
+							<label for="deadlineNone">Brak</label>
+							<input type="radio" name="deadline" id="deadlineNone" value="NONE" checked>
+						</div>
+						<div>
+							<label for="deadlineToday">Dziś</label>
+							<input type="radio" name="deadline" id="deadlineToday" value="TODAY">
+						</div>
+						<div>
+							<label for="deadlineTomorrow">Jutro</label>
+							<input type="radio" name="deadline" id="deadlineTomorrow" value="TOMORROW">
+						</div>
+						<div>
+							<label for="deadlineOther">Inna</label>
+							<input type="radio" name="deadline" id="deadlineOther" value="OTHER">
+						</div>
+					</div>
+					
+					<div>
+						<label for="deadlinedate">Inna Data</label>
+					</div>
+					<div>
+						<input type="date" name="deadlinedate" id="deadlinedate" required disabled>
+					</div>
+					<div style="margin-top: 10px;">
+						<button class="savebutton" type="submit">Dodaj</button>
+					</div>
+				</form>
+			</div>
+		</aside>
+	</div>
+	
+
 	<!-- ************************************************************************* -->
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
+<script>
+
+document.getElementById("deadlineOther").onchange = function(){
+	document.getElementById("deadlinedate").disabled = false;	
+}
+
+document.getElementById("deadlineNone").onchange = function(){
+	document.getElementById("deadlinedate").disabled = true;	
+}
+
+document.getElementById("deadlineTomorrow").onchange = function(){
+	document.getElementById("deadlinedate").disabled = true;	
+}
+
+document.getElementById("deadlineNone").onchange = function(){
+	document.getElementById("deadlinedate").disabled = true;	
+}
+
+</script>
 </html>

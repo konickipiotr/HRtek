@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/report_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<div class="header-container">
+			<h1 class="header-header">Raproty</h1>
+		</div>
+	<!-- ************************************************************************* -->
+	<div class="button-panel">
+		<div class="common-bpanel">
+		<div class="row">
+			<h3>Różne</h3>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">
+						<input type="hidden" name="reportType" value="WITHPESEL">
+						<button type="submit" name="action" value="common">Z Pesel</button>
+					</form>
+				</div>			
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">
+						<input type="hidden" name="reportType" value="WITHOUTPESEL">
+						<button type="submit" name="action" value="common">bez Pesel</button>
+					</form>
+				</div>
+			</div>
+			
+			
+			
+			<div class="col">
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">
+						<input type="hidden" name="reportType" value="MEDICALEXAMS">
+						<button type="submit" name="action" value="common">Badania</button>
+					</form>
+				</div>
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">
+						<input type="hidden" name="reportType" value="ACCOMMODATION">
+						<button type="submit" name="action" value="common">WOLNE Miejsca</button>
+					</form>
+				</div>
+			</div>
+				
+		
+		
+			<div class="col">
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">
+						<input type="hidden" name="reportType" value="STARTWORK_LESS1MON">
+						<button type="submit" name="action" value="common">Start work less 1 mon</button>
+					</form>
+				</div>
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">
+						<input type="hidden" name="reportType" value="STARTWORK_MORE1MON">
+						<button type="submit" name="action" value="common">Start work more 1 mon</button>
+					</form>
+				</div>
+			</div>
+			
+			
+			
+			<div class="col">
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">
+						<input type="hidden" name="reportType" value="STARTWORK_LESS3MON">
+						<button type="submit" name="action" value="common">Start work less 3 mon</button>
+					</form>
+				</div>
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">
+						<input type="hidden" name="reportType" value="STARTWORK_MORE3MON">
+						<button type="submit" name="action" value="common">Start work more 3 mon</button>
+					</form>
+				</div>
+			</div>
+			
+			<div class="col">
+				<form th:action="@{/reports}" method="post">
+				<div class="cell">
+					<label for="recruiterid">dfdfdf</label>
+				</div>
+				<div class="cell">					
+					<input type="hidden" name="reportType" value="RECRUITERS">
+					<select id="recruiterid" name="recruiterid">	
+						<option th:each="r : ${recruiters}" th:value="${r.id}" th:text="${r.value}"></option>
+					</select>	
+				</div>
+				<div class="cell">
+					<button type="submit" name="action" value="recruiter">Rekruter</button>
+				</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="row" style="margin-top: 10px;">
+			<form th:action="@{/reports/download}" method="post">
+				<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+				<input th:if="${wraper.reportType == 'RECRUITERS'}" type="hidden" name="recruiterid" th:value="${recruiterid}">
+				<button th:if="${others == true and wraper.report.isEmpty() == false}" class="bdownload" type="submit">Pobierz plik</button>
+				<button th:unless="${others == true and wraper.report.isEmpty() == false}" class="bdownload" type="submit" disabled>Pobierz plik</button>
+			</form>
+		</div>
+		
+		
+	</div>
+	
+	<div class="mont-bpanel">
+		<div class="row">
+			<h3>ILE OSÓB W DANYM MIESIĄCU PRZYJECHAŁO NA OŚWIADCZENIU TYPU</h3>
+		</div>
+		<div class="row">
+			<div class="col">
+				<form th:action="@{/reports}" method="post">
+					<div class="cell">
+						<input type="hidden" name="reportType" value="STATEMENTVISA">
+						<input type="month" name="month">
+					</div>
+					<div class="cell">
+						<button type="submit" name="action" value="month">VISA</button>
+					</div>
+				</form>	
+			</div>	
+			<div class="col">
+				<form th:action="@{/reports}" method="post">
+					<div class="cell">
+						<input type="hidden" name="reportType" value="STATEMENTWORK">
+						<input type="month" name="month">
+					</div>
+					<div class="cell">
+						<button type="submit" name="action" value="month">WORK</button>
+					</div>
+				</form>				
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			<form th:action="@{/reports/download}" method="post">
+				<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+				<input th:if="${month != null}" type="hidden" name="month" th:value="${month}">
+				<button class="bdownload"  th:if="${month != null and wraper.report.isEmpty() == false}"  type="submit" name="action" value="month">Pobierz plik </button>
+				<button class="bdownload"  th:unless="${month != null and wraper.report.isEmpty() == false}"  type="submit" name="action" value="month" disabled>Pobierz plik </button>
+			</form>
+		</div>
+	</div>
+		
+		
+	<div class="zus-bpanel">
+		<div class="row">
+			<h3>RAPORT ZUS</h3>
+		</div>
+		<form th:action="@{/reports}" method="post">
+		<div class="row">
+			<div class="col" style="width: 50%">
+				<div class="cell">
+					<label for="companyid">Firma</label>
+				</div>
+				<div class="cell">
+					<label for="comapnyid"></label>
+				</div>
+				<div class="cell">
+					<select id="companyid" name="companyid">
+						<option th:each="c : ${comapnies}" th:value="${c.id}" th:text="${c.shortname}"></option>
+					</select>
+				</div>
+				
+			</div>
+			<div class="col" style="width: 50%">
+				<div class="cell">
+					<label for="factoryid">Fabryka</label>
+				</div>
+				<div class="cell">
+					<label for="factoryid"></label>
+				</div>
+				<div class="cell">					
+					<select id="factoryid" name="factoryid">
+						<option th:each="f : ${factroies}" th:value=${f.id} th:text="${f.shortname}"></option>
+					</select>
+				</div>
+				
+			</div>
+			
+		</div>
+		<div class="row">
+			<div class="col" style="width: 50%">
+				<div class="cell">
+					<label for="datefrom">Od Daty</label>
+				</div>
+			</div>
+			<div class="col" style="width: 50%">
+				<div class="cell">
+					<input th:if="${datefrom != null}" type="date" name="datefrom" id="datefrom" th:value="${datefrom}">
+					<input th:unless="${datefrom != null}" type="date" name="datefrom" id="datefrom">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<input type="hidden" name="reportType" value="ZUS">
+			<button  style="width: 100%; height: 40px; margin-bottom: 10px;" type="submit" name="action" value="zus">Zus</button>
+		</div>
+		</form>
+		
+		<div class="row">
+			<form th:action="@{/reports/download}" method="post">
+				<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+				<input th:if="${companyid != null}" type="hidden" name="companyid" th:value="${companyid}">
+				<input th:if="${factoryid != null}" type="hidden" name="factoryid" th:value="${factoryid}">
+				<input th:if="${datefrom != null}" type="hidden" name="datefrom" id="datefrom" th:value="${datefrom}">				
+				<button class="bdownload" th:if="${companyid == null or factoryid == null or datefrom == null}"  type="submit" name="action" value="zus" disabled>Pobierz plik </button>
+				<button class="bdownload" th:unless="${companyid == null or factoryid == null or datefrom == null}"  type="submit" name="action" value="zus" >Pobierz plik </button>
+			</form>
+		</div>
+	
+	</div>
+
+	</div>
+	
+	<div class="div-switch" th:switch="${wraper.reportType}">	
+		<div th:case="'WITHPESEL'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Pesel</th>
+					<th>fabryka</th>
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.pesel}"></td>
+					<td th:text="${i.factory}"></td>
+				</tr>
+				
+			</table>
+		</div>
+		<!--*************** CASE ************************ -->
+		<div th:case="'WITHOUTPESEL'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Pesel</th>
+					<th>fabryka</th>
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.pesel}"></td>
+					<td th:text="${i.factory}"></td>
+				</tr>
+				
+			</table>
+		</div>
+		<!--*************** CASE ************************ -->
+		<div th:case="'MEDICALEXAMS'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Start medical</th>
+					<th>end medical</th>
+					<th>fabryka</th>
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.statrtMedical}"></td>
+					<td th:text="${i.endMedical}"></td>
+					<td th:text="${i.factory}"></td>
+				</tr>
+				
+			</table>
+		</div>
+		<!--*************** CASE ************************ -->
+		<div th:case="'RECRUITERS'">
+			<table>
+				<tr>
+					<th>Imie rekrutera</th>
+					<th>Nazwisko rekrutera</th>
+					<th>Imie pracownika</th>
+					<th>Nazwisko pracowika</th>
+					<th>data dodania</th>
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.rfirstname}"></td>
+					<td th:text="${i.rlastname}"></td>
+					<td th:text="${i.wfirstname}"></td>
+					<td th:text="${i.wlastname}"></td>
+					<td th:text="${i.addtosystem}"></td>
+				</tr>
+				
+			</table>
+		</div>
+		<!--*************** CASE ************************ -->
+		<div th:replace="user/report/startworkfragment :: startworkfragment"></div>
+		<div th:replace="user/report/statementfragment :: statementfragment"></div>
+		<!--*************** CASE ************************ -->
+		<div th:case="'ACCOMMODATION'">
+			<table>
+				<tr>
+					<th>Adress</th>
+					<th>Ilośc miejsc</th>
+					<th>Wolne</th>
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.address}"></td>
+					<td th:text="${i.capacity}"></td>
+					<td th:text="${i.free}"></td>			
+				</tr>
+				
+			</table>
+		</div>
+		<!--*************** CASE ************************ -->
+		<div th:case="'ZUS'">
+			<table>
+				<tr>
+					<th>company</th>					
+					<th>factory</th>
+					<th>Name</th>
+					<th>Surname</th>
+					<th>gender</th>
+					<th>Date of birth</th>
+					<th>paszport</th>
+					<th>pesl</th>
+					<th>address</th>
+					<th>start zus</th>
+					<th>end zus</th>
+					<th>oswiadcznie</th>
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.company}"></td>
+					<td th:text="${i.facotry}"></td>
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.sex}"></td>
+					<td th:text="${i.dateofbirth}"></td>
+					<td th:text="${i.passport}"></td>
+					<td th:text="${i.pesel}"></td>
+					<td th:text="${i.address}"></td>
+					<td th:text="${i.startZus}"></td>
+					<td th:text="${i.endZus}"></td>
+					<td th:text="${i.type}"></td>	
+				</tr>
+				
+			</table>
+		</div>
+	</div>
+
+
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

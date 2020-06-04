@@ -13,6 +13,7 @@ import com.hrtek.db.accommodation.BedRepository;
 import com.hrtek.db.accommodation.HouseRepository;
 import com.hrtek.db.accommodation.RoomRepository;
 import com.hrtek.db.worker.ResidencyRepository;
+import com.hrtek.db.worker.TimesheetRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerContactRepository;
 import com.hrtek.db.worker.WorkerDateRepository;
@@ -35,6 +36,7 @@ import com.hrtek.model.worker.WorkerDate;
 import com.hrtek.model.worker.WorkerFinance;
 import com.hrtek.model.worker.WorkerNote;
 import com.hrtek.user.accommodation.Bedstatus;
+import com.hrtek.user.timesheet.Timesheet;
 
 @Service
 public class HireService {
@@ -53,6 +55,7 @@ public class HireService {
 	private CompanyRepository companyRepo;
 	private WorkerFinanceRepository workerFinanceRepo;
 	private WorkerNoteRepository workerNoteRepo;
+	private TimesheetRepository timesheetRepo;
 
 	@Autowired
 	public HireService(CandidateRepository candidateRepo, HouseRepository houseRepo, RoomRepository roomRepo,
@@ -60,7 +63,7 @@ public class HireService {
 			WorkerDateRepository workerDateRepo, WorkerContactRepository workerContactRepo,
 			WorkerPermintRepository workerPermintRepo, ResidencyRepository residencyRepo, FactoryRepository factoryRepo,
 			CompanyRepository companyRepo, WorkerFinanceRepository workerFinanceRepo,
-			WorkerNoteRepository workerNoteRepo) {
+			WorkerNoteRepository workerNoteRepo, TimesheetRepository timesheetRepo) {
 		this.candidateRepo = candidateRepo;
 		this.houseRepo = houseRepo;
 		this.roomRepo = roomRepo;
@@ -75,6 +78,7 @@ public class HireService {
 		this.companyRepo = companyRepo;
 		this.workerFinanceRepo = workerFinanceRepo;
 		this.workerNoteRepo = workerNoteRepo;
+		this.timesheetRepo = timesheetRepo;
 	}
 
 	public Long hire(NewWorker nw) {
@@ -85,8 +89,9 @@ public class HireService {
 		this.workerPermintRepo.save(new PermitStatement(worker));
 		this.residencyRepo.save(new Residency(worker, nw));
 		this.workerNoteRepo.save(new WorkerNote(worker.getId(), nw.getNote()));
+		this.timesheetRepo.save(new Timesheet(worker));
 		setAccommodation(worker, nw);
-		increasNumberOfWorker(worker);
+		increasNumberOfWorker(worker, nw.getWage());
 		removeCandidate(nw, worker);
 		return worker.getId();
 	}
@@ -119,10 +124,10 @@ public class HireService {
 		this.workerContactRepo.save(contact);
 	}	
 	
-	private void increasNumberOfWorker(Worker w) {
+	private void increasNumberOfWorker(Worker w, double wage) {
 		Factory factory = factoryRepo.findById(w.getFactoryid()).get();
 		factory.addPerson();
-		this.workerFinanceRepo.save(new WorkerFinance(w.getId(), factory.getHourlyrate()));
+		this.workerFinanceRepo.save(new WorkerFinance(w.getId(), factory.getHourlyrate(), wage));
 		this.factoryRepo.save(factory);
 		
 		Company company = companyRepo.findById(w.getCompanyid()).get();
@@ -131,8 +136,10 @@ public class HireService {
 	}
 	
 	private void removeCandidate(NewWorker nw , Worker w) {
-		if(this.candidateRepo.existsById(nw.getId())) {
-			this.candidateRepo.deleteById(nw.getId());
+		if(nw.getId() != null) {
+			if(this.candidateRepo.existsById(nw.getId())) {
+				this.candidateRepo.deleteById(nw.getId());
+			}
 		}
 		nw.setId(w.getId());
 	}
@@ -151,11 +158,11 @@ public class HireService {
 		return w;
 	}
 
-	public void updateWorker(WorkerAll workerAll) {
+	public Worker updateWorker(WorkerAll workerAll) {
 		Optional<Worker> oWorker = workerRepo.findById(workerAll.getId());
 		if(oWorker.isEmpty()) {
 			System.out.println("updateWorker: Nie odnaleziono pracownika");
-			return;
+			return null;
 		}
 		Worker worker = oWorker.get();
 		Long id = worker.getId();
@@ -182,8 +189,7 @@ public class HireService {
 		WorkerNote wn = workerNoteRepo.findById(id).get();
 		wn.setText(workerAll.getNote());
 		this.workerNoteRepo.save(wn);
-		
-		
+		return worker;
 	}
 	
 	private void uContact(WorkerAll all, Long id) {
@@ -246,8 +252,6 @@ public class HireService {
 			this.companyRepo.save(newComp);
 		}
 		
-		System.out.println(all.getRecruiter());
-		System.out.println(worker);
 		if(!worker.getRecruiter().equals(all.getRecruiter())) {
 			worker.setRecruiter(all.getRecruiter());
 		}

@@ -270,6 +270,29 @@
 						</div>
 						<div class="col"> &nbsp;</div>
 					</div>
+					<!-- ***************** ROW ************************ -->
+					<div class="section-header"><h2>Stawka</h2></div>
+					<div class="row">
+						
+						<div class="col"> &nbsp;</div>
+						<div class="col">
+							<div class="lab-div">
+								<label for="wage">Stawka pracownika</label>
+							</div>
+							<div class="input-div">
+								<input type="number" min="0" step="0.01" id="wage" name="wage" th:field="*{wage}">
+							</div>
+						</div>
+						<div class="col">
+							<div class="lab-div">
+								<label for="sWage">Stawka słownie</label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="sWage" name="sWage" th:field="*{sWage}">
+							</div>
+						</div>
+						<div class="col"> &nbsp;</div>
+					</div>
 					<!-- ***************** ROW ************************ -->	
 					<div class="row-buttons">
 						<button th:if="${status == 'success'}" class="button" name="action" value="hire" type="submit" disabled>Zatrudnij</button>

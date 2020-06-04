@@ -9,6 +9,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,17 +22,22 @@ import com.hrtek.model.worker.WorkerFiles;
 import com.hrtek.settings.GlobalSettings;
 
 @Service
-public class UploadFilesService {
+public class FilesService {
 
 	@Autowired
 	private WorkerFilesRepository workerFilesRepo;
 	private String hrtekpath;
 	
 	
-	public UploadFilesService() {
+	public FilesService() {
 		String userName = System.getProperty("user.name");
 		
 		this.hrtekpath = "/home/" + userName + GlobalSettings.hrtekRoot + GlobalSettings.hrtekWorkersDir;
+	}
+	
+	public List<WorkerFiles> getWorkerFiles(Long id){
+		List<WorkerFiles> wf_files = workerFilesRepo.findByWorkerid(id);
+		return wf_files;
 	}
 
 	public void uploadWorkerFiles(MultipartFile[] uploadfiles, Worker worker) {
@@ -76,5 +82,30 @@ public class UploadFilesService {
 			e.printStackTrace();
 		}
 		workerFilesRepo.saveAll(wfiles_list);
+	}
+	
+	public void deleteFile(Long id) {
+		Optional<WorkerFiles> oFile = workerFilesRepo.findById(id);
+		if(oFile.isEmpty()) {
+			//TODO
+		}
+		
+		WorkerFiles file = oFile.get();
+		
+		String ss = file.getPath();
+		
+		File f = new File(ss);
+		f.delete();
+		this.workerFilesRepo.delete(file);
+	}
+	
+	public String getFilepath(Long id) {
+		Optional<WorkerFiles> oFile = workerFilesRepo.findById(id);
+		if(oFile.isEmpty()) {
+			//TODO
+		}
+		
+		WorkerFiles file = oFile.get();
+		return file.getPath();
 	}
 }

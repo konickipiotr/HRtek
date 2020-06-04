@@ -152,3 +152,31 @@ h3{
 .war{
 	color: #fa600;
 }
+
+#list{
+	resize: none;
+	justify-content: center;
+	width: 98%;
+	height: 100px;
+	
+}
+
+.file-table{
+	border-radius: 20px;
+	background-color: white;
+	border: none;
+}
+
+.file-table tr{
+	background-color: white;
+	border: none;
+}
+
+.file-table td{
+	background-color: white;
+	border: none;
+}
+
+.td-action{
+	width: 20px;
+}

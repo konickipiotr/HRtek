@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/boss/boss_style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/boss/tasks_style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="/css/boss/bosscolors_style.css" />
+
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="boss/fragments/menu :: menu"></nav>
+	<section id="container">
+		<div class="header-container">
+			<h1 class="header-header">Zadania</h1>
+		</div>
+	<!-- ************************************************************************* -->
+		<!--  *************** NEW TASK START ******************  -->
+		<div class="new-task">
+			
+				<div class="new-task-header">
+					<h2 style="text-align: center; margin: 0px;">Nowe zadanie</h2>
+				</div>
+				
+				<form th:action="@{/boss/tasks}" method="post" th:object="${task}">
+				<input type="hidden" name="owner" value="BOSS">
+				<input type="hidden" name="status" value="ONGOING">
+				<div class="newtask-content">
+					<div class="task-coll">
+						<div class="t-label">
+							<label for="taskname">Zadanie</label>
+						</div>
+						<div>
+							<input type="text" name="taskname" id="taskname" required>
+						</div>
+						<div class="t-label">
+							<label for="description">Opis</label>
+						</div>
+						<div>
+							<textarea id="description" name="description"></textarea>
+						</div>
+					</div>
+					<div class="task-coll">
+						<div class="t-label">
+							<label for="employeeid">Pracownik</label>
+						</div>
+						<div>
+							<select name="employeeid" id="employeeid" required>
+								<option th:each="e : ${employees}" th:value="${e.id}" th:text="${e.value}"></option>
+							</select>
+						</div>
+						<div class="t-label">
+							<label for="priority">Priorytet</label>
+						</div>
+						<div class="radio-buttons">
+							<div>
+								<label for="priorityN">Normal</label>
+								<input type="radio" name="priority" id="priorityN" value="NORMAL" checked>
+							</div>
+							<div>
+								<label for="priorityH">High</label>
+								<input type="radio" name="priority" id="priorityH" value="HIGH">
+							</div>
+							<div>
+								<label for="priorityL">Low</label>
+								<input type="radio" name="priority" id="priorityL" value="LOW">
+							</div>
+						</div>
+						
+						<div class="t-label">
+							<label for="deadline">Termin</label>
+						</div>
+						<div class="radio-buttons">
+							<div>
+								<label for="deadlineNone">Brak</label>
+								<input type="radio" name="deadline" id="deadlineNone" value="NONE" checked>
+							</div>
+							<div>
+								<label for="deadlineToday">Dziś</label>
+								<input type="radio" name="deadline" id="deadlineToday" value="TODAY">
+							</div>
+							<div>
+								<label for="deadlineTomorrow">Jutro</label>
+								<input type="radio" name="deadline" id="deadlineTomorrow" value="TOMORROW">
+							</div>
+							<div>
+								<label for="deadlineOther">Inna</label>
+								<input type="radio" name="deadline" id="deadlineOther" value="OTHER">
+							</div>
+						</div>
+						
+						<div>
+							<label for="deadlinedate">Inna Data</label>
+						</div>
+						<div>
+							<input type="date" name="deadlinedate" id="deadlinedate" required disabled>
+						</div>
+					</div>
+				</div>
+				<div class="newtask-buttons">
+					<button class="savebutton" type="submit">Dodaj</button>
+				</div>
+			</form>
+		</div>
+		<!--  *************** NEW TASK END ******************  -->
+		
+		
+		<div class="emplyees-tasks">
+			<table>
+				<tr>
+					<th style="width: 30px"></th>
+					<th style="width: 170px">Pracownik</th>
+					<th>Zadaie</th>
+					<th>Opis</th>
+					<th style="width: 100px" >Priorytet</th>
+					<th style="width: 110px" >Deadline</th>
+					<th style="width: 70px">Status</th>
+					<th style="width: 70px"></th>
+				</tr>
+				<tr th:each="t, it : ${tlist}">
+					<td style="width: 30px" th:text="${it.count}"></td>
+					<td style="width: 170px" th:text="${t.employeename}"></td>
+					<td th:text="${t.taskname}"></td>
+					<td th:text="${t.description}"></td>
+					<td style="width: 100px" th:text="${t.priority}"></td>
+					<td style="width: 110px" th:text="${t.deadlinedate}"></td>
+					<td style="width: 70px" th:text="${t.status}"></td>
+					<td style="width: 70px">
+						<a th:href="@{'/boss/tasks/del/' + ${t.id}}">[del]</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>	
+</body>
+<script>
+
+document.getElementById("deadlineOther").onchange = function(){
+	document.getElementById("deadlinedate").disabled = false;	
+}
+
+document.getElementById("deadlineNone").onchange = function(){
+	document.getElementById("deadlinedate").disabled = true;	
+}
+
+document.getElementById("deadlineTomorrow").onchange = function(){
+	document.getElementById("deadlinedate").disabled = true;	
+}
+
+document.getElementById("deadlineNone").onchange = function(){
+	document.getElementById("deadlinedate").disabled = true;	
+}
+
+</script>
+</html>

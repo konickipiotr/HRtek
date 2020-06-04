@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+/* 
+d5eeee 
+*/
+#container{
+	background-color:  #f3dede;
+	
+}
+
+.header-container{
+	background-color: #5f1010;
+}
+
+th{
+	background-color: #b56e6e;
+}
+
+a:link.tdbutton{
+	background-color: #5b7cb0;
+}
+
+a:visited.tdbutton{
+	background-color: #5b7cb0;
+}
+
+a:hover.tdbutton{
+	background-color: #5b7cb0;
+}
+
+a:link.button_new{
+	
+	background-color: #5b7cb0;
+}
+
+a:visited.button_new{
+	background-color: #5b7cb0;
+}
+
+a:hover.button_new{
+	background-color: #5b7cb0;
+}

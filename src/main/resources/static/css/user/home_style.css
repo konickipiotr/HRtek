@@ -1,0 +1,94 @@
+@charset "UTF-8";
+
+
+.content{
+	display: flex;
+	margin-top: 10px;
+}
+
+.left-content{
+	width: 75%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.right-content{
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.section-header{
+	width: 60%;
+	background-color: #204a87;
+	color: white;
+	height: 30px;
+	display: flex;
+	justify-content: center; 
+	border-radius: 5px;
+	margin-left: 1%;
+	
+}
+
+h3{
+	padding: 0px;
+	margin: 2px;
+}
+
+.boss-tasks{
+	margin-top: 10px;
+	width: 100%;
+}
+
+.aside-box{
+	background-color: #204a87;
+	border-radius: 10px;
+	color: white;
+	font-weight: bold;
+}
+
+#mynote{
+	width: 98%;
+	height: 170px
+}
+
+.savebutton{
+	background-color: #5f1010;
+}
+
+.radio-buttons{
+	display: flex;
+	justify-content: space-between;
+}
+
+#description{
+	width: 98%;
+	min-height: 120px;
+	resize: none;
+}
+
+.t-label{
+	background-color: black;
+	margin-top: 10px;
+}
+
+#taskname{
+	width: 96%;
+}
+
+.tr-ONGOING{
+	background-color: white;
+}
+.tr-DELAY{
+	background-color: #fce94f;
+}
+
+.tr-DONE{
+	background-color: #b3dcb3;
+}
+
+.tr-FAIL{
+	background-color: #ffb9b9;
+}

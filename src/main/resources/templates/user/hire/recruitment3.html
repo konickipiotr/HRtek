@@ -22,7 +22,7 @@
 		</div>
 
 		<div class="content">
-			<form th:action="@{/recruitment}" method="post" th:object="${workerAll}" id="form">
+			<form th:action="@{/recruitment}" method="post" th:object="${workerAll}" id="form" enctype="multipart/form-data">
 				
 				<input type="hidden" name="id" th:field="*{id}">
 				<div class="section-header"><h2>Dane personalne</h2></div>
@@ -504,6 +504,15 @@
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
-<script type="text/javascript" src="/scripts/recruitment2.js">
+<!-- <script type="text/javascript" src="/scripts/recruitment2.js"> 
+</script>-->
+<script>
+function update() {
+    document.getElementById("filelist").value = "";
+	var files = document.getElementById("fileInput").files;
+	for (var i = 0; i < files.length ; i++){
+		document.getElementById("filelist").value += files[i].name + "\n";
+	}
+}
 </script>
 </html>

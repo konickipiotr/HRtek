@@ -387,7 +387,7 @@ class IntegrationTestHire {
 		Long oldC = wa.getCompanyid();
 		wa.setFactoryid(factoryList.get(1).getId());
 		wa.setCompanyid(companyList.get(1).getId());
-		wa.setWorkerNo(123l);
+		wa.setWorkerNo("123");
 		
 		wa.setStartWork(LocalDate.of(2020, 05, 01));
 		wa.setStartZus(null);

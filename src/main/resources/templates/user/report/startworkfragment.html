@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title> HRtek</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+	<div  th:fragment="startworkfragment">
+		<!--*************** CASE ************************ -->
+		<div th:case="'STARTWORK_LESS1MON'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Start work</th>
+					<th>End work</th>
+					
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.startWork}"></td>
+					<td th:text="${i.endWork}"></td>
+				</tr>
+			</table>
+		</div>	
+		
+		<!--*************** CASE ************************ -->
+		<div th:case="'STARTWORK_LESS3MON'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Start work</th>
+					<th>End work</th>
+					
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.startWork}"></td>
+					<td th:text="${i.endWork}"></td>
+				</tr>
+			</table>
+		</div>	
+		
+		<!--*************** CASE ************************ -->
+		<div th:case="'STARTWORK_MORE1MON'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Start work</th>
+					<th>End work</th>
+
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.startWork}"></td>
+					<td th:text="${i.endWork}"></td>
+				</tr>
+			</table>
+		</div>	
+		
+		<!--*************** CASE ************************ -->
+		<div th:case="'STARTWORK_MORE3MON'">
+			<table>
+				<tr>
+					<th>Imie</th>
+					<th>Nazwisko</th>
+					<th>Start work</th>
+					<th>End work</th>
+					
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.startWork}"></td>
+					<td th:text="${i.endWork}"></td>
+				</tr>
+			</table>
+		</div>	
+	</div>
+</body>
+</html>

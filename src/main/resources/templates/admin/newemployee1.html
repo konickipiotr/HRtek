@@ -20,7 +20,8 @@
 		<div class="header-container">
 			<h1 class="header-header">Nowy pracownik</h1>
 		</div>
-
+	
+		<p th:text="${error_msg}" class="error_message">
 	 	
 	 	<div class="newemployee-outer-container">
 	 		<form th:action="@{/admin/newemployee}" method="post" th:object="${newEmployeeModel}">

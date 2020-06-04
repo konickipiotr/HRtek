@@ -24,7 +24,7 @@ public class DownloadFileController {
 	@GetMapping
     public ResponseEntity<Resource> downloadDoc(@RequestParam("filename") String filename, HttpServletRequest request) {		
 		String path = filename;
-		
+		System.out.println("W downloada");
 		Path filePath = Path.of(path);
         Resource resource = null;
 		try {

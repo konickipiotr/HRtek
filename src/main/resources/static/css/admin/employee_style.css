@@ -1,20 +1,12 @@
 @charset "UTF-8";
 
 
-#container{
-	width: 95%;
-	margin: auto;
-	background-color:  #e4ffd9;
-	min-height: 500px;
-	height: auto;
-}
-
 #form-edit-employee-container{
 	margin: auto;
 	margin-bottom: 10px;
 	color: #ffffff;
 	font-weight: bold;
-	width: 80%;
+	width: 80%;http://localhost:8080/admin
 	height: auto;
 	background-color: #037135;
 	border-radius: 10px;

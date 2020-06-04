@@ -8,11 +8,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hrtek.Tasks.Task;
+import com.hrtek.Tasks.TaskOwner;
+import com.hrtek.Tasks.TaskPriority;
+import com.hrtek.Tasks.TaskStatus;
 import com.hrtek.admin.tickets.TicketType;
 import com.hrtek.db.accommodation.BedRepository;
 import com.hrtek.db.accommodation.HouseRepository;
 import com.hrtek.db.accommodation.RoomRepository;
 import com.hrtek.db.worker.ResidencyRepository;
+import com.hrtek.db.worker.TimesheetRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerContactRepository;
 import com.hrtek.db.worker.WorkerDateRepository;
@@ -25,6 +30,8 @@ import com.hrtek.model.Citizenship;
 import com.hrtek.model.Company;
 import com.hrtek.model.Department;
 import com.hrtek.model.Factory;
+import com.hrtek.model.MyNote;
+import com.hrtek.model.StatusFC;
 import com.hrtek.model.Ticket;
 import com.hrtek.model.User;
 import com.hrtek.model.UserInfo;
@@ -45,6 +52,7 @@ import com.hrtek.model.worker.WorkerNote;
 import com.hrtek.settings.GlobalSettings;
 import com.hrtek.user.accommodation.Bedstatus;
 import com.hrtek.user.recruitment.Candidate;
+import com.hrtek.user.timesheet.Timesheet;
 
 @Service
 public class DBInit implements CommandLineRunner {
@@ -71,6 +79,10 @@ public class DBInit implements CommandLineRunner {
 	private ResidencyRepository residencyRepo;
 	private WorkerFinanceRepository workerFinanceRepo;
 	private WorkerNoteRepository workerNoteRepo;
+	private TimesheetRepository timesheetRepo;
+	private MyNoteRepository myNoteRepo;
+	
+	private TaskRepository taskRepo;
 	
 	@Autowired
 	public DBInit(UserRepository userRepo, UserInfoRepository userInfoRepo, PasswordEncoder passwordEncoder,
@@ -80,7 +92,9 @@ public class DBInit implements CommandLineRunner {
 			CitizenshipRepository citizenshipRepo, WorkerRepository workerRepo, WorkerBasicRepository workerBasicRepo,
 			WorkerContactRepository workerContactRepo, WorkerPermintRepository workerPermitRepo,
 			WorkerDateRepository workerDateRepo, ResidencyRepository residencyRepo,
-			WorkerFinanceRepository workerFinanceRepo, WorkerNoteRepository workerNoteRepo) {
+			WorkerFinanceRepository workerFinanceRepo, WorkerNoteRepository workerNoteRepo,
+			TimesheetRepository timesheetRepo, MyNoteRepository myNoteRepo, TaskRepository taskRepo) {
+		super();
 		this.userRepo = userRepo;
 		this.userInfoRepo = userInfoRepo;
 		this.passwordEncoder = passwordEncoder;
@@ -102,7 +116,12 @@ public class DBInit implements CommandLineRunner {
 		this.residencyRepo = residencyRepo;
 		this.workerFinanceRepo = workerFinanceRepo;
 		this.workerNoteRepo = workerNoteRepo;
+		this.timesheetRepo = timesheetRepo;
+		this.myNoteRepo = myNoteRepo;
+		this.taskRepo = taskRepo;
 	}
+
+
 
 
 	@Override
@@ -126,6 +145,10 @@ public class DBInit implements CommandLineRunner {
 		this.workerFinanceRepo.deleteAll();
 		this.workerPermitRepo.deleteAll();
 		
+		this.taskRepo.deleteAll();
+		this.myNoteRepo.deleteAll();
+		
+		
 		Citizenship citiz1 = new Citizenship("ukraińskie");
 		Citizenship citiz2 = new Citizenship("polskie");
 		Citizenship citiz3 = new Citizenship("białoruskie");
@@ -133,37 +156,48 @@ public class DBInit implements CommandLineRunner {
 		
 		
 		
-		Factory f1 = new Factory("45686", "1597534589", "1165159554", "DongYang", "Dong Yang internatinal sp z o.o.", "Jan 43", "42-548", "Wrocław", 0, 17.25);
-		Factory f2 = new Factory("14326", "1516551129", "4587466611", "Fabryk 2", "zong Yang internatinal sp z o.o.", "Mickiewicza 43", "42-548", "Krocław", 0, 18.25);
-		Factory f3 = new Factory("31586", "1596556689", "1551651854", "Fabryka 3", "bong Yang internatinal sp z o.o.", "Adama 342", "32-548", "Brocław", 0, 16.25);
-		Factory f4 = new Factory("13586", "1561834589", "2987435774", "Fabryka 4", "tong Yang internatinal sp z o.o.", "Kochanowskiego 34", "14-448", "Orocław", 0, 19.25);
+		Factory f1 = new Factory(StatusFC.ENABLED, "45686", "1597534589", "1165159554", "DongYang", "Dong Yang internatinal sp z o.o.", "Jan 43", "42-548", "Wrocław", 0, 17.25);
+		Factory f2 = new Factory(StatusFC.ENABLED, "14326", "1516551129", "4587466611", "Fabryk 2", "zong Yang internatinal sp z o.o.", "Mickiewicza 43", "42-548", "Krocław", 0, 18.25);
+		Factory f3 = new Factory(StatusFC.ENABLED, "31586", "1596556689", "1551651854", "Fabryka 3", "bong Yang internatinal sp z o.o.", "Adama 342", "32-548", "Brocław", 0, 16.25);
+		Factory f4 = new Factory(StatusFC.DISABLED, "13586", "1561834589", "2987435774", "Fabryka 4", "tong Yang internatinal sp z o.o.", "Kochanowskiego 34", "14-448", "Orocław", 0, 19.25);
 		this.factoryRepo.saveAll(Arrays.asList(f1,f2,f3,f4));
 		
 		
-		Company c1 = new Company("11111", "2222222222", "3333", "444444444", "555", "UWC", "UWC sp. z o.o", "Kutnowska 43", "53-541", "Wrocław", 0, 20.10);
-		Company c2 = new Company("99999", "8888888888", "7777", "666666666", "111", "XYZ", "XYZ sp. z o.o", "Śnieżna 12", "23-311", "Wrocław", 0, 15.10);
+		Company c1 = new Company(StatusFC.ENABLED, "11111", "2222222222", "3333", "444444444", "555", "UWC", "UWC sp. z o.o", "Kutnowska 43", "53-541", "Wrocław", 0, 20.10);
+		Company c2 = new Company(StatusFC.ENABLED, "99999", "8888888888", "7777", "666666666", "111", "THE HR", "THE HR sp. z o.o", "Śnieżna 12", "23-311", "Wrocław", 0, 15.10);
 		this.companyRepo.saveAll(Arrays.asList(c1, c2));
 
 		Department d1 = new Department("Kierowca");
 		Department d2 = new Department("Operator Wtryskarki");
 		Department d3 = new Department("Pakowacz");
 		this.departmentRepo.saveAll(Arrays.asList(d1, d2, d3));
-		
+//		
 		UserPostions up1 = new UserPostions("Admin");
 		UserPostions up2 = new UserPostions("Boss");
 		UserPostions up3 = new UserPostions("Office");
 		UserPostions up4 = new UserPostions(GlobalSettings.agent);
 		UserPostions up5 = new UserPostions(GlobalSettings.coordinator);
 		this.userPositionsRepo.saveAll(Arrays.asList(up1, up2, up3, up4, up5));
+
 		
 		User u1 = new User("superadmin", passwordEncoder.encode("123"), "ADMIN", UserStatus.ACTIVE);
+		this.userRepo.save(u1);
+		this.myNoteRepo.save(new MyNote(u1.getId()));
 		User u2 = new User("boss", passwordEncoder.encode("123"), "BOSS",  UserStatus.ACTIVE);
 		User u3 = new User("user1", passwordEncoder.encode("123"), "USER",  UserStatus.ACTIVE);
 		User u4 = new User("user2", passwordEncoder.encode("123"), "USER",  UserStatus.ACTIVE);
 		User u5 = new User("user3", passwordEncoder.encode("123"), "USER",  UserStatus.ACTIVE);
 		this.userRepo.saveAll(Arrays.asList(u1, u2, u3, u4, u5));
+		this.myNoteRepo.save(new MyNote(u1.getId()));
+		this.myNoteRepo.save(new MyNote(u2.getId()));
+		this.myNoteRepo.save(new MyNote(u3.getId()));
+		this.myNoteRepo.save(new MyNote(u4.getId()));
+		this.myNoteRepo.save(new MyNote(u5.getId()));
+		
 		
 		UserInfo ui1 = new UserInfo(u1.getId(), "super", "admin", "", up1.getId() , "", "", 0);
+//		this.userInfoRepo.save(ui1);
+		
 		UserInfo ui2 = new UserInfo(u2.getId(), "Krzysztof", "Jarzyna", "", up2.getId(), "krzysztof.jarzyna@mail.com", "7598421", 1);
 		UserInfo ui3 = new UserInfo(u3.getId(), "Adam", "Nowak", "", up3.getId() , "adam.nowak@mail.com", "7894891", 0);
 		UserInfo ui4 = new UserInfo(u4.getId(), "James", "Bond", "", up4.getId() , "james.bondk@mail.com", "7070007", 0);
@@ -258,6 +292,7 @@ public class DBInit implements CommandLineRunner {
 		w1.setFactoryid(f1.getId()); //Dong Yang
 		w1.setRecruiter(ui4.getId()); //James Bond
 		this.workerRepo.save(w1);
+		this.timesheetRepo.save(new Timesheet(w1));
 		f1.addPerson();
 		this.factoryRepo.save(f1);
 		c1.addPerson();
@@ -271,7 +306,7 @@ public class DBInit implements CommandLineRunner {
 		wb1.setDepartment(d1.getId()); //Kierowca
 		wb1.setPesel("75535184884");
 		wb1.setSex("F");
-		wb1.setWorkerNo(1555l);
+		wb1.setWorkerNo("1555");
 		this.workerBasicRepo.save(wb1);
 		
 		WorkerDate wd1 = new WorkerDate();
@@ -305,7 +340,7 @@ public class DBInit implements CommandLineRunner {
 		ps1.setOther("Kara polaka");
 		this.workerPermitRepo.save(ps1);
 		
-		WorkerFinance fw1 = new WorkerFinance(w1.getId(), f1.getHourlyrate());
+		WorkerFinance fw1 = new WorkerFinance(w1.getId(), f1.getHourlyrate(), 15.20);
 		this.workerFinanceRepo.save(fw1);
 		
 		this.workerNoteRepo.save(new WorkerNote(w1.getId(), "coś tam, coś tam"));
@@ -340,6 +375,7 @@ public class DBInit implements CommandLineRunner {
 		w2.setFactoryid(f2.getId()); //Fabryka 2
 		w2.setRecruiter(ui5.getId()); //Jadwiga Koordynariusz
 		this.workerRepo.save(w2);
+		this.timesheetRepo.save(new Timesheet(w2));
 		f2.addPerson();
 		this.factoryRepo.save(f2);
 		c2.addPerson();
@@ -367,7 +403,7 @@ public class DBInit implements CommandLineRunner {
 		ps2.setId(w2.getId());
 		this.workerPermitRepo.save(ps2);
 		
-		WorkerFinance fw2 = new WorkerFinance(w2.getId(), f2.getHourlyrate());
+		WorkerFinance fw2 = new WorkerFinance(w2.getId(), f2.getHourlyrate(), 14.15);
 		this.workerFinanceRepo.save(fw2);
 		
 		this.workerNoteRepo.save(new WorkerNote(w2.getId(), "spoko gość"));
@@ -391,6 +427,7 @@ public class DBInit implements CommandLineRunner {
 		w3.setFactoryid(f3.getId());
 		w3.setRecruiter(ui4.getId()); //James Bond
 		this.workerRepo.save(w3);
+		this.timesheetRepo.save(new Timesheet(w3));
 		f3.addPerson();
 		this.factoryRepo.save(f3);
 		c1.addPerson();
@@ -403,7 +440,7 @@ public class DBInit implements CommandLineRunner {
 		wb3.setDepartment(d3.getId()); //Kierowca
 		wb3.setPesel("666845924");
 		wb3.setSex("M");
-		wb3.setWorkerNo(485l);
+		wb3.setWorkerNo("485");
 		this.workerBasicRepo.save(wb3);
 		
 		WorkerDate wd3 = new WorkerDate();
@@ -431,7 +468,7 @@ public class DBInit implements CommandLineRunner {
 		ps3.setStatementValidTo(LocalDate.of(2021, 06, 6));
 		this.workerPermitRepo.save(ps3);
 		
-		WorkerFinance fw3 = new WorkerFinance(w3.getId(), f3.getHourlyrate());
+		WorkerFinance fw3 = new WorkerFinance(w3.getId(), f3.getHourlyrate(), 16.47);
 		this.workerFinanceRepo.save(fw3);
 		
 		this.workerNoteRepo.save(new WorkerNote(w3.getId(), ""));
@@ -456,7 +493,35 @@ public class DBInit implements CommandLineRunner {
 		this.bedRepo.save(h1r3b2);		
 		
 		/// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		Task t1 = new Task();
+		t1.setEmployeeid(u3.getId());
+		t1.setTaskname("Zakupy");;
+		t1.setDescription("Kupić jajka");
+		t1.setDeadlinedate(LocalDate.now().plusDays(1));
+		t1.setPriority(TaskPriority.NORMAL);
+		t1.setOwner(TaskOwner.BOSS);
+		t1.setStatus(TaskStatus.ONGOING);
+		this.taskRepo.save(t1);
 		
+		Task t2 = new Task();
+		t2.setEmployeeid(u3.getId());
+		t2.setTaskname("Załatwić sprawę");;
+		t2.setDescription("Załatwić ważna spawę");
+		t2.setDeadlinedate(LocalDate.now().plusDays(-1));
+		t2.setPriority(TaskPriority.HIGH);
+		t2.setOwner(TaskOwner.BOSS);
+		t2.setStatus(TaskStatus.DELAY);
+		this.taskRepo.save(t2);
+		
+		Task t3 = new Task();
+		t3.setEmployeeid(u3.getId());
+		t3.setTaskname("Zatrudnić");;
+		t3.setDescription("Zatrudniń");
+		t3.setDeadlinedate(LocalDate.now().plusDays(1));
+		t3.setPriority(TaskPriority.LOW);
+		t3.setOwner(TaskOwner.ME);
+		t3.setStatus(TaskStatus.ONGOING);
+		this.taskRepo.save(t3);
 		
 	}
 

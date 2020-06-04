@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/timesheet_style.css" />
+ 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" /> 
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header">Obecność</h1>
+		</div>
+		<div class="timesheet-menu" th:replace="user/timesheet/timesheetmenu :: timesheetmenu"></div>
+		
+		<div class="month-nav">
+			<a class="m-button" th:if="${previousIsPossible}" th:href="@{'/timesheet/' + ${mon - 1} + '/' + ${fv.id}}"> &#171; PREVIOUS MONTH</a>
+			<span class="info-month" th:text="${month + '/' + year}"></span>
+			<a class="m-button" th:if="${nextIsPossible}" th:href="@{'/timesheet/' + ${mon + 1} + '/' + ${fv.id}}">NEXT MONTH	&#187;</a>
+			 
+		</div>
+		
+		<p th:text="${message}" class="error_message">
+		
+		<div class="main-content">
+			<div class="factory-header">
+				<span th:text="${fv.shortname}"></span>
+			</div>
+		
+			<div class="table">
+				<div class="tr">
+					<span class="th">Osoba</span>
+					<span class="th">Nr pracownika</span>
+					<span class="th">Dział</span>
+					<span class="th" th:each="i : ${#numbers.sequence(1, monLen)}" th:text="${i}"></span>
+					<span class="th">Total h</span>
+					<span class="th">Total cost</span>
+					<span class="th"></span>
+				</div>
+				<form th:action="@{/timesheet}" method="post" class="tr" th:each="v : ${fv.wts}">
+				
+					<input type="hidden" name="workerid" th:value="${v.id}">
+					<input type="hidden" name="factoryid" th:value="${fv.id}">
+					<input type="hidden" name="month" th:value="${month}">
+					<input type="hidden" name="year" th:value="${year}">
+					<input type="hidden" name="monoffset" th:value="${year}">
+					
+					<span class="td" th:text="${v.name}"></span>
+					<span class="td" th:text="${v.workernr}"></span>
+					<span class="td" th:text="${v.department}"></span>
+					<span class="td" th:each="h : ${v.hourlList}">
+						<input type="text" name="hour" th:value="${h}" size="2" maxlength="2">
+					</span>
+					<span class="td" th:text="${v.hsum}"></span>
+					<span class="td" th:text="${v.total}"></span>
+					<span class="td">
+						<button class="button" type="submit">Zapisz</button>
+					</span>
+				</form>
+			</div>
+		</div>
+		
+
+	
+
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+<script src="/scripts/BasicViewScript.js"></script>
+<script src="/scripts/ViewCommon.js"></script>
+</html>

@@ -46,7 +46,7 @@ public class WorkerAll {
 	
 	private Integer citizenship;
 	private Long department;
-	private Long workerNo;
+	private String workerNo;
 	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate startWork;
@@ -83,6 +83,8 @@ public class WorkerAll {
 	private String other;
 	private String accountnr;
 	private double bonus;
+	private double wage;
+	private String sWage;
 	
 	public void setWorker(Worker w) {
 		this.id = w.getId();

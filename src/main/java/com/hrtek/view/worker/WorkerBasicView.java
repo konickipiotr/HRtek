@@ -20,7 +20,7 @@ public class WorkerBasicView {
 	private String sex;
 	private String accountnr;
 	private String pesel;
-	private Long workerNo;
+	private String workerNo;
 	
 	public WorkerBasicView(WorkerBasic wb) {
 		this.id = wb.getId();

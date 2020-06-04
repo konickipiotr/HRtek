@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/statistic_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<div class="header-container">
+			<h1 class="header-header">Statystyki</h1>
+		</div>
+	<!-- ************************************************************************* -->
+	
+		<div class="div-content">
+			<div class="div-company" th:each="c : ${statlist}">
+				<div class="company-header">
+					<h3 th:text="${c.shortname}"></h3>
+				</div>
+				<div class="element">
+					<div class="element-label">Liczba pracowników</div>
+					<div class="element-content" th:text="${c.currentnumofworkers}"></div>
+				</div>
+				<div class="element">
+					<div class="element-label">Osoby poniżej 26 roku</div>
+					<div class="element-content" th:text="${c.less26}"></div>
+				</div>
+				<div class="element">
+					<div class="element-label">Osoby powyżej 26 roku</div>
+					<div class="element-content" th:text="${c.more26}"></div>
+				</div>
+				
+				<div class="element-f" th:each="f : ${c.factorystat}">
+					<div class="element-label" th:text="${f.shortname}"></div>
+					<div class="element-content" th:text="${f.numofworkers}"></div>
+				</div>
+				
+			
+			</div>
+		
+		</div>
+	
+	
+
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

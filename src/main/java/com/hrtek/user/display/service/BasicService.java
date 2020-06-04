@@ -70,7 +70,10 @@ public class BasicService {
 		bv.setFromWorkerBasic(wb);
 		bv.setFromWorkerDate(workerDateRepo.findById(id).get());
 		bv.setFromResidency(residencyRepo.findById(id).get());
-		bv.setCitizenship(citizenshipRepo.findById(wb.getCitizenship()).get().getName());
+		
+		if(wb.getCitizenship() != null)
+			bv.setCitizenship(citizenshipRepo.findById(wb.getCitizenship()).get().getName());
+		
 		bv.setFactory(factoryRepo.findById(w.getFactoryid()).get().getShortname());
 		bv.setCompany(companyRepo.findById(w.getCompanyid()).get().getShortname());
 		return bv;

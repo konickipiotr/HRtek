@@ -25,7 +25,7 @@ public class WorkerBasic {
 	private String sex;
 	private String accountnr;
 	private String pesel;
-	private Long workerNo;
+	private String workerNo;
 	
 	public WorkerBasic() {
 	}
@@ -44,5 +44,7 @@ public class WorkerBasic {
 		this.id = w.getId();
 		this.dateofbirth = nw.getDateofbirth();
 		this.sex = nw.getSex();
+		
+
 	}
 }

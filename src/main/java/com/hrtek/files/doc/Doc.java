@@ -1,9 +1,10 @@
 package com.hrtek.files.doc;
 
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
+public interface Doc<T> {
 
-public interface Doc {
-
-	XWPFDocument prepareDoc();
-	//void setType
+	void prepareDoc();
+	T getDoc();
+	String getFilepath();
+	String getFilename();
+	DocType getType();
 }

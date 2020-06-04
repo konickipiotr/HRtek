@@ -109,7 +109,6 @@ public class ProfilService {
 		model.addAttribute("workerNote", workerNoteRepo.findById(id).get());
 		model.addAttribute("wf", workerFinanceRepo.findById(id).get());
 		model.addAttribute("cv", prepareContactView(id));
-		//model.addAttribute("", );
 		return true;
 	}
 	
@@ -134,14 +133,19 @@ public class ProfilService {
 		WorkerBasic wb = workerBasicRepo.findById(id).get();
 		WorkerBasicView wbv = new WorkerBasicView(wb);
 		
-		Optional<Citizenship> oCitizenship = citizenshipRepo.findById(wb.getCitizenship());
-		if(oCitizenship.isPresent()) {
-			wbv.setCitizenship(oCitizenship.get().getName());
+
+		if(wb.getCitizenship() != null) {
+			Optional<Citizenship> oCitizenship = citizenshipRepo.findById(wb.getCitizenship());
+			if(oCitizenship.isPresent()) {
+				wbv.setCitizenship(oCitizenship.get().getName());
+			}
 		}
 		
-		Optional<Department> oDep = departmentRepo.findById(wb.getDepartment());
-		if(oDep.isPresent()) {
-			wbv.setDepartment(oDep.get().getDepartment());
+		if(wb.getDepartment() != null) {
+			Optional<Department> oDep = departmentRepo.findById(wb.getDepartment());
+			if(oDep.isPresent()) {
+				wbv.setDepartment(oDep.get().getDepartment());
+			}
 		}
 		return wbv;
 	}
@@ -168,6 +172,14 @@ public class ProfilService {
 			wv.setRecruiter(text);
 		} 
 		return wv;
+	}
+	
+	public Worker getWorker(Long id) {
+		Optional<Worker> oWorker = workerRepo.findById(id);
+		if(oWorker.isEmpty()) {
+			return null;
+		}
+		return oWorker.get();
 	}
 	
 	

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hrtek.db.FactoryRepository;
 import com.hrtek.model.Factory;
+import com.hrtek.model.StatusFC;
 
 @Controller
 @RequestMapping("/admin/newfactory")
@@ -52,7 +53,7 @@ public class NewFactoryController {
 				return "admin/newfactory";
 			}
 		}
-		
+		factory.setStatus(StatusFC.ENABLED);
 		this.factoryRepo.save(factory);
 		model.addAttribute("factory_list", factoryRepo.findAll());
 		return "admin/factory";

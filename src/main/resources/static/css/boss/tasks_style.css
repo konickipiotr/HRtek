@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+#container{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+label{
+	font-weight: bold;
+}
+
+#taskname{
+	width: 98%;
+}
+/* //////////////////// */
+
+.new-task{
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	
+	background-color: #d7adad;
+	width: 50%;
+	border-radius: 5px;
+	
+}
+
+
+.new-task-header{
+	background-color: #5f1010;
+	height: 30px;
+	color: white;
+}
+
+.newtask-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.newtask-buttons{
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+
+.t-label{
+	background-color: #782525;
+	color: white;
+	margin-top: 10px;
+}
+
+.task-coll{
+	width: 45%;
+	
+}
+
+
+.task-coll select{
+	width: 100%;
+}
+
+.radio-buttons{
+	display: flex;
+	justify-content: space-between;
+}
+
+.savebutton{
+	background-color: #5f1010;
+}
+
+
+#description{
+	width: 100%;
+	min-height: 120px;
+	resize: none;
+}
+
+/* //////////////////// */
+
+.emplyees-task{
+	margin-top: 30px;
+	
+}

@@ -754,77 +754,52 @@
 				<div class="section-header">
 					<h3>Pliki</h3>
 				</div>
+				<div class="border-div">
+					<table class="file-table">
+						<tr th:each="f : ${files}">
+							<td th:text="${f.filename}"></td>
+							<td class="td-action">
+								<a th:href="@{'/profil/download/' + ${f.id} }">[DL]</a>
+							</td>
+							<td class="td-action">
+								<a th:href="@{'/profil/delete/' + ${wv.id} + '/' + ${f.id} }">[X]</a>
+								
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+			</div>
+			
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>Nowe</h3>
+				</div>
+				<div class="border-div">
+				<div id="fileadd">
+					<form th:action="@{/profil}" enctype="multipart/form-data" method="post">
+			            <input class="button" id="fileInput" type="file" name="uploadFiles" onchange="update();" multiple><br>
+						<textarea id="list" disabled="disabled" ></textarea><br>
+						<input type="hidden" name="id" th:value="${wv.id}">	
+						<button class="button" type="submit"> Dodaj</button>
+					</form>
+				</div>
+				</div>
 			</div>
 		</section>
-<!-- 		<br>
-					<p><span>Telefon: </span><span class="data" th:text="${cv.phone}"></span></p>
-					<p><span>email: </span><span class="data" th:text="${cv.email}"></span></p>
-					<p><span>Adres: </span><span class="data" th:text="${cv.address}"></span></p>
-					<p><span>Kod pocztowy: </span><span class="data" th:text="${cv.postcode}"></span></p>
-					<p><span>Miasto: </span><span class="data" th:text="${cv.city}"></span></p>
-					
-					<br>
-					<p><span>Adres PL: </span><span class="data" th:text="${cv.pladdress}"></span></p>
-					<p><span>Kod pocztowy PL: </span><span class="data" th:text="${cv.plpostcode}"></span></p>
-					<p><span>Miasto PL: </span><span class="data" th:text="${cv.plcity}"></span></p>
-					
-					<br>
-					<div  th:if="${cv.houseid != null}">
-						<p><span>Dom: </span><span class="data" th:text="${cv.house}"></span></p>
-						<p><span>Pokój: </span><span class="data" th:text="${cv.room}"></span></p>
-						<p><span>Do: </span><span class="data" th:text="${cv.expire}"></span></p>
-					</div> -->
-<!-- 					<p><span>Status: </span><span class="data" th:text="${wv.status}"></span></p>
-					<p><span>Imię: </span><span class="data" th:text="${wv.firstname}"></span></p>
-					<p><span>Nazwisko: </span><span class="data" th:text="${wv.lastname}"></span></p>
-					<p><span>Firma: </span><span class="data" th:text="${wv.company}"></span></p>
-					<p><span>Fabryka: </span><span class="data" th:text="${wv.factory}"></span></p>
-					<p><span>rekruter: </span><span class="data" th:text="${wv.recruiter}"></span></p> -->
-	<!-- 				
-					<br>
-					<p><span>Dział: </span><span class="data" th:text="${wb.department}"></span></p>
-					<p><span>Obywatelstwo: </span><span class="data" th:text="${wb.citizenship}"></span></p>
-					<p><span>Data urodzenia: </span><span class="data" th:text="${wb.dateofbirth}"></span></p>
-					<p><span>Płeć: </span><span class="data" th:text="${wb.sex}"></span></p>
-					<p><span>Numer konta: </span><span class="data" th:text="${wb.accountnr}"></span></p>
-					<p><span>PESEL</span><span class="data" th:text="${wb.pesel}"></span></p>
-					<p><span>Numer pracowniak: </span><span class="data" th:text="${wb.workerNo}"></span></p> -->
-					
-					<!-- <br>
-					<p><span>Start Zus: </span><span class="data" th:text="${wd.startZus}"></span></p>
-					<p><span>End Zus: </span><span class="data" th:text="${wd.endZus}"></span></p>
-					<p><span>Start work:  </span><span class="data" th:text="${wd.startWork}"></span></p>
-					<p><span>Start Badania: </span><span class="data" th:text="${wd.startMedicalExams}"></span></p>
-					<p><span>End Badania: </span><span class="data" th:text="${wd.endMedicalExams}"></span></p>
-					<p><span>W systemie: </span><span class="data" th:text="${wd.addToSystem}"></span></p>
-					
-					<br>
-					<p><span>Typ oświadczenia: </span><span class="data" th:text="${ps.statementType}"></span></p>
-					<p><span>Oświadczenie: </span><span class="data" th:text="${ps.statement}"></span></p>
-					<p><span>Ważne od: </span><span class="data" th:text="${ps.statementValidFrom}"></span></p>
-					<p><span>Ważme do: </span><span class="data" th:text="${ps.statementValidTo}"></span></p>
-					<p><span>Zezwolenie: </span><span class="data" th:text="${ps.permit}"></span></p>
-					<p><span>Ważne od: </span><span class="data" th:text="${ps.permitValidFrom}"></span></p>
-					<p><span>Ważne do: </span><span class="data" th:text="${ps.permitValidTo}"></span></p>
-					<p><span>Inne</span><span class="data" th:text="${ps.other}"></span></p> -->
-					
-		<!-- 			<br>
-					<p><span>Paszport biometryczny: </span><span class="data" th:text="${re.biopassport}"></span></p>
-					<p><span>Paszport: </span><span class="data" th:text="${re.passport}"></span></p>
-					<p><span>Wiza</span><span class="data" th:text="${re.visa}"></span></p>
-					<p><span>Ważna od: </span><span class="data" th:text="${re.visaValidFrom}"></span></p>
-					<p><span>Ważna do: </span><span class="data" th:text="${re.visaValidTo}"></span></p> -->
-	<!-- 				
-					<br>
-					<p><span>Stawka netto/h:</span><span class="data" th:text="${wf.hourlyrate}"></span></p>
-					<p><span>bonus: </span><span class="data" th:text="${wf.bonus}"></span></p>
-					 -->
-					
-		
 			
 	
 	<!-- ************************************************************************* -->
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
+<script>
+function update() {
+    document.getElementById("list").value = "";
+	var files = document.getElementById("fileInput").files;
+	for (var i = 0; i < files.length ; i++){
+		document.getElementById("list").value += files[i].name + "\n";
+	}
+}
+</script>
 </html>

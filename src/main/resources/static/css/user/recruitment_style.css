@@ -142,6 +142,7 @@ textarea{
 	width: 50%;
 	height: auto;
 	margin: auto;
+	margin-top: 10px;
 	overflow: auto;
 	display: flex;
 	justify-content: space-between;
