@@ -35,7 +35,7 @@
 				<td th:text="${i.login}" class="td_who"></td>
 				<td th:text="${i.remarks}"></td>
 				<td class="td_short_button">
-					<a th:href="@{'/admin/ticket/action/'+ ${i.event} + '/' + ${i.id}}" class="tdbutton">action</a>
+					<a th:if="${i.event.name() == 'PASSWORDFORGOTTEN'}" th:href="@{'/admin/ticket/action/'+ ${i.event} + '/' + ${i.id}}" class="tdbutton">action</a>
 				</td>
 				<td class="td_short_button">
 					<a th:href="@{'/admin/ticket/delete/' + ${i.id}}" class="tdbutton">Usuń</a>

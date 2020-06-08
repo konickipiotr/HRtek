@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hrtek.db.CompanyRepository;
 import com.hrtek.model.Company;
+import com.hrtek.model.StatusFC;
 
 @Controller
 @RequestMapping("/admin/newcompany")
@@ -49,7 +50,7 @@ public class NewComapnyController {
 			}
 			//TODO nie pozwolić na zmianę na istniejące 
 		}
-		
+		company.setStatus(StatusFC.ENABLED);
 		this.companyRepo.save(company);
 		return "redirect:/admin/company";
 	}

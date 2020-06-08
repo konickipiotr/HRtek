@@ -46,13 +46,17 @@ public class FactoryController {
 			if(factory.getNumberofwokers() == 0) {
 				factory.setStatus(StatusFC.DISABLED);
 				this.factoryRepo.save(factory);
+				System.out.println("w ifie");
 			}
-			else
-				model.addAttribute("error_msg", "Nie można dezaktywować fabryki dopóki pracuje w niej co najmniej jeden pracownik");
+			else {
+				model.addAttribute("emsg", "Nie można dezaktywować fabryki dopóki pracuje w niej co najmniej jeden pracownik");
+				System.out.println("w elsie");
+			}
+			model.addAttribute("factory_list", factoryRepo.findAll());
 			
 		}
 
-		return "redirect:/admin/factory";
+		return "admin/factory";
 	}
 	
 	@GetMapping("/edit/{id}")

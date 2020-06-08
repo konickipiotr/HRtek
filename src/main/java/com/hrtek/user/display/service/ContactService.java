@@ -18,6 +18,7 @@ import com.hrtek.db.worker.WorkerContactRepository;
 import com.hrtek.db.worker.WorkerDateRepository;
 import com.hrtek.db.worker.WorkerRepository;
 import com.hrtek.model.ListModel;
+import com.hrtek.model.StatusFC;
 import com.hrtek.model.accommodation.House;
 import com.hrtek.model.worker.Contact;
 import com.hrtek.model.worker.Worker;
@@ -51,8 +52,8 @@ public class ContactService {
 	}
 	
 	public void setModel(Model model) {
-		model.addAttribute("companies", companyRepo.findAll());
-		model.addAttribute("factories", factoryRepo.findAll());
+		model.addAttribute("companies", companyRepo.findByStatus(StatusFC.ENABLED));
+		model.addAttribute("factories", factoryRepo.findByStatus(StatusFC.ENABLED));
 		
 		List<House> hlist = houseRepo.findAll();
 		List<ListModel> houses = new ArrayList<ListModel>();

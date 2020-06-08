@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/tickets_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<div class="header-container">
+			<h1 class="header-header">Tikets</h1>
+		</div>
+	<!-- ************************************************************************* -->
+		<div class="form-container">
+			<form th:action="@{/tickets}" method="post">
+				<div>
+				<label for="event">Wybierz rodziaj zgłoszenia</label>
+				</div>
+				<div>
+					<select id="event" name="event" required>
+						<option th:each="v : ${values}" th:value="${v}" th:text="${v}"></option>
+					</select>
+				</div>
+				<div>
+					<p id="iERR" class="warning_message" th:text="${info['APPLICATION_ERROR']}"></p>
+					<p id="iINC" class="warning_message" th:text="${info['WORKING_INCORRECT']}" hidden="true"></p>
+					<p id="iNEE" class="warning_message" th:text="${info['NEEDED_NEW_VALUE']}" hidden="true"></p>
+					<p id="iSUG" class="warning_message" th:text="${info['SUGESSTION']}" hidden="true"></p>
+				</div>
+				<div>
+					<label  for="remarks">Opis</label>
+				</div>
+				<div>
+					<textarea id="remarks" name="remarks" required></textarea>
+				</div>
+				<div>
+					<button class="savebutton" type="submit">Wyślij zgłoszenie</button>
+				</div>
+			</form>
+		</div>
+	
+	
+
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script>
+
+document.getElementById('event').onchange = function(){
+	clear();
+	var el = document.getElementById('event').value;
+	if(el == 'APPLICATION_ERROR') document.getElementById('iERR').hidden = false;
+	if(el == 'WORKING_INCORRECT') document.getElementById('iINC').hidden = false;
+	if(el == 'NEEDED_NEW_VALUE') document.getElementById('iNEE').hidden = false;
+	if(el == 'SUGESSTION') document.getElementById('iSUG').hidden = false;
+}
+
+function clear(){
+	document.getElementById('iERR').hidden = true;
+	document.getElementById('iINC').hidden = true;
+	document.getElementById('iNEE').hidden = true;
+	document.getElementById('iSUG').hidden = true;
+}
+
+</script>
+</html>

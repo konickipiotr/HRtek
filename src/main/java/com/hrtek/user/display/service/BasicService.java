@@ -14,6 +14,7 @@ import com.hrtek.db.worker.ResidencyRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerDateRepository;
 import com.hrtek.db.worker.WorkerRepository;
+import com.hrtek.model.StatusFC;
 import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
@@ -48,8 +49,8 @@ public class BasicService {
 	
 	public void setModel(Model model) {
 		model.addAttribute("citizenships", citizenshipRepo.findAll());
-		model.addAttribute("companies", companyRepo.findAll());
-		model.addAttribute("factories", factoryRepo.findAll());
+		model.addAttribute("companies", companyRepo.findByStatus(StatusFC.ENABLED));
+		model.addAttribute("factories", factoryRepo.findByStatus(StatusFC.ENABLED));
 	}
 
 	public List<BasicView> getBasicViewList(){

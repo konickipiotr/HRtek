@@ -23,7 +23,7 @@
 	 	<div class="button_container">
 			<a class="button_new" th:href="@{/admin/newfactory}">Nowa Fabryka</a>
 		</div>
-		
+		<p class="error_message" th:text="${emsg}"></p>
 		<table>
 			<tr>
 				<th class="td_lp">Lp.</th>
@@ -45,7 +45,7 @@
 				<td th:text="${it.count}"></td>
 				<td>
 					<span th:if="${i.status.name() == 'DISABLED'}" class="dot-orange"></span> 
-					<span th:unless="${i.status.name() == 'ENABLED'}" class="dot-green"></span>
+					<span th:unless="${i.status.name() == 'DISABLED'}" class="dot-green"></span>
 				</td>
 				<td th:text="${i.pkd}" class="pkd"></td>
 				<td th:text="${i.nip}" class="nip"></td>

@@ -38,6 +38,7 @@ import com.hrtek.model.Citizenship;
 import com.hrtek.model.Company;
 import com.hrtek.model.Department;
 import com.hrtek.model.Factory;
+import com.hrtek.model.StatusFC;
 import com.hrtek.model.User;
 import com.hrtek.model.UserInfo;
 import com.hrtek.model.accommodation.Bed;
@@ -131,13 +132,13 @@ class IntegrationTestHire {
 		this.citizenshipRepo.saveAll(Arrays.asList(citiz1, citiz2, citiz3));
 		citizList = Arrays.asList(citiz1, citiz2, citiz3);
 		
-		Factory f1 = new Factory("45686", "1597534589", "1165159554", "DongYang", "Dong Yang internatinal sp z o.o.", "Jan 43", "42-548", "Wrocław", 0, 17.25);
-		Factory f2 = new Factory("14326", "1516551129", "4587466611", "Fabryk 2", "zong Yang internatinal sp z o.o.", "Mickiewicza 43", "42-548", "Krocław", 0, 18.25);
+		Factory f1 = new Factory(StatusFC.ENABLED, "45686", "1597534589", "1165159554", "DongYang", "Dong Yang internatinal sp z o.o.", "Jan 43", "42-548", "Wrocław", 0, 17.25);
+		Factory f2 = new Factory(StatusFC.ENABLED,"14326", "1516551129", "4587466611", "Fabryk 2", "zong Yang internatinal sp z o.o.", "Mickiewicza 43", "42-548", "Krocław", 0, 18.25);
 		this.factoryRepo.saveAll(Arrays.asList(f1,f2));
 		factoryList = Arrays.asList(f1,f2);
 		
-		Company c1 = new Company("11111", "2222222222", "3333", "444444444", "555", "UWC", "UWC sp. z o.o", "Kutnowska 43", "53-541", "Wrocław", 0, 20.10);
-		Company c2 = new Company("99999", "8888888888", "7777", "666666666", "111", "XYZ", "XYZ sp. z o.o", "Śnieżna 12", "23-311", "Wrocław", 0, 15.10);
+		Company c1 = new Company(StatusFC.ENABLED, "11111", "2222222222", "3333", "444444444", "555", "UWC", "UWC sp. z o.o", "Kutnowska 43", "53-541", "Wrocław", 0, 20.10);
+		Company c2 = new Company(StatusFC.ENABLED, "99999", "8888888888", "7777", "666666666", "111", "XYZ", "XYZ sp. z o.o", "Śnieżna 12", "23-311", "Wrocław", 0, 15.10);
 		this.companyRepo.saveAll(Arrays.asList(c1, c2));
 		companyList = Arrays.asList(c1, c2);
 

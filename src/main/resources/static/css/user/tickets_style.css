@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.form-container{
+	width: 50%;
+	display: flex;
+	flex-direction: coll;
+	justify-content: center;
+	background-color: #729fcf;
+}
+
+.form-container div{
+	display: flex;
+	justify-content: center;
+}
+
+#remarks{
+	width: 100%;
+	height: 200px;
+	resize: none;
+}
+
+.savebutton{
+	background-color: #204a87;
+}

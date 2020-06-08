@@ -1,9 +1,12 @@
 package com.hrtek.db;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.hrtek.model.Company;
+import com.hrtek.model.StatusFC;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Long> {
@@ -14,4 +17,5 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
 	boolean existsByFullname(String fulname);
 	boolean existsByKraz(String kraz);
 	boolean existsByRegon(String regon);
+	List<Company> findByStatus(StatusFC status);
 }

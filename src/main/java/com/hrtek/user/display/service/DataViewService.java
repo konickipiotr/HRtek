@@ -15,6 +15,7 @@ import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerDateRepository;
 import com.hrtek.db.worker.WorkerRepository;
 import com.hrtek.model.ListModel;
+import com.hrtek.model.StatusFC;
 import com.hrtek.model.UserInfo;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
@@ -46,8 +47,8 @@ public class DataViewService {
 	}
 	
 	public void setModel(Model model) {
-		model.addAttribute("companies", companyRepo.findAll());
-		model.addAttribute("factories", factoryRepo.findAll());
+		model.addAttribute("companies", companyRepo.findByStatus(StatusFC.ENABLED));
+		model.addAttribute("factories", factoryRepo.findByStatus(StatusFC.ENABLED));
 		
 		int agentpId = userPositionRepo.findByPosition(GlobalSettings.agent).getId();
 		int coorPId = userPositionRepo.findByPosition(GlobalSettings.coordinator).getId();

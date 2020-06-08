@@ -18,6 +18,7 @@ import com.hrtek.model.Company;
 import com.hrtek.model.Department;
 import com.hrtek.model.Factory;
 import com.hrtek.model.ListModel;
+import com.hrtek.model.StatusFC;
 import com.hrtek.model.UserInfo;
 import com.hrtek.model.accommodation.Bed;
 import com.hrtek.model.accommodation.House;
@@ -80,7 +81,7 @@ public class SortFields {
 	}
 	
 	public List<Factory> getFactoryInOrder(Long id){
-		List<Factory> factories = factroryRepo.findAll(); 
+		List<Factory> factories = factroryRepo.findByStatus(StatusFC.ENABLED);
 		
 		if( id != null) {
 			for(int i = 0 ; i < factories.size(); i++) {
@@ -123,7 +124,7 @@ public class SortFields {
 	
 	
 	public List<Company> getCompaniesInOrder(Long id){
-		List<Company> companies = companyRepo.findAll(); 
+		List<Company> companies = companyRepo.findByStatus(StatusFC.ENABLED); 
 		
 		if(id != null) {
 			for(int i = 0 ; i < companies.size(); i++) {
