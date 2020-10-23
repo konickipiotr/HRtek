@@ -9,11 +9,9 @@ import com.hrtek.Tasks.Task;
 import com.hrtek.Tasks.TaskOwner;
 import com.hrtek.db.MyNoteRepository;
 import com.hrtek.db.TaskRepository;
-import com.hrtek.db.UserInfoRepository;
 import com.hrtek.db.UserRepository;
 import com.hrtek.model.MyNote;
 import com.hrtek.model.User;
-import com.hrtek.model.UserInfo;
 
 @Service
 public class UserHomeService {
@@ -47,7 +45,6 @@ public class UserHomeService {
 	}
 	
 	public void saveMyNote(MyNote myNote) {
-		System.out.println(myNote);
 		this.myNoteRepo.save(myNote);
 	}
 }

@@ -25,6 +25,13 @@ public class WorkerFiles {
 		this.type = type;
 	}
 
+	public WorkerFiles(WorkerFilesArch f) {
+		this.workerid = f.getId();
+		this.filename = f.getFilename();
+		this.path = f.getPath();
+		this.type = f.getType();
+	}
+
 	public Long getId() {
 		return id;
 	}

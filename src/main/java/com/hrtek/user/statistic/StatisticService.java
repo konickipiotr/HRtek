@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.hrtek.db.CompanyRepository;
 import com.hrtek.db.FactoryRepository;
-import com.hrtek.db.worker.TimesheetRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerRepository;
 import com.hrtek.model.Company;
@@ -25,17 +24,14 @@ public class StatisticService {
 	private CompanyRepository companyRepo;
 	private FactoryRepository facotoryRepo;
 	private WorkerBasicRepository workerBasicRepo;
-	private TimesheetRepository timesheerRepository;
 	private WorkerRepository workerRepo;
 	
 	@Autowired
 	public StatisticService(CompanyRepository companyRepo, FactoryRepository facotoryRepo,
-			WorkerBasicRepository workerBasicRepo, TimesheetRepository timesheerRepository,
-			WorkerRepository workerRepo) {
+			WorkerBasicRepository workerBasicRepo,WorkerRepository workerRepo) {
 		this.companyRepo = companyRepo;
 		this.facotoryRepo = facotoryRepo;
 		this.workerBasicRepo = workerBasicRepo;
-		this.timesheerRepository = timesheerRepository;
 		this.workerRepo = workerRepo;
 	}
 
@@ -61,9 +57,6 @@ public class StatisticService {
 		companyStat.setLess26(less26);
 		companyStat.setMore26(workersId.size() - less26);
 		companyStat.setFactorystat(getFactoriesStat(c.getId()));
-		
-		System.out.println(companyStat);
-		
 		return companyStat;
 	}
 	
@@ -95,7 +88,6 @@ public class StatisticService {
 		
 		for(Factory f : list) {
 			int numW = workerRepo.countByCompanyidAndFactoryid(companyid, f.getId());
-			System.out.println("fac num: " + numW);
 			FactoryStat fs = new FactoryStat(f);
 			fs.setNumofworkers(numW);
 			fstatlist.add(fs);

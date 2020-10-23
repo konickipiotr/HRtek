@@ -16,6 +16,8 @@
 	background-color: #5b7cb0;
 }
 
+
+
 .company-button{
 	display: inline-block;
 	padding: 5px;
@@ -79,36 +81,6 @@ SPAN.td {
 	border: 1px solid black;
 }
 
-.button{
-	background-color: #387103;
-	text-decoration: none;
-	min-width: 100px;
-	color: white;
-	font-weight: bold;
-	font-size: 1.2em;
-	border: 1px solid white;
-	border-radius: 5px;
-	padding: 5px;
-}
-
-.button:hover{
-	background-color: #4e9a06;
-	text-decoration: none;
-	min-width: 100px;
-	color: white;
-	font-weight: bold;
-	font-size: 1.2em;
-	border: 1px solid white;
-	border-radius: 5px;
-	padding: 5px;
-}
-
-.button:disabled{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  text-decoration: none;
-  color: #666666;
-}
 
 .month-nav{
 	display: flex;
@@ -151,3 +123,34 @@ SPAN.td {
 	background-color: 	#c17d11;
 	padding: 20px;
 }  */
+
+span.th{
+	font-size: 14px;
+}
+
+span.td{
+	font-size: 12px;
+}
+
+
+select{
+	margin: 0px;
+	padding: 0px;
+	border-radius: 0px;
+	height: 40px;
+	background-color: white;
+	margin-top: 10px;
+}
+
+select:hover{
+	border: 1px solid green;
+}
+
+.button{
+	min-width: 78px;
+	height: 30px;
+}
+.button:hover{
+	min-width: 78px;
+	height: 30px;
+}

@@ -12,9 +12,7 @@ import com.hrtek.db.worker.ResidencyRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerContactRepository;
 import com.hrtek.db.worker.WorkerFilesRepository;
-import com.hrtek.db.worker.WorkerFinanceRepository;
 import com.hrtek.db.worker.WorkerRepository;
-import com.hrtek.files.FilesService;
 import com.hrtek.model.Company;
 import com.hrtek.model.Factory;
 import com.hrtek.model.worker.Contact;
@@ -22,7 +20,6 @@ import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
 import com.hrtek.model.worker.WorkerFiles;
-import com.hrtek.model.worker.WorkerFinance;
 
 @Service
 public class DocumentService {

@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/factory_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/factory_style.css" />
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
@@ -18,62 +18,153 @@
 	<!-- ************************************************************************* -->
 
 		<div class="header-container">
-			<h1 class="header-header">Nowa Firma</h1>
+			<h1 class="header-header" th:text="#{button.newcompany}"></h1>
 		</div>
 		
 		<p th:text="${message}"></p>
-		
-		<div>
-			<form th:action="@{/admin/newcompany}" method="post" th:object="${company}">
+		<form th:action="@{/admin/newcompany}" method="post" th:object="${company}">
+			<div class="main-container">
+			
 				<input type="hidden" name="type" th:value="${type}">
 				<input type="hidden" name="id" th:field="*{id}">
 				<input type="hidden" name="numberofwokers" th:field="*{numberofwokers}">
 			
-				<p th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" />
-				<label for="fullname">fullname</label>
-				<input type="text" id="fullname" name="fullname" th:field="*{fullname}" required>
+				<div class="row">
+					<div class="col">
+						<p class="error_message" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}" />
+					</div>
+					<div class="col">
+						<p class="error_message" th:if="${#fields.hasErrors('shortname')}" th:errors="*{shortname}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="label-col">
+							<label for="fullname" th:text="#{fullname}"></label>
+						</div>
+						<div class="input-col">
+							<input type="text" id="fullname" name="fullname" th:field="*{fullname}" required>
+						</div>
+					</div>
+					<div class="col">
+						<div class="label-col">
+							<label for="shortname" th:text="#{shortname}"></label>
+						</div>
+						<div class="input-col">
+							<input type="text" id="shortname" name="shortname" th:field="*{shortname}" required>
+						</div>
+					</div>
+				</div>
+				<!-- *********************************************** -->
+				<div class="row">
+					<div class="col">
+						
+					</div>
+					<div class="col">
+						<p class="error_message" th:if="${#fields.hasErrors('nip')}" th:errors="*{nip}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="label-col">
+							<label for="pkd">PKD</label>
+						</div>
+						<div class="input-col">
+							<input type="text" size="5" minlength="5" maxlength="5" id="pkd" name="pkd" th:field="*{pkd}" required>
+						</div>
+					</div>
+					<div class="col">
+						<div class="label-col">
+							<label for="nip">NIP</label>
+						</div>
+						<div class="input-col">
+							<input type="number" min="1000000000" max="9999999999" maxlength="10" step="1" size="10" id="nip" name="nip" th:field="*{nip}" required>
+						</div>
+					</div>
+				</div>
+				<!-- *********************************************** -->
+				<div class="row">
+					<div class="col">
+						<p class="error_message" th:if="${#fields.hasErrors('krs')}" th:errors="*{krs}" />
+					</div>
+					<div class="col">
+						<p class="error_message" th:if="${#fields.hasErrors('regon')}" th:errors="*{regon}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="label-col">
+							<label for="krs">KRS</label>
+						</div>
+						<div class="input-col">
+							<input type="number" min="0" max="9999999999" step="1" size="10"  id="krs" name="krs" th:field="*{krs}" required>
+						</div>
+					</div>
+					<div class="col">
+						<div class="label-col">
+							<label for="regon">REGON</label>
+						</div>
+						<div class="input-col">
+							<input type="text" minlength="9" maxlength="14" size="14"  id="regon" name="regon" th:field="*{regon}" required>
+						</div>
+					</div>
+				</div>
+				<!-- *********************************************** -->
+				<div class="row">
+					<div class="col">
+						<p class="error_message" th:if="${#fields.hasErrors('kraz')}" th:errors="*{kraz}" />
+					</div>
+					<div class="col">
+						
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="label-col">
+							<label for="kraz">KRAZ</label>
+						</div>
+						<div class="input-col">
+							<input type="text" minlength="1" maxlength="5" size="5"  id="kraz" name="kraz" th:field="*{kraz}" required>
+						</div>
+					</div>
+					<div class="col">
+						<div class="label-col">
+							<label for="address" th:text="#{address}"></label>
+						</div>
+						<div class="input-col">
+							<input type="text" id="address" name="address" th:field="*{address}">
+						</div>
+					</div>
+				</div>
+
+			<!-- *********************************************** -->
+				<div class="row">
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="label-col">
+							<label for="city" th:text="#{city}"></label>
+						</div>
+						<div class="input-col">
+							<input type="text" id="city" name="city" th:field="*{city}">
+						</div>
+					</div>
+					<div class="col">
+						<div class="label-col">
+							<label for="postcode" th:text="#{postcode}"></label>
+						</div>
+						<div class="input-col">
+							<input type="text" id="postcode" name="postcode" th:field="*{postcode}">
+						</div>
+					</div>
+				</div>
+				<!-- *********************************************** -->
+				<div class="row-b">
+					<button type="submit" class="button" th:text="#{button.add}"></button>
+				</div>
 				
-				<p th:if="${#fields.hasErrors('shortname')}" th:errors="*{shortname}" />
-				<label for="shortname">shortname</label>
-				<input type="text" id="shortname" name="shortname" th:field="*{shortname}" required>
-				
-				<label for="pkd">pkd</label>
-				<input type="text" size="5" minlength="5" maxlength="5" id="pkd" name="pkd" th:field="*{pkd}" required>
-				
-				<p th:if="${#fields.hasErrors('nip')}" th:errors="*{nip}" />
-				<label for="nip">nip</label>
-				<input type="number" min="1000000000" max="9999999999" maxlength="10" step="1" size="10" id="nip" name="nip" th:field="*{nip}" required>
-				
-				<p th:if="${#fields.hasErrors('krs')}" th:errors="*{krs}" />
-				<label for="krs">krs</label>
-				<input type="number" min="0" max="9999999999" step="1" size="10"  id="krs" name="krs" th:field="*{krs}" required>
-				
-				<p th:if="${#fields.hasErrors('regon')}" th:errors="*{regon}" />
-				<label for="regon">REGON</label>
-				<input type="text" minlength="9" maxlength="14" size="14"  id="regon" name="regon" th:field="*{regon}" required>
-				
-				<p th:if="${#fields.hasErrors('kraz')}" th:errors="*{kraz}" />
-				<label for="kraz">KRAZ</label>
-				<input type="text" minlength="1" maxlength="5" size="5"  id="kraz" name="kraz" th:field="*{kraz}" required>
-				
-				<label for="nettorate">netto rate</label>
-				<input type="number" min="0" step="0.01" size="10" id="nettorate" name="nettorate" th:field="*{nettorate}" required>
-				
-				<label for="address">address</label>
-				<input type="text" id="address" name="address" th:field="*{address}">
-				
-				<label for="city">city</label>
-				<input type="text" id="city" name="city" th:field="*{city}">
-				
-				<label for="postcode">postcode</label>
-				<input type="text" id="postcode" name="postcode" th:field="*{postcode}">
-			
-				<button type="submit">Dodaj</button>
-			</form>		
-		</div>
-		
-		
-	
+			</div>
+		</form>		
 		
 	<!-- ************************************************************************* -->
 	</section>

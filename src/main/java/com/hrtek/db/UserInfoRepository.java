@@ -15,4 +15,6 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Long> {
 	
 	@Query(value = "from UserInfo where position=:agent or position=:coordinator")
 	List<UserInfo> getAgentsAndCoordinators(@Param("agent") int agent, @Param("coordinator") int coordinators);
+	
+	List<UserInfo> findByPosition(int pos);
 }

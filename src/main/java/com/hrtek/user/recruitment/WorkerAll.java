@@ -10,6 +10,7 @@ import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
 import com.hrtek.model.worker.WorkerDate;
+import com.hrtek.user.dismissed.Dismissed;
 
 import lombok.Data;
 
@@ -43,6 +44,8 @@ public class WorkerAll {
 	private String pladdress;
 	private String plpostcode;
 	private String plcity;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate acomdate;
 	
 	private Integer citizenship;
 	private Long department;
@@ -78,6 +81,9 @@ public class WorkerAll {
 	private LocalDate visaValidFrom;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate visaValidTo;
+	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)	
+	private LocalDate addToSystem;
 	
 	private String pesel;
 	private String other;
@@ -123,7 +129,11 @@ public class WorkerAll {
 		this.postcode = c.getPostcode();
 		this.phone = c.getPhone();
 		this.email = c.getEmail();
-		this.bedid = c.getBedid();		
+		this.bedid = c.getBedid();	
+		
+		if(bedid == null) {
+			this.isOhter = true; 
+		}
 	}
 	
 	public void setFromPermitStatement(PermitStatement p) {
@@ -143,5 +153,29 @@ public class WorkerAll {
 		this.visa = r.getVisa();
 		this.visaValidFrom = r.getVisaValidFrom();
 		this.visaValidTo = r.getVisaValidTo();
+	}
+
+	public WorkerAll() {
+		
+	}
+	
+	public WorkerAll(Dismissed d) {
+		this.id = d.getId();
+		this.firstname = d.getFirstname();
+		this.lastname = d.getLastname();
+		this.sex = d.getSex();
+		this.workerNo = d.getWorkerNo();
+		this.dateofbirth = d.getDateofbirth();
+		this.email = d.getEmail();
+		this.phone = d.getPhone();
+		this.pesel = d.getPesel();
+		this.accountnr = d.getAccountnr();
+		this.note = d.getNote();
+		this.passport = d.getPassport();
+		this.biopassport = d.getBiopassport();
+		this.address = d.getAddress();
+		this.postcode = d.getPostcode();
+		this.city = d.getCity();
+		this.addToSystem = d.getAddToSystem();
 	}
 }

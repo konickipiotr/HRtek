@@ -1,6 +1,8 @@
 package com.hrtek.model;
 
-public class ListModel {
+import com.hrtek.user.display.views.BasicView;
+
+public class ListModel implements Comparable<ListModel> {
 
 	private Long id;
 	private String value;
@@ -32,5 +34,10 @@ public class ListModel {
 	@Override
 	public String toString() {
 		return "ListModel [id=" + id + ", value=" + value + "]";
+	}
+
+	@Override
+	public int compareTo(ListModel o) {
+		return this.value.compareToIgnoreCase(o.value);
 	}
 }

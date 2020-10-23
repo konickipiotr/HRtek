@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
+	<script src="https://kit.fontawesome.com/7ccfa6815b.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -18,7 +19,7 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Podstawowe</h1>
+			<h1 class="header-header" th:text="#{label.contact}"></h1>
 		</div>
 
 		<div th:replace="user/display/fragments/viewbar:: viewbar"></div>
@@ -31,21 +32,21 @@
 				<table id="basic-table">
 					<tr>
 						<th>lp</th>
-						<th>profil</th>
-						<th>Imię</th>
-						<th>Nazwisko</th>
-						<th th:if="${fd.bDateofbirth == true}" >Data Urodzenia</th>
-						<th th:if="${fd.bCompany == true}" >Company</th>
-						<th th:if="${fd.bFactory == true}" >Factory</th>
-						<th th:if="${fd.bPhone == true}" >Phone</th>
-						<th th:if="${fd.bEmail == true}" >bEmail</th>
+						<th>PROFIL</th>
+						<th th:text="#{firstname}"></th>
+						<th th:text="#{lastname}"></th>
+						<th th:if="${fd.bDateofbirth == true}" th:text="#{dateofbirth}" class="td_date"></th>
+						<th th:if="${fd.bCompany == true}" th:text="#{company}"></th>
+						<th th:if="${fd.bFactory == true}" th:text="#{factory}"></th>
+						<th th:if="${fd.bPhone == true}" th:text="#{phone}"></th>
+						<th th:if="${fd.bEmail == true}" th:text="#{email}"></th>
 						<th></th>
-						<th th:if="${fd.bPladdress == true}" >Pladdress</th>
-						<th th:if="${fd.bPlpostcode == true}" >Plpostcode</th>
-						<th th:if="${fd.bPlcity == true}" >Plcity</th>
-						<th th:if="${fd.bAddress == true}" >Address</th>
-						<th th:if="${fd.bPostcode == true}" >Postcode</th>
-						<th th:if="${fd.bCity == true}" >City</th>
+						<th th:if="${fd.bPladdress == true}" th:text="#{address} + ${' PL'}"> PL</th>
+						<th th:if="${fd.bPlpostcode == true}" th:text="#{postcode} + ${' PL'}"> PL</th>
+						<th th:if="${fd.bPlcity == true}" th:text="#{city} + ${' PL'}"> PL</th>
+						<th th:if="${fd.bAddress == true}" th:text="#{address}"></th>
+						<th th:if="${fd.bPostcode == true}" th:text="#{postcode}"></th>
+						<th th:if="${fd.bCity == true}" th:text="#{city}"></th>
 					</tr>
 					<tr>
 						<td class="td_noP">
@@ -152,7 +153,9 @@
 					<tr th:each="i, it : ${cv_list}">
 						<td th:text="${it.count}"></td>
 						<td>
-							<a th:href="@{'/profil/'+ ${i.id}}">[ico]</a>
+							<div class="i-ico">
+								<a th:href="@{'/profil/'+ ${i.id}}"><i class="fas fa-address-card fa-2x"></i></a>
+							</div>
 						</td>
 						<td th:text="${i.firstname}"></td>
 						<td th:text="${i.lastname}"></td>
@@ -162,9 +165,9 @@
 						<td th:if="${fd.bPhone == true}"  th:text="${i.phone}"></td>
 						<td th:if="${fd.bEmail == true}"  th:text="${i.email}"></td>
 						<td>
-							<span th:if="${i.houseid == null and i.pladdress == ''}">Brak</span>
-							<span th:if="${i.houseid == null and i.pladdress != ''}">Własne</span>
-							<a th:if="${i.houseid != null}" th:href="@{'/accdetail/' + ${i.houseid}}">Firmowy</a> 
+							<span th:if="${i.houseid == null and i.pladdress == ''}" th:text="#{label.none}"></span>
+							<span th:if="${i.houseid == null and i.pladdress != ''}" th:text="#{label.own}"></span>
+							<a th:if="${i.houseid != null}" th:href="@{'/accdetail/' + ${i.houseid}}" th:text="#{label.companys}"></a> 
 						</td>
 						<td th:if="${fd.bPladdress == true}"  th:text="${i.pladdress}"></td>
 						<td th:if="${fd.bPlpostcode == true}"  th:text="${i.plpostcode}"></td>

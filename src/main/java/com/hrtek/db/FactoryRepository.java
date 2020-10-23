@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.hrtek.model.Factory;
 import com.hrtek.model.StatusFC;
 
-import ch.qos.logback.core.status.Status;
-
 @Repository
 public interface FactoryRepository extends JpaRepository<Factory, Long> {
 

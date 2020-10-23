@@ -16,6 +16,8 @@ public enum ReportType {
 	STATEMENTWORK,
 	
 	ACCOMMODATION,
-	ZUS
+	ZUS,
+	
+	WORKING_TIME
 
 }

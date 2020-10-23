@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title th:text="#{appName}"></title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
+	<script src="https://kit.fontawesome.com/7ccfa6815b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header" th:text="#{header.Archives}"></h1>
+		</div>
+		<div th:replace="user/display/fragments/viewbar:: viewbar"></div>
+		
+		
+		<div th:replace="user/display/fragments/dismissFilters :: dismissFilters"></div>
+	 	<div class="showedFields"  th:replace="user/display/fragments/dismissedfieldshideshow :: dismissedfieldshideshow"></div>	
+
+ 	<div>
+			<div class="table-div">
+				<table id="basic-table">
+					<tr>
+						<th>lp</th>
+						<th>PROFIL</th>
+						<th th:text="#{firstname}"></th>
+						<th th:text="#{lastname}"></th>
+						<th th:if="${fd.bDateofbirth == true}" th:text="#{dateofbirth}" class="td_date"></th>
+						<th th:if="${fd.bCitizenship == true}" th:text="#{citizenship}"></th>
+						<th th:if="${fd.bCompany == true}" th:text="#{company}"></th>
+						<th th:if="${fd.bFactory == true}" th:text="#{factory}"></th>
+						<th th:if="${fd.bRecruiter == true}" th:text="#{label.recruiter}"></th>
+						
+						<th th:if="${fd.bStartWork == true}" th:text="#{start.work}" class="td_date"></th>
+						<th th:if="${fd.bStartZus == true}" th:text="#{start.zus}" class="td_date"></th>
+						<th th:if="${fd.bEndZus == true}" th:text="#{end.zus}" class="td_date"></th>
+						<th th:if="${fd.bEndWork == true}" th:text="#{end.work}" class="td_date"></th>
+						
+						<th th:if="${fd.bPesel == true}" th:text="#{pesel}"></th>
+						<th th:if="${fd.bPassport == true}" th:text="#{passport}"></th>
+						<th th:if="${fd.bBiopassport == true}" th:text="#{biopass}"></th>
+						
+						<th th:if="${fd.bStatement == true}" th:text="#{statement}"></th>
+						<th th:if="${fd.bPermit == true}" th:text="#{permit}"></th>
+						<th th:if="${fd.bOther == true}" th:text="#{other}"></th>
+						
+						
+					</tr>
+					<tr>
+						<td class="td_noP">
+						</td>
+						<td class="td_noP">
+							<!-- profil -->
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="FIRSTNAME">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="LASTNAME">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bDateofbirth == true}"  class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="DATEOFBIRTH">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bCitizenship == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="CITIZENSHIP">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bCompany == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="COMPANY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bFactory == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="FACTORY">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bRecruiter == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="RECRUITER">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td  th:if="${fd.bStartWork == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="STARTWORK">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStartZus == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="STARTZUS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bEndZus == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="ENDZUS">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bEndWork == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="ENDWORK">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						
+						<td th:if="${fd.bPesel == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="PESEL">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPassport == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="PASZPORT">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bBiopassport == true}" class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="BIOPASZPORT">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bStatement == true}"  class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="STATEMENT">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bPermit == true}"  class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="PERMIT">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						<td th:if="${fd.bOther == true}"  class="td_noP">
+							<form th:action="@{/showdismissed/sort}" method="post">
+								<input type="hidden" name="field" value="OTHER">
+								<button class="sort-button" name="sortT" value="down">&#8659;</button>
+								<button class="sort-button" name="sortT" value="up">&#8657;</button>
+							</form>
+						</td>
+						
+					</tr> 
+					<tr th:each="i, it : ${dv_list}">
+						<td th:text="${it.count}"></td>
+						<td>
+							<div class="i-ico">
+								<a th:href="@{'/dismiss/'+ ${i.id}}"><i class="fas fa-address-card fa-2x"></i></a>
+							</div>
+						</td>
+						<td th:text="${i.firstname}"></td>
+						<td th:text="${i.lastname}"></td>
+						<td th:if="${fd.bDateofbirth == true}"  th:text="${i.dateofbirth}"></td>
+						<td  th:if="${fd.bCitizenship == true}"th:text="${i.citizenship}"></td>
+						
+						<td th:if="${fd.bCompany == true}" th:text="${i.company}"></td>
+						<td th:if="${fd.bFactory == true}" th:text="${i.factory}"></td>
+						<td th:if="${fd.bRecruiter == true}" th:text="${i.recruiter}"></td>
+						
+						<td th:if="${fd.bStartWork == true}" th:text="${i.startWork}"></td>
+						<td th:if="${fd.bStartZus == true}" th:text="${i.startZus}"></td>
+						<td th:if="${fd.bEndZus == true}" th:text="${i.endZus}"></td>
+						<td th:if="${fd.bEndWork == true}"  th:text="${i.endWork}"></td>
+						
+						<td th:if="${fd.bPesel == true}" th:text="${i.pesel}"></td>
+						<td th:if="${fd.bPassport == true}" th:text="${i.passport}"></td>
+						<td th:if="${fd.bBiopassport == true}" th:text="${i.biopassport}"></td>
+						
+						<td th:if="${fd.bStatement == true}" th:text="${i.statement}"></td>
+						<td th:if="${fd.bPermit == true}" th:text="${i.permit}"></td>
+						<td th:if="${fd.bOther == true}" th:text="${i.other}"></td>
+						
+					</tr>
+				</table>
+			</div>
+		
+		</div> 
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+<script src="/scripts/DismissViewScript.js"></script>
+<script src="/scripts/ViewCommon.js"></script>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -17,11 +17,11 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Zakwaterowanie</h1>
+			<h1 class="header-header" th:text="#{menu.accommodation}"></h1>
 		</div>
 
 	 	<div class="button_container">
-			<a class="button_new" th:href="@{/accommodation/newaccommodation}">Nowy dom</a>
+			<a class="stage-button" th:href="@{/accommodation/newaccommodation}" th:text="#{label.newHouse}"></a>
 		</div>
 		
 		<p th:text="${error_msg}" class="error_message">
@@ -30,13 +30,13 @@
 			<table>
 				<tr>
 					<th>Lp</th>
-					<th>Address</th>
-					<th>Miasto</th>
-					<th>Pojemność</th>
-					<th>Zajęte</th>
-					<th>Wolne</th>
-					<th>czynsz+media</th>
-					<th>cena/os</th>
+					<th th:text="#{address}"></th>
+					<th th:text="#{city}"></th>
+					<th th:text="#{label.capacity}"></th>
+					<th th:text="#{label.occupated}"></th>
+					<th th:text="#{label.free}"></th>
+					<th th:text="#{label.rentMedia}"></th>
+					<th th:text="#{label.costPerPerson}"></th>
 					<th></th>
 				</tr>
 				<tr th:each="i, it : ${houses}">
@@ -49,7 +49,7 @@
 					<td th:text="${i.rent + i.media}"></td>
 					<td th:text="${i.perperson}"></td>
 					<td class="td_short_button">
-						<a th:href="@{'/accdetail/' + ${i.id}}" class="tdbutton">Szczegóły</a>
+						<a th:href="@{'/accdetail/' + ${i.id}}" class="aButton" th:text="#{label.details}"></a>
 					</td>
 				</tr>
 			</table>

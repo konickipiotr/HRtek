@@ -13,7 +13,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import com.hrtek.user.report.views.ReportPesel;
 import com.hrtek.user.report.views.ReportRecruiters;
 
 public class ReportRecruiterDoc implements Doc<Workbook> {
@@ -113,7 +112,7 @@ public class ReportRecruiterDoc implements Doc<Workbook> {
 
 	@Override
 	public String getFilename() {
-		return "Report_withPesel.xlsx";
+		return "Report_withPesel.xls";
 	}
 
 	@Override

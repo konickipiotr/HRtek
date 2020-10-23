@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" /> 
@@ -20,45 +20,53 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Zakwaterowanie</h1>
+			<h1 class="header-header" th:text="#{menu.accommodation}"></h1>
 		</div>
 
 	 	<div class="container">
 	 		<form th:action="@{/accdetail}" method="post" th:object="${house}">
-	 		<input type="hidden" name="id" th:field="*{id}">
-	 		<div class="section-header"><h3>Dane adresowe</h3></div>
-	 			<div class="inputcontainer">
-	 				<div class="label-div">
-	 					<label for="address">Address</label>
-	 				</div>
-	 				<div class="input-div">
-	 					<input type="text" id="address" name="address" th:field="*{address}" required disabled>
-	 				</div>
+		 		<input type="hidden" name="id" th:field="*{id}">
+		 		<div class="section-header"><h3 th:text="#{address}"></h3></div>
+		 			<div class="input-row-container">
+		 			<div class="inputcontainer">
+		 				<div class="label-div">
+		 					<label for="address" th:text="#{address}"></label>
+		 				</div>
+		 				<div class="input-div">
+		 					<input type="text" id="address" name="address" th:field="*{address}" required disabled>
+		 				</div>
+		 			</div>
+		 			<!-- ----------------------------- -->
+		 			
+		 			<div class="inputcontainer">
+		 				<div class="label-div">
+		 					<label for="postcode" th:text="#{postcode}"></label>
+		 				</div>
+		 				<div class="input-div">
+		 					<input type="text" id="postcode" name="postcode" th:field="*{postcode}" disabled>
+		 				</div>
+		 			</div>
+		 			<!-- ----------------------------- -->
+		 			<div class="inputcontainer">
+		 				<div class="label-div">
+		 					<label for="city" th:text="#{city}"></label>
+		 				</div>
+		 				<div class="input-div">
+		 					<input type="text" id="city" name="city" th:field="*{city}" required disabled>
+		 				</div>
+		 			</div>
 	 			</div>
-	 			<!-- ----------------------------- -->
-	 			
-	 			<div class="inputcontainer">
-	 				<div class="label-div">
-	 					<label for="postcode">Kod pocztowy</label>
-	 				</div>
-	 				<div class="input-div">
-	 					<input type="text" id="postcode" name="postcode" th:field="*{postcode}" disabled>
-	 				</div>
-	 			</div>
-	 			<!-- ----------------------------- -->
-	 			<div class="inputcontainer">
-	 				<div class="label-div">
-	 					<label for="city">City</label>
-	 				</div>
-	 				<div class="input-div">
-	 					<input type="text" id="city" name="city" th:field="*{city}" required disabled>
-	 				</div>
-	 			</div>
+	 			<div class="input-row-center">
 	 			<div class="section-button">
-	 				<label for="editaddress">Edytuj</label>
+	 				<div>
+	 				<label for="editaddress" th:text="#{button.edit}"></label>
+	 				</div>
+	 				<div>
 					<input class="chxEdit" type="checkbox" id="editaddress">
-					<button id="savebuttonAddress" class="savebutton" name="edit" value="address" type="submit" disabled>Zmień</button>
-					<button id="savebuttonAddress" class="savebutton" name="edit" value="reset" type="submit">Reset</button>
+					</div>
+					<button id="savebuttonAddress" class="button" name="edit" value="address" type="submit" disabled th:text="#{button.change}"></button>
+					<button id="savebuttonAddress" class="button" name="edit" value="reset" type="submit" th:text="#{button.reset}"></button>
+	 			</div>
 	 			</div>
 	 		
 	 			
@@ -71,10 +79,11 @@
 	 	<div class="container">
 	 		<form th:action="@{/accdetail}" method="post" th:object="${house}">
 	 		<input type="hidden" name="id" th:field="*{id}">
-	 		<div class="section-header"><h3>Dane finansowe</h3></div>
+	 		<div class="section-header"><h3 th:text="#{label.finance}"></h3></div>
+	 		<div class="input-row-container">
 	 			<div class="inputcontainer">
 	 				<div class="label-div">
-	 					<label for="rent">Czynsz</label>
+	 					<label for="rent" th:text="#{label.rent}"></label>
 	 				</div>
 	 				<div class="input-div">
 	 					<input type="number" min="0" step="0.01" id="rent" name="rent" th:field="*{rent}" required disabled>
@@ -84,7 +93,7 @@
 	 			
 	 			<div class="inputcontainer">
 	 				<div class="label-div">
-	 					<label for="media">Media</label>
+	 					<label for="media" th:text="#{label.media}"></label>
 	 				</div>
 	 				<div class="input-div">
 	 					<input type="number" min="0" step="0.01" id="media" name="media" th:field="*{media}" disabled>
@@ -93,45 +102,56 @@
 	 			<!-- ----------------------------- -->
 	 			<div class="inputcontainer">
 	 				<div class="label-div">
-	 					<label for="deposit">Depozyt</label>
+	 					<label for="deposit" th:text="#{label.deposit}"></label>
 	 				</div>
 	 				<div class="input-div">
 	 					<input type="number" min="0" step="0.01" id="deposit" name="deposit" th:field="*{deposit}" disabled>
 	 				</div>
 	 			</div>
+	 		</div>
+	 		<div class="input-row-center">
 	 			<!-- ----------------------------- -->
-	 			<div class="inputcontainer" style="width: 66%">
+	 			<div class="inputcontainer" >
 	 				<div class="label-div">
-	 					<label for="typecost">Typ wyliczeń</label>
+	 					<label for="typecost" th:text="#{label.typeOfCalculation}"></label>
 	 				</div>
 	 				<div class="input-div">
-	 					<label for="typecostrent">Czynsz</label>
+	 					<label for="typecostrent" th:text="#{label.rent}"></label>
 				 		<input th:if="${house.costType.name() == 'RENT'}" type="radio" id="typecostrent" name="costType" value="RENT" disabled checked>
 				 		<input th:unless="${house.costType.name() == 'RENT'}" type="radio" id="typecostrent" name="costType" value="RENT" disabled>
 				 		
-				 		<label for="typecostrentmedia">czynsz + media</label>
+				 		<label for="typecostrentmedia" th:text="#{label.rentMedia}"></label>
 				 		<input th:if="${house.costType.name() == 'MEDIARENT'}" type="radio" id="typecostrentmedia" name="costType" value="MEDIARENT" disabled checked>
 				 		<input th:unless="${house.costType.name() == 'MEDIARENT'}" type="radio" id="typecostrentmedia" name="costType" value="MEDIARENT" disabled>
-				 		<label for="typecostrentmedia">koszt na osobę</label>
+				 		<label for="typecostrentmedia" th:text="#{label.perPerson}"></label>
 				 		<input th:if="${house.costType.name() == 'PERPERSON'}" type="radio" id="typecostperperson" name="costType" value="PERPERSON" disabled checked>
 				 		<input th:unless="${house.costType.name() == 'PERPERSON'}" type="radio" id="typecostperperson" name="costType" value="PERPERSON" disabled>
 	 				</div>
 	 			</div>
+	 		</div>
+	 		<div class="input-row-center">
 	 			<!-- ----------------------------- -->
 	 			<div class="inputcontainer">
 	 				<div class="label-div">
-	 					<label for=perperson>Koszt na osobę</label>
+	 					<label for=perperson th:text="#{label.costPerPerson}"></label>
 	 				</div>
 	 				<div class="input-div">
 	 					<input type="number" min="0" step="0.01" id="perperson" name="perperson" th:field="*{perperson}" disabled>
 	 				</div>
 	 			</div>
+	 		</div>
+	 		<div class="input-row-center">
 	 			<div class="section-button">
-	 				<label for="editfinance">Edytuj</label>
-					<input class="chxEdit" type="checkbox" id="editfinance">
-					<button id="savebuttonFinance" class="savebutton" name="edit" value="finance" type="submit" disabled>Zmień</button>
-					<button class="savebutton" name="edit" value="reset" type="submit">Reset</button>
+	 				<div>
+	 					<label for="editfinance" th:text="#{button.edit}"></label>
+	 				</div>
+	 				<div>
+						<input class="chxEdit" type="checkbox" id="editfinance">
+					</div>
+					<button id="savebuttonFinance" class="button" name="edit" value="finance" type="submit" disabled th:text="#{button.change}"></button>
+					<button class="button" name="edit" value="reset" type="submit" th:text="#{button.reset}"></button>
 	 			</div>
+	 		</div>
 	 		
 
 	 		</form>
@@ -140,8 +160,9 @@
 	 	<!-- ##################################################################### -->
 
 	<div class="container">
-	 		<div class="section-header"><h3>Inne</h3></div>
-	 			
+	 		<div class="section-header"><h3 th:text="#{other}"></h3></div>
+	 		
+	 		<div class="input-row-container">
 	 			<div class="inputcontainer">
 		 			<form th:action="@{/accdetail}" method="post" th:object="${house}">	
 		 				<input type="hidden" name="id" th:field="*{id}">
@@ -150,7 +171,7 @@
 		 					<p th:text="${house.lidername}"></p>
 		 				</div>
 		 				<div class="label-div">
-		 					<label for="lider">Bonus:</label>
+		 					<label for="lider" th:text="#{label.bonus}">:</label>
 		 				</div>
 		 				<div class="label-div">
 		 					<p th:text="${house.liderbonus}"></p>
@@ -158,7 +179,7 @@
 		 					
 		 		
 		 				<div class="label-div">
-		 					<label for="editlider">Edit</label>
+		 					<label for="editlider" th:text="#{button.edit}"></label>
 		 					<input type="checkbox" id="editlider">
 		 				</div>
 		 				
@@ -166,24 +187,24 @@
 			 				<label for="liderid"></label>
 			 			</div>
 		 				<div class="input-div"> 
-		 					<select id="liderid" name="liderid" disabled>
+		 					<select id="liderid" name="liderid" disabled required>
 		 						<option th:each="i : ${houshold}" th:value="${i.id}" th:text="${i.value}"></option>
 		 					</select>
 		 				</div>
 		 				<div class="label-div">
-		 					<label for="lider">Bonus:</label>
+		 					<label for="lider" th:text="#{label.bonus}">:</label>
 		 				</div>
 		 				<div class="label-div">
 		 					<input type="number" min="0" step="0.01" id="liderbonus" name="liderbonus" disabled>
 		 				</div>
 		 				<div class="section-button">
-							<button id="savebuttonLider" class="savebutton" name="edit" value="lider" type="submit" disabled>Zmień</button>
+							<button id="savebuttonLider" class="button" name="edit" value="lider" type="submit" disabled th:text="#{button.change}"></button>
 			 			</div>
 			 		</form>
 			 		<div class="section-button">
 		 				<form th:action="@{/accdetail}" method="post" th:object="${house}">
 		 					<input type="hidden" name="id" th:field="*{id}">
-		 					<button  class="savebutton" name="edit" value="reset" type="submit">Reset</button>
+		 					<button  class="button" name="edit" value="reset" type="submit" th:text="#{button.reset}"></button>
 		 				</form>
 		 			</div>
 			 	</div> 
@@ -191,30 +212,30 @@
 					<div class="inputcontainer-wide">
 						<div class="section-header"><h2>Info</h2></div>
 		 				<div class="label-div">
-		 					<p class="stat"><span>Liczba pokoi:</span> <span th:text="${house.noofrooms}"></span></p>
-		 					<p class="stat"><span>Liczba miejsc:</span> <span th:text="${house.capacity}"></span></p>
-		 					<p class="stat"><span>Miejsca zajęte</span> <span th:text="${house.occupied}"></span></p>
-		 					<p class="stat"><span>Miejsca wolne</span> <span th:text="${house.capacity - house.occupied}"></span></p>
+		 					<p class="stat"><span th:text="#{label.numberOfRooms}">:</span> <span th:text="${house.noofrooms}"></span></p>
+		 					<p class="stat"><span th:text="#{label.numberOfBeds}">:</span> <span th:text="${house.capacity}"></span></p>
+		 					<p class="stat"><span th:text="#{label.occupiedbeds}"></span> <span th:text="${house.occupied}"></span></p>
+		 					<p class="stat"><span th:text="#{label.freebeds}"></span> <span th:text="${house.capacity - house.occupied}"></span></p>
 		 				</div>
-		 				<div class="section-header"><h2>Uwagi</h2></div>
+		 				<div class="section-header"><h2 th:text="#{remarks}"></h2></div>
 		 				<form th:action="@{/accdetail}"  method="post" th:object="${house}">
 		 					<input type="hidden" name="id" th:field="*{id}">
 			 				<div class="input-div">
 			 					<textarea id="remark" name="remark" th:text="${house.remark}"></textarea>	
 			 				</div>
 			 				<div class="input-div">
-			 					<button id="savebuttonLider" class="savebutton" name="edit" value="remark" type="submit">Zapisz</button>
-			 					<button type="button" class="savebutton" id="clearremake">Czyść</button>
+			 					<button id="savebuttonLider" class="button" name="edit" value="remark" type="submit" th:text="#{button.save}"></button>
+			 					<button type="button" class="button" id="clearremake" th:text="#{button.clear}"></button>
 			 				</div>
 		 				</form>
 		 			</div>
-	</div>			 				
-			 				
-
+		</div>			 				
+				 				
+	</div>
 	
 	<!-- ************************************************************************* -->
 		 <div class="button_container">
-			<a class="button_new"   th:href="@{'/accomoperation/addroom/' + ${house.id}} ">Nowy Pokój</a>
+			<a class="stage-button"   th:href="@{'/accomoperation/addroom/' + ${house.id}} " th:text="#{label.newRoom}"></a>
 		</div>
 	<!-- ************************************************************************* -->
 	<div class="rooms-container">
@@ -232,8 +253,8 @@
 			<div class="room-content">
 				<table>
 					<tr>
-						<th>person</th>
-						<th>data</th>
+						<th th:text="#{label.person}"></th>
+						<th th:text="#{label.date}"></th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -258,13 +279,13 @@
 					<input type="hidden" name="roomid" th:value="${r.id}">
 					<input type="hidden" name="houseid" th:value="${house.id}">
 					<div>
-						<label style="color: black" for="remark">Uwagi</label>
+						<label style="color: black" for="remark" th:text="#{remarks}"></label>
 					</div>
 					<div style="padding: 5px;">
 						<textarea id="remark" name="remark" style="resize: none" th:text="${r.remark}"></textarea>
 					</div>
-					<div>
-						<button class="savebutton" type="submit">Zapisz</button>
+					<div class="input-row-center">
+						<button class="button" type="submit" th:text="#{button.save}"></button>
 					</div>
 				</form>
 			</div>

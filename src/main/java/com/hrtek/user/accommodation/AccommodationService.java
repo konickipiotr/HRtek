@@ -44,8 +44,6 @@ public class AccommodationService {
 	}
 	
 	public void saveRoomAndBead(House house, String[] roomname, String[] remark, int[] capacity) {
-		System.out.println("nnofroom"+house.getNoofrooms());
-		System.out.println("capaclen " + capacity.length);
 		if(house.getNoofrooms() == roomname.length && roomname.length == remark.length && capacity.length == remark.length) {
 			System.out.println("Wszystko ok");
 		}else{
@@ -62,7 +60,6 @@ public class AccommodationService {
 			this.roomRepo.save(room);
 			
 			for(int j = 0; j < capacity[i]; j++) {
-				System.out.println("j = " + j +" -- " + capacity[i]);
 				this.bedRepo.save(new Bed(room.getId(), house.getId(), null, null, Bedstatus.FREE));
 			}
 		}

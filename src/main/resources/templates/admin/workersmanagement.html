@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/workers_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
+	<script src="https://kit.fontawesome.com/7ccfa6815b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="admin/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header" th:text="#{header.workersmanagment}"></h1>
+		</div>
+		
+		<div class="buttons-container">
+			<a th:class="${styleTab1}" th:href="@{/admin/workers}">Current workers</a>
+			<a th:class="${styleTab2}" th:href="@{/admin/workers/arch}">Archives</a>
+		</div>
+		<div class="table-container">
+		
+		<form th:action="@{/admin/workers/filter}" method="post" th:object="${basicFilters}">
+		<div class="filter-bar">
+			<div class="filter-panel">
+				<div class="header-filter">
+					<label for="bytext" th:text="#{h2.TEXT}"></label>
+					<input th:if="${basicFilters.bytext == true}" type="checkbox" name="bytext" id="bytext" checked>
+					<input th:unless="${basicFilters.bytext == true}" type="checkbox" name="bytext" id="bytext">
+				</div>
+				<div class="fields-groups">
+					<div class="radio-div">
+						<input th:if="${basicFilters.searchingMethod.name() == 'EQUAL'}" type="radio" name="searchingMethod" id="textequal" value="EQUAL" onload="bodyOnload()"  checked>
+						<input th:unless="${basicFilters.searchingMethod.name() == 'EQUAL'}" type="radio" name="searchingMethod" id="textequal" value="EQUAL" onload="bodyOnload()" >
+						
+						<label for="textequal" th:text="#{radio.exactly}"></label>
+					</div>
+					<div class="radio-div">
+						<input th:if="${basicFilters.searchingMethod.name() == 'CONTAINS'}" type="radio" name="searchingMethod" id="textcontains" value="CONTAINS" checked>
+						<input th:unless="${basicFilters.searchingMethod.name() == 'CONTAINS'}" type="radio" name="searchingMethod" id="textcontains" value="CONTAINS">
+						<label for="textcontains" th:text="#{radio.contains}"></label>
+					</div>
+					<div class="radio-div">
+						<input th:if="${basicFilters.searchingMethod.name() == 'FIRSTS'}" type="radio" name="searchingMethod" id="textfirst" value="FIRSTS" checked>
+						<input th:unless="${basicFilters.searchingMethod.name() == 'FIRSTS'}" type="radio" name="searchingMethod" id="textfirst" value="FIRSTS">
+						<label for="textfirst" th:text="#{radio.f3letters}"></label>
+					</div>
+					<div class="radio-div">							
+						<input th:if="${basicFilters.searchingMethod.name() == 'EMPTY'}" type="radio" name="searchingMethod" id="emptytext" value="EMPTY" checked>
+						<input th:unless="${basicFilters.searchingMethod.name() == 'EMPTY'}" type="radio" name="searchingMethod" id="emptytext" value="EMPTY">
+						<label for="emptytext" th:text="#{radio.empty}"></label>
+					</div>
+				</div>
+			</div>	
+			<div class="filter-panel">
+				<div class="fields-groups">
+				
+					<div class="radio-div">							
+						<input th:if="${basicFilters.searchbyfield.name() == 'FIRSTNAME'}" type="radio" name="searchbyfield" id="firstname" value="FIRSTNAME" checked>
+						<input th:unless="${basicFilters.searchbyfield.name() == 'FIRSTNAME'}" type="radio" name="searchbyfield" id="firstname" value="FIRSTNAME">
+						<label for="firstname" th:text="#{firstname}"></label>
+					</div>
+					<div class="radio-div">							
+						<input th:if="${basicFilters.searchbyfield.name() == 'LASTNAME'}" type="radio" name="searchbyfield" id="lastname" value="LASTNAME" checked>
+						<input th:unless="${basicFilters.searchbyfield.name() == 'LASTNAME'}" type="radio" name="searchbyfield" id="lastname" value="LASTNAME">
+						<label for="lastname" th:text="#{lastname}"></label>
+					</div>
+					<div class="radio-div">							
+						<input th:if="${basicFilters.searchbyfield.name() == 'NAME'}" type="radio" name="searchbyfield" id="name" value="NAME" checked>
+						<input th:unless="${basicFilters.searchbyfield.name() == 'NAME'}" type="radio" name="searchbyfield" id="name" value="NAME">
+						<label for="name" th:text="#{firstnameLsatname}"></label>
+					</div>
+					<div class="radio-div">							
+						<input th:if="${basicFilters.searchbyfield.name() == 'PESEL'}" type="radio" name="searchbyfield" id="pesel" value="PESEL" checked>
+						<input th:unless="${basicFilters.searchbyfield.name() == 'PESEL'}" type="radio" name="searchbyfield" id="pesel" value="PESEL">
+						<label for="pesel" th:text="#{pesel}"></label>
+					</div>
+					<div class="radio-div">							
+						<input th:if="${basicFilters.searchbyfield.name() == 'PASZPORT'}" type="radio" name="searchbyfield" id="passport" value="PASZPORT" checked>
+						<input th:unless="${basicFilters.searchbyfield.name() == 'PASZPORT'}" type="radio" name="searchbyfield" id="passport" value="PASZPORT">
+						<label for="passport" th:text="#{passport}"></label>
+					</div>
+				</div>
+				<div class="fields-groups">
+					<div class="check-div">
+						<label for="texttosearch" th:text="#{label.text}"></label>
+					</div>
+					<div class="check-div">	
+						<input type="text" name="texttosearch" id="texttosearch" >
+					</div>
+				</div>
+			</div>
+			<!-- ********************************************************** -->
+			
+			<div class="filter-panel">
+				<div class="header-filter">
+					<label for="bydateofbirth" th:text="#{h2.DATEOFBIRTH}"></label>
+					<input th:if="${basicFilters.bydateofbirth == true}" type="checkbox" name="bydateofbirth" id="bydateofbirth" checked>
+					<input th:unless="${basicFilters.bydateofbirth == true}" type="checkbox" name="bydateofbirth" id="bydateofbirth">
+				</div>
+				<div class="fields-groups">
+					<div class="radio-div">
+						<input th:if="${basicFilters.dateofbirthMethod.name() == 'EQUAL'}" type="radio" name="dateofbirthMethod" id="birthEqual" value="EQUAL" checked>
+						<input th:unless="${basicFilters.dateofbirthMethod.name() == 'EQUAL'}" type="radio" name="dateofbirthMethod" id="birthEqual" value="EQUAL" >
+						<label for="birthEqual" th:text="#{radio.exactly}"></label>
+					</div>
+					<div class="radio-div">
+						<input th:if="${basicFilters.dateofbirthMethod.name() == 'RANGE'}" type="radio" name="dateofbirthMethod" id="birthRange" value="RANGE" checked>
+						<input th:unless="${basicFilters.dateofbirthMethod.name() == 'RANGE'}" type="radio" name="dateofbirthMethod" id="birthRange" value="RANGE">
+						<label for="birthRange" th:text="#{radio.contains}"></label>
+					</div>
+					<div class="radio-div">
+						<input th:if="${basicFilters.dateofbirthMethod.name() == 'LESS26'}" type="radio" name="dateofbirthMethod" id="birthLess" value="LESS26" checked>
+						<input th:unless="${basicFilters.dateofbirthMethod.name() == 'LESS26'}" type="radio" name="dateofbirthMethod" id="birthLess" value="LESS26">
+						<label for="birthLess" th:text="#{radio.under26}"></label>
+					</div>
+					<div class="radio-div">
+						<label for="dateofbirth" id="labelbirthfrom" th:text="#{from}"></label>
+						<label for="dateofbirth" id="lablebirthequal" th:text="#{label.date}">:</label>
+					</div>
+					<div class="radio-div">							
+						<input type="date" name="dateofbirth" id="dateofbirth" th:field="*{dateofbirth}">
+					</div>
+					<div class="radio-div">
+						<label for="dateofbirthTo" th:text="#{to}"></label>
+					</div>
+					<div class="radio-div">
+						
+						<input type="date" name="dateofbirthTo" id="dateofbirthTo" th:field="*{dateofbirthTo}">
+					</div>
+				</div>
+			</div> 
+			
+			<!-- ********************************************************** -->
+			<!-- *********************** COMAPNY FACTRORY*********************************** -->
+			<div class="filter-panel">
+				
+				<div class="header-filter">
+					<label th:text="#{company}"></label>
+				</div>
+				<div class="fields-groups">
+					<div class="radio-div">
+						&nbsp;
+					</div>
+					<div class="radio-div">
+						<select id="byCompany" name="byCompany">
+							<option></option>
+							<option th:each="c : ${companies}" th:value="${c.shortname}" th:text="${c.shortname}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="header-filter">
+					<label th:text="#{factory}"></label>
+				</div>
+				<div class="fields-groups">
+						<div class="radio-div">
+							&nbsp;
+						</div>
+						<div class="radio-div">
+							<select id="byFactory" name="byFactory">
+								<option></option>
+								<option th:each="c : ${factories}" th:value="${c.shortname}" th:text="${c.shortname}"></option>
+							</select>
+						</div>
+					</div>
+			</div>
+		
+	
+		</div>
+		<div class="button-bar">
+			<button class="button" name="filter" value="new" type="submit" th:text="#{button.filterAgain}"></button>
+			<button class="button" name="filter" value="next" type="submit" th:text="#{button.filterFurther}"></button>
+			<button class="button" name="filter" value="reset" type="submit" th:text="#{button.reset}"> </button>
+		</div>
+		</form>
+		
+		
+		
+		
+			<table>
+				<tr>
+					<th></th>
+					<th th:text="#{firstname}"></th>
+					<th th:text="#{lastname}"></th>
+					<th th:text="#{dateofbirth}"></th>
+					<th th:text="#{company}"></th>
+					<th th:text="#{factory}"></th>
+					<th th:text="#{passport}"></th>
+					<th th:text="#{pesel}"></th>
+					<th></th>
+				</tr>
+				<!-- ************************************************ -->
+				
+				<tr>
+					<td class="td_noP">
+					</td>
+					<td class="td_noP">
+						<form th:action="@{/admin/workers/sort}" method="post">
+							<input type="hidden" name="field" value="FIRSTNAME">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+					<td class="td_noP">
+						<form th:action="@{/admin/workers/sort}" method="post">
+							<input type="hidden" name="field" value="LASTNAME">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+					<td class="td_noP">
+						<form th:action="@{/admin/workers/sort}" method="post">
+							<input type="hidden" name="field" value="DATEOFBIRTH">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+					<td class="td_noP">
+						<form th:action="@{/admin/workers/sort}" method="post">
+							<input type="hidden" name="field" value="PESEL">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+					<td class="td_noP">
+						<form th:action="@{/admin/workers/sort}" method="post">
+							<input type="hidden" name="field" value="PASZPORT">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+					<td class="td_noP">
+						<form th:action="@{/admin/workers/sort}" method="post">
+							<input type="hidden" name="field" value="COMPANY">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+					<td class="td_noP">
+						<form th:action="@{/admin/workers/sort}" method="post">
+							<input type="hidden" name="field" value="FACTORY">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+					<td></td>
+				</tr>
+					
+					<!-- ************************************************ -->
+				<tr th:each="i : ${workers}">
+					<td class="td_lp">
+						<div class="i-ico">
+							<a th:if="${session.listType == 'dismissed'}" th:href="@{'/dismiss/'+ ${i.id}}"><i class="fas fa-address-card fa-2x"></i></a>
+							<a th:unless="${session.listType == 'dismissed'}" th:href="@{'/profil/'+ ${i.id}}"><i class="fas fa-address-card fa-2x"></i></a>
+						</div>
+					</td>
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.dateofbirth}"></td>
+					<td th:utext="${i.company}"></td>
+					<td th:utext="${i.factory}"></td>
+					<td th:utext="${i.passport}"></td>
+					<td th:utext="${i.pesel}"></td>
+					<td class="td_short_button">
+						<form th:action="@{/admin/workers/delete}" method="post">
+							<input type="hidden" name="id" th:value="${i.id}">
+							<button class="button" onclick="return confirm('Are you sure you want to permanently remove the worker? personal data, timesheets and files?')" type="submit" name="delete">Delete</button>						
+						</form>
+					</td>
+				</tr>
+			
+			</table>
+		</div>
+		
+		
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script src="/scripts/AdminWorkerView.js"></script>
+<script src="/scripts/ViewCommon.js"></script>
+</html>

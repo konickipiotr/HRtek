@@ -45,6 +45,23 @@ public class Residency {
 		else
 			this.passport = nw.getPassport();
 	}
+
+	public Residency(Worker worker, WorkerAll wall) {
+		this.id = worker.getId();
+		this.biopassport = wall.getBiopassport();
+		this.passport = wall.getPassport();
+		this.visa = wall.getVisa();
+		this.visaValidFrom = wall.getVisaValidFrom();
+		this.visaValidTo = wall.getVisaValidTo();
+	}
+
+	@Override
+	public String toString() {
+		return " [biopassport=" + biopassport + ", passport=" + passport + ", visa=" + visa
+				+ ", visaValidFrom=" + visaValidFrom + ", visaValidTo=" + visaValidTo + "]";
+	}
+	
+	
 }
 
 	

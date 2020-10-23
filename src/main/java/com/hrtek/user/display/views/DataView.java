@@ -18,6 +18,7 @@ public class DataView implements Comparable<DataView> {
 	private Long id;
 	private String firstname;
 	private String lastname;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dateofbirth;
 	private String recruiter;
 	private String company;

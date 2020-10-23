@@ -1,9 +1,21 @@
 package com.hrtek.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class FieldsComparator {
 	private FieldsComparator() {}
+	
+	public static int compareDateTime(LocalDateTime member, LocalDateTime o, boolean up) {
+		if(up) {
+			if(member == null) return 1;
+			if(o == null) return -1;
+			return member.compareTo(o);
+		}
+		if(member == null) return -1;
+		if(o == null) return 1;
+		return -member.compareTo(o);
+	}
 	
 	public static int compareDate(LocalDate member, LocalDate o, boolean up) {
 		if(up) {

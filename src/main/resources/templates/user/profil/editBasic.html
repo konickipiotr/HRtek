@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -17,49 +17,117 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">EDYTUJ</h1>
+			<h1 class="header-header" th:text="#{header.EDIT}"></h1>
 		</div>
 		
 		<p th:text="${error_msg}" class="error_message"></p>
 		<p th:text="${success_msg}" class="succes_message"></p>
 		
-		
+		<div class="form-container0">
 			<form th:action="@{/profiledit}" method="post" th:object="${workerBacic}">
 				<input type="hidden" name="id" th:field="*{id}">
 				<input type="hidden" name="type" value="BASIC">
-				<label for="dateofbirth" ></label>
-				<input type="date" name="dateofbirth" id="dateofbirth" th:field="*{dateofbirth}" required><br>
+				<div class="edit-row">
+					<span style="color: white; font-size: 1.3em; font-weight: bold;" th:text="${name}"></span>
+				</div>
+				<div class="edit-row">
+					<div class="time-info">
+						<span th:text="#{label.unlockAt}">:</span>
+						<span id="h" th:text="${h}"></span>
+						<span>:</span>
+						<span id="min" th:text="${min}"></span>
+					</div>
+				</div>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="dateofbirth" th:text="#{dateofbirth}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="date" name="dateofbirth" id="dateofbirth" th:field="*{dateofbirth}" required><br>
+					</div>
+				</div>
 				
-				<span>Sex: </span>
-				<label for="sexM" >Male</label>
-				<input th:if="${workerBacic.sex == 'M'}" type="radio" name="sex" id="sexM" value="M" checked>
-				<input th:unless="${workerBacic.sex == 'M'}" type="radio" name="sex" id="sexM" value="M">
-				<label for="sexF" >Female</label>
-				<input th:if="${workerBacic.sex == 'F'}" type="radio" name="sex" id="sexM" value="F" checked>
-				<input th:unless="${workerBacic.sex == 'F'}" type="radio" name="sex" id="sexM" value="F">
-				<br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="sexM" th:text="#{male}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input th:if="${workerBacic.sex == 'M'}" type="radio" name="sex" id="sexM" value="M" checked>
+					<input th:unless="${workerBacic.sex == 'M'}" type="radio" name="sex" id="sexM" value="M">
+					</div>
+				</div>
 				
-				<label for="pesel">PESEL</label>
-				<input type="text" name="pesel" id="pesel" th:field="*{pesel}"><br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="sexF" th:text="#{female}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input th:if="${workerBacic.sex == 'F'}" type="radio" name="sex" id="sexF" value="F" checked>
+						<input th:unless="${workerBacic.sex == 'F'}" type="radio" name="sex" id="sexF" value="F">
+					</div>
+				</div>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="pesel" th:text="#{pesel}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="text" name="pesel" id="pesel" th:field="*{pesel}"><br>
+					</div>
+				</div>
 				
-				<label for="accountnr">Numer konta</label>
-				<input type="text" name="accountnr" id="accountnr" th:field="*{accountnr}"><br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="accountnr" th:text="#{accountNo}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="text" name="accountnr" id="accountnr" th:field="*{accountnr}"><br>
+					</div>
+				</div>
 				
-				<label for="workerNo">Numer pracownika</label>
-				<input type="text" name="workerNo" id="workerNo" th:field="*{workerNo}"><br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="workerNo" th:text="#{workerNo}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="text" name="workerNo" id="workerNo" th:field="*{workerNo}">
+					</div>
+				</div>
 				
-				<label for="department" ></label>
-				<select name="department" id="department">
-					<option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.department}"></option>
-				</select><br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="department" th:text="#{department}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<select name="department" id="department">
+						<option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.department}"></option>
+					</select>
+					</div>
+				</div>
 				
-				<label for="citizenship" ></label>
-				<select name="citizenship" id="citizenship">
-					<option th:each="c : ${citizenships}" th:value="${c.id}" th:text="${c.name}"></option>
-				</select><br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="citizenship" th:text="#{citizenship}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<select name="citizenship" id="citizenship">
+							<option th:each="c : ${citizenships}" th:value="${c.id}" th:text="${c.name}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="edit-row">
+					<button class="button" name="action" value="save"  type="submit" th:text="#{button.save}" onclick="return confirm('Are you sure you want to modify these values?')"></button>
+					<button class="button" name="action" value="cancel" type="submit" th:text="#{button.cancel}" formnovalidate></button>
+				</div>	
 				
-				<button type="submit">Zapisz</button>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+					</div>
+					<div class="edit-col-inp">
+					</div>
+				</div>
+				
 			</form>
+		</div>
 	
 	<!-- ************************************************************************* -->
 	</section>

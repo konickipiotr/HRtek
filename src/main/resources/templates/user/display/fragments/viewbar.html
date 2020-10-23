@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
@@ -11,11 +11,12 @@
 			
 			<div class="viewbar-container">
 				
-					<a class="viewbar-button" th:href="@{/showbasic}">Podstawowe</a>
-					<a class="viewbar-button" th:href="@{/showwork}">Praca</a>
-					<a class="viewbar-button" th:href="@{/showresidency}">Pobyt</a>
-					<a class="viewbar-button" th:href="@{/showcontact}">Kontakt</a>
-					<a class="viewbar-button" th:href="@{/showdata}">Inne</a>
+					<a class="viewbar-button" th:href="@{/showbasic}" th:text="#{label.basic}"></a>
+					<a class="viewbar-button" th:href="@{/showwork}" th:text="#{header.work}"></a>
+					<a class="viewbar-button" th:href="@{/showresidency}" th:text="#{header.Residency}"></a>
+					<a class="viewbar-button" th:href="@{/showcontact}" th:text="#{label.contact}"></a>
+					<a class="viewbar-button" th:href="@{/showdata}" th:text="#{other}"></a>
+					<a class="viewbar-button" th:href="@{/showdismissed}" th:text="#{label.archives}"></a>
 		
 			</div>
 		

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -10,25 +10,36 @@
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
 </head>
 <body>
-	<section id="container">
+	<section id="container-f">
 	<!-- ************************************************************************* -->
-		<p th:text="${login}"></p>
+		
 		<form th:action="@{/firstlogin}" method="post" th:object="${passwordForm}">
 			<input type="hidden" name="id" th:value="${id}">
-		
-			<p th:if="${#fields.hasErrors('oldpassword')}" th:errors="*{oldpassword}" class="error_message" />
-			<label for="oldpassword">Jednorazowe hasło</label>
-			<input type="password" id="oldpassword", name="oldpassword" th:field="*{oldpassword}" required>
-			
-			<p th:if="${#fields.hasErrors('newpassword1')}" th:errors="*{newpassword1}" class="error_message" />
-			<label for="newpassword1">Nowe hasło</label>
-			<input type="password" id="newpassword1", name="newpassword1" th:field="*{newpassword1}" minlength="6" required>
-			
-			<p th:if="${#fields.hasErrors('newpassword2')}" th:errors="*{newpassword2}" class="error_message" />
-			<label for="newpassword2">Powtórz new hasło</label>
-			<input type="password" id="newpassword2", name="newpassword2" th:field="*{newpassword2}" minlength="6" required>
-			
-			<button type="submit">Zmień</button>
+			<div class="form-content">
+				
+				<div>
+					<p><span style="font-weight: bold;">Login: </span> <span th:text="${login}"></span></p>
+				</div>
+				<div>
+					<p th:if="${#fields.hasErrors('oldpassword')}" th:errors="*{oldpassword}" class="error_message" />
+					<label for="oldpassword" th:text="#{label.onetimePassword}"></label>
+					<input class="inp" type="password" id="oldpassword", name="oldpassword" th:field="*{oldpassword}" required><br>
+				</div>
+				
+				<div>
+					<p th:if="${#fields.hasErrors('newpassword1')}" th:errors="*{newpassword1}" class="error_message" />
+					<label for="newpassword1" th:text="#{label.newPassword}"></label> 
+					<input class="inp" type="password" id="newpassword1", name="newpassword1" th:field="*{newpassword1}" minlength="6" required><br>
+				</div>
+				
+				<div>
+					<p th:if="${#fields.hasErrors('newpassword2')}" th:errors="*{newpassword2}" class="error_message" />
+					<label for="newpassword2" th:text="#{passwordAgain}"></label> 
+					<input class="inp" type="password" id="newpassword2", name="newpassword2" th:field="*{newpassword2}" minlength="6" required><br>
+				</div>
+				
+				<button type="submit" th:text="#{button.change}"></button>
+			</div>
 		</form>
 	<!-- ************************************************************************* -->
 	</section>

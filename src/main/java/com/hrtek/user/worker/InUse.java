@@ -1,23 +1,19 @@
 package com.hrtek.user.worker;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
+@NoArgsConstructor	
 public class InUse {
 
 	@Id
@@ -27,11 +23,11 @@ public class InUse {
 	private Long userid;
 	@Enumerated(EnumType.STRING)
 	private UsedTable usedTable;
-	@Column(name = "expired", columnDefinition="TIMESTAMP")
-	private Timestamp expired;
+	//@Column(name = "expired", columnDefinition="TIMESTAMP")
+	private LocalDateTime expired;
 	private String username;
 	
-	public InUse(Long workerid, Long userid, UsedTable usedTable, Timestamp expired, String username) {
+	public InUse(Long workerid, Long userid, UsedTable usedTable, LocalDateTime expired, String username) {
 		this.workerid = workerid;
 		this.userid = userid;
 		this.usedTable = usedTable;

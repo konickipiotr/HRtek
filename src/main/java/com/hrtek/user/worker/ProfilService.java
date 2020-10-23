@@ -36,6 +36,7 @@ import com.hrtek.model.accommodation.Room;
 import com.hrtek.model.worker.Contact;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
+import com.hrtek.model.worker.WorkerNote;
 import com.hrtek.view.worker.ContactView;
 import com.hrtek.view.worker.WorkerBasicView;
 import com.hrtek.view.worker.WorkerView;
@@ -182,5 +183,13 @@ public class ProfilService {
 		return oWorker.get();
 	}
 	
+	public void updateNote(Long id, String note) {
+		Optional<WorkerNote> oNote = workerNoteRepo.findById(id);
+		if(oNote.isPresent()) {
+			WorkerNote workerNote = oNote.get();
+			workerNote.setText(note);
+			workerNoteRepo.save(workerNote);
+		}
+	}
 	
 }

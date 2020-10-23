@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
@@ -17,17 +17,18 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Podstawowe</h1>
+			<h1 class="header-header" th:text="#{header.PROFIL} + ' - ' + ${wv.firstname} + ' ' + ${wv.lastname}"></h1>
 		</div>
-		
-		<p th:text="${error_msg}" class="error_message"></p>
-		<p th:text="${success_msg}" class="succes_message"></p>
-		
+		<div th:if="${error_msg} or ${success_msg}">
+ 		<p th:text="${error_msg}" class="error_message" style="background-color: fuchsia;"></p>
+		<p th:text="${success_msg}" class="succes_message" style="background-color: fuchsia;"></p>
+		</div>
+		 
 		<section class="content-row">
 			<div class="data-double-block">
 				<div class="data-block">
 					<div class="section-header">
-						<h3>Podstowowe</h3>
+						<h3 th:text="#{label.basic}"></h3>
 					</div>
 					<div class="border-div">
 						<div class="data-row">
@@ -52,7 +53,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Imię: </span>
+									<span th:text="#{firstname}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wv.firstname}"></span>
@@ -60,7 +61,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Nazwisko: </span>
+									<span th:text="#{lastname}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wv.lastname}"></span>
@@ -71,7 +72,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Firma: </span>
+									<span th:text="#{company}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wv.company}"></span>
@@ -79,7 +80,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Fabryka: </span>
+									<span th:text="#{factory}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wv.factory}"></span>
@@ -90,7 +91,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Rekruter: </span>
+									<span th:text="#{recruiter}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wv.recruiter}"></span>
@@ -102,14 +103,14 @@
 						<!-- ####### ROW ######  -->
 						<div>
 						<div class="button-bar">
-							<a th:if="${av.worker == null}" th:href="@{'/profiledit/WORKER/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.worker == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.worker == null}" th:href="@{'/profiledit/WORKER/' + ${wv.id}}" class="button" th:text="#{button.change}"></a>
+							<a th:unless="${av.worker == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.worker != null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.worker != null}" class="war">Zajęte przez: </span>
-								<span th:if="${av.worker != null}" class="war" th:text="${av.worker.username}"> </span>
-								<span th:if="${av.worker != null}" class="war"> max do: </span>
+								<span th:if="${av.worker != null}" class="war" th:text="#{label.blockBy}">: </span>
+								<span th:if="${av.worker != null}" class="war" th:text="${av.worker.username}">. </span>
+								<span th:if="${av.worker != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.worker != null}" class="war" th:text="${av.worker.expired}"> </span>
 							</p>
 						</div>
@@ -123,7 +124,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Data urodzenia: </span>
+									<span th:text="#{dateofbirth}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wb.dateofbirth}"></span>
@@ -131,7 +132,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Płeć: </span>
+									<span th:text="#{sex}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wb.sex}"></span>
@@ -142,7 +143,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Numer konta: </span>
+									<span th:text="#{accountNo}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wb.accountnr}"></span>
@@ -150,7 +151,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>PESEL: </span>
+									<span th:text="#{pesel}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wb.pesel}"></span>
@@ -161,7 +162,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Numer pracowniak: </span>
+									<span th:text="#{workerNo}">:</span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wb.workerNo}"></span>
@@ -169,7 +170,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Dział: </span>
+									<span th:text="#{department}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wb.department}"></span>
@@ -180,7 +181,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Obywatelstwo: </span>
+									<span th:text="#{citizenship}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wb.citizenship}"></span>
@@ -191,14 +192,14 @@
 						</div>
 						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.basic == null}" th:href="@{'/profiledit/BASIC/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.basic == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.basic == null}" th:href="@{'/profiledit/BASIC/' + ${wv.id}}" class="button" th:text="#{button.change}"></a>
+							<a th:unless="${av.basic == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.basic != null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.basic != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.basic != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.basic != null}" class="war" th:text="${av.basic.username}"> </span>
-								<span th:if="${av.basic != null}" class="war"> max do: </span>
+								<span th:if="${av.basic != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.basic != null}" class="war" th:text="${av.basic.expired}"> </span>
 							</p>
 						</div>
@@ -208,13 +209,13 @@
 				<!-- ################ BLOCKA #################  -->
 				<div class="data-block">
 					<div class="section-header">
-						<h3>Finanse</h3>
+						<h3 th:text="#{label.finance}"></h3>
 					</div>
 					<div class="border-div">
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Stawka netto/h: </span>
+									<span th:text="#{label.incomePerHour}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wf.hourlyrate}"></span>
@@ -222,7 +223,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Bonus: </span>
+									<span th:text="#{label.bonus}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wf.bonus}"></span>
@@ -230,74 +231,44 @@
 							</div>
 						</div>
 						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{label.wagePerHour}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${wf.wage}"></span>
+								</div>
+							</div>
+							<div class="data-col"></div>
+						</div>
+						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.finance == null}" th:href="@{'/profiledit/FINANCE/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.finance == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.finance == null}" th:href="@{'/profiledit/FINANCE/' + ${wv.id}}" class="button" th:text="#{button.change}"></a>
+							<a th:unless="${av.finance == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.finance != null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.finance != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.finance != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.finance != null}" class="war" th:text="${av.finance.username}"> </span>
-								<span th:if="${av.finance != null}" class="war"> max do: </span>
+								<span th:if="${av.finance != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.finance != null}"class="war" th:text="${av.finance.expired}"> </span>
 							</p>
 						</div>
 					</div>
 				</div>
-				<!-- ################ BLOCKA #################  -->
-			</div>
-			<div class="menu-bar">
-				<div class="menu-inner">
-					<div class="section-header">
-						<h3>Menu</h3>
-					</div>
-					<form action="">
-						<div>
-							<label for="workerNote">Notaki</label>
-						</div>
-						<div>
-							<textarea id="workerNote" name="workerNote" th:text="${workerNote.text}"></textarea>
-						</div>
-						<div>
-							<button type="submit">Zapisz</button>
-						</div>
-					</form>
-					
-					<form action="">
-					<div>
-						<label for="doc">Dokumenty</label>
-					</div>
-					<div>
-						<select>
-							<option></option>
-						</select>
-					</div>
-					<button type="submit">Generuj</button>
-					</form>
-					
-					<form method="post">
-						<input type="hidden" name="id" id="id" th:value="${wv.id}">
-						<button type="submit">Zwolnij</button>
-					</form>
-					
-				</div>
-			</div>
-			
-			
-			<!-- ################ DOUBLE BLOCKA #################  -->
-		</section>
-		
-		
-		<section class="content-row">
+				
+				<div class="data-block">
+				<section class="content-row">
 			<div class="data-block-50">
 				<div class="section-header">
-					<h3>Oświadczenie</h3>
+					<h3 th:text="#{statement}"></h3>
 				</div>
 					<div class="border-div">
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Typ oświadczenia </span>
+									<span th:text="#{statementType}"></span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${ps.statementType}"></span>
@@ -305,7 +276,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Oświadczenie: </span>
+									<span th:text="#{statement}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${ps.statement}"></span>
@@ -316,7 +287,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Ważne od:</span>
+									<span th:text="#{valid.form}">:</span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${ps.statementValidFrom}"></span>
@@ -324,7 +295,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Ważne do: </span>
+									<span th:text="#{valid.to}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${ps.statementValidTo}"></span>
@@ -333,14 +304,14 @@
 						</div>
 						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.statement == null}" th:href="@{'/profiledit/STATEMENT/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.statement == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.statement == null}" th:href="@{'/profiledit/STATEMENT/' + ${wv.id}}" class="button"  th:text="#{button.change}"></a>
+							<a th:unless="${av.statement == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.statement != null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.statement != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.statement != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.statement != null}" class="war" th:text="${av.statement.username}"> </span>
-								<span th:if="${av.statement != null}" class="war"> max do: </span>
+								<span th:if="${av.statement != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.statement != null}"class="war" th:text="${av.statement.expired}"> </span>
 							</p>
 						</div>
@@ -349,13 +320,13 @@
 			<!-- ################ BLOCKA #################  -->
 			<div class="data-block-50">
 				<div class="section-header">
-					<h3>Zezwolenie</h3>
+					<h3 th:text="#{permit}"></h3>
 				</div>
 					<div class="border-div">
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Zezwolenie: </span>
+									<span th:text="#{permit}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${ps.permit}"></span>
@@ -363,7 +334,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Inne: </span>
+									<span th:text="#{other}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${ps.other}"></span>
@@ -374,7 +345,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Ważne od: </span>
+									<span th:text="#{valid.form}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${ps.permitValidFrom}"></span>
@@ -382,7 +353,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Ważne do: </span>
+									<span th:text="#{valid.to}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${ps.permitValidTo}"></span>
@@ -391,14 +362,14 @@
 						</div>
 						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.permit == null}" th:href="@{'/profiledit/PERMIT/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.permit == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.permit == null}" th:href="@{'/profiledit/PERMIT/' + ${wv.id}}" class="button" th:text="#{button.change}"></a>
+							<a th:unless="${av.permit == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.permit != null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.permit != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.permit != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.permit != null}" class="war" th:text="${av.permit.username}"> </span>
-								<span th:if="${av.permit != null}" class="war"> max do: </span>
+								<span th:if="${av.permit != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.permit != null}"class="war" th:text="${av.permit.expired}"> </span>
 							</p>
 						</div>
@@ -406,17 +377,102 @@
 			</div>
 			<!-- ################ BLOCKA #################  -->
 		</section>
-			<!-- ################ BLOCKA #################  -->
+				</div>
+				<!-- ################ BLOCKA #################  -->
+			</div>
+			<div class="menu-bar">
+				<div class="menu-inner">
+					<div class="section-header">
+						<h3 th:text="#{label.note}"></h3>
+					</div>
+					<form th:action="@{/profil/updatenote}" method="post">
+						<input type="hidden" name="id" th:value="${wv.id}">
+						<div class="center-div">
+							<textarea id="workerNote" name="workerNote" th:text="${workerNote.text}"></textarea>
+						</div>
+						<div class="center-div">
+							<button type="submit" class="button" th:text="#{button.save}"></button>
+						</div>
+					</form>
+					<div class="section-header">
+						<h3 th:text="#{label.documents}"></h3>
+					</div>
+					<form action="">
+
+					<div class="center-div">
+						<select>
+							<option></option>
+						</select>
+					</div>
+					<div class="center-div">
+					<button type="submit" class="button" th:text="#{label.generate}"></button>
+					</div>
+					</form>
+					<div class="section-header">
+						<h3 th:text="#{other}"></h3>
+					</div>
+					<div class="center-div">
+					<form th:action="@{/dismiss}" method="post">
+						<input type="hidden" name="id" id="id" th:value="${wv.id}">
+						<button type="submit" class="button" th:text="#{label.dismiss}"></button>
+					</form>
+					</div>
+					<!-- ************************** -->
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3 th:text="#{niefiles}"></h3>
+				</div>
+				<div class="border-div">
+				<div id="fileadd">
+					<form th:action="@{/profil}" enctype="multipart/form-data" method="post">
+			            <input class="button" id="fileInput" type="file" name="uploadFiles" onchange="update();" multiple><br>
+						<textarea id="list" disabled="disabled" ></textarea><br>
+						<input type="hidden" name="id" th:value="${wv.id}">	
+						<button class="button" type="submit" th:text="#{button.add}"></button>
+					</form>
+				</div>
+				</div>
+			</div>
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3 th:text="#{files}"></h3>
+				</div>
+				<div class="border-div">
+					<table class="file-table">
+						<tr th:each="f : ${files}">
+							<td th:text="${f.filename}"></td>
+							<td class="td-action">
+								<a class="button" th:href="@{'/profil/download/' + ${f.id} }">DOWNLOAD</a>
+							</td>
+							<td class="td-action">
+								<a class="button" th:href="@{'/profil/delete/' + ${wv.id} + '/' + ${f.id} }" onclick="return confirm('Are you sure you want to delete this file?')">DELETE</a>
+								
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+			</div>
+			
+			
+				</div>
+			</div>
+			
+			
+			<!-- ################ DOUBLE BLOCKA #################  -->
+		</section>
+		
+		<!-- ################ BLOCKA #################  -->
 		<section class="content-row">
 			<div class="data-block-50">
 				<div class="section-header">
-					<h3>Daty</h3>
+					<h3 th:text="#{label.date}"></h3>
 				</div>
 					<div class="border-div">
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Start Zus:: </span>
+									<span th:text="#{start.zus}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wd.startZus}"></span>
@@ -424,7 +480,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>End Zus</span>
+									<span th:text="#{end.zus}"></span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wd.endZus}"></span>
@@ -435,7 +491,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Start work: </span>
+									<span th:text="#{start.work}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wd.startWork}"></span>
@@ -443,7 +499,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>End work: </span>
+									<span th:text="#{end.work}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" >???</span>
@@ -454,7 +510,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Start Badania: </span>
+									<span th:text="#{start.medical.exam}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wd.startMedicalExams}"></span>
@@ -462,7 +518,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>End Badania: </span>
+									<span th:text="#{end.medical.exam}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wd.endMedicalExams}"></span>
@@ -473,7 +529,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>W systemie: </span>
+									<span th:text="#{inSystemFrom}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${wd.addToSystem}"></span>
@@ -484,14 +540,14 @@
 						</div>
 						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.date == null}" th:href="@{'/profiledit/DATE/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.date == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.date == null}" th:href="@{'/profiledit/DATE/' + ${wv.id}}" class="button" th:text="#{button.change}"></a>
+							<a th:unless="${av.date == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.date != null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.date != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.date != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.date != null}" class="war" th:text="${av.date.username}"> </span>
-								<span th:if="${av.date != null}" class="war"> max do: </span>
+								<span th:if="${av.date != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.date != null}"class="war" th:text="${av.date.expired}"> </span>
 							</p>
 						</div>
@@ -500,13 +556,13 @@
 			<!-- ################ BLOCKA #################  -->
 			<div class="data-block-50">
 				<div class="section-header">
-					<h3>zzzz</h3>
+					<h3 th:text="#{header.Residency}"></h3>
 				</div>
 					<div class="border-div">
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Paszport biometryczny:  </span>
+									<span th:text="#{biospassport}">:  </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${re.biopassport}"></span>
@@ -514,7 +570,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Paszport</span>
+									<span th:text="#{passport}"></span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${re.passport}"></span>
@@ -525,7 +581,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Wiza </span>
+									<span th:text="#{visa}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${re.visa}"></span>
@@ -538,7 +594,7 @@
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Ważna od: </span>
+									<span th:text="#{valid.form}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${re.visaValidFrom}"></span>
@@ -546,7 +602,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Ważna do: </span>
+									<span th:text="#{valid.to}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${re.visaValidTo}"></span>
@@ -555,14 +611,14 @@
 						</div>
 						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.residency == null}" th:href="@{'/profiledit/RESIDENCY/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.residency == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.residency == null}" th:href="@{'/profiledit/RESIDENCY/' + ${wv.id}}" class="button"  th:text="#{button.change}"></a>
+							<a th:unless="${av.residency == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.residency != null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.residency != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.residency != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.residency != null}" class="war" th:text="${av.residency.username}"> </span>
-								<span th:if="${av.residency != null}" class="war"> max do: </span>
+								<span th:if="${av.residency != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.residency != null}"class="war" th:text="${av.residency.expired}"> </span>
 							</p>
 						</div>
@@ -574,13 +630,13 @@
 		<section class="content-row">
 			<div class="data-block-50">
 				<div class="section-header">
-					<h3>Dane kontaktowe</h3>
+					<h3 th:text="#{label.contact}"></h3>
 				</div>
 					<div class="border-div">
 						<div class="data-row">
 							<div class="data-col">
 								<div class="data-label">
-									<span>Telefon </span>
+									<span th:text="#{phone}"></span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${cv.phone}"></span>
@@ -588,7 +644,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>email: </span>
+									<span th:text="#{email}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${cv.email}"></span>
@@ -597,14 +653,14 @@
 						</div>
 						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.contact == null}" th:href="@{'/profiledit/CONTACT/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.contact == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.contact == null}" th:href="@{'/profiledit/CONTACT/' + ${wv.id}}" class="button" th:text="#{button.change}"></a>
+							<a th:unless="${av.contact == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.contact!= null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.contact != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.contact != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.contact != null}" class="war" th:text="${av.contact.username}"> </span>
-								<span th:if="${av.contact != null}" class="war"> max do: </span>
+								<span th:if="${av.contact != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.contact != null}"class="war" th:text="${av.contact.expired}"> </span>
 							</p>
 						</div>
@@ -613,33 +669,33 @@
 				<!-- ################ BLOCK #################  -->
 				<div class="data-block-50">
 				<div class="section-header">
-					<h3>Adres PL</h3>
+					<h3 th:text="#{address}"> PL</h3>
 				</div>
 					<div class="border-div">
 							
 							<div th:if="${cv.houseid != null}">
 								<div  class="data-col">
 									<div class="data-label">
-									<span>Typ: </span>
+									<span th:text="#{label.type}">: </span>
 									</div>
 									<div class="data-content">
-										<span class="data">Firmowe</span>
+										<span class="data" th:text="#{lable.our}"></span>
 									</div>
 								</div>
 							</div>
 							<div th:unless="${cv.houseid != null}">
 								<div  class="data-col">
 									<div class="data-label">
-									<span>Typ: </span>
+									<span th:text="#{label.type}">: </span>
 									</div>
 									<div class="data-content">
-										<span class="data">Własne</span>
+										<span class="data" th:text="#{label.own}"></span>
 									</div>
 								</div>
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>adres: </span>
+									<span th:text="#{address}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${cv.pladdress}"></span>
@@ -647,7 +703,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Kod pocztowy: </span>
+									<span th:text="#{postcode}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${cv.plpostcode}"></span>
@@ -655,7 +711,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Miasto: </span>
+									<span th:text="#{city}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${cv.plcity}"></span>
@@ -667,7 +723,7 @@
 							<div th:if="${cv.houseid != null}">
 								<div  class="data-col">
 									<div class="data-label">
-									<span>Dom: </span>
+									<span th:text="#{house}">: </span>
 									</div>
 									<div class="data-content">
 										<span class="data" th:text="${cv.house}"></span>
@@ -675,7 +731,7 @@
 								</div>
 								<div  class="data-col">
 									<div class="data-label">
-										<span>Pokój: </span>
+										<span th:text="#{room}">: </span>
 									</div>
 									<div class="data-content">
 										<span class="data" th:text="${cv.room}"></span>
@@ -683,7 +739,7 @@
 								</div>
 								<div  class="data-col">
 									<div class="data-label">
-										<span>Do: </span>
+										<span th:text="#{to}">: </span>
 									</div>
 									<div class="data-content">
 										<span class="data" th:text="${cv.expire}"></span>
@@ -694,14 +750,14 @@
 
 						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.addresspl == null}" th:href="@{'/profiledit/ADDRESSPL/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.addresspl == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.addresspl == null}" th:href="@{'/profiledit/ADDRESSPL/' + ${wv.id}}" class="button" th:text="#{button.change}"></a>
+							<a th:unless="${av.addresspl == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.addresspl != null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.addresspl != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.addresspl != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.addresspl != null}" class="war" th:text="${av.addresspl.username}"> </span>
-								<span th:if="${av.addresspl != null}" class="war"> max do: </span>
+								<span th:if="${av.addresspl != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.addresspl != null}"class="war" th:text="${av.addresspl.expired}"> </span>
 							</p>
 						</div>
@@ -710,12 +766,12 @@
 				<!-- ################ BLOCK #################  -->
 				<div class="data-block-50">
 				<div class="section-header">
-					<h3>Adres zag</h3>
+					<h3 th:text="#{address}"></h3>
 				</div>
 					<div class="border-div">
 						<div class="data-col">
 								<div class="data-label">
-									<span>adres: </span>
+									<span th:text="#{address}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${cv.address}"></span>
@@ -723,7 +779,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Kod pocztowy: </span>
+									<span th:text="#{postcode}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${cv.postcode}"></span>
@@ -731,7 +787,7 @@
 							</div>
 							<div class="data-col">
 								<div class="data-label">
-									<span>Miasto: </span>
+									<span th:text="#{city}">: </span>
 								</div>
 								<div class="data-content">
 									<span class="data" th:text="${cv.city}"></span>
@@ -739,14 +795,14 @@
 							</div>
 						<!-- ####### ROW ######  -->
 						<div class="button-bar">
-							<a th:if="${av.address == null}" th:href="@{'/profiledit/ADDRESS/' + ${wv.id}}" class="button" >Zmień</a>
-							<a th:unless="${av.address == null}" th:href="@{'/profil/' + ${wv.id}}" class="button">Odśwież</a>
+							<a th:if="${av.address == null}" th:href="@{'/profiledit/ADDRESS/' + ${wv.id}}" class="button" th:text="#{button.change}"></a>
+							<a th:unless="${av.address == null}" th:href="@{'/profil/' + ${wv.id}}" class="button" th:text="#{button.refresh}"></a>
 					
 							<span th:if="${av.address!= null}" class="dot"></span> 
 							<p>
-								<span th:if="${av.address != null}" class="war">Zajęte przez: </span>
+								<span th:if="${av.address != null}" class="war" th:text="#{label.blockBy}">: </span>
 								<span th:if="${av.address != null}" class="war" th:text="${av.address.username}"> </span>
-								<span th:if="${av.address != null}" class="war"> max do: </span>
+								<span th:if="${av.address != null}" class="war" th:text="#{label.blockUntil}">: </span>
 								<span th:if="${av.address != null}"class="war" th:text="${av.address.expired}"> </span>
 							</p>
 						</div>
@@ -754,44 +810,7 @@
 				</div>
 				<!-- ################ BLOCK #################  -->
 		</section>
-		<section class="content-row">
-			<div class="data-block-50">
-				<div class="section-header">
-					<h3>Pliki</h3>
-				</div>
-				<div class="border-div">
-					<table class="file-table">
-						<tr th:each="f : ${files}">
-							<td th:text="${f.filename}"></td>
-							<td class="td-action">
-								<a th:href="@{'/profil/download/' + ${f.id} }">[DL]</a>
-							</td>
-							<td class="td-action">
-								<a th:href="@{'/profil/delete/' + ${wv.id} + '/' + ${f.id} }">[X]</a>
-								
-							</td>
-						</tr>
-					</table>
-				</div>
-				
-			</div>
-			
-			<div class="data-block-50">
-				<div class="section-header">
-					<h3>Nowe</h3>
-				</div>
-				<div class="border-div">
-				<div id="fileadd">
-					<form th:action="@{/profil}" enctype="multipart/form-data" method="post">
-			            <input class="button" id="fileInput" type="file" name="uploadFiles" onchange="update();" multiple><br>
-						<textarea id="list" disabled="disabled" ></textarea><br>
-						<input type="hidden" name="id" th:value="${wv.id}">	
-						<button class="button" type="submit"> Dodaj</button>
-					</form>
-				</div>
-				</div>
-			</div>
-		</section>
+		
 			
 	
 	<!-- ************************************************************************* -->

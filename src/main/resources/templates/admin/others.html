@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admin_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/factory_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/other_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/admin/admincolors_style.css" />
 </head>
 <body>
@@ -17,107 +17,146 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Inne</h1>
+			<h1 class="header-header" th:text="#{header.ohter}"></h1>
 		</div>
 		
 		<div class="item-container">
-			<h2>Dział</h2>
-			<div class="table-container">
-				<table>
-					<tr>
-						<th>Lp.</th>
-						<th>Department</th>
-						<th></th>
-					</tr>
-					<tr th:each="i, it : ${dep_list}">
-						<td th:text="${it.count}" class="td_lp"></td>
-						<td th:text="${i.department}"></td>
-						<td class="td_short_button">
-							<a th:href="@{'/admin/others/removedepartment/' + ${i.id}}" class="tdbutton">Usuń</a>
-						</td>
-					</tr>
-				</table>
-			</div>	
-			<div class="form-container">
-				<h3>Dodaj dział</h3>
-				<p th:text="${department_msg}" class="error_message"></p>
-				<form th:action="@{/admin/others/adddepartment}" method="post">
-					<div class='input-container'>
-						<label for="department" class="white_label">Department</label>
-						<input type="text" name="department" id="department">
-						<button class="button_add" type="submit">Dodaj</button>
-					</div>
-				</form>
+			<div class="item-header">
+				<h2 th:text="#{label.department}"></h2>
 			</div>
-			<div class="clear"></div>
-		</div>
-		
-		<!-- -------------------------------------------------------------------- -->
-		
-		<div class="item-container">
-			<h2>Obywatelstwo</h2>
-			<div class="table-container">
-				<table>
-					<tr>
-						<th>Lp.</th>
-						<th>Obywatelstwo</th>
-						<th></th>
-					</tr>
-					<tr th:each="i, it : ${citiz_list}">
-						<td th:text="${it.count}" class="td_lp"></td>
-						<td th:text="${i.name}"></td>
-						<td class="td_short_button">
-							<a th:href="@{'/admin/others/removecitizenship/' + ${i.id}}" class="tdbutton">Usuń</a>
-						</td>
-					</tr>
-				</table>
-			</div>	
-			<div class="form-container">
-				<h3>Dodaj dział</h3>
-				<p th:text="${citiz_msg}" class="error_message"></p>
-				<form th:action="@{/admin/others/addcitizenship}" method="post">
-					<div class='input-container'>
-						<label for="citizenship" class="white_label">Obywatelstwo</label>
-						<input type="text" name="citizenship" id="citizenship">
-						<button class="button_add" type="submit">Dodaj</button>
+			<div class="item-content">
+				<div class="half-container">
+					<table>
+						<tr>
+							<th>Lp.</th>
+							<th th:text="#{label.department}"></th>
+							<th></th>
+						</tr>
+						<tr th:each="i, it : ${dep_list}">
+							<td th:text="${it.count}" class="td_lp"></td>
+							<td th:text="${i.department}"></td>
+							<td class="td_short_button">
+								<a th:href="@{'/admin/others/removedepartment/' + ${i.id}}" class="aButton" onclick="return confirm('Are you sure you want to delete department?')" th:text="#{button.delete}"></a>
+							</td>
+						</tr>
+					</table>
+				</div>	
+				<div class="half-container">
+					<div class="form-container">
+						<div class="sub-header">
+							<h3 th:text="#{button.addDepartment}"></h3>
+							<p th:text="${department_msg}" class="error_message"></p>
+						</div>
+						<div class="form-content">
+							<form th:action="@{/admin/others/adddepartment}" method="post">
+								<div class='input-container'>
+								
+									<label for="department" class="white_label" th:text="#{label.department}"></label>
+									<input type="text" name="department" id="department">
+									
+								
+								</div>
+								<div class="button-div">
+									<button class="button" type="submit" th:text="#{button.add}"></button>
+								</div>
+								</form>
+							
+						</div>
 					</div>
-				</form>
+				</div>
 			</div>
-			<div class="clear"></div>
 		</div>
 		
 		<!-- -------------------------------------------------------------------- -->
 		
 		<div class="item-container">
-			<h2>Stanowisko</h2>
-			<div class="table-container">
-				<table>
-					<tr>
-						<th>Lp.</th>
-						<th>Stanowisko</th>
-						<th></th>
-					</tr>
-					<tr th:each="i, it : ${emp_pos}">
-						<td th:text="${it.count}" class="td_lp"></td>
-						<td th:text="${i.position}"></td>
-						<td class="td_short_button">
-							<a th:href="@{'/admin/others/removeposition/' + ${i.id}}" class="tdbutton">Usuń</a>
-						</td>
-					</tr>
-				</table>
-			</div>	
-			<div class="form-container">
-				<h3>Dodaj stanowsko</h3>
-				<p th:text="${position_msg}" class="error_message"></p>
-				<form th:action="@{/admin/others/addposition}" method="post">
-					<div class='input-container'>
-						<label for="userposition"  class="white_label">Stanowsko</label>
-						<input type="text" name="userposition" id="userposition">
-						<button class="button_add" type="submit">Dodaj</button>
-					</div>
-				</form>
+			<div class="item-header">
+				<h2 th:text="#{citizenship}"></h2>
 			</div>
-			<div class="clear"></div>
+			<div class="item-content">
+				<div class="half-container">
+					<table>
+						<tr>
+							<th>Lp.</th>
+							<th th:text="#{citizenship}"></th>
+							<th></th>
+						</tr>
+						<tr th:each="i, it : ${citiz_list}">
+							<td th:text="${it.count}" class="td_lp"></td>
+							<td th:text="${i.name}"></td>
+							<td class="td_short_button">
+								<a th:href="@{'/admin/others/removecitizenship/' + ${i.id}}" onclick="return confirm('Are you sure you want to delete citizenship?')" class="aButton" th:text="#{button.delete}"></a>
+							</td>
+						</tr>
+					</table>
+				</div>	
+				<div class="half-container">
+						<div class="form-container">
+							<div class="sub-header">
+								<h3 th:text="#{button.addCitizenship}"></h3>
+								<p th:text="${citiz_msg}" class="error_message"></p>
+							</div>
+							<div class="form-content">
+								<form th:action="@{/admin/others/addcitizenship}" method="post">
+									<div class='input-container'>
+										<label for="citizenship" class="white_label" th:text="#{citizenship}"></label>
+										<input type="text" name="citizenship" id="citizenship">
+									</div>
+									<div class="button-div">
+										<button class="button" type="submit" th:text="#{button.add}"></button>
+									</div>
+								</form>
+							</div>
+							
+						</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- -------------------------------------------------------------------- -->
+		
+		<div class="item-container">
+			<div class="item-header">
+				<h2 th:text="#{position}"></h2>
+			</div>
+			<div class="item-content">
+				<div class="half-container">
+					<table>
+						<tr>
+							<th>Lp.</th>
+							<th th:text="#{position}"></th>
+							<th></th>
+						</tr>
+						<tr th:each="i, it : ${emp_pos}">
+							<td th:text="${it.count}" class="td_lp"></td>
+							<td th:text="${i.position}"></td>
+							<td class="td_short_button">
+								<a th:if="${i.position != 'Agent' and i.position != 'Coordinator'}" th:href="@{'/admin/others/removeposition/' + ${i.id}}" onclick="return confirm('Are you sure you want to delete position?')" class="aButton" th:text="#{button.delete}"></a>
+							</td>
+						</tr>
+					</table>
+				</div>	
+				<div class="half-container">
+					<div class="form-container">
+						<div class="sub-header">
+							<h3 th:text="#{button.addPosition}"></h3>
+							<p th:text="${position_msg}" class="error_message"></p>
+						</div>
+						<div class="form-content">
+							<form th:action="@{/admin/others/addposition}" method="post">
+								<div class='input-container'>
+									<label for="userposition"  class="white_label" th:text="#{position}"></label>
+									<input type="text" name="userposition" id="userposition">
+								</div>
+								<div class="button-div">
+									<button class="button" type="submit" th:text="#{button.add}"></button>
+								</div>
+								</form>
+							</div>
+							
+						</div>
+				</div>
+			</div>
 		</div>
 	<!-- ************************************************************************* -->
 	</section>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -18,23 +18,27 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Rekrutacja</h1>
+			<h1 class="header-header" th:text="#{label.recruitment}"></h1>
 		</div>
 		
 		<div class="stage-container">
-			<a class="stage-button" th:href="@{/canditate}">Faza 1</a>
-			<a class="stage-button" th:href="@{/recruitment}">Faza 2</a>
+			<a class="stage-button" th:href="@{/canditate}" th:text="#{button.stage1}"></a>
+			<a class="stage-button" th:href="@{/recruitment}" th:text="#{button.stage2}"></a>
 		</div>
 		
 		<p th:text="${success_msg}" class="success_message"></p>
 		<div class="mini-content">
-			<div class="section-header"><h3>Kadydaci</h3></div>
+			<div class="section-header"><h2 th:text="#{label.candidate}"></h2></div>
 			<form th:action="@{/recruitment/select}" method="post">
-				<select id="candidateid" name="candidateid">
-					<option th:each="i : ${candidates}" th:value="${i.id}" th:text="${i.value}"></option>
-				</select>
-				<button th:if="${candidates.isEmpty()}" type="submit" class="button" disabled>Wybierz</button>
-				<button th:unless="${candidates.isEmpty()}" type="submit" class="button">Wybierz</button>
+				<div>
+					<select id="candidateid" name="candidateid">
+						<option th:each="i : ${candidates}" th:value="${i.id}" th:text="${i.value}"></option>
+					</select>
+				</div>
+				<div class="row-buttons">
+					<button th:if="${candidates.isEmpty()}" type="submit" class="button" disabled th:text="#{label.choose}"></button>
+					<button th:unless="${candidates.isEmpty()}" type="submit" class="button" th:text="#{label.choose}"></button>
+				</div>
 			</form>
 		</div>
 		
@@ -43,44 +47,37 @@
 				<p th:text="${error_msg}" class="error_message"></p>
 				<p th:text="${success_msg}" class="success_message"></p>
 				<input type="hidden" name="id" th:field="*{id}">
-				<div class="section-header"><h2>Dane personalne</h2></div>
+				<div class="section-header"><h2 th:text="#{label.personal.data}"></h2></div>
 					<!-- ---------------------  -->
 					<div class="row">
 						<div class="col">
+							<label for="firstname" th:text="#{firstname}"></label>
+							<input type="text" name="firstname" id="firstname" th:field="*{firstname}" required> 
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<label for="lastname" th:text="#{lastname}"></label>
+							<input type="text" name="lastname" id="lastname" th:field="*{lastname}" required>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
 							<div class="lab-div">
-								<label for="firstname">Imię</label>
+								<label for="sex" th:text="#{sex}"></label>
 							</div>
 							<div class="input-div">
-								<input type="text" name="firstname" id="firstname" th:field="*{firstname}" required> 
+								<label for="sexM" th:text="#{male}"></label>
+								<input th:if="${newWorker.sex == 'M'}" type="radio" name="sex" id="sexM" value="M" checked required>
+								<input th:unless="${newWorker.sex == 'M'}" type="radio" name="sex" id="sexM" value="M" required>
+								<input th:if="${newWorker.sex == 'F'}" type="radio" name="sex" id="sexF" value="F" checked required>
+								<label for="sexF" th:text="#{female}"></label>
+								<input th:unless="${newWorker.sex == 'F'}" type="radio" name="sex" value="F" id="sexF" required>
 							</div>
 						</div>
 						<!-- ---------------------  -->
 						<div class="col">
 							<div class="lab-div">
-								<label for="lastname">Nazwisko</label>
-							</div>
-							<div class="input-div">
-								<input type="text" name="lastname" id="lastname" th:field="*{lastname}" required>
-							</div>
-						</div>
-						<!-- ---------------------  -->
-						<div class="col">
-							<div class="lab-div">
-								<label for="sex">Płeć</label>
-							</div>
-							<div class="input-div">
-								<label for="sexM">Male</label>
-								<input th:if="${newWorker.sex == 'M'}" type="radio" name="sex" id="sexM" value="M" checked>
-								<input th:unless="${newWorker.sex == 'M'}" type="radio" name="sex" id="sexM" value="M">
-								<input th:if="${newWorker.sex == 'F'}" type="radio" name="sex" id="sexF" value="F" checked>
-								<label for="sexF">Female</label>
-								<input th:unless="${newWorker.sex == 'F'}" type="radio" name="sex" value="F" id="sexF">
-							</div>
-						</div>
-						<!-- ---------------------  -->
-						<div class="col">
-							<div class="lab-div">
-								<label for="dateofbirth">Data urodzenia</label>
+								<label for="dateofbirth" th:text="#{dateofbirth}"></label>
+								<p class="wronginput" th:if="${#fields.hasErrors('dateofbirth')}" th:errors="*{dateofbirth}" ></p>
 							</div>
 							<div class="input-div">
 								<input type="date" id="dateofbirth" name="dateofbirth" th:field="*{dateofbirth}" min="1930-01-01" max="2200-01-01" required>
@@ -91,11 +88,10 @@
 
 					<!-- ***************** ROW ************************ -->
 					<div class="row">
-						<div class="section-header"><h2>Dane personalne</h2></div>
 						<div class="col">
 							<div class="lab-div">
-								<label for="passport">Paszport</label>
-								<label for="isBiopass">(Bio)</label>
+								<label for="passport" th:text="#{passport}"></label>
+								<label for="isBiopass" >(Bio)</label>
 								<input th:if="${newWorker.isBiopass == true}" type="checkbox" name="isBiopass" id="isBiopass" checked>
 								<input th:unless="${newWorker.isBiopass == true}" type="checkbox" name="isBiopass" id="isBiopass">
 							</div>
@@ -106,7 +102,7 @@
 						<!-- ---------------------  -->
 						<div class="col">
 							<div class="lab-div">
-								<label for="recruiter">Rekruter</label>
+								<label for="recruiter" th:text="#{label.recruiter}"></label>
 							</div>
 							<div class="input-div">
 								<select id="recruiter" name="recruiter" required>
@@ -117,7 +113,7 @@
 						<!-- ---------------------  -->
 						<div class="col">
 							<div class="lab-div">
-								<label for="companyid">Firma</label>
+								<label for="companyid" th:text="#{company}"></label>
 							</div>
 							<div class="input-div">
 								<select id="companyid" name="companyid" required>
@@ -128,7 +124,7 @@
 						<!-- ---------------------  -->
 						<div class="col">
 							<div class="lab-div">
-								<label for="factoryid">Fabryka</label>
+								<label for="factoryid" th:text="#{factory}"></label>
 							</div>
 							<div class="input-div">
 								<select id="factoryid" name="factoryid" required>
@@ -140,55 +136,71 @@
 					
 					<!-- ***************** ROW ************************ -->
 					<div class="row">
-						<div class="section-header"><h2>Adres - Polska</h2></div>
+						<div class="section-header"><h2 th:text="#{address} + ' - Poland'"></h2></div>
 						<div class="col">
 							<div class="lab-div">
-								<label for="bedid">Nasze</label>
-								<label for="isOhter">(Inne)</label>
+								<label for="bedid" th:text="#{lable.our}"></label>
+								<label for="isOhter">(other)</label>
 								<input th:if="${newWorker.isOhter == true}" type="checkbox" name="isOhter" id="isOhter" checked>
 								<input th:unless="${newWorker.isOhter == true}" type="checkbox" name="isOhter" id="isOhter">
 							</div>
-							<div class="input-div">
-								<select id="bedid" name="bedid" required>
-									<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}"></option>
+							<div class="input-div" th:if="${newWorker.isOhter == true}">
+								<select id="bedid" name="bedid" disabled>
+									<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}" ></option>
 								</select>
 							</div>
+							<div class="input-div" th:unless="${newWorker.isOhter == true}">
+								<select id="bedid" name="bedid" required>
+									<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}" ></option>
+								</select>
+							</div>
+							<div class="input-div" th:if="${newWorker.isOhter == true}">
+								<label for="acomdate" th:text="#{from}"></label>
+								<input type="date" id="acomdate" name="acomdate" disabled>
+							</div>
+							<div class="input-div" th:unless="${newWorker.isOhter == true}">
+								<label for="acomdate" th:text="#{to}"></label>
+								<input type="date" id="acomdate" name="acomdate">
+							</div>
 						</div>
 						<!-- ---------------------  -->
 						<div class="col">
 							<div class="lab-div">
-								<label for="pladdress">Adres</label>
+								<label for="pladdress" th:text="#{address}"></label>
 							</div>
 							<div class="input-div">
-								<input type="text" name="pladdress" id="pladdress" th:field="*{pladdress}" disabled>
+								<input th:if="${newWorker.isOhter == true}" type="text" name="pladdress" id="pladdress" th:field="*{pladdress}">
+								<input th:unless="${newWorker.isOhter == true}" type="text" name="pladdress" id="pladdress" th:field="*{pladdress}" disabled>
 							</div>
 						</div>
 						<!-- ---------------------  -->
 						<div class="col">
 							<div class="lab-div">
-								<label for="plpostcode">Kod pocztowy</label>
+								<label for="plpostcode" th:text="#{postcode}"></label>
 							</div>
 							<div class="input-div">
-								<input type="text" name="plpostcode" id="plpostcode" th:field="*{plpostcode}" disabled>
+								<input th:if="${newWorker.isOhter == true}" type="text" name="plpostcode" id="plpostcode" th:field="*{plpostcode}">
+								<input th:unless="${newWorker.isOhter == true}" type="text" name="plpostcode" id="plpostcode" th:field="*{plpostcode}" disabled>
 							</div>
 						</div>
 					
 						<!-- ---------------------  -->
 						<div class="col">
 							<div class="lab-div">
-								<label for="plcity">City</label>
+								<label for="plcity" th:text="#{city}"></label>
 							</div>
 							<div class="input-div">
-								<input type="text" name="plcity" id="plcity" th:field="*{plcity}" disabled>
+								<input th:if="${newWorker.isOhter == true}" type="text" name="plcity" id="plcity" th:field="*{plcity}">
+								<input th:unless="${newWorker.isOhter == true}" type="text" name="plcity" id="plcity" th:field="*{plcity}" disabled>
 							</div>
 						</div>
 					</div>
 					<!-- ***************** ROW ************************ -->
 					<div class="row">
-						<div class="section-header"><h2>Adres - Zagraniczny</h2></div>
+						<div class="section-header" ><h2 th:text="#{label.addressabroad}"></h2></div>
 						<div class="col-a">
 							<div class="lab-div">
-								<label for="address">Adres</label>
+								<label for="address" th:text="#{address}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" name="address" id="address" th:field="*{address}">
@@ -197,7 +209,7 @@
 						<!-- ---------------------  -->
 						<div class="col-a">
 							<div class="lab-div">
-								<label for="postcode">Kod pocztowy</label>
+								<label for="postcode" th:text="#{postcode}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" name="postcode" id="postcode" th:field="*{postcode}">
@@ -206,7 +218,7 @@
 						<!-- ---------------------  -->
 						<div class="col-a">
 							<div class="lab-div">
-								<label for="city">Miasto</label>
+								<label for="city" th:text="#{city}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" name="city" id="city" th:field="*{city}">
@@ -215,11 +227,11 @@
 					</div>
 					<!-- ***************** ROW ************************ -->
 					<div class="row">
-						<div class="section-header"><h2>Inne</h2></div>
+						<div class="section-header"><h2 th:text="#{other}"></h2></div>
 						<div class="col-a">
 							<div class="lab-div">
 								<p class="wronginput" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></p>
-								<label for="email">email</label>
+								<label for="email" th:text="#{email}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" name="email" id="email" th:field="*{email}">
@@ -229,7 +241,7 @@
 						<div class="col-a">
 							<div class="lab-div">
 								<p class="wronginput" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" ></p>
-								<label for="phone">phone</label>
+								<label for="phone" th:text="#{phone}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" name="phone" id="phone" th:field="*{phone}">
@@ -238,7 +250,7 @@
 						<!-- ---------------------  -->
 						<div class="col-a">
 							<div class="lab-div">
-								<label for="note">Notatki</label>
+								<label for="note" th:text="#{remarks}"></label>
 							</div>
 							<div class="input-div">
 								<textarea id="note" name="note" th:text="${newWorker.note}"></textarea>
@@ -247,13 +259,13 @@
 						
 					</div>
 					<!-- ***************** ROW ************************ -->
-					<div class="section-header"><h2>Umowa</h2></div>
+					<div class="section-header"><h2 th:text="#{label.agreement}"></h2></div>
 					<div class="row">
 						
 						<div class="col"> &nbsp;</div>
 						<div class="col">
 							<div class="lab-div">
-								<label for="startZus">Umowa od</label>
+								<label for="startZus" th:text="#{label.agreement.from}"></label>
 							</div>
 							<div class="input-div">
 								<input type="date" id="startZus" name="startZus" th:field="*{startZus}">
@@ -262,7 +274,7 @@
 						<div class="col">
 							<div class="lab-div">
 								<p class="wronginput" th:if="${#fields.hasErrors('endZus')}" th:errors="*{endZus}" ></p>
-								<label for="endZus">Umowa do</label>
+								<label for="endZus" th:text="#{lable.agreement.to}"></label>
 							</div>
 							<div class="input-div">
 								<input type="date" id="endZus" name="endZus" th:field="*{endZus}">
@@ -271,13 +283,13 @@
 						<div class="col"> &nbsp;</div>
 					</div>
 					<!-- ***************** ROW ************************ -->
-					<div class="section-header"><h2>Stawka</h2></div>
+					<div class="section-header"><h2 th:text="#{lable.wage}"></h2></div>
 					<div class="row">
 						
 						<div class="col"> &nbsp;</div>
 						<div class="col">
 							<div class="lab-div">
-								<label for="wage">Stawka pracownika</label>
+								<label for="wage" th:text="#{label.wagePerHour}"></label>
 							</div>
 							<div class="input-div">
 								<input type="number" min="0" step="0.01" id="wage" name="wage" th:field="*{wage}">
@@ -285,7 +297,7 @@
 						</div>
 						<div class="col">
 							<div class="lab-div">
-								<label for="sWage">Stawka słownie</label>
+								<label for="sWage" th:text="#{label.wage.in.words}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" id="sWage" name="sWage" th:field="*{sWage}">
@@ -295,15 +307,15 @@
 					</div>
 					<!-- ***************** ROW ************************ -->	
 					<div class="row-buttons">
-						<button th:if="${status == 'success'}" class="button" name="action" value="hire" type="submit" disabled>Zatrudnij</button>
-						<button th:unless="${status == 'success'}" class="button" name="action" value="hire" type="submit">Zatrudnij</button>
+						<button th:if="${status == 'success'}" onclick="return confirm('The new employee will be hired. Are you sure that all fields have been correctly completed?')" class="button" name="action" value="hire" type="submit" disabled th:text="#{menu.hire}"></button>
+						<button th:unless="${status == 'success'}" class="button" name="action" value="hire" type="submit" th:text="#{menu.hire}"></button>
 						
 						
-						<button th:if="${status == 'success'}" class="button" name="action" value="contract" type="submit">Generuj umowe</button>
-						<button th:unless="${status == 'success'}" class="button" name="action" value="contract" type="submit" disabled>Generuj umowe</button>
+						<button th:if="${status == 'success'}" class="button" name="action" value="contract" type="submit" th:text="#{button.generateacontract}"></button>
+						<button th:unless="${status == 'success'}" class="button" name="action" value="contract" type="submit" disabled th:text="#{button.generateacontract}"></button>
 						
-						<button th:if="${status == 'success'}" class="button" name="action" value="other" type="submit">Wypełnij pozostałe</button>
-						<button th:unless="${status == 'success'}" class="button" name="action" value="other" type="submit" disabled>Wypełnij pozostałe</button>
+						<button th:if="${status == 'success'}" class="button" name="action" value="other" type="submit" th:text="#{button.fill.more}"></button>
+						<button th:unless="${status == 'success'}" class="button" name="action" value="other" type="submit" disabled th:text="#{button.fill.more}"></button>
 					</div>
 			</form>
 		</div>

@@ -43,6 +43,10 @@ public enum ViewFields {
 	
 	STARTMEDICAL,
 	ENDMEDICAL,
-	ADDTOSYSTEM
+	ADDTOSYSTEM,
+	
+	WHO,
+	TIMESTAMP,
+	LOGTYPE
 	
 }

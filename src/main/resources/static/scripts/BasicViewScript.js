@@ -1,4 +1,5 @@
 //Onload
+console.log("elo000")
 if(document.getElementById("bytext").checked == true){
 	document.getElementById("textequal").disabled = false;
 	document.getElementById("textcontains").disabled = false;

@@ -103,7 +103,7 @@ public class ReportPeselDoc implements Doc<Workbook> {
 
 	@Override
 	public String getFilename() {
-		return "Report_withPesel.xlsx";
+		return "Report_withPesel.xls";
 	}
 
 	@Override

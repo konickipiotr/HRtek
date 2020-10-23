@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -12,45 +12,43 @@
 			<form th:action="@{/showdata/showhide}" method="post">
 			<div class="sort-bar">
 				<div>
-				
-					Pokaż kolumny:
-				
+					<span th:text="#{msg.showColumns}">:</span>		
 				</div>
 				<div>
-					<button class="button-small" type="submit">zapisz</button>
+					<button class="button-small" type="submit" th:text="#{button.save}"></button>
 				</div>
 				<div class="check-div">
-					<label for="bDateofbirth">Data urodzenia</label>
+					<label for="bDateofbirth" th:text="#{dateofbirth}"></label>
 					<input th:if="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth" checked>
 					<input th:unless="${fd.bDateofbirth == true}" type="checkbox" name="bDateofbirth" id="bDateofbirth" >		
 				</div>
 				<div class="check-div">
-					<label for="bRecruiter">Rekruter</label>
+					<label for="bRecruiter" th:text="#{label.recruiter}"></label>
 					<input th:if="${fd.bRecruiter == true}" type="checkbox" name="bRecruiter" id="bRecruiter" checked>
 					<input th:unless="${fd.bRecruiter == true}" type="checkbox" name="bRecruiter" id="bRecruiter" >
 				</div>
 				<div class="check-div">
-					<label for="bCompany">Firma</label>
+					<label for="bCompany" th:text="#{company}"></label>
 					<input th:if="${fd.bCompany == true}" type="checkbox" name="bCompany" id="bCompany" checked>
 					<input th:unless="${fd.bCompany == true}" type="checkbox"  name="bCompany" id="bCompany" >
 				</div>
 				<div class="check-div">
-					<label for="bFactory">Fabryka</label>
+					<label for="bFactory" th:text="#{factory}"></label>
 					<input th:if="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory" checked>
 					<input th:unless="${fd.bFactory == true}" type="checkbox" name="bFactory" id="bFactory">
 				</div>
 				<div class="check-div">
-					<label for="bStartMedicalExams">Badani od</label>
+					<label for="bStartMedicalExams" th:text="#{medical.form}"></label>
 					<input th:if="${fd.bStartMedicalExams == true}" type="checkbox" name="bStartMedicalExams" id="bStartMedicalExams" checked>
 					<input th:unless="${fd.bStartMedicalExams == true}" type="checkbox" name="bStartMedicalExams" id="bStartMedicalExams">
 				</div>		
 				<div class="check-div">
-					<label for="bEndMedicalExams">Badania do</label>
+					<label for="bEndMedicalExams" th:text="#{mediacl.to}"></label>
 					<input th:if="${fd.bEndMedicalExams == true}" type="checkbox" name="bEndMedicalExams" id="bEndMedicalExams" checked>
 					<input th:unless="${fd.bEndMedicalExams == true}" type="checkbox" name="bEndMedicalExams" id="bEndMedicalExams">
 				</div>			
 				<div class="check-div">
-					<label for="bAddToSystem">W systemie</label>
+					<label for="bAddToSystem" th:text="#{inSystem}"></label>
 					<input th:if="${fd.bAddToSystem == true}" type="checkbox" name="bAddToSystem" id="bAddToSystem" checked>
 					<input th:unless="${fd.bAddToSystem == true}" type="checkbox" name="bAddToSystem" id="bAddToSystem">
 				</div>				

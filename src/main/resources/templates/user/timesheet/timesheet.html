@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/timesheet_style.css" />
@@ -17,7 +17,7 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Obecność</h1>
+			<h1 class="header-header" th:text="#{menu.timesheet}"></h1>
 		</div>
 		<div class="timesheet-menu" th:replace="user/timesheet/timesheetmenu :: timesheetmenu"></div>
 		

@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.hrtek.model.worker.StatusWorker;
-
 import lombok.Data;
 
 @Data

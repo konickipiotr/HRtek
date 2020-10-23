@@ -1,6 +1,5 @@
 package com.hrtek.user.worker;
 
-import java.beans.Statement;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import com.hrtek.db.CitizenshipRepository;
 import com.hrtek.db.CompanyRepository;
 import com.hrtek.db.DepartmentRepository;
 import com.hrtek.db.FactoryRepository;
+import com.hrtek.db.LogRepository;
 import com.hrtek.db.UserInfoRepository;
 import com.hrtek.db.UserPositonsRepository;
 import com.hrtek.db.accommodation.BedRepository;
@@ -20,13 +20,13 @@ import com.hrtek.db.worker.ResidencyRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerContactRepository;
 import com.hrtek.db.worker.WorkerDateRepository;
-import com.hrtek.db.worker.WorkerFilesRepository;
 import com.hrtek.db.worker.WorkerFinanceRepository;
-import com.hrtek.db.worker.WorkerNoteRepository;
 import com.hrtek.db.worker.WorkerPermintRepository;
 import com.hrtek.db.worker.WorkerRepository;
+import com.hrtek.enums.LogType;
 import com.hrtek.model.Company;
 import com.hrtek.model.Factory;
+import com.hrtek.model.Log;
 import com.hrtek.model.UserInfo;
 import com.hrtek.model.accommodation.Bed;
 import com.hrtek.model.accommodation.House;
@@ -61,10 +61,8 @@ public class EditService {
 	private ResidencyRepository residencyRepo;
 	private FactoryRepository factoryRepo;
 	private WorkerFinanceRepository workerFinanceRepo;
-	private WorkerNoteRepository workerNoteRepo;
-	private WorkerFilesRepository workerFilesRepo;
-	private UserPositonsRepository userPositonsRepo;
-	
+	private LogRepository logRepo;
+
 	@Autowired
 	public EditService(CitizenshipRepository citizenshipRepo, DepartmentRepository departmentRepo,
 			FactoryRepository factroryRepo, CompanyRepository companyRepo, UserInfoRepository userInfoRepo,
@@ -72,8 +70,8 @@ public class EditService {
 			BedRepository bedRepo, WorkerRepository workerRepo, WorkerBasicRepository workerBasicRepo,
 			WorkerDateRepository workerDateRepo, WorkerContactRepository workerContactRepo,
 			WorkerPermintRepository workerPermintRepo, ResidencyRepository residencyRepo, FactoryRepository factoryRepo,
-			WorkerFinanceRepository workerFinanceRepo, WorkerNoteRepository workerNoteRepo,
-			WorkerFilesRepository workerFilesRepo, UserPositonsRepository userPositonsRepo) {
+			WorkerFinanceRepository workerFinanceRepo, LogRepository logRepo) {
+		super();
 		this.citizenshipRepo = citizenshipRepo;
 		this.departmentRepo = departmentRepo;
 		this.factroryRepo = factroryRepo;
@@ -91,28 +89,29 @@ public class EditService {
 		this.residencyRepo = residencyRepo;
 		this.factoryRepo = factoryRepo;
 		this.workerFinanceRepo = workerFinanceRepo;
-		this.workerNoteRepo = workerNoteRepo;
-		this.workerFilesRepo = workerFilesRepo;
-		this.userPositonsRepo = userPositonsRepo;
-	}
-
-	public void setWorkerModel(Long id, Model model) {
-		Optional<Worker> ow = workerRepo.findById(id);
-		if(ow.isEmpty())
-			throw new IllegalArgumentException();
-		
-		Worker w = ow.get();
-		
-		SortFields fs = new SortFields(citizenshipRepo, departmentRepo, factroryRepo, companyRepo, userInfoRepo, userPositionRepo, bedRepo, houseRepo, roomRepo);
-		
-		model.addAttribute("companies", fs.getCompaniesInOrder(w.getCompanyid()));
-		model.addAttribute("factories", fs.getFactoryInOrder(w.getFactoryid()));
-		model.addAttribute("recruiters", fs.getOrederAgentsAndCoordinators(w.getRecruiter()));
-		model.addAttribute("worker", w);
+		this.logRepo = logRepo;
 	}
 	
-	public void setBasicModel(Long id, Model model) {
-		Optional<WorkerBasic> oWb = workerBasicRepo.findById(id);
+	public Worker getWorker(Long id) {
+		Optional<Worker> oWorker = this.workerRepo.findById(id);
+		if(oWorker.isEmpty())
+			return null;
+		return oWorker.get();
+	}
+
+	public void setWorkerModel(Worker worker, Model model) {
+
+		
+		SortFields fs = new SortFields(citizenshipRepo, departmentRepo, factroryRepo, companyRepo, userInfoRepo, userPositionRepo, bedRepo, houseRepo, roomRepo);
+		model.addAttribute("name", worker.getName());
+		model.addAttribute("companies", fs.getCompaniesInOrder(worker.getCompanyid()));
+		model.addAttribute("factories", fs.getFactoryInOrder(worker.getFactoryid()));
+		model.addAttribute("recruiters", fs.getOrederAgentsAndCoordinators(worker.getRecruiter()));
+		model.addAttribute("worker", worker);
+	}
+	
+	public void setBasicModel(Worker worker, Model model) {
+		Optional<WorkerBasic> oWb = workerBasicRepo.findById(worker.getId());
 		if(oWb.isEmpty()) {
 			//TODO
 			System.out.println("setBasicModel: nieznaleziono id");
@@ -120,73 +119,80 @@ public class EditService {
 		WorkerBasic wb = oWb.get();
 		SortFields fs = new SortFields(citizenshipRepo, departmentRepo, factroryRepo, companyRepo, userInfoRepo, userPositionRepo, bedRepo, houseRepo, roomRepo);
 		
+		model.addAttribute("name", worker.getName());
 		model.addAttribute("citizenships", fs.getCitizenshipInOrder(wb.getCitizenship()));
 		model.addAttribute("departments", fs.getDepartmentInOrder(wb.getDepartment()));
 		model.addAttribute("workerBacic", wb);
 	}
 	
-	public void setStatementModel(Long id, Model model) {
-		Optional<PermitStatement> oPs = workerPermintRepo.findById(id);
+	public void setStatementModel(Worker worker, Model model) {
+		Optional<PermitStatement> oPs = workerPermintRepo.findById(worker.getId());
 		if(oPs.isEmpty()) {
 			//TODO
 			System.out.println("setStatementModel: nieznaleziono id");
 		}
 		PermitStatement ps = oPs.get();
+		model.addAttribute("name", worker.getName());
 		model.addAttribute("permitStatement", ps);
 	}
 	
-	public void setPermitModel(Long id, Model model) {
-		Optional<PermitStatement> oPs = workerPermintRepo.findById(id);
+	public void setPermitModel(Worker worker, Model model) {
+		Optional<PermitStatement> oPs = workerPermintRepo.findById(worker.getId());
 		if(oPs.isEmpty()) {
 			//TODO
 			System.out.println("setPermitModel: nieznaleziono id");
 		}
 		PermitStatement ps = oPs.get();
+		model.addAttribute("name", worker.getName());
 		model.addAttribute("permitStatement", ps);
 	}
 	
-	public void setDatetModel(Long id, Model model) {
-		Optional<WorkerDate> oWd = workerDateRepo.findById(id);
+	public void setDatetModel(Worker worker, Model model) {
+		Optional<WorkerDate> oWd = workerDateRepo.findById(worker.getId());
 		if(oWd.isEmpty()) {
 			//TODO
 			System.out.println("setDatetModel: nieznaleziono id");
 		}
 		WorkerDate wd = oWd.get();
+		model.addAttribute("name", worker.getName());
 		model.addAttribute("workerDate", wd);
 	}
 	
-	public void setResidencytModel(Long id, Model model) {
-		Optional<Residency> oRe = residencyRepo.findById(id);
+	public void setResidencytModel(Worker worker, Model model) {
+		Optional<Residency> oRe = residencyRepo.findById(worker.getId());
 		if(oRe.isEmpty()) {
 			//TODO
 			System.out.println("setResidencytModel: nieznaleziono id");
 		}
 		Residency re = oRe.get();
+		model.addAttribute("name", worker.getName());
 		model.addAttribute("residency", re);
 	}
 	
-	public void setContactModel(Long id, Model model) {
-		Optional<Contact> oCo = workerContactRepo.findById(id);
+	public void setContactModel(Worker worker, Model model) {
+		Optional<Contact> oCo = workerContactRepo.findById(worker.getId());
 		if(oCo.isEmpty()) {
 			//TODO
 			System.out.println("setContacttModel: nieznaleziono id");
 		}
 		Contact co = oCo.get();
+		model.addAttribute("name", worker.getName());
 		model.addAttribute("contact", co);
 	}
 	
-	public void setFinanceModel(Long id, Model model) {
-		Optional<WorkerFinance> oWf = workerFinanceRepo.findById(id);
+	public void setFinanceModel(Worker worker, Model model) {
+		Optional<WorkerFinance> oWf = workerFinanceRepo.findById(worker.getId());
 		if(oWf.isEmpty()) {
 			//TODO
 			System.out.println("setContacttModel: nieznaleziono id");
 		}
 		WorkerFinance wf = oWf.get();
+		model.addAttribute("name", worker.getName());
 		model.addAttribute("workerFinance", wf);
 	}
 	
-	public void setAddressPlModel(Long id, Model model) {
-		Optional<Contact> oCo = workerContactRepo.findById(id);
+	public void setAddressPlModel(Worker worker, Model model) {
+		Optional<Contact> oCo = workerContactRepo.findById(worker.getId());
 		if(oCo.isEmpty()) {
 			//TODO
 			System.out.println("setContacttModel: nieznaleziono id");
@@ -195,62 +201,71 @@ public class EditService {
 		Contact co = oCo.get();
 		if(co.getBedid() == null) {
 			co.setIsOhter(true);
+		}else {
+			co.setAcomdate(bedRepo.findById(co.getBedid()).get().getExpire());
 		}
+		model.addAttribute("name", worker.getName());
 		model.addAttribute("contact", co);
 		model.addAttribute("beds", sf.getBedsInOrder(co.getBedid()));
 	}
 
-	public void update(UsedTable usedTable, WorkerAll all) {
+	public void update(UsedTable usedTable, WorkerAll all, UserInfo user) {
 		
 		switch (usedTable) {
-		case WORKER: updateWorker(all); break;
-		case BASIC: updateBasic(all); break;
-		case STATEMENT: updateStatement(all); break;
-		case PERMIT: updatePermit(all); break;
-		case DATE: updateDate(all); break;
-		case RESIDENCY: updateResidency(all); break;
-		case FINANCE: updateFinance(all); break;
-		case CONTACT: updateContact(all); break;
-		case ADDRESS: updateAddress(all); break;
-		case ADDRESSPL: updateAddressPl(all); break;
+		case WORKER: updateWorker(all, user); break;
+		case BASIC: updateBasic(all, user); break;
+		case STATEMENT: updateStatement(all, user); break;
+		case PERMIT: updatePermit(all, user); break;
+		case DATE: updateDate(all, user); break;
+		case RESIDENCY: updateResidency(all, user); break;
+		case FINANCE: updateFinance(all, user); break;
+		case CONTACT: updateContact(all, user); break;
+		case ADDRESS: updateAddress(all, user); break;
+		case ADDRESSPL: updateAddressPl(all, user); break;
 		default:
 			break;
 		}
 	}
 	
-	public void updateAddressPl(WorkerAll all) {
+	public void updateAddressPl(WorkerAll all, UserInfo user) {
+		
 		Optional<Contact> oCo = workerContactRepo.findById(all.getId());
 		if(oCo.isEmpty()) {
 			//TODO
 			System.out.println("setContacttModel: nieznaleziono id");
 		}
 		Contact co = oCo.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + co.toString() + "<br /> to: <br />");
 		
 		if(co.getBedid() == null && all.getBedid() == null) {
 			co.setAddressPl(all);
 			co.setaccommodation(null, null, null);
 		}else if(co.getBedid() == null && all.getBedid() != null) {
-			addBed(all.getBedid(), co);
+			addBed(all, co);
 		}else if(co.getBedid() != null && all.getBedid() == null) {
 			removeBed(co.getBedid());
 			co.setAddressPl(all);
 			co.setaccommodation(null, null, null);
 		}else {
 			removeBed(co.getBedid());
-			addBed(all.getBedid(), co);
+			addBed(all, co);
 		}
+		
 		this.workerContactRepo.save(co);
+		sb.append(co.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	private void addBed(Long bedid, Contact c) {
-		Bed b = bedRepo.findById(bedid).get();
+	private void addBed(WorkerAll all, Contact c) {
+		Bed b = bedRepo.findById(all.getBedid()).get();
 		Room r = roomRepo.findById(b.getRoomid()).get();
 		House h = houseRepo.findById(b.getHouseid()).get();
 		h.addPerson();
 		this.houseRepo.save(h);
 		r.addPerson();
 		this.roomRepo.save(r);
-		b.setOccupied(c.getId(), null);
+		b.setOccupied(c.getId(), all.getAcomdate());
 		this.bedRepo.save(b);
 		
 		c.setPladdress(h.getAddress());
@@ -272,95 +287,144 @@ public class EditService {
 	}
 	
 	
-	public void updateFinance(WorkerAll all) {
+	public void updateFinance(WorkerAll all, UserInfo user) {
 		Optional<WorkerFinance> oWf = workerFinanceRepo.findById(all.getId());
 		if(oWf.isEmpty()) {
 			//TODO
 			System.out.println("setContacttModel: nieznaleziono id");
 		}
 		WorkerFinance wf = oWf.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + wf.toString() + "<br /> to: <br />");
+		
 		wf.setBonus(all.getBonus());
+		wf.setWage(all.getWage());
 		this.workerFinanceRepo.save(wf);
+		
+		sb.append(wf.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	public void updateAddress(WorkerAll all) {
+	public void updateAddress(WorkerAll all, UserInfo user) {
 		Optional<Contact> oCo = workerContactRepo.findById(all.getId());
 		if(oCo.isEmpty()) {
 			//TODO
 			System.out.println("setContacttModel: nieznaleziono id");
 		}
 		Contact co = oCo.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + co.toString() + "<br /> to: <br />");
+		
 		co.setAddressAbroad(all);
 		this.workerContactRepo.save(co);
+		
+		sb.append(co.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	public void updateContact(WorkerAll all) {
+	public void updateContact(WorkerAll all, UserInfo user) {
 		Optional<Contact> oCo = workerContactRepo.findById(all.getId());
 		if(oCo.isEmpty()) {
 			//TODO
 			System.out.println("setContacttModel: nieznaleziono id");
 		}
 		Contact co = oCo.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + co.toString() + "<br /> to: <br />");
+		
 		co.setContact(all);
 		this.workerContactRepo.save(co);
+		
+		sb.append(co.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	public void updateResidency(WorkerAll all) {
+	public void updateResidency(WorkerAll all, UserInfo user) {
 		Optional<Residency> oRe = residencyRepo.findById(all.getId());
 		if(oRe.isEmpty()) {
 			//TODO
 			System.out.println("setPermitModel: nieznaleziono id");
 		}
 		Residency re = oRe.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + re.toString() + "<br /> to: <br />");
+		
 		re.update(all);
 		this.residencyRepo.save(re);
+		
+		sb.append(re.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	public void updateDate(WorkerAll all) {
+	public void updateDate(WorkerAll all, UserInfo user) {
 		Optional<WorkerDate> oWd = workerDateRepo.findById(all.getId());
 		if(oWd.isEmpty()) {
 			//TODO
 			System.out.println("setPermitModel: nieznaleziono id");
 		}
 		WorkerDate wd = oWd.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + wd.toString() + "<br /> to: <br />");
+		
 		wd.update(all);
 		this.workerDateRepo.save(wd);
+		
+		sb.append(wd.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	public void updatePermit(WorkerAll all) {
+	public void updatePermit(WorkerAll all, UserInfo user) {
 		Optional<PermitStatement> oPs = workerPermintRepo.findById(all.getId());
 		if(oPs.isEmpty()) {
 			//TODO
 			System.out.println("setPermitModel: nieznaleziono id");
 		}
 		PermitStatement ps = oPs.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + ps.toString() + "<br /> to: <br />");
+		
 		ps.updatePermit(all);
 		this.workerPermintRepo.save(ps);
+		
+		sb.append(ps.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	public void updateStatement(WorkerAll all) {
+	public void updateStatement(WorkerAll all, UserInfo user) {
 		Optional<PermitStatement> oPs = workerPermintRepo.findById(all.getId());
 		if(oPs.isEmpty()) {
 			//TODO
 			System.out.println("setStatementModel: nieznaleziono id");
 		}
 		PermitStatement ps = oPs.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + ps.toString() + "<br /> to: <br />");
+		
 		ps.updateStatement(all);
 		this.workerPermintRepo.save(ps);
+		
+		sb.append(ps.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	private void updateBasic(WorkerAll all) {
+	private void updateBasic(WorkerAll all, UserInfo user) {
 		Optional<WorkerBasic> oWb = workerBasicRepo.findById(all.getId());
 		if(oWb.isEmpty()) {
 			//TODO
 			System.out.println("updateBasic: nieznaleziono id");
 		}
 		WorkerBasic wb = oWb.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + wb.toString() + "<br /> to: <br />");
+		
 		wb.update(all);
 		this.workerBasicRepo.save(wb);
+		
+		sb.append(wb.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
-	private void updateWorker(WorkerAll all) {
+	private void updateWorker(WorkerAll all, UserInfo user) {
 		Optional<Worker> oWorker = workerRepo.findById(all.getId());
 		if(oWorker.isEmpty()) {
 			//TODO
@@ -369,6 +433,9 @@ public class EditService {
 		}
 		
 		Worker w = oWorker.get();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Modify: <br />" + w.toString() + "<br /> to: <br />");
+		
 		w.setFirstname(all.getFirstname());
 		w.setLastname(all.getLastname());
 		
@@ -406,6 +473,9 @@ public class EditService {
 			w.setRecruiter(newUi.getId());
 		}
 		this.workerRepo.save(w);
+		
+		sb.append(w.toString());
+		this.logRepo.save(new Log(user.getName(), sb.toString(), LogType.MODIFY));
 	}
 	
 	

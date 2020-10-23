@@ -35,6 +35,9 @@ public class NewWorker {
 	private String pladdress;
 	private String plpostcode;
 	private String plcity;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate acomdate;
+	
 	private double wage;
 	private String sWage;
 	
@@ -44,6 +47,7 @@ public class NewWorker {
 	private LocalDate endZus;
 	
 	public NewWorker() {	
+		this.sex = "M";
 	}
 	
 	public NewWorker(Candidate c) {

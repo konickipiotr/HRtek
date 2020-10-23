@@ -38,16 +38,34 @@ public class WorkerDate {
 	
 	public WorkerDate(Worker w, NewWorker nw) {
 		this.id = w.getId();
-		this.startZus = nw.getStartZus();
-		this.endZus = nw.getEndZus();
+		//this.startZus = nw.getStartZus();
 		this.addToSystem = LocalDate.now();
 	}
 	
+	public WorkerDate(Worker worker, WorkerAll wall) {
+		this.id = worker.getId();
+		this.startZus = wall.getStartZus();
+		this.endZus = wall.getEndZus();
+		this.startWork = wall.getStartWork();
+		this.endWork = wall.getEndZus();
+		this.startWork = wall.getStartWork();
+		this.addToSystem = wall.getAddToSystem();
+		this.startMedicalExams = wall.getStartMedicalExams();
+		this.endMedicalExams = wall.getEndMedicalExams();
+	}
+
 	public void update(WorkerAll w) {
 		this.startZus = w.getStartZus();
 		this.endZus = w.getEndZus();
 		this.startWork = w.getStartWork();
 		this.startMedicalExams = w.getStartMedicalExams();
 		this.endMedicalExams = w.getEndMedicalExams();
+	}
+
+	@Override
+	public String toString() {
+		return " [startZus=" + startZus + ", endZus=" + endZus + ", startWork=" + startWork + ", endWork="
+				+ endWork + ", startMedicalExams=" + startMedicalExams + ", endMedicalExams=" + endMedicalExams
+				+ ", addToSystem=" + addToSystem + "]";
 	}
 }

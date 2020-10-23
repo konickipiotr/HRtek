@@ -15,28 +15,22 @@ d5eeee
 th{
 	background-color: #b56e6e;
 }
-
-a:link.tdbutton{
-	background-color: #5b7cb0;
+a:link.aButton{
+	background-color: #782525;
 }
 
-a:visited.tdbutton{
-	background-color: #5b7cb0;
+a:visited.aButton{
+	background-color: #782525;
 }
 
-a:hover.tdbutton{
-	background-color: #5b7cb0;
+a:hover.aButton{
+	background-color: #cc0000;
 }
 
-a:link.button_new{
-	
-	background-color: #5b7cb0;
+.button{
+	background-color: #782525;
 }
 
-a:visited.button_new{
-	background-color: #5b7cb0;
-}
-
-a:hover.button_new{
-	background-color: #5b7cb0;
+.button:hover{
+	background-color: #cc0000;
 }

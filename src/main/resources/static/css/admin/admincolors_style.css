@@ -1,5 +1,18 @@
 @charset "UTF-8";
 
+a:link.stage-button{
+	background-color:  #037135;
+	border: 3px solid #296e0f;
+}
+
+a:visited.stage-button{
+	background-color:  #037135;
+	border: 3px solid #296e0f;
+}
+
+a:hover.stage-button{
+	background-color:  #4e9a06;
+}
 
 #container{
 	background-color:  #e4ffd9;
@@ -9,15 +22,24 @@ th{
 	background-color: #037135;
 }
 
-a:link.tdbutton{
+.button{
 	background-color: #037135;
 }
 
-a:visited.tdbutton{
+.button:hover{
+	background-color: #4e9a06;
+}
+
+
+a:link.aButton{
 	background-color: #037135;
 }
 
-a:hover.tdbutton{
+a:visited.aButton{
+	background-color: #037135;
+}
+
+a:hover.aButton{
 	background-color: #4e9a06;
 }
 

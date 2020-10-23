@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
-
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
+	<script src="https://kit.fontawesome.com/7ccfa6815b.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
@@ -18,7 +18,7 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Podstawowe</h1>
+			<h1 class="header-header" th:text="#{header.work}"></h1>
 		</div>
 		
 		<div th:replace="user/display/fragments/viewbar:: viewbar"></div>
@@ -32,26 +32,26 @@
 				<table id="basic-table">
 					<tr>
 						<th>lp</th>
-						<th>status</th>
-						<th>profil</th>
-						<th>Imię</th>
-						<th>Nazwisko</th>
-						<th th:if="${fd.bDateofbirth == true}" >Data urodzenia</th>
-						<th th:if="${fd.bRecruiter == true}">rekruter</th>
-						<th th:if="${fd.bCompany == true}">firma</th>
-						<th th:if="${fd.bFactory == true}">fabryka</th>
-						<th th:if="${fd.bStartWork == true}">start work</th>
-						<th th:if="${fd.bStartZus == true}">start zus</th>
-						<th th:if="${fd.bEndWork == true}">end work</th>
-						<th th:if="${fd.bEndZus == true}">end zus</th>
-						<th th:if="${fd.bStatementType == true}">typ o</th>
-						<th th:if="${fd.bStatement == true}">oświad</th>
-						<th th:if="${fd.bStatementValidFrom == true}">o od</th>
-						<th th:if="${fd.bStatementValidTo == true}">o do</th>
-						<th th:if="${fd.bPermit == true}">pozwolenia</th>
-						<th th:if="${fd.bPermitValidFrom == true}">p od</th>
-						<th th:if="${fd.bPermitValidTo == true}">p do</th>
-						<th th:if="${fd.bOther == true}">other</th>
+						<th class="td_small">Status</th>
+						<th>PROFIL</th>
+						<th th:text="#{firstname}"></th>
+						<th th:text="#{lastname}"></th>
+						<th th:if="${fd.bDateofbirth == true}" th:text="#{dateofbirth}" class="td_date"></th>
+						<th th:if="${fd.bRecruiter == true}" th:text="#{recruiter}"></th>
+						<th th:if="${fd.bCompany == true}" th:text="#{company}"></th>
+						<th th:if="${fd.bFactory == true}" th:text="#{factory}"></th>
+						<th th:if="${fd.bStartWork == true}" th:text="#{start.work}" class="td_date"></th>
+						<th th:if="${fd.bStartZus == true}" th:text="#{start.zus}" class="td_date"></th>
+						<th th:if="${fd.bEndWork == true}" th:text="#{end.work}" class="td_date"></th>
+						<th th:if="${fd.bEndZus == true}" th:text="#{end.zus}" class="td_date"></th>
+						<th th:if="${fd.bStatementType == true}" th:text="#{statementT}"></th>
+						<th th:if="${fd.bStatement == true}" th:text="#{statement}"></th>
+						<th th:if="${fd.bStatementValidFrom == true}" th:text="#{from}" class="td_date"></th>
+						<th th:if="${fd.bStatementValidTo == true}" th:text="#{to}" class="td_date"></th>
+						<th th:if="${fd.bPermit == true}" th:text="#{permit}"></th>
+						<th th:if="${fd.bPermitValidFrom == true}" th:text="#{from}" class="td_date"></th>
+						<th th:if="${fd.bPermitValidTo == true}" th:text="#{to}" class="td_date"></th>
+						<th th:if="${fd.bOther == true}" th:text="#{other}"></th>
 					</tr>
 					
 					<tr>
@@ -202,7 +202,9 @@
 							<span th:unless="${i.status == 1}" class="dot"></span>
 						</td>
 						<td>
-							<a th:href="@{'/profil/'+ ${i.id}}">[ico]</a>
+							<div class="i-ico">
+								<a th:href="@{'/profil/'+ ${i.id}}"><i class="fas fa-address-card fa-2x"></i></a>
+							</div>
 						</td>
 						<td th:text="${i.firstname}"></td>
 						<td th:text="${i.lastname}"></td>

@@ -2,37 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/user/home_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/home_style.css" />
+	
+	<script src="https://kit.fontawesome.com/7ccfa6815b.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
 	<nav th:replace="user/fragments/menu :: menu"></nav>
 	<section id="container">
 	<div class="header-container">
-			<h1 class="header-header">Home</h1>
+			<h1 class="header-header" th:text="#{menu.home}"></h1>
 		</div>
 	<!-- ************************************************************************* -->
 	
 	<div class="content">
 		<div class="left-content">
 			<div class="section-header">
-				<h3>Zadania od szefa</h3>
+				<h3 th:text="#{msg.bosstasks}"></h3>
 			</div>
 			<div class="boss-tasks">
 			<table>
 				<tr>
 					<th style="width: 30px"></th>
-					<th>Zadaie</th>
-					<th>Opis</th>
-					<th style="width: 100px" >Priorytet</th>
-					<th style="width: 110px" >Deadline</th>
-					<th style="width: 70px">Status</th>
+					<th th:text="#{label.task}"></th>
+					<th th:text="#{label.description}"></th>
+					<th style="width: 100px" th:text="#{label.priority}"></th>
+					<th style="width: 110px" th:text="#{label.deadline}"></th>
+					<th style="width: 70px" th:text="#{label.status}"></th>
 					<th style="width: 70px"></th>
 					<th style="width: 70px"></th>
 				</tr>
@@ -45,10 +47,14 @@
 					<td style="width: 110px" th:text="${t.deadlinedate}"></td>
 					<td style="width: 70px" th:text="${t.status}"></td>
 					<td style="width: 70px">
-						<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}" th:href="@{'/task/DONE/' +  ${t.id}}">done</a>
+						<div class="i-ico-green">
+							<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}" th:href="@{'/task/DONE/' +  ${t.id}}"><i class="fas fa-check-square fa-2x"></i></a>
+						</div>
 					</td>
 					<td style="width: 70px">
-						<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/FAIL/' +  ${t.id}}">[fail]</a>
+						<div class="i-ico-red">
+							<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/FAIL/' +  ${t.id}}"><i class="fas fa-times-circle fa-2x"></i></a>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -56,17 +62,17 @@
 			
 			
 			<div class="section-header">
-				<h3>Moja todo lista</h3>
+				<h3 th:text="#{msg.mytodolist}"></h3>
 			</div>
 			<div class="boss-tasks">
 			<table>
 				<tr>
 					<th style="width: 30px"></th>
-					<th>Zadaie</th>
-					<th>Opis</th>
-					<th style="width: 100px" >Priorytet</th>
-					<th style="width: 110px" >Deadline</th>
-					<th style="width: 70px">Status</th>
+					<th th:text="#{label.task}"></th>
+					<th th:text="#{label.description}"></th>
+					<th style="width: 100px" th:text="#{label.priority}"></th>
+					<th style="width: 110px" th:text="#{label.deadline}"></th>
+					<th style="width: 70px" th:text="#{label.status}"></th>
 					<th style="width: 70px"></th>
 					<th style="width: 70px"></th>
 					<th style="width: 70px"></th>
@@ -79,13 +85,19 @@
 					<td style="width: 110px" th:text="${t.deadlinedate}"></td>
 					<td style="width: 70px" th:text="${t.status}"></td>
 					<td style="width: 70px">
-						<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/DONE/' +  ${t.id}}">done</a>
+						<div class="i-ico-green">
+							<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/DONE/' +  ${t.id}}"><i class="fas fa-check-square fa-2x"></i></a>
+						</div>
 					</td>
 					<td style="width: 70px">
-						<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/FAIL/' +  ${t.id}}">[fail]</a>
+						<div class="i-ico-red">
+							<a th:if="${t.status.name() == 'ONGOING' or t.status.name() == 'DELAY'}"  th:href="@{'/task/FAIL/' +  ${t.id}}"><i class="fas fa-times-circle fa-2x"></i></a>
+						</div>
 					</td>
 					<td style="width: 70px">
-						<a th:href="@{'task/del/' + ${t.id}}">[del]</a>
+						<div class="i-ico">
+							<a th:href="@{'task/del/' + ${t.id}}"><i class="fas fa-trash-alt fa-2x"></i></a>
+						</div>
 					</td>
 				</tr>
 			</table>
@@ -96,13 +108,13 @@
 				<form th:action="@{/savenote}" method="post" th:object="${myNote}">
 				<input type="hidden" name="id" th:field="*{id}">
 				<div>
-					<label for="mynote">Notaki</label>
+					<label for="mynote" th:text="#{label.note}"></label>
 				</div>
 				<div>
 					<textarea id="mynote" name="text" th:text="${myNote.text}"></textarea>
 				</div>
 				<div>
-					<button class="savebutton" type="submit">Zapisz</button>
+					<button class="button" type="submit" th:text="#{button.save}"></button>
 				</div>
 				</form>
 			</div>
@@ -113,65 +125,65 @@
 				<input type="hidden" name="owner" value="ME">
 				<input type="hidden" name="status" value="ONGOING">
 				<div class="t-label">
-					<label for="mynote">Nazwa</label>
+					<label for="taskname" th:text="#{label.name}"></label>
 				</div>
 				<div>
 					<input type="text" name="taskname" id="taskname" required>
 				</div>
 				<div class="t-label">
-					<label for="description">opis</label>
+					<label for="description" th:text="#{label.description}"></label>
 				</div>
 				<div>
 					<textarea id="description" name="description"></textarea>
 				</div>
 				<div class="t-label">
-					<label for="priority">Priorytet</label>
+					<label for="priority" th:text="#{label.priority}"></label>
 				</div>
 				<div class="radio-buttons">
 						<div>
-							<label for="priorityN">Normal</label>
+							<label for="priorityN" th:text="#{status.priority.normal}"></label>
 							<input type="radio" name="priority" id="priorityN" value="NORMAL" checked>
 						</div>
 						<div>
-							<label for="priorityH">High</label>
+							<label for="priorityH" th:text="#{status.priority.high}"></label>
 							<input type="radio" name="priority" id="priorityH" value="HIGH">
 						</div>
 						<div>
-							<label for="priorityL">Low</label>
+							<label for="priorityL" th:text="#{status.priority.low}"></label>
 							<input type="radio" name="priority" id="priorityL" value="LOW">
 						</div>
 					</div>
 					
 					<div class="t-label">
-						<label for="deadline">Termin</label>
+						<label for="deadline" th:text="#{label.deadline}"></label>
 					</div>
 					<div class="radio-buttons">
 						<div>
-							<label for="deadlineNone">Brak</label>
+							<label for="deadlineNone" th:text="#{status.none}"></label>
 							<input type="radio" name="deadline" id="deadlineNone" value="NONE" checked>
 						</div>
 						<div>
-							<label for="deadlineToday">Dziś</label>
+							<label for="deadlineToday" th:text="#{status.today}"></label>
 							<input type="radio" name="deadline" id="deadlineToday" value="TODAY">
 						</div>
 						<div>
-							<label for="deadlineTomorrow">Jutro</label>
+							<label for="deadlineTomorrow" th:text="#{status.tomorrow}"></label>
 							<input type="radio" name="deadline" id="deadlineTomorrow" value="TOMORROW">
 						</div>
 						<div>
-							<label for="deadlineOther">Inna</label>
+							<label for="deadlineOther" th:text="#{status.other}"></label>
 							<input type="radio" name="deadline" id="deadlineOther" value="OTHER">
 						</div>
 					</div>
 					
 					<div>
-						<label for="deadlinedate">Inna Data</label>
+						<label for="deadlinedate" th:text="#{status.ohterdate}"></label>
 					</div>
 					<div>
 						<input type="date" name="deadlinedate" id="deadlinedate" required disabled>
 					</div>
 					<div style="margin-top: 10px;">
-						<button class="savebutton" type="submit">Dodaj</button>
+						<button class="button" type="submit" th:text="#{button.add}"></button>
 					</div>
 				</form>
 			</div>

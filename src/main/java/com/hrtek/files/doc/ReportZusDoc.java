@@ -8,13 +8,11 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import com.hrtek.user.report.views.ReportAccommodation;
 import com.hrtek.user.report.views.ReportZus;
 
 public class ReportZusDoc implements Doc<Workbook> {
@@ -161,7 +159,7 @@ public class ReportZusDoc implements Doc<Workbook> {
 
 	@Override
 	public String getFilename() {
-		return "Report_Zus_" + rp_list.get(0).getCompany() + "_" + rp_list.get(0).getFacotry() + ".xlsx";
+		return "Report_Zus_" + rp_list.get(0).getCompany() + "_" + rp_list.get(0).getFacotry() + ".xls";
 	}
 
 	@Override

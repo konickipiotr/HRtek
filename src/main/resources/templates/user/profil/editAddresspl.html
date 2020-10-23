@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -17,51 +17,89 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">EDYTUJ</h1>
+			<h1 class="header-header" th:text="#{header.EDIT}"></h1>
 		</div>
 		
 		<p th:text="${error_msg}" class="error_message"></p>
 		<p th:text="${success_msg}" class="succes_message"></p>
 		
-		
+		<div class="form-container0">
 			<form th:action="@{/profiledit}" method="post" th:object="${contact}">
 				<input type="hidden" name="id" th:field="*{id}">
 				<input type="hidden" name="type" value="ADDRESSPL">
+				<div class="edit-row">
+					<span style="color: white; font-size: 1.3em; font-weight: bold;" th:text="${name}"></span>
+				</div>
 				
 				<div class="lab-div">
-					<label for="bedid">Nasze</label>
-					<label for="workerAll">(Inne)</label>
+					<label for="bedid" th:text="#{lable.our}"></label>
+					<label for="workerAll" th:text="#{other}"></label>
 					<input th:if="${contact.isOhter == true}" type="checkbox" name="isOhter" id="isOhter" checked>
 					<input th:unless="${contact.isOhter == true}" type="checkbox" name="isOhter" id="isOhter">
 				</div>
-				<div class="input-div">
-					<select id="bedid" name="bedid" required>
-						<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}"></option>
-					</select>
+				<div class="edit-row">
+					<div class="time-info">
+						<span th:text="#{label.unlockAt}">:</span>
+						<span id="h" th:text="${h}"></span>
+						<span>:</span>
+						<span id="min" th:text="${min}"></span>
+					</div>
+				</div>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="bedid" th:text="#{label.bed}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<select id="bedid" name="bedid" required>
+							<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}"></option>
+						</select>	
+					</div>
 				</div>
 				
-				<label for="pladdress" >Address</label>
-				<input type="text" name="pladdress" id="pladdress" th:field="*{pladdress}"><br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="acomdate" th:text="#{to}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="date" id="acomdate" name="acomdate" th:value="${contact.acomdate}">
+					</div>
+				</div>
 				
-				<label for="plpostcode">Kod poczt</label>
-				<input type="text" name="postcode" id="plpostcode" th:field="*{plpostcode}"><br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="pladdress" th:text="#{address}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="text" name="pladdress" id="pladdress" th:field="*{pladdress}"><br>
+					</div>
+				</div>
 				
-				<label for="plcity">Miasto</label>
-				<input type="text" name="plcity" id="plcity" th:field="*{plcity}"><br>
-				<br>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="plpostcode" th:text="#{postcode}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="text" name="postcode" id="plpostcode" th:field="*{plpostcode}"><br>
+					</div>
+				</div>
 				
-				
-				<button type="submit">Zapisz</button>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="plcity" th:text="#{city}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="text" name="plcity" id="plcity" th:field="*{plcity}"><br>
+					</div>
+				</div>
+				<div class="edit-row">
+					<button class="button" name="action" value="save"  type="submit" th:text="#{button.save}" onclick="return confirm('Are you sure you want to modify these values?')"></button>
+					<button class="button" name="action" value="cancel" type="submit" th:text="#{button.cancel}" formnovalidate></button>
+				</div>	
 			</form>
+		</div>
 	
 	<!-- ************************************************************************* -->
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
-<script type="text/javascript" src="/scripts/recruitment2.js">
-
-</script>
-<script th:inline="javascript">
-var status = [[${status}]];
-</script>
 </html>

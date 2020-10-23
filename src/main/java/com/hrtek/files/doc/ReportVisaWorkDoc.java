@@ -13,7 +13,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import com.hrtek.user.report.views.ReportStartWork;
 import com.hrtek.user.report.views.ReportVisaWork;
 
 public class ReportVisaWorkDoc implements Doc<Workbook> {
@@ -102,7 +101,7 @@ public class ReportVisaWorkDoc implements Doc<Workbook> {
 
 	@Override
 	public String getFilename() {
-		return "Report_StatementVisaWork.xlsx";
+		return "Report_StatementVisaWork.xls";
 	}
 
 	@Override

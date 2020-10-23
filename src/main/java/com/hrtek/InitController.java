@@ -50,6 +50,7 @@ public class InitController {
 		
 		if(user.getRoles().equals("BOSS")) return "redirect:/boss";
 		if(user.getRoles().equals("ADMIN")) return "redirect:/admin";
+		
 		return "redirect:/";
 	}
 }

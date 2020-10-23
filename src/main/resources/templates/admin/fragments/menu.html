@@ -2,19 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body>
 	<nav th:fragment="menu">
 		<ul>
-			<li><a th:href="@{/admin}">Home</a></li>
-			<li><a th:href="@{/admin/employees}">Pracownicy</a></li>
-			<li><a th:href="@{/admin/factory}">Fabryki</a></li>
-			<li><a th:href="@{/admin/company}">Firmy</a></li>
-			<li><a th:href="@{/admin/others}">Inne</a></li>
-			<li><a href="">Logi</a></li>
+			<li><a th:href="@{/admin}" th:text="#{menu.home}"></a></li>
+			<li><a th:href="@{/admin/employees}" th:text="#{header.employees}"></a></li>
+			<li><a th:href="@{/admin/factory}" th:text="#{header.factories}"></a></li>
+			<li><a th:href="@{/admin/company}" th:text="#{header.companies}"></a></li>
+			<li><a th:href="@{/admin/others}" th:text="#{header.ohter}"></a></li>
+			<li><a th:href="@{/admin/workers}" th:text="#{header.workersmanagment}"></a></li>
+			<li><a th:href="@{/admin/logs}" th:text="#{header.logs}"></a></li>
 		</ul>
 	</nav>
 </body>

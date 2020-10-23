@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -17,26 +17,52 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">EDYTUJ</h1>
+			<h1 class="header-header" th:text="#{header.EDIT}"></h1>
 		</div>
 		
 		<p th:text="${error_msg}" class="error_message"></p>
 		<p th:text="${success_msg}" class="succes_message"></p>
 		
-		
+		<div class="form-container0">
 			<form th:action="@{/profiledit}" method="post" th:object="${contact}">
 				<input type="hidden" name="id" th:field="*{id}">
 				<input type="hidden" name="type" value="CONTACT">
+				<div class="edit-row">
+					<span style="color: white; font-size: 1.3em; font-weight: bold;" th:text="${name}"></span>
+				</div>
 				
-				<label for="phone" ></label>
-				<input type="text" name=phone id="phone" th:field="*{phone}"><br>
-				
-				<label for="email" ></label>
-				<input type="email" name="email" id="email" th:field="*{email}"><br>
-
-				
-				<button type="submit">Zapisz</button>
+				<div class="edit-row">
+					<div class="time-info">
+						<span th:text="#{label.unlockAt}">:</span>
+						<span id="h" th:text="${h}"></span>
+						<span>:</span>
+						<span id="min" th:text="${min}"></span>
+					</div>
+				</div>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="phone" th:text="#{phone}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="text" name=phone id="phone" th:field="*{phone}">
+					</div>
+					
+				</div>
+				<div class="edit-row">
+					<div class="edit-col-lab">
+						<label for="email" th:text="#{email}"></label>
+					</div>
+					<div class="edit-col-inp">
+						<input type="email" name="email" id="email" th:field="*{email}">
+					</div>
+					
+				</div>
+				<div class="edit-row">
+					<button class="button" name="action" value="save"  type="submit" th:text="#{button.save}" onclick="return confirm('Are you sure you want to modify these values?')"></button>
+					<button class="button" name="action" value="cancel" type="submit" th:text="#{button.cancel}" formnovalidate></button>
+				</div>	
 			</form>
+		</div>
 	
 	<!-- ************************************************************************* -->
 	</section>

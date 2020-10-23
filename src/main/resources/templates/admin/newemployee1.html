@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -18,7 +18,7 @@
 	<!-- ************************************************************************* -->
 
 		<div class="header-container">
-			<h1 class="header-header">Nowy pracownik</h1>
+			<h1 class="header-header" th:text="#{button.newEmployee}"></h1>
 		</div>
 	
 		<p th:text="${error_msg}" class="error_message">
@@ -27,32 +27,32 @@
 	 		<form th:action="@{/admin/newemployee}" method="post" th:object="${newEmployeeModel}">
 	 			<div class="box">
 		 			<div>
-	 					<label for="firstname">Firstname</label>
+	 					<label for="firstname" th:text="#{firstname}"></label>
 	 					<input type="text" minlength="2" id="firstname" name="firstname" th:field="*{firstname}" required><br>
 		 		
-		 				<label for="phone">Phone</label>
+		 				<label for="phone" th:text="#{phone}"></label>
 		 				<input type="text" id="phone" name="phone" th:field="*{phone}"><br>
 		 		
-		 				<label for="sexM">Male</label>
+		 				<label for="sexM" th:text="#{male}"></label>
 		 				<input type="radio" id="sexM" name="sex" value="M" checked>
-		 				<label for="sexF">Female</label>
+		 				<label for="sexF" th:text="#{female}"></label>
 		 				<input type="radio" id="sexF" name="sex" value="F">
 		 			</div>
 		 			<div>
-		 				<label for="lastname">Lastname</label>
+		 				<label for="lastname" th:text="#{lastname}"></label>
 		 				<input type="text" minlength="2" id="lastname" name="lastname" th:field="*{lastname}" required><br>
 		 				
-		 				<label for="email">E-mail</label>
+		 				<label for="email" th:text="#{email}"></label>
 		 				<input type="email" id="email" name="email" th:field="*{email}"><br>
 		 				
-		 				<label for="position">Stanowisko</label>
+		 				<label for="position" th:text="#{position}"></label>
 		 				<select id="position" name="position">
 		 					<option th:each="i : ${positions}" th:value="${i.id}" th:text="${i.position}"></option>
 		 				</select>
 		 			</div>
 	 			</div>
 
-	 			<button type="submit">Dalej</button>
+	 			<button type="submit" class="button" th:text="#{button.next}"></button>
 	 		</form>
 	 	</div>
 		

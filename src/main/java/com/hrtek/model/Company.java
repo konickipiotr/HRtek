@@ -25,7 +25,6 @@ public class Company {
 	private String postcode;
 	private String city;
 	private int numberofwokers;
-	private double nettorate;
 	
 	public Company() {
 	}
@@ -57,8 +56,13 @@ public class Company {
 		this.postcode = postcode;
 		this.city = city;
 		this.numberofwokers = numberofwokers;
-		this.nettorate = nettorate;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "[pkd=" + pkd + ", nip=" + nip + ", krs=" + krs + ", regon=" + regon + ", kraz=" + kraz
+				+ ", shortname=" + shortname + ", fullname=" + fullname + ", address=" + address + ", postcode="
+				+ postcode + ", city=" + city + ", numberofwokers=" + numberofwokers + "]";
+	}
 	
 }

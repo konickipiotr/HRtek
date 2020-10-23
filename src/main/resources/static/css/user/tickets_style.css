@@ -3,9 +3,9 @@
 .form-container{
 	width: 50%;
 	display: flex;
-	flex-direction: coll;
 	justify-content: center;
 	background-color: #729fcf;
+	align-self: flex-start;
 }
 
 .form-container div{

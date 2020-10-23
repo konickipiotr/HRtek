@@ -66,4 +66,25 @@ public class PermitStatement {
 	public PermitStatement(Worker w) {
 		this.id = w.getId();
 	}
+
+	public PermitStatement(Worker worker, WorkerAll wall) {
+		this.id = worker.getId();
+		this.statementType = wall.getStatementType();
+		this.statement = wall.getStatement();
+		this.statementValidFrom = wall.getStatementValidFrom();
+		this.statementValidTo = wall.getStatementValidTo();
+		this.permit = wall.getPermit();
+		this.permitValidFrom = wall.getPermitValidFrom();
+		this.permitValidTo = wall.getPermitValidTo();
+		this.other = wall.getOther();
+	}
+
+	@Override
+	public String toString() {
+		return " [statementType=" + statementType + ", statement=" + statement + ", statementValidFrom="
+				+ statementValidFrom + ", statementValidTo=" + statementValidTo + ", permit=" + permit
+				+ ", permitValidFrom=" + permitValidFrom + ", permitValidTo=" + permitValidTo + ", other=" + other
+				+ "]";
+	}
+	
 }

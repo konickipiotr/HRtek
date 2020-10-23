@@ -4,7 +4,6 @@ import java.security.Principal;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.hrtek.admin.tickets.TicketType;
 import com.hrtek.db.TicketRepository;
 import com.hrtek.db.UserRepository;
 import com.hrtek.model.Ticket;
 import com.hrtek.model.User;
-import com.hrtek.model.UserInfo;
 
 @Controller
 @RequestMapping("/tickets")
@@ -40,10 +37,8 @@ public class UserTiketsController {
 	@PostMapping
 	public String sendTicket(Ticket ticket, Model model, Principal principal) {
 		User user = userRepo.findByUsername(principal.getName());
-		System.out.println(ticket);
 		ticket.setLogin(user.getUsername());
 		ticket.setUserId(user.getId());
-		System.out.println(ticket);
 		this.ticketRepo.save(ticket);
 		setTicketType(model);
 		return "user/tickets";
@@ -59,9 +54,6 @@ public class UserTiketsController {
 			}
 			values[j] = allvalues[i];
 		}
-	
-		for(TicketType t : values)
-			System.out.println(t);
 		
 		Map<String, String>  info = new TreeMap<>();
 		info.put(TicketType.APPLICATION_ERROR.name(), "Aplikacja przestała działać w którymś momencie? Opisz szczegółowo co się stało i w jakiej sytuacji.");

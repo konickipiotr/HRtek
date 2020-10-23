@@ -1,5 +1,8 @@
 package com.hrtek.user.timesheet;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -60,17 +63,18 @@ public class Timesheet {
 //	@Length(max = 1000)
 //	private String y2040;
 	
-	
 	public Timesheet() {
+		
+	}
+	
+	public Timesheet(LocalDate now) {
 		
 		String value = "";
 		StringBuilder sb = new StringBuilder();
 		for(int day = 0; day < 366; day++) {
-				sb.append("12");
+				sb.append("XX");
 		}
-			
 		value = sb.toString();
-
 		y2020 = value;
 		y2021 = value;
 		y2022 = value;
@@ -92,10 +96,56 @@ public class Timesheet {
 //		y2038 = value;
 //		y2039 = value;
 //		y2040 = value;
+		
+		int year = now.getYear();
+		
+		switch (year) {
+		case 2020: y2020 = perpare(now, 2020);
+		case 2021: y2021 = perpare(now, 2021);
+		case 2022: y2022 = perpare(now, 2022);
+		case 2023: y2023 = perpare(now, 2023);
+		case 2024: y2024 = perpare(now, 2024);
+		case 2025: y2025 = perpare(now, 2025);
+		case 2026: y2026 = perpare(now, 2026);
+		case 2027: y2027 = perpare(now, 2027);
+		case 2028: y2028 = perpare(now, 2028);
+		case 2029: y2029 = perpare(now, 2029);
+		case 2030: y2030 = perpare(now, 2030);
+		case 2031: y2031 = perpare(now, 2031);
+		case 2032: y2032 = perpare(now, 2032);
+		case 2033: y2033 = perpare(now, 2033);
+		case 2034: y2034 = perpare(now, 2034);
+		
+//		case 2035: y2035 = perpare(now, 2035);
+//		case 2036: y2036 = perpare(now, 2036);
+//		case 2037: y2037 = perpare(now, 2037);
+//		case 2038: y2038 = perpare(now, 2038);
+//		case 2039: y2039 = perpare(now, 2039);
+//		case 2040: y2040 = perpare(now, 2040);
+		
+		default:
+			break;
+		}
+
 	}
 	
-	public Timesheet(Worker w) {
-		this();
+	private String perpare(LocalDate now, int year) {
+		int dayOfYear = 0;
+		int currYear = now.getYear();
+		if(currYear == year) {
+			dayOfYear = (now.getDayOfYear() - 1) * 2;
+		}
+		
+		String syear = "y" + year;
+		StringBuilder currentYear = new StringBuilder(getCurrentYear(syear));
+		for(int i = dayOfYear; i < currentYear.length(); i++) {
+			currentYear.setCharAt(i, '0');			
+		}
+		return currentYear.toString();
+	}
+	
+	public Timesheet(Worker w, LocalDate now) {
+		this(now);
 		this.factoryid = w.getFactoryid();
 		this.workerid = w.getId();
 	}

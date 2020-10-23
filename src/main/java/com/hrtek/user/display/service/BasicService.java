@@ -2,6 +2,7 @@ package com.hrtek.user.display.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,8 @@ import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerDateRepository;
 import com.hrtek.db.worker.WorkerRepository;
 import com.hrtek.model.StatusFC;
-import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
-import com.hrtek.model.worker.WorkerDate;
 import com.hrtek.user.display.views.BasicView;
 
 
@@ -58,12 +57,16 @@ public class BasicService {
 		List<BasicView> bv_list = new ArrayList<BasicView>();
 		
 		for(Worker w : worker_list) {
-			bv_list.add(buildSingelWorkerRecord(w));
+			try {
+				bv_list.add(buildSingelWorkerRecord(w));
+			}catch (NoSuchElementException e) {
+				System.err.println("BasicService.buildSingelWorkerRecord() Nie odnaleziono elementu");
+			}
 		}
 		return bv_list;
 	}
 	
-	private BasicView buildSingelWorkerRecord(Worker w) {
+	private BasicView buildSingelWorkerRecord(Worker w) throws NoSuchElementException{
 		long id = w.getId();
 		BasicView bv = new BasicView(w);
 		

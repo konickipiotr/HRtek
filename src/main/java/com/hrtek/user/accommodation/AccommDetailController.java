@@ -1,9 +1,5 @@
 package com.hrtek.user.accommodation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hrtek.db.accommodation.BedRepository;
-import com.hrtek.model.ListModel;
 import com.hrtek.model.accommodation.AddressForm;
-import com.hrtek.model.accommodation.Bed;
 import com.hrtek.model.accommodation.FinanceForm;
 import com.hrtek.model.accommodation.LiderForm;
-import com.hrtek.model.worker.Contact;
-import com.hrtek.model.worker.Worker;
 
 @Controller
 @RequestMapping("/accdetail")
@@ -57,7 +48,6 @@ public class AccommDetailController {
 	
 	@PostMapping(params = "edit=lider")
 	public String editLider(LiderForm lf) {
-		System.out.println(lf);
 		accDetailService.saveLider(lf);
 		return "redirect:/accdetail/" + lf.getId();
 	}

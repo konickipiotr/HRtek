@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -18,29 +18,29 @@
 	<!-- ************************************************************************* -->
 
 		<div class="header-container">
-			<h1 class="header-header">Pracownicy</h1>
+			<h1 class="header-header" th:text="#{header.employees}"></h1>
 		</div>
 
 	 	<div class="button_container">
-			<a class="button_new" th:href="@{/admin/newemployee}">Nowy pracownik</a>
+			<a class="stage-button" th:href="@{/admin/newemployee}" th:text="#{button.newEmployee}"></a>
 		</div>
 		
 		<div th:if="${edit == 'E'}" id="form-edit-employee-container">
-			<h3>Edytuj</h3>
+			<h3 th:text="#{button.edit}"></h3>
 			<form th:action="@{/admin/employees/modify}" method="post">
 				<input type="hidden" name="id" th:value="${emp.id}">
 				
 				<div class="edit-column">
 					<div class="input-div">
-						<label for="efristname" >Imię</label>
+						<label for="efristname" th:text="#{firstname}"></label>
 						<input type="text" id="efristname" name="firstname" th:value="${emp.firstname}"><br>
 					</div>
 					<div class="input-div">
-						<label for="email">email</label>
+						<label for="email" th:text="#{email}"></label>
 						<input type="email" id="email" name="email" th:value="${emp.email}"><br>
 					</div>
 					<div class="input-div">
-						<label for="position" th:value="${emp.position}">Stanowsko</label>
+						<label for="position" th:value="${emp.position}" th:text="#{position}"></label>
 						<select id="position" name="position">
 							<option th:each="p : ${positons_list}" th:value="${p.id}" th:text="${p.position}"></option>
 						</select>
@@ -49,32 +49,34 @@
 				</div>
 				
 				<div class="edit-column">
-					<label for="elastname" >Nazwisko</label>
+					<label for="elastname" th:text="#{lastname}"></label>
 					<input type="text" id="elastname" name="lastname" th:value="${emp.lastname}"> <br>
 				
-					<label for="phone">phone</label>
+					<label for="phone" th:text="#{phone}"></label>
 					<input type="text" id="phone" name="phone"  th:value="${emp.phone}">
 				</div>
 				<br>
-				<button type="submit">Aktualizuj</button>
+				<button type="submit" class="button-accept" onclick="return confirm('Are you sure you want to modify employee?')" th:text="#{button.update}"></button>
 			</form>
 		</div>
 		
 		<table>
 			<tr>
 				<th class="td_lp">Lp.</th>
+				<th>ID</th>
 				<th>login</th>
-				<th>First name</th>
-				<th>Last name</th>
-				<th>Position</th>
-				<th class="td_sex">Sex</th>
-				<th>email</th>
-				<th>phone</th>
+				<th th:text="#{firstname}"></th>
+				<th th:text="#{lastname}"></th>
+				<th th:text="#{position}"></th>
+				<th class="td_sex" th:text="#{sex}"></th>
+				<th th:text="#{email}"></th>
+				<th th:text="#{phone}"></th>
 				<th></th>
 				<th></th>
 			</tr>
 			<tr th:each="i, it : ${employeeList}">
 				<td th:text="${it.count}" class="td_lp"></td>
+				<td th:text="${i.id}" class="td_lp"></td>
 				<td th:text="${i.login}"></td>
 				<td th:text="${i.firstname}"></td>
 				<td th:text="${i.lastname}"></td>
@@ -82,19 +84,14 @@
 				<td class="td_sex" th:text="${i.sex}"></td>
 				<td th:text="${i.email}"></td>
 				<td th:text="${i.phone}"></td>
-				<td class="td_short_button">
-					<a th:href="@{'/admin/employees/edit/' + ${i.id}}" class="tdbutton">Edit</a>
+				<td  class="td_short_button">
+					<a th:if="${i.login != 'superadmin'}" th:href="@{'/admin/employees/edit/' + ${i.id}}" class="aButton" th:text="#{button.edit}"></a>
 				</td>
 				<td class="td_short_button">
-					<a th:href="@{'/admin/employees/delete/' + ${i.id}}" class="tdbutton">Fire</a>
+					<a th:if="${i.login != 'superadmin'}" th:href="@{'/admin/employees/delete/' + ${i.id}}" onclick="return confirm('Do you want to delete this employee?')" class="aButton" th:text="#{button.fireEmployee}"></a>
 				</td>
-				
-				
 			</tr>
 		</table>
-		
-		
-	
 		
 	<!-- ************************************************************************* -->
 	</section>

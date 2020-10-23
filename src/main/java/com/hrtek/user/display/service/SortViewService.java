@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.hrtek.admin.others.WorkerView;
+import com.hrtek.model.Log;
 import com.hrtek.user.display.views.BasicView;
 import com.hrtek.user.display.views.ContactViewDis;
 import com.hrtek.user.display.views.DataView;
+import com.hrtek.user.display.views.DismissedView;
 import com.hrtek.user.display.views.ResidencyView;
 import com.hrtek.user.display.views.ViewFields;
 import com.hrtek.user.display.views.WorkersView;
@@ -48,6 +51,27 @@ public class SortViewService {
 		DataView.isup = sortT.equals("up");
 		Collections.sort(dateViewList);
 		return dateViewList;
+	}
+	
+	public List<DismissedView> sortDismissedView(ViewFields field, String sortT, List<DismissedView> dismissedViewList) {
+		DismissedView.field = field;
+		DismissedView.isup = sortT.equals("up");
+		Collections.sort(dismissedViewList);
+		return dismissedViewList;
+	}
+	
+	public List<WorkerView> sortWorkerView(ViewFields field, String sortT, List<WorkerView> workerViewList) {
+		WorkerView.field = field;
+		WorkerView.isup = sortT.equals("up");
+		Collections.sort(workerViewList);
+		return workerViewList;
+	}
+	
+	public List<Log> sortLogs(ViewFields field, String sortT, List<Log> loglist) {
+		Log.field = field;
+		Log.isup = sortT.equals("up");
+		Collections.sort(loglist);
+		return loglist;
 	}
 
 }

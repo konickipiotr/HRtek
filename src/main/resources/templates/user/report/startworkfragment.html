@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -12,10 +12,10 @@
 		<div th:case="'STARTWORK_LESS1MON'">
 			<table>
 				<tr>
-					<th>Imie</th>
-					<th>Nazwisko</th>
-					<th>Start work</th>
-					<th>End work</th>
+					<th th:text="#{firstname}"></th>
+					<th th:text="#{lastname}"></th>
+					<th th:text="#{start.work}"></th>
+					<th th:text="#{end.work}"></th>
 					
 				</tr>
 				<tr th:each="i : ${wraper.report}">
@@ -31,10 +31,10 @@
 		<div th:case="'STARTWORK_LESS3MON'">
 			<table>
 				<tr>
-					<th>Imie</th>
-					<th>Nazwisko</th>
-					<th>Start work</th>
-					<th>End work</th>
+					<th th:text="#{firstname}"></th>
+					<th th:text="#{lastname}"></th>
+					<th th:text="#{start.work}"></th>
+					<th th:text="#{end.work}"></th>
 					
 				</tr>
 				<tr th:each="i : ${wraper.report}">
@@ -50,10 +50,10 @@
 		<div th:case="'STARTWORK_MORE1MON'">
 			<table>
 				<tr>
-					<th>Imie</th>
-					<th>Nazwisko</th>
-					<th>Start work</th>
-					<th>End work</th>
+					<th th:text="#{firstname}"></th>
+					<th th:text="#{lastname}"></th>
+					<th th:text="#{start.work}"></th>
+					<th th:text="#{end.work}"></th>
 
 				</tr>
 				<tr th:each="i : ${wraper.report}">
@@ -69,10 +69,10 @@
 		<div th:case="'STARTWORK_MORE3MON'">
 			<table>
 				<tr>
-					<th>Imie</th>
-					<th>Nazwisko</th>
-					<th>Start work</th>
-					<th>End work</th>
+					<th th:text="#{firstname}"></th>
+					<th th:text="#{lastname}"></th>
+					<th th:text="#{start.work}"></th>
+					<th th:text="#{end.work}"></th>
 					
 				</tr>
 				<tr th:each="i : ${wraper.report}">

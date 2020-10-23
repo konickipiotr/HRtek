@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 .content{
 	width: 88%;
 	margin:auto;
@@ -13,7 +14,6 @@
 .content-row{
 	padding: 1%;
 	display: flex;
-	
 }
 
 .menu-bar{
@@ -27,9 +27,18 @@
 	flex-direction: column;
 }
 
+.center-div{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+
 #workerNote{
 	resize: none;
+	
 	justify-content: center;
+	padding-right: 1%;
+	padding-left: 1%;
 	width: 98%;
 	height: 140px;
 	
@@ -78,8 +87,8 @@ h3{
 }
 
 .data-label{
-	
 	flex: 4;
+
 }
 
 .data-content{
@@ -94,15 +103,16 @@ h3{
 .border-div{
 	border: 1px solid gray;
 	border-radius: 5px;
-	padding: 3px;
-	margin: 1%;
+	padding: 2px;
+	margin: 4px;
 	
 }
 
 .data-col{
 	display: flex;
 	flex: 1;
-	padding: 1%;
+	margin: 3px;
+	padding: 0px;
 }
 
 
@@ -122,6 +132,7 @@ h3{
 	border: 1px solid white;
 	border-radius: 5px;
 	padding: 5px;
+	text-align: center;
 }
 
 .button:disabled{
@@ -157,7 +168,7 @@ h3{
 	resize: none;
 	justify-content: center;
 	width: 98%;
-	height: 100px;
+	height: 50px;
 	
 }
 
@@ -179,4 +190,37 @@ h3{
 
 .td-action{
 	width: 20px;
+}
+
+/* --------------------------- */
+
+.form-container0{
+	margin: auto;
+	width: 25%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #729fcf;
+}
+
+.edit-row{
+	margin-bottom: 10px;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.edit-col-lab{
+	width: 40%;
+}
+
+.edit-col-inp{
+	width: 60%;
+	
+}
+
+.time-info{
+	color: yellow;
+	font-weight: bold;
+	margin-bottom: 10px;
 }

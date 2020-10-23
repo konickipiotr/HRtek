@@ -27,7 +27,7 @@ public class WorkerMonthValidator {
 		String[] arr = mf.getHour();
 		
 		for(int i = 0; i < arr.length; i++) {
-			if(!(arr[i].toLowerCase().equals("ho") || arr[i].toLowerCase().equals("nw") || arr[i].toLowerCase().equals("00"))) {
+			if(!(arr[i].toLowerCase().equals("ho") || arr[i].toLowerCase().equals("nw") || arr[i].toLowerCase().equals("00") || arr[i].toLowerCase().equals("xx"))) {
 				try {
 					int val = Integer.parseInt(arr[i]);
 					if(val<0 || val > 24) {

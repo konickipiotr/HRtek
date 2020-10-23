@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -17,11 +17,11 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Firmy</h1>
+			<h1 class="header-header" th:text="#{header.companies}"></h1>
 		</div>
 
 	 	<div class="button_container">
-			<a class="button_new" th:href="@{/admin/newcompany}">Nowa Firma</a>
+			<a class="stage-button" th:href="@{/admin/newcompany}" th:text="#{button.newcompany}"></a>
 		</div>
 		
 		<p th:text="${error_msg}" class="error_message"></p>
@@ -30,24 +30,25 @@
 		<table>
 			<tr>
 				<th class="td_lp">Lp.</th>
+				<th class="td_lp">ID</th>
 				<th>Status</th>
-				<th>pkd</th>
-				<th>nip</th>
-				<th>krs</th>
+				<th>PKD</th>
+				<th>NIP</th>
+				<th>KRS</th>
 				<th>REGON</th>
-				<th>kraz</th>
-				<th>Shortname</th>
-				<th>fullname</th>
-				<th>netto rate</th>
-				<th class="numberofworker">Num of woker</th>
-				<th>address</th>
-				<th>post code</th>
-				<th>city</th>
+				<th>KRAZ</th>
+				<th th:text="#{shortname}"></th>
+				<th th:text="#{fullname}"></th>
+				<th class="numberofworker" th:text="#{numOfWorkers}"></th>
+				<th th:text="#{address}"></th>
+				<th th:text="#{postcode}"></th>
+				<th th:text="#{city}"></th>
 				<th></th>
 				<th></th>
 			</tr>
 			<tr th:each="i, it : ${companies}">
 				<td th:text="${it.count}"></td>
+				<td th:text="${i.id}"></td>
 				<td>
 					<span th:if="${i.status.name() == 'DISABLED'}" class="dot-orange"></span> 
 					<span th:unless="${i.status.name() == 'DISABLED'}" class="dot-green"></span>
@@ -59,24 +60,20 @@
 				<td th:text="${i.kraz}"></td>
 				<td th:text="${i.shortname}"></td>
 				<td th:text="${i.fullname}"></td>
-				<td th:text="${i.nettorate}" class="hourlyrate"></td>
 				<td th:text="${i.numberofwokers}" class="numberofworker"></td>
 				<td th:text="${i.address}"></td>
 				<td class="postcode" th:text="${i.postcode}"></td>
 				<td th:text="${i.city}"></td>
 				<td class="td_short_button">
-					<a th:href="@{'/admin/company/edit/' + ${i.id}}" class="tdbutton">Edit</a>
+					<a th:href="@{'/admin/company/edit/' + ${i.id}}" class="aButton" th:text="#{button.edit}"></a>
 				</td>
 				<td class="td_short_button">
-					<a th:if="${i.status.name() == 'DISABLED'}" th:href="@{'/admin/company/enable/' + ${i.id}}" class="tdbutton">Aktywuj</a>
-					<a th:if="${i.status.name() == 'ENABLED'}" th:href="@{'/admin/company/disable/' + ${i.id}}" class="tdbutton">Dezaktywuj</a>
+					<a th:if="${i.status.name() == 'DISABLED'}" th:href="@{'/admin/company/enable/' + ${i.id}}" class="aButton" th:text="#{button.activate}"></a>
+					<a th:if="${i.status.name() == 'ENABLED'}" th:href="@{'/admin/company/disable/' + ${i.id}}" class="aButton" th:text="#{button.deactivate}"></a>
 				</td>
 				
 			</tr>
 		</table>
-		
-		
-	
 		
 	<!-- ************************************************************************* -->
 	</section>

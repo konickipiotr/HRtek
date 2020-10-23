@@ -1,5 +1,7 @@
 package com.hrtek.user.timesheet;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,25 +22,28 @@ public class TimesheetOperation {
 		
 		List<String> slist = getStringHourList(currentMonth);
 		List<Integer> ilist = getIntegerHourList(slist);
+		if(ilist.size() == 0)
+			return null;
 		
 		WorkerTimesheet workerTs = new WorkerTimesheet();
 		workerTs.setId(ts.getWorkerid());
-		workerTs.setHsum(calculateHours(ilist));
+		int hsum = calculateHours(ilist);
+		workerTs.setHsum(hsum);
 		workerTs.setHourlList(slist);
 
 		return workerTs;
 	}
 	
 	
-	private List<String> getStringHourList(String currenMonth){
+	public static List<String> getStringHourList(String currenMonth){
 		String[] array=currenMonth.split("(?<=\\G.{2})");
 		return Arrays.asList(array);
 	}
 	
-	private List<Integer> getIntegerHourList(List<String> slist){
+	public static List<Integer> getIntegerHourList(List<String> slist){
 		List<Integer> ilist = new ArrayList<Integer>();
 		for(String s : slist) {
-			if(s.equals("00") || s.equals("NW") || s.equals("HO"))
+			if(s.equals("NW") || s.equals("HO") || s.equals("XX"))
 				continue;
 			
 			ilist.add(Integer.parseInt(s));
@@ -46,7 +51,7 @@ public class TimesheetOperation {
 		return ilist;		
 	}
 	
-	private int calculateHours(List<Integer> ilist) {
+	public static int calculateHours(List<Integer> ilist) {
 		return ilist.stream()
 						.reduce(0, (x, y) -> x + y);
 	}

@@ -2,6 +2,8 @@ package com.hrtek.admin.factory;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,16 +12,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hrtek.db.FactoryRepository;
+import com.hrtek.db.LogRepository;
+import com.hrtek.enums.LogType;
 import com.hrtek.model.Factory;
+import com.hrtek.model.Log;
 import com.hrtek.model.StatusFC;
+import com.hrtek.model.UserInfo;
+import com.hrtek.settings.Msg;
 
 @Controller
 @RequestMapping("/admin/factory")
 public class FactoryController {
 	
-	@Autowired
 	public FactoryRepository factoryRepo;
+	private LogRepository logRepo;
 	
+	@Autowired
+	public FactoryController(FactoryRepository factoryRepo, LogRepository logRepo) {
+		this.factoryRepo = factoryRepo;
+		this.logRepo = logRepo;
+	}
+
 	@GetMapping
 	public String showFactories(Model model) {
 		model.addAttribute("factory_list", factoryRepo.findAll());
@@ -27,35 +40,36 @@ public class FactoryController {
 	}
 	
 	@GetMapping(path = "/enable/{id}")
-	public String enableFactory(@PathVariable("id") Long id) {
+	public String enableFactory(@PathVariable("id") Long id, HttpSession session) {
 		Optional<Factory> oFactory = this.factoryRepo.findById(id);
 		if(oFactory.isPresent()) {
 			Factory factory = oFactory.get();
 			factory.setStatus(StatusFC.ENABLED);
 			this.factoryRepo.save(factory);
+			UserInfo ui = (UserInfo) session.getAttribute("user");
+			this.logRepo.save(new Log(ui.getName(), Msg.enableFactory + factory.getFullname(), LogType.CREATE));
 		}
 
 		return "redirect:/admin/factory";
 	}
 	
 	@GetMapping(path = "/disable/{id}")
-	public String disablleFactory(@PathVariable("id") Long id, Model model) {
+	public String disablleFactory(@PathVariable("id") Long id, Model model, HttpSession session) {
 		Optional<Factory> oFactory = this.factoryRepo.findById(id);
 		if(oFactory.isPresent()) {
 			Factory factory = oFactory.get();
+			
 			if(factory.getNumberofwokers() == 0) {
 				factory.setStatus(StatusFC.DISABLED);
 				this.factoryRepo.save(factory);
-				System.out.println("w ifie");
+				UserInfo ui = (UserInfo) session.getAttribute("user");
+				this.logRepo.save(new Log(ui.getName(), Msg.disableFactory + factory.getFullname(), LogType.DELETE));
 			}
 			else {
 				model.addAttribute("emsg", "Nie można dezaktywować fabryki dopóki pracuje w niej co najmniej jeden pracownik");
-				System.out.println("w elsie");
 			}
 			model.addAttribute("factory_list", factoryRepo.findAll());
-			
 		}
-
 		return "admin/factory";
 	}
 	

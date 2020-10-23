@@ -5,10 +5,12 @@
 	margin:auto;
 	margin-bottom: 2%;
 	padding: 1%;
-	/* background-color: #5b7cb0; */
 	background-color: #668db6;
 	border-radius: 5px;
-	overflow: auto;
+/* 	overflow: auto; */
+	
+	display: flex;
+	flex-direction: column;
 }
 
 .section-header{
@@ -21,17 +23,28 @@
 }
 
 .section-button{
-	width: 50%;
-	margin: auto;
+	width: 50%;	
+	display: flex;
 	margin-top: 20px;
-	clear:both;
+	justify-content: center;
+	align-self: center;
+	align-content: center;
 }
 
+.input-row-container{
+	display: flex;
+	justify-content: space-between;
+	
+}
 
+.input-row-center{
+	display: flex;
+	justify-content: center;
+}
 
 .inputcontainer{
-	width: 33%;
-	float: left;
+	width: 30%;
+	
 	margin-bottom: 10px;
 }
 
@@ -47,7 +60,7 @@
 	margin-right: 30px;
 }
 
-.savebutton{
+/* .savebutton{
 	background-color: #204a87;
 	min-width: 100px;
 	color: white;
@@ -62,7 +75,7 @@
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
-}
+} */
 
 h3{
 	margin-top: 0px;
@@ -79,9 +92,9 @@ h2{
 }
 
 
-intput{
+/* intput{
 	width: 100%;
-}
+} */
 
 
 label{

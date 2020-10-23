@@ -2,22 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body>
 	<nav th:fragment="menu">
 		<ul>
-			<li><a th:href="@{/}">Home</a></li>
-			<li><a th:href="@{/canditate}">Zatrudnij</a></li>
-			<li><a th:href="@{/accommodation}">Zakwaterowanie</a></li>
-			<li><a th:href="@{/showbasic}">Listy</a></li>
-			<li><a th:href="@{/reports}">Raporty</a></li>
-			<li><a th:href="@{/timesheet}">List Obecności</a></li>
-			<li><a th:href="@{/statistic}">Statystyki</a></li>
-			<li><a th:href="@{/tickets}">Tickets</a></li>			
-			
+			<li><a th:href="@{/}" th:text="#{menu.home}"></a></li>
+			<li><a th:href="@{/canditate}" th:text="#{menu.hire}"></a></li>
+			<li><a th:href="@{/accommodation}" th:text="#{menu.accommodation}"></a></li>
+			<li><a th:href="@{/showbasic}" th:text="#{menu.tabels}"></a></li>
+			<li><a th:href="@{/reports}" th:text="#{menu.reports}"></a></li>
+			<li><a th:href="@{/timesheet}" th:text="#{menu.timesheet}"></a></li>
+			<li><a th:href="@{/statistic}" th:text="#{menu.statistics}"></a></li>
+			<li><a th:href="@{/tickets}" th:text="#{menu.tickets}"></a></li>			
 		</ul>
 	</nav>
 </body>

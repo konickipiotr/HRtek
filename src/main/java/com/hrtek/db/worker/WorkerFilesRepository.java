@@ -10,4 +10,5 @@ import com.hrtek.model.worker.WorkerFiles;
 @Repository
 public interface WorkerFilesRepository extends JpaRepository<WorkerFiles, Long> {
 	List<WorkerFiles> findByWorkerid(Long workerid);
+	void deleteByWorkerid(Long workerid);
 }

@@ -44,7 +44,22 @@ public class WorkerBasic {
 		this.id = w.getId();
 		this.dateofbirth = nw.getDateofbirth();
 		this.sex = nw.getSex();
-		
+	}
 
+	public WorkerBasic(Worker worker, WorkerAll wall) {
+		this.id = worker.getId();
+		this.dateofbirth = wall.getDateofbirth();
+		this.sex = wall.getSex();
+		this.accountnr = wall.getAccountnr();
+		this.pesel = wall.getPesel();
+		this.workerNo = wall.getWorkerNo();
+		this.department = wall.getDepartment();
+		this.citizenship = wall.getCitizenship();
+	}
+
+	@Override
+	public String toString() {
+		return "[department=" + department + ", citizenship=" + citizenship + ", dateofbirth=" + dateofbirth
+				+ ", sex=" + sex + ", accountnr=" + accountnr + ", pesel=" + pesel + ", workerNo=" + workerNo + "]";
 	}
 }

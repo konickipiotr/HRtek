@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
@@ -13,14 +13,14 @@
 	<header th:replace="fragments/top :: top"></header>
 	<nav th:replace="user/fragments/menu :: menu"></nav>
 	<section id="container">
-	<div class="header-container">
-			<h1 class="header-header">Tikets</h1>
+		<div class="header-container">
+			<h1 class="header-header" th:text="#{menu.tickets}"></h1>
 		</div>
 	<!-- ************************************************************************* -->
 		<div class="form-container">
 			<form th:action="@{/tickets}" method="post">
 				<div>
-				<label for="event">Wybierz rodziaj zgłoszenia</label>
+				<label for="event" th:text="#{msg.selectreporttype}"></label>
 				</div>
 				<div>
 					<select id="event" name="event" required>
@@ -34,13 +34,13 @@
 					<p id="iSUG" class="warning_message" th:text="${info['SUGESSTION']}" hidden="true"></p>
 				</div>
 				<div>
-					<label  for="remarks">Opis</label>
+					<label  for="remarks" th:text="#{label.description}"></label>
 				</div>
 				<div>
 					<textarea id="remarks" name="remarks" required></textarea>
 				</div>
 				<div>
-					<button class="savebutton" type="submit">Wyślij zgłoszenie</button>
+					<button class="savebutton" type="submit" th:text="#{button.send}"></button>
 				</div>
 			</form>
 		</div>

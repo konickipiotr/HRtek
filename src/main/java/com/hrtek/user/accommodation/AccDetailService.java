@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -22,7 +21,6 @@ import com.hrtek.model.accommodation.FinanceForm;
 import com.hrtek.model.accommodation.House;
 import com.hrtek.model.accommodation.LiderForm;
 import com.hrtek.model.accommodation.Room;
-import com.hrtek.model.worker.Contact;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerFinance;
 
@@ -60,7 +58,6 @@ public class AccDetailService {
 				BedView nb = new BedView(b);
 				if(b.getWorkerid() != null) {
 					nb.setWorkername(workerRepo.findById(b.getWorkerid()).get().getName());
-					System.out.println(nb);
 				}
 				bv.add(nb);
 			}
@@ -70,7 +67,6 @@ public class AccDetailService {
 		
 		model.addAttribute("rooms", rooms);
 		model.addAttribute("houshold", getHousehold(house.getId()));
-		System.out.println(rooms);
 		model.addAttribute("house", house);
 		return true;
 	}
@@ -102,7 +98,6 @@ public class AccDetailService {
 	
 	private List<ListModel> getHousehold(Long houseid){
 		List<Bed> oBeds = bedRepo.findByBedstatusAndHouseid(Bedstatus.OCCUPIED, houseid);
-		oBeds.forEach(i -> System.out.println(i));
 		List<ListModel> list = new ArrayList<>();
 
 		for(Bed b : oBeds) {

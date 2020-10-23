@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title th:text="#{appName}"></title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/recruitment_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body onload="enableReadOnly()">
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header" th:text="#{label.recruitment}"></h1>
+		</div>
+
+		<div class="content">
+			<form th:action="@{/recruitment}" method="post" th:object="${workerAll}" id="form" enctype="multipart/form-data">
+				
+				<input type="hidden" name="id" th:field="*{id}">
+				<input type="hidden" name="addToSystem" th:field="*{addToSystem}">
+				<div class="section-header"><h2 th:text="#{label.personal.data}"></h2></div>
+					<!-- ---------------------  -->
+					<div class="row">
+						<div class="col">
+							<div class="lab-div">
+								<label for="firstname" th:text="#{firstname}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="firstname" id="firstname" th:field="*{firstname}" required> 
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="lastname" th:text="#{lastname}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="lastname" id="lastname" th:field="*{lastname}" required>
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="sex" th:text="#{sex}"></label>
+							</div>
+							<div class="input-div">
+								<label for="sexM" th:text="#{male}"></label>
+								<input th:if="${workerAll.sex == 'M'}" type="radio" name="sex" id="sexM" value="M" checked required>
+								<input th:unless="${workerAll.sex == 'M'}" type="radio" name="sex" value="M" id="sexM" required>
+								<input th:if="${workerAll.sex == 'F'}" type="radio" name="sex" id="sexF" value="F" checked required>
+								<label for="sexF" th:text="#{female}"></label>
+								<input th:unless="${workerAll.sex == 'F'}" type="radio" name="sex" value="M" id="sexF" required>
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="dateofbirth" th:text="#{dateofbirth}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="dateofbirth" name="dateofbirth" th:field="*{dateofbirth}" min="1930-01-01" max="2200-01-01" required>
+							</div>
+						</div>
+						
+					</div>
+
+					<!-- ***************** ROW ************************ -->
+					<div class="row">
+						<div class="section-header"><h2 th:text="#{label.personal.data}"></h2></div>
+						
+						<div class="col">
+							<div class="lab-div">
+								<label for="recruiter" th:text="#{label.recruiter}"></label>
+							</div>
+							<div class="input-div">
+								<select id="recruiter" name="recruiter" required>
+									<option th:each="r : ${recruiters}" th:value="${r.id}" th:text="${r.value}"></option>
+								</select>
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="companyid" th:text="#{company}"></label>
+							</div>
+							<div class="input-div">
+								<select id="companyid" name="companyid" required>
+									<option th:each="c : ${companies}" th:value="${c.id}" th:text="${c.shortname}"></option>
+								</select>
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="factoryid" th:text="#{factory}"></label>
+							</div>
+							<div class="input-div">
+								<select id="factoryid" name="factoryid" required>
+									<option th:each="f : ${factories}" th:value="${f.id}" th:text="${f.shortname}"></option>
+								</select>
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="department" th:text="#{label.department}"></label>
+							</div>
+							<div class="input-div">
+								<select id="department" name="department">
+									<option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.department}"></option>
+								</select>
+							</div>
+						</div>
+						<!-- ---------------------  -->
+					</div>
+					
+					<!-- ***************** ROW ************************ -->
+					<div class="row">
+						<div class="section-header"><h2 th:text="#{address}"> - PL</h2></div>
+						<div class="col">
+							<div class="lab-div">
+								<label for="bedid" th:text="#{lable.our}"></label>
+								<label for="workerAll" th:text="#{other}"></label>
+								<input th:if="${workerAll.isOhter == true}" type="checkbox" name="isOhter" id="isOhter" checked>
+								<input th:unless="${workerAll.isOhter == true}" type="checkbox" name="isOhter" id="isOhter">
+							</div>
+							<div class="input-div" th:if="${workerAll.isOhter == true}">
+								<select id="bedid" name="bedid" disabled>
+									<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}"></option>
+								</select>
+							</div>
+							<div class="input-div" th:unless="${workerAll.isOhter == true}">
+								<select id="bedid" name="bedid" required>
+									<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}"></option>
+								</select>
+							</div>
+							<div class="input-div" th:if="${workerAll.isOhter == true}">
+								<label for="acomdate" th:text="#{from}"></label>
+								<input type="date" id="acomdate" name="acomdate" th:field="*{acomdate}" disabled>
+							</div>
+							<div class="input-div" th:unless="${workerAll.isOhter == true}">
+								<label for="acomdate" th:text="#{to}"></label>
+								<input type="date" id="acomdate" name="acomdate" th:field="*{acomdate}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="pladdress" th:text="#{address}"></label>
+							</div>
+							<div class="input-div">
+								<input th:if="${workerAll.isOhter == true}" type="text" name="pladdress" id="pladdress" th:field="*{pladdress}">
+								<input th:unless="${workerAll.isOhter == true}" type="text" name="pladdress" id="pladdress" th:field="*{pladdress}" disabled>
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="plpostcode" th:text="#{postcode}"></label>
+							</div>
+							<div class="input-div">
+								<input th:if="${workerAll.isOhter == true}" type="text" name="plpostcode" id="plpostcode" th:field="*{plpostcode}" >
+								<input th:unless="${workerAll.isOhter == true}" type="text" name="plpostcode" id="plpostcode" th:field="*{plpostcode}" disabled>
+							</div>
+						</div>
+					
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="plcity" th:text="#{city}"></label>
+							</div>
+							<div class="input-div">
+								<input  th:if="${workerAll.isOhter == true}" type="text" name="plcity" id="plcity" th:field="*{plcity}" >
+								<input  th:unless="${workerAll.isOhter == true}" type="text" name="plcity" id="plcity" th:field="*{plcity}" disabled>
+							</div>
+						</div>
+					</div>
+					<!-- ***************** ROW ************************ -->
+					<div class="row">
+						<div class="section-header"><h2 th:text="#{label.addressabroad}"></h2></div>
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="address" th:text="#{address}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="address" id="address" th:field="*{address}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="postcode" th:text="#{postcode}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="postcode" id="postcode" th:field="*{postcode}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="city" th:text="#{city}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="city" id="city" th:field="*{city}">
+							</div>
+						</div>
+					</div>
+					<!-- ***************** ROW ************************ -->
+					<div class="row">
+						<div class="section-header"><h2 th:text="#{label.contact}"></h2></div>
+						<div class="col"> &nbsp;</div>
+						<div class="col">
+							<div class="lab-div">
+								<p class="wronginput" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></p>
+								<label for="email" th:text="${email}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="email" id="email" th:field="*{email}">
+							</div>
+						
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<p class="wronginput" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" ></p>
+								<label for="phone" th:text="${phone}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="phone" id="phone" th:field="*{phone}">
+							</div>
+						</div>
+						<div class="col"> &nbsp;</div>
+					</div>
+					<!-- ***************** ROW ************************ -->
+					<div class="section-header"><h2 th:text="#{label.agreement}"></h2></div>
+					<div class="row">
+						
+						<div class="col-a"> 
+							<div class="lab-div">
+								<label for="startWork" th:text="#{start.work}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="startWork" name="startWork" th:field="*{startWork}">
+							</div>
+						</div>
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="startZus" th:text="#{agreement.from}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="startZus" name="startZus" th:field="*{startZus}">
+							</div>
+						</div>
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="endZus" th:text="#{agreement.to}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="endZus" name="endZus" th:field="*{endZus}">
+							</div>
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col"> &nbsp;</div>
+						<div class="col">
+							<div class="lab-div">
+								<label for="startMedicalExams" th:text="#{start.medical.exam}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="startMedicalExams" name="startMedicalExams" th:field="*{startMedicalExams}">
+							</div>
+						</div>
+						<div class="col">
+							<div class="lab-div">
+								<p class="wronginput" th:if="${#fields.hasErrors('endMedicalExams')}" th:errors="*{endMedicalExams}" ></p>
+								<label for="endMedicalExams" th:text="#{end.medical.exam}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="endMedicalExams" name="endMedicalExams" th:field="*{endMedicalExams}">
+							</div>
+						</div>
+						<div class="col"> &nbsp;</div>
+					</div>
+					
+					<!-- ***************** ROW ************************ -->	
+					<div class="section-header"><h2>&nbsp;</h2></div>
+					<div class="row">
+						<div class="col">
+							<div class="lab-div">
+								<label for="pesel" th:text="#{pesel}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="pesel" name="pesel" th:field="*{pesel}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="accountnr" th:text="#{accountNo}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="accountnr" name="accountnr" th:field="*{accountnr}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="workerNo" th:text="#{workerNo}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="workerNo" name="workerNo" th:field="*{workerNo}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						
+						<div class="col">
+							<div class="lab-div">
+								<label for="wage" th:text="#{wage}"></label>
+							</div>
+							<div class="input-div">
+								<input type="number" min="0" step="0.01" id="wage" name="wage" th:field="*{wage}">
+							</div>
+						</div>
+						
+						<!-- ---------------------  -->
+					</div>
+					
+					<!-- ***************** ROW ************************ -->	
+					<div class="section-header"><h2 th:text="#{statement}"></h2></div>
+					<div class="row">
+						<div class="col">
+							<div class="lab-div">
+								<label for="statementType" th:text="#{statementType}"></label>
+							</div>
+							<div class="input-div">
+								<select id="statementType" name="statementType">
+									<option value="VISA">VISA</option>
+									<option value="WORK">WORK</option>
+								</select>
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="statement" th:text="#{statement}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="statement" name="statement" th:field="*{statement}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="statementValidFrom" th:text="#{valid.form}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="statementValidFrom" name="statementValidFrom" th:field="*{statementValidFrom}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						
+						<div class="col">
+							<div class="lab-div">
+								<p class="wronginput" th:if="${#fields.hasErrors('statementValidTo')}" th:errors="*{statementValidTo}" ></p>
+								<label for="statementValidTo" th:text="#{valid.to}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="statementValidTo" name="statementValidTo" th:field="*{statementValidTo}">
+							</div>
+						</div>
+					</div>
+					
+					<!-- ***************** ROW ************************ -->	
+					
+					<div class="section-header"><h2 th:text="#{permit}"></h2></div>
+					<div class="row">
+						<div class="col">
+							<div class="lab-div">
+								<label for="permit" th:text="#{permit}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="permit" name="permit" th:field="*{permit}">
+							</div>
+						</div>
+						
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="permitValidFrom" th:text="#{valid.form}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="permitValidFrom" name="permitValidFrom" th:field="*{permitValidFrom}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						
+						<div class="col">
+							<div class="lab-div">
+								<p class="wronginput" th:if="${#fields.hasErrors('permitValidTo')}" th:errors="*{permitValidTo}" ></p>
+								<label for="permitValidTo" th:text="#{valid.to}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="permitValidTo" name="permitValidTo" th:field="*{permitValidTo}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="other" th:text="#{other}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="other" name="other" th:field="*{other}">
+							</div>
+						</div>
+					</div>
+					
+					<!-- ***************** ROW ************************ -->	
+					<div class="section-header"><h2 th:text="#{visa}"></h2></div>
+					<div class="row">
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="visa" th:text="#{visa}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="visa" name="visa" th:field="*{visa}">
+							</div>
+						</div>
+						
+						<!-- ---------------------  -->
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="visaValidFrom" th:text="#{valid.form}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="visaValidFrom" name="visaValidFrom" th:field="*{visaValidFrom}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						
+						<div class="col-a">
+							<div class="lab-div">
+								<p class="wronginput" th:if="${#fields.hasErrors('visaValidTo')}" th:errors="*{visaValidTo}" ></p>
+								<label for="visaValidTo" th:text="#{valid.to}"></label>
+							</div>
+							<div class="input-div">
+								<input type="date" id="visaValidTo" name="visaValidTo" th:field="*{visaValidTo}">
+							</div>
+						</div>
+					</div>
+
+					<!-- ***************** ROW ************************ -->	
+					<div class="section-header"><h2 th:text="#{passport}"></h2></div>
+					<div class="row">
+			
+						<div class="col-a">
+							<div class="lab-div">
+								<p class="wronginput" th:if="${#fields.hasErrors('biopassport')}" th:errors="*{biopassport}" ></p>
+								<label for="biopassport" th:text="#{biospassport}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="biopassport" name="biopassport" th:field="*{biopassport}">
+							</div>
+						</div>
+						
+						<!-- ---------------------  -->
+						<div class="col-a">
+							<div class="lab-div">
+								<p class="wronginput" th:if="${#fields.hasErrors('passport')}" th:errors="*{passport}" ></p>
+								<label for="passport" th:text="#{passport}"></label>
+							</div>
+							<div class="input-div">
+					
+								<input type="text" id="passport" name="passport" th:field="*{passport}">
+							</div>
+						</div>
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="citizenship" th:text="#{citizenship}"></label>
+							</div>
+							<div class="input-div">
+								<select id="citizenship" name="citizenship" required>
+									<option th:each="c : ${citizenships}" th:value="${c.id}" th:text="${c.name}"></option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<!-- ***************** ROW ************************ -->	
+				<div class="section-header"><h2 th:text="#{remarks}"></h2></div>
+					<div class="row">
+						<div class="col-b">
+							<div class="lab-div">
+								<label for="biopassport" th:text="#{remarks}"></label>
+							</div>
+							<div class="input-div">
+								<textarea id="note-80" name="note" th:text="${workerAll.note}"></textarea>
+							</div>
+						</div>
+						
+						<!-- ---------------------  -->
+						<div class="col-b">
+							<div class="lab-div">
+								<label for="passport" th:text="#{files}"></label>
+							</div>
+							<div class="input-div">
+								<input id="fileInput" type="file" name="uploadFiles" onchange="update();" multiple><br>
+								<textarea id="filelist" disabled="disabled" ></textarea><br>
+							</div>
+						</div>
+					</div>
+
+					<!-- ***************** ROW ************************ -->	
+					<div th:if="${hireagain == true}" class="row-buttons">
+						<button th:unless="${status == 'success'}" name="action" value="hireagain" class="button" type="submit" th:text="#{button.hireAgain}"></button>
+					</div>
+					<div th:unless="${hireagain == true}" class="row-buttons">
+						<button th:unless="${status == 'success'}" name="action" value="saveothers" class="button" type="submit" th:text="#{menu.hire}"></button>
+					</div>
+			</form>
+		</div>
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<!-- <script type="text/javascript" src="/scripts/recruitment2.js"> 
+</script>-->
+<script>
+function update() {
+    document.getElementById("filelist").value = "";
+	var files = document.getElementById("fileInput").files;
+	for (var i = 0; i < files.length ; i++){
+		document.getElementById("filelist").value += files[i].name + "\n";
+	}
+}
+</script>
+</html>

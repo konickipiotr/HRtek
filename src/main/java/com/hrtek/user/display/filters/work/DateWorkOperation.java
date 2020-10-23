@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.hrtek.user.display.filters.DateFilterOperation;
 import com.hrtek.user.display.filters.WorkFilters;
-import com.hrtek.user.display.views.ResidencyView;
 import com.hrtek.user.display.views.WorkersView;
 
 public class DateWorkOperation extends DateFilterOperation<WorkersView, WorkFilters> {

@@ -3,6 +3,8 @@ package com.hrtek.user.recruitment;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import com.hrtek.model.UserInfo;
 import com.hrtek.settings.GlobalSettings;
 
 @Service
+@Transactional
 public class CandidateService {
 
 	private CandidateRepository candidateRepo;

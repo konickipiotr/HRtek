@@ -1,24 +1,19 @@
 package com.hrtek.files.doc;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.DateFormatConverter;
 
 import com.hrtek.user.report.views.ReportMedical;
-import com.hrtek.user.report.views.ReportPesel;
 
 import lombok.Data;
 @Data
@@ -115,7 +110,7 @@ public class ReportMedicalDoc implements Doc<Workbook> {
 
 	@Override
 	public String getFilename() {
-		return "Report_MedicalExams.xlsx";
+		return "Report_MedicalExams.xls";
 	}
 
 	@Override

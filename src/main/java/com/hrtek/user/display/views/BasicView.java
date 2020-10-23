@@ -1,8 +1,6 @@
 package com.hrtek.user.display.views;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.StatusWorker;

@@ -20,7 +20,6 @@ public class StatisticController {
 	public String toStatistic(Model  model) {
 		List<CompanyStat> statlist = statisticService.getCompaniesStat();
 		model.addAttribute("statlist", statlist);
-		System.out.println(">> " + statlist);
 		return "user/stat";
 	}
 }

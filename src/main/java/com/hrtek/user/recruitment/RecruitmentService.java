@@ -1,7 +1,12 @@
 package com.hrtek.user.recruitment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,17 +17,22 @@ import com.hrtek.db.CitizenshipRepository;
 import com.hrtek.db.CompanyRepository;
 import com.hrtek.db.DepartmentRepository;
 import com.hrtek.db.FactoryRepository;
+import com.hrtek.db.LogRepository;
 import com.hrtek.db.UserInfoRepository;
 import com.hrtek.db.UserPositonsRepository;
 import com.hrtek.db.accommodation.BedRepository;
 import com.hrtek.db.accommodation.HouseRepository;
 import com.hrtek.db.accommodation.RoomRepository;
+import com.hrtek.enums.LogType;
 import com.hrtek.model.ListModel;
+import com.hrtek.model.Log;
 import com.hrtek.model.UserInfo;
 import com.hrtek.settings.GlobalSettings;
+import com.hrtek.settings.Msg;
 import com.hrtek.utils.SortFields;
 
 @Service
+@Transactional
 public class RecruitmentService {
 	
 	private CandidateRepository candidateRepo;
@@ -35,13 +45,14 @@ public class RecruitmentService {
 	private RoomRepository roomRepo;
 	private CitizenshipRepository citizenshipRepo;
 	private DepartmentRepository departmentRepo;
+	private LogRepository logRepo;
 
 	
-	@Autowired
+	@Autowired	
 	public RecruitmentService(CandidateRepository candidateRepo, UserInfoRepository userInfoRepo,
 			UserPositonsRepository userPositionRepo, FactoryRepository factroryRepo, CompanyRepository companyRepo,
 			BedRepository bedRepo, HouseRepository houseRepo, RoomRepository roomRepo,
-			CitizenshipRepository citizenshipRepo, DepartmentRepository departmentRepo) {
+			CitizenshipRepository citizenshipRepo, DepartmentRepository departmentRepo, LogRepository logRepo) {
 		this.candidateRepo = candidateRepo;
 		this.userInfoRepo = userInfoRepo;
 		this.userPositionRepo = userPositionRepo;
@@ -52,9 +63,9 @@ public class RecruitmentService {
 		this.roomRepo = roomRepo;
 		this.citizenshipRepo = citizenshipRepo;
 		this.departmentRepo = departmentRepo;
+		this.logRepo = logRepo;
 	}
 
-	
 	public List<ListModel> getCoordinatorsAndAgents(){
 		List<ListModel> recruiters = new ArrayList<>();
 		int agenid = userPositionRepo.findByPosition(GlobalSettings.agent).getId();
@@ -74,19 +85,32 @@ public class RecruitmentService {
 		
 		for(Candidate c :allCandidate) {
 			CandidateView cv = new CandidateView(c);
-			cv.setRecruiter(userInfoRepo.findById(c.getRecruiter()).get().getName());
+			Optional<UserInfo> oRecruiter = userInfoRepo.findById(c.getRecruiter());
+			if(oRecruiter.isEmpty())
+				cv.setRecruiter("ERR: DOESN'T EXIST");
+			else
+				cv.setRecruiter(oRecruiter.get().getName());
+			
 			candidates.add(cv);
 		}	
 		return candidates;
 	}
 
-	public Long addCandidate(Candidate candidate) {
+	public Long addCandidate(Candidate candidate, HttpSession session) {
 		this.candidateRepo.save(candidate);
+		UserInfo ui = (UserInfo) session.getAttribute("user");
+		this.logRepo.save(new Log(ui.getName(), Msg.newCandidate + candidate.toString(), LogType.CREATE));
 		return candidate.getId();
 	}
 	
-	public void deleteCandidate(Long id) {
-		this.candidateRepo.deleteById(id);
+	public void deleteCandidate(Long id, HttpSession session) {
+		Optional<Candidate> oCandi = candidateRepo.findById(id);
+		if(oCandi.isPresent()) {
+			this.candidateRepo.deleteById(id);
+			UserInfo ui = (UserInfo) session.getAttribute("user");
+			this.logRepo.save(new Log(ui.getName(), Msg.removeCandidate + oCandi.get(), LogType.DELETE));
+		}
+		
 	}
 
 	public NewWorker selectCandidatAsNewWorker(Long id) {
@@ -101,6 +125,7 @@ public class RecruitmentService {
 		for(Candidate c : candidates) {
 			list.add(new ListModel(c.getId(), c.getName()));
 		}
+		Collections.sort(list);
 		return list;		
 	}
 

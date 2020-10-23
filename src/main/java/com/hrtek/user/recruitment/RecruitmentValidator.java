@@ -1,6 +1,7 @@
 package com.hrtek.user.recruitment;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -20,6 +21,13 @@ public class RecruitmentValidator implements Validator {
 		if(nw.getPhone().isBlank() && nw.getEmail().isBlank()) {
 			ValidationUtils.rejectIfEmpty(errors, "email", "valid.contact");
 			ValidationUtils.rejectIfEmpty(errors, "phone", "valid.contact");
+		}
+		
+		LocalDate overeighteen = LocalDate.now(ZoneId.systemDefault());
+		overeighteen = overeighteen.minusYears(18);
+		
+		if(nw.getDateofbirth().isAfter(overeighteen)) {
+			errors.rejectValue("dateofbirth", "valid.agebeloweighteen");
 		}
 		
 		LocalDate form = nw.getStartZus();

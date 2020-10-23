@@ -109,7 +109,7 @@ public class ReportStartWorkDoc implements Doc<Workbook> {
 
 	@Override
 	public String getFilename() {
-		return "Report_StartWork.xlsx";
+		return "Report_StartWork.xls";
 	}
 
 	@Override

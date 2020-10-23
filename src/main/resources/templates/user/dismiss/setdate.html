@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{appName}"></title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+		<div class="header-container">
+			<h1 class="header-header" th:text="#{label.dismiss}"></h1>
+		</div>
+	<!-- ************************************************************************* -->
+	<div class="outer">
+		<div class="inner">
+		<form th:action="@{/dismiss/end}" method="post" th:object="${workerDate}">
+			
+			<input type="hidden" name="id" id="id" th:field="*{id}">
+			<div style="margin-bottom: 10px;">
+				<label for="endWork" th:text="#{end.work}"></label>
+				<input type="date" name="endWork" id="endWork" th:field="*{endWork}" required><br>
+			</div>
+			<div style="margin-bottom: 10px;">
+				<label for="endZus" th:text="#{end.zus}"></label>
+				<input type="date" name="endZus" id="endZus" th:field="*{endZus}" required><br>
+			</div>
+			<div class="row-center">
+				<button type="submit" class="button" onclick="return confirm('Are you sure you want to fire the worker?')" th:text="#{label.dismiss}"></button>
+			</div> 	
+		</form>
+		</div>
+	</div>
+		
+		
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+
+</html>

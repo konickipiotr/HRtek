@@ -8,7 +8,7 @@ import java.time.ZoneId;
 public class DateTimesheetOperation {
 	
 	private final LocalDate lastPrevious = LocalDate.of(2020, 02, 01);
-	private final LocalDate lastNext = LocalDate.of(2034, 12, 1);
+	private final LocalDate lastNext = LocalDate.of(2040, 12, 1);
 
 	private LocalDate selected;
 	

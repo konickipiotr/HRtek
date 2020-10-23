@@ -1,8 +1,13 @@
 package com.hrtek.user.timesheet;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -11,12 +16,14 @@ import com.hrtek.db.DepartmentRepository;
 import com.hrtek.db.FactoryRepository;
 import com.hrtek.db.worker.TimesheetRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
+import com.hrtek.db.worker.WorkerFinanceRepository;
 import com.hrtek.db.worker.WorkerRepository;
 import com.hrtek.model.Department;
 import com.hrtek.model.Factory;
 import com.hrtek.model.ListModel;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
+import com.hrtek.model.worker.WorkerFinance;
 
 @Service
 public class TimesheetService {
@@ -26,15 +33,18 @@ public class TimesheetService {
 	private WorkerRepository workerRepo;
 	private WorkerBasicRepository workerBacicRepo;
 	private DepartmentRepository departmentRepo;
+	private WorkerFinanceRepository workerFinanceRepo; //  ???TO
 	
 	@Autowired
 	public TimesheetService(FactoryRepository factoryRepo, TimesheetRepository timesheetRepo,
-			WorkerRepository workerRepo, WorkerBasicRepository workerBacicRepo, DepartmentRepository departmentRepo) {
+			WorkerRepository workerRepo, WorkerBasicRepository workerBacicRepo, DepartmentRepository departmentRepo,
+			WorkerFinanceRepository workerFinanceRepo) {
 		this.factoryRepo = factoryRepo;
 		this.timesheetRepo = timesheetRepo;
 		this.workerRepo = workerRepo;
 		this.workerBacicRepo = workerBacicRepo;
 		this.departmentRepo = departmentRepo;
+		this.workerFinanceRepo = workerFinanceRepo;
 	}
 
 	public void setModel(Model model) {
@@ -62,6 +72,8 @@ public class TimesheetService {
 		
 		for(Timesheet t : ts_list) {
 			WorkerTimesheet wts = tso.getWorkerTimesheet(t);
+			if(wts == null )
+				continue;
 			Worker w = workerRepo.findById(t.getWorkerid()).get();
 			WorkerBasic wb = workerBacicRepo.findById(w.getId()).get();
 			if(wb.getDepartment() != null) {
@@ -72,7 +84,8 @@ public class TimesheetService {
 			}
 						
 			wts.setName(w.getName());
-			wts.setTotal(wts.getHsum() * factory.getHourlyrate());
+			double total = wts.getHsum() * factory.getHourlyrate();
+			wts.setTotal(BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP).doubleValue());
 			
 			wts.setWorkernr(wb.getWorkerNo());
 			wts_list.add(wts);
@@ -87,16 +100,16 @@ public class TimesheetService {
 	}
 
 	
-	public void saveTimesheet(MonthFrom mf) {
+	public void saveTimesheet(MonthFrom mf, HttpSession session) {
 		Timesheet ts = timesheetRepo.findById(mf.getWorkerid()).get();
-		
+	
 		DateTimesheetOperation dts = new DateTimesheetOperation(mf.getMon());
 		String syear = "y" + dts.getYear();
-		
+
 		String currentYear = ts.getCurrentYear(syear);
 		StringBuilder sb = new StringBuilder();
 		for(String s : mf.getHour()) {
-			if(s.length()<2)
+			if(s.length() < 2)
 				sb.append("0" + s);
 			else
 				sb.append(s);
@@ -112,5 +125,38 @@ public class TimesheetService {
 		
 		ts.setCurrentYear(syear, currentYear);
 		this.timesheetRepo.save(ts);
+
+	}
+	
+	public FactoryView fillTweleve(FactoryView fv, Long workerid) {
+		List<WorkerTimesheet> wts = fv.getWts();
+		int worker_position = -1;
+		for(int i = 0; i < wts.size(); i++) {
+			if(wts.get(i).getId().equals(workerid)) {
+				worker_position = i;
+				break;
+			}
+		}
+		
+		WorkerTimesheet wtimeshet = wts.get(worker_position);
+		List<String> hourlList = wtimeshet.getHourlList();
+		for(int i = 0; i < hourlList.size(); i++) {
+			if(hourlList.get(i).equals("XX")) continue;
+			
+			hourlList.set(i, "12");
+		}
+		List<Integer> integerHourList = TimesheetOperation.getIntegerHourList(hourlList);
+		int sum = TimesheetOperation.calculateHours(integerHourList);
+		
+		wtimeshet.setHsum(sum);
+		
+		WorkerFinance wf = workerFinanceRepo.findById(workerid).get();
+		double total = wf.getWage() * sum;
+		wtimeshet.setTotal(BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP).doubleValue());
+		
+		
+		wts.get(worker_position).setHourlList(hourlList);
+		fv.setWts(wts);
+		return fv;
 	}
 }

@@ -14,3 +14,31 @@
 	color: white;
 	font-weight: bold;
 }
+
+
+#container-f{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color:  #d0e5e5;
+	min-height: 700px;
+}
+
+
+.form-content{
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+}
+
+.inp{
+	width: 95%;
+}
+
+.inner{
+	background-color: #729fcf;
+	font-weight: bold;
+	
+}
+.

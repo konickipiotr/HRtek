@@ -5,9 +5,7 @@ import java.util.List;
 
 import com.hrtek.user.display.filters.ContactFilters;
 import com.hrtek.user.display.filters.DateFilterOperation;
-import com.hrtek.user.display.views.BasicView;
 import com.hrtek.user.display.views.ContactViewDis;
-import com.hrtek.user.display.views.DataView;
 
 public class DateContactOperation extends DateFilterOperation<ContactViewDis, ContactFilters> {
 

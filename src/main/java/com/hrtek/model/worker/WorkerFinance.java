@@ -3,7 +3,6 @@ package com.hrtek.model.worker;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.00">
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/user/timesheet_style.css" />
  	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" /> 
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/timesheet_style.css" />
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
@@ -16,14 +16,14 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Obecność</h1>
+			<h1 class="header-header" th:text="#{menu.timesheet}"></h1>
 		</div>
 		<div class="timesheet-menu" th:replace="user/timesheet/timesheetmenu :: timesheetmenu"></div>
 		
 		<div class="month-nav">
-			<a class="m-button" th:if="${previousIsPossible}" th:href="@{'/timesheet/' + ${mon - 1} + '/' + ${fv.id}}"> &#171; PREVIOUS MONTH</a>
+			<a class="m-button" th:if="${previousIsPossible}" th:href="@{'/timesheet/' + ${mon - 1} + '/' + ${fv.id}}" th:text="#{button.previousMonth}"></a>
 			<span class="info-month" th:text="${month + '/' + year}"></span>
-			<a class="m-button" th:if="${nextIsPossible}" th:href="@{'/timesheet/' + ${mon + 1} + '/' + ${fv.id}}">NEXT MONTH	&#187;</a>
+			<a class="m-button" th:if="${nextIsPossible}" th:href="@{'/timesheet/' + ${mon + 1} + '/' + ${fv.id}}" th:text="#{button.nextMonth}"></a>
 			 
 		</div>
 		
@@ -36,12 +36,10 @@
 		
 			<div class="table">
 				<div class="tr">
-					<span class="th">Osoba</span>
-					<span class="th">Nr pracownika</span>
-					<span class="th">Dział</span>
+					<span class="th" th:text="#{person}"></span>
 					<span class="th" th:each="i : ${#numbers.sequence(1, monLen)}" th:text="${i}"></span>
-					<span class="th">Total h</span>
-					<span class="th">Total cost</span>
+					<span class="th">hours</span>
+					<span class="th" th:text="#{label.totalCost}"></span>
 					<span class="th"></span>
 				</div>
 				<form th:action="@{/timesheet}" method="post" class="tr" th:each="v : ${fv.wts}">
@@ -49,28 +47,40 @@
 					<input type="hidden" name="workerid" th:value="${v.id}">
 					<input type="hidden" name="factoryid" th:value="${fv.id}">
 					<input type="hidden" name="month" th:value="${month}">
+					<input type="hidden" name="mon" th:value="${mon}">
 					<input type="hidden" name="year" th:value="${year}">
 					<input type="hidden" name="monoffset" th:value="${year}">
 					
-					<span class="td" th:text="${v.name}"></span>
-					<span class="td" th:text="${v.workernr}"></span>
-					<span class="td" th:text="${v.department}"></span>
+					<span class="td" >
+						<b><span th:text="${v.name}"></span></b><br>
+						<span th:text="${v.workernr}"></span><br>
+						<span th:text="${v.department}"></span>
+					</span>
 					<span class="td" th:each="h : ${v.hourlList}">
-						<input type="text" name="hour" th:value="${h}" size="2" maxlength="2">
+							<select name="hour">
+								<option th:value="${h}"  th:text="${h}"></option>
+								<option th:each="t : ${hoursV}" th:value="${t}" th:text="${t}"></option>
+							</select>
+							<!-- <input type="text" name="hour" th:value="${h}" size="2" maxlength="2"> -->
 					</span>
 					<span class="td" th:text="${v.hsum}"></span>
 					<span class="td" th:text="${v.total}"></span>
-					<span class="td">
-						<button class="button" type="submit">Zapisz</button>
-					</span>
+		
+					<div class="td" style="display: flex; flex-direction: column; width: 80px">
+						
+							<div style="width: 100%">
+								<button class="button" type="submit" name="save" th:text="#{button.save}"></button>
+							</div>
+							<div style="width: 100%">
+								<button class="button" type="submit" name="fill" >Fill</button>
+							</div>
+						
+					</div>
+		
 				</form>
 			</div>
 		</div>
-		
-
-	
-
-	
+			
 	<!-- ************************************************************************* -->
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>

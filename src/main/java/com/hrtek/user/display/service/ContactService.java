@@ -7,15 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.hrtek.db.CitizenshipRepository;
 import com.hrtek.db.CompanyRepository;
 import com.hrtek.db.FactoryRepository;
 import com.hrtek.db.accommodation.BedRepository;
 import com.hrtek.db.accommodation.HouseRepository;
-import com.hrtek.db.worker.ResidencyRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerContactRepository;
-import com.hrtek.db.worker.WorkerDateRepository;
 import com.hrtek.db.worker.WorkerRepository;
 import com.hrtek.model.ListModel;
 import com.hrtek.model.StatusFC;
@@ -23,7 +20,6 @@ import com.hrtek.model.accommodation.House;
 import com.hrtek.model.worker.Contact;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
-import com.hrtek.user.display.views.BasicView;
 import com.hrtek.user.display.views.ContactViewDis;
 
 @Service

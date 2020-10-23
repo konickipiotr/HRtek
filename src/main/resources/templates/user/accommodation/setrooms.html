@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/nhouse_style.css" />
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
@@ -17,31 +18,63 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Pokoje</h1>
+			<h1 class="header-header" th:text="#{label.rooms}"></h1>
 		</div>
 
-		 <div>
-		 	<span>Max: </span><span th:text="${house.capacity}"></span>
-			<span>Aktualnie: </span><span id="sum"></span>
-			room
+		 <div class="main-content-room">
+		 	<div class="room-div">
+		 		<div>
+			 		<span th:text="#{label.capacity}+ ' '">: </span><span th:text="${house.capacity}"></span>
+			 	</div>
+			 	<div>
+					<span>Set: </span><span id="sum"></span>
+				</div>
+		 	</div>
+		 	
 			<form th:action="@{/accommodation/saverooms}" method="post">
 				<input type="hidden" id="maxcapacity" th:value="${house.capacity}">
 				<input type="hidden" id="houseid" name="houseid" th:value="${house.id}">
 				
-				<div th:each="room, it : ${#numbers.sequence(0, house.noofrooms-1)}">
-	
-						<label for="roomname">Nazwa/nr pokoju</label>
-						<input type="text" name="roomname" id="roomname" required>
+				<div class="room-div" th:each="room, it : ${#numbers.sequence(0, house.noofrooms-1)}">
+					<div class="room-row">
+						<div class="label-div">
+							<label for="roomname" th:text="#{label.nameOfRoom}"></label>
+						</div>
+						<div class="input-div">
+							<input type="text" name="roomname" id="roomname" required>
+						</div>
+					</div>
+					
+					<div class="room-row">
+						<div class="label-div">
+							<span>set beds: </span>
+						</div>
+						<div class="input-div">
+							<select id="${it.index}" name="capacity" onchange="updateC()">
+								<option th:each="i : ${#numbers.sequence(1, house.capacity)}" th:value="${i}" th:text="${i}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="room-row" style="height: 100px;">
+						<div class="label-div">
+							<label for="remark" th:text="#{remarks}"></label>
+						</div>	
+						<div class="input-div">
+							<textarea rows="5" cols="10" name="remark"></textarea>
+						</div>
+					</div>
+					
 						
-						<select id="${it.index}" name="capacity" onchange="updateC()">
-							<option th:each="i : ${#numbers.sequence(1, house.capacity)}" th:value="${i}" th:text="${i}"></option>
-						</select>
 						
-						<label for="remark">Uwagi</label>
-						<textarea rows="5" cols="10" name="remark"></textarea>
+						
+						
+						
 						
 				</div>
-				<button type="submit" id="addRoom"  disabled="disabled" >dodaj</button>
+				<div style="display: flex; justify-content: center;">
+					<button type="submit" id="addRoom" class="button"  disabled="disabled"th:text="#{button.add}"></button>
+				</div>
 			</form>
 		 </div>
 	

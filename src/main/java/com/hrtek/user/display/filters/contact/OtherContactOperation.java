@@ -3,7 +3,6 @@ package com.hrtek.user.display.filters.contact;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hrtek.model.accommodation.House;
 import com.hrtek.user.display.filters.ContactFilters;
 import com.hrtek.user.display.filters.OtherFilterOperation;
 import com.hrtek.user.display.views.ContactViewDis;

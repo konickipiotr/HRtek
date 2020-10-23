@@ -1,9 +1,7 @@
 package com.hrtek.user.worker;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,7 @@ public class InUseService {
 
 	public Available getAvailable(long id) {
 		Available available = new Available();
-		inUseRepo.deleteByExpiredBefore(Timestamp.valueOf(LocalDateTime.now()));
+		inUseRepo.deleteByExpiredBefore(LocalDateTime.now(GlobalSettings.zid));
 		List<InUse> inUseList = inUseRepo.findByWorkerid(id);
 		
 		for(InUse i : inUseList) {
@@ -40,7 +38,6 @@ public class InUseService {
 			case ADDRESS: available.setAddress(i);break;
 			}
 		}
-		System.err.println(available.getWorker() == null);
 		return available;
 	}
 	
@@ -48,23 +45,21 @@ public class InUseService {
 		
 	}
 
-	public boolean lockup(UserInfo user, Long workerid, UsedTable usedTable) {
-		Timestamp now =  Timestamp.valueOf(LocalDateTime.now());
-		
-		System.out.println(LocalDateTime.now());
-		System.out.println(now);
-		Timestamp lock =  Timestamp.valueOf(LocalDateTime.now().plusMinutes(GlobalSettings.lockupminue));
+	public LocalDateTime lockup(UserInfo user, Long workerid, UsedTable usedTable) {
+		LocalDateTime now = LocalDateTime.now(GlobalSettings.zid);
+
+		LocalDateTime lock = LocalDateTime.now(GlobalSettings.zid).plusMinutes(GlobalSettings.lockupminue);
 		
 		InUse iu = new InUse(workerid, user.getId(), usedTable, lock, user.getName());
 		this.inUseRepo.deleteByExpiredBefore(now);
 		if(this.inUseRepo.existsByWorkeridAndUsedTable(workerid, usedTable)) {
 			if(this.inUseRepo.findByWorkeridAndUsedTable(workerid, usedTable).getId().equals(user.getId())) {
-				return true;
+				return null;
 			}
-			return false;
+			return lock;
 		}
 		this.inUseRepo.save(iu);
-		return true;
+		return lock;
 	}
 	
 	public void unlock(Long workerid, UsedTable usedTable, Long userid) {

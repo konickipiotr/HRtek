@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+.pkd{
+	width: 5em;
+}
+
+.nip{
+	width: 10em;
+}
+
+.krs{
+	width: 10em;
+}
+
+.numberofworker{
+	width: 5em;
+}
+
+.hourlyrate{
+	width: 6em;
+}
+
+.postcode{
+	width: 6em;
+}
+
+.item-container{
+	margin-bottom: 20px;
+}
+
+.item-header{
+	display: flex;
+	justify-content: center;
+}
+
+.item-content{
+	width: 100%;
+	display: flex;
+	width: 100%;
+}
+
+
+.half-container{
+	width: 49%;
+	display: flex;
+	justify-content: center;
+}
+
+.form-container{
+	width: 70%;
+	background-color: #009d48;
+	
+}
+
+.form-content{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+
+.input-container{
+	color: white;
+	font-weight: bold;
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+}
+
+h3{
+	text-align: center;
+	margin-top: 0px;
+}
+
+.button-div{
+	display: flex;
+	justify-content: center;	
+	margin-top: 15px;
+}
+
+.sub-header{
+	background-color: #037135;
+	color: white;
+}
+
+.button-accept{
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color:  #7fc7a0;
+}
+
+.button-accept:visited{
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color:  #7fc7a0;
+}
+
+.button-accept:hover{
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color:  #c4a000;
+}

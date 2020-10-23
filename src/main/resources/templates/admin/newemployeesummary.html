@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -18,23 +18,33 @@
 	<!-- ************************************************************************* -->
 
 		<div class="header-container">
-			<h1 class="header-header">Nowy pracownik</h1>
+			<h1 class="header-header" th:text="#{button.newEmployee}"></h1>
 		</div>
 		
-		<div class = "H">
-				<h2>Podsumownanie</h2>
+		
+		<div class="outer-container2">
+		<div class="H">
+				<h2 th:text="#{label.summary}"></h2>
 		</div>
-		<div class="SummaryNewemployee-outer-container">
-			<div class ="SummaryNewemployee-outer-containerPart1">
-				<p> <span>Imie:</span> <span th:text="${newEmployeeModel.firstname}"></span></p>
-				<p> <span>Nazwisko:</span> <span th:text="${newEmployeeModel.lastname}"></span></p>
-				<p> <span>E-mail:</span> <span th:text="${newEmployeeModel.email}"></span></p>
-				<p> <span>Tel:</span> <span th:text="${newEmployeeModel.phone}"></span></p>
+			<div class="d-row">
+				<div>
+					<p> <span style="color: #edd400;" th:text="#{firstname}">:</span> <span th:text="${newEmployeeModel.firstname}"></span></p>
+					<p> <span style="color: #edd400;" th:text="#{lastname}">:</span> <span th:text="${newEmployeeModel.lastname}"></span></p>
+					<p> <span style="color: #edd400;" th:text="#{email}">:</span> <span th:text="${newEmployeeModel.email}"></span></p>
+					<p> <span style="color: #edd400;" th:text="#{phone}">:</span> <span th:text="${newEmployeeModel.phone}"></span></p>
+				</div>
+				<div >
+					<p><span style="color: #edd400;" th:text="#{sex}">:</span> <span th:text="${newEmployeeModel.sex}"></span></p>	
+					<p><span style="color: #edd400;">Login:</span> <span th:text="${newEmployeeModel.username}"></span></p>
+					<p><span style="color: #edd400;" th:text="#{password}">:</span> <span th:text="${newEmployeeModel.password}"></span></p>
+				</div>
 			</div>
-			<div class ="SummaryNewemployee-outer-containerPart2">
-				<p><span>Płeć:</span> <span th:text="${newEmployeeModel.sex}"></span></p>	
-				<p><span>Login:</span> <span th:text="${newEmployeeModel.username}"></span></p>
-				<p><span>Hasło:</span> <span th:text="${newEmployeeModel.password}"></span></p>
+			<div>
+				<form th:action="@{/admin/newemployee/download}" method="post">
+					<input type="hidden" name="id" id="id" th:value="${id}"> 
+					<input type="hidden" name="pass" th:value="${pass}">
+					<button type="submit" class="button-accept" th:text="#{button.download}"></button>
+				</form>
 			</div>
 		</div>
 	<!-- ************************************************************************* -->

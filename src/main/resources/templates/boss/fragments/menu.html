@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body>
 	<nav th:fragment="menu">
 		<ul>
-			<li><a th:href="@{/boss}">Home</a></li>
-			<li><a th:href="@{/boss/tasks}">Zadania</a></li>
+			<li><a th:href="@{/boss}" th:text="#{menu.home}"></a></li>
+			<li><a th:href="@{/boss/tasks}" th:text="#{header.tasks}"></a></li>
 			
 		</ul>
 	</nav>

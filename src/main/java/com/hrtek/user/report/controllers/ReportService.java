@@ -42,12 +42,14 @@ import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
 import com.hrtek.model.worker.WorkerDate;
+import com.hrtek.settings.GlobalSettings;
 import com.hrtek.user.report.views.ReportAccommodation;
 import com.hrtek.user.report.views.ReportMedical;
 import com.hrtek.user.report.views.ReportPesel;
 import com.hrtek.user.report.views.ReportRecruiters;
 import com.hrtek.user.report.views.ReportStartWork;
 import com.hrtek.user.report.views.ReportVisaWork;
+import com.hrtek.user.report.views.ReportWorkTime;
 import com.hrtek.user.report.views.ReportZus;
 
 @Service
@@ -100,8 +102,11 @@ public class ReportService {
 		return new SaveFile().saveDoc(doc);
 	}
 	
-	public String downloadZus(ReportType reportType, Long companyid, Long factoryid, LocalDate datefrom) {
-		ReportWraper<ReportZus> wraper = getReportZus(reportType, companyid, factoryid, datefrom);
+	public String downloadZus(List<ReportZus> zusList, ReportType reportType) {
+		ReportWraper<ReportZus> wraper = new ReportWraper<>();
+		wraper.setReport(zusList);
+		wraper.setReportType(reportType.toString());
+		
 		Doc<Workbook> doc = new ReportZusDoc(wraper.getReport());
 		doc.prepareDoc();
 		return new SaveFile().saveDoc(doc);
@@ -156,14 +161,14 @@ public class ReportService {
 /////***************************************************************************
 	
 
-	public ReportWraper<ReportZus> getReportZus(ReportType rtype, Long comapnyid, Long factoryid, LocalDate dateform){
+	public ReportWraper<ReportZus> getReportZus(ReportType rtype, Long comapnyid, Long factoryid, LocalDate dateform, String zusSearchingType){
 		ReportWraper<ReportZus> wraper = new ReportWraper<>();
 		List<ReportZus> report = new ArrayList<>();
 		List<Worker> w_list = workerRepo.findByCompanyidAndFactoryid(comapnyid, factoryid);
 		
 		if(dateform != null) {
 			for(Worker w : w_list) {
-				ReportZus rz = getOneRecordReportZus(w, dateform);
+				ReportZus rz = getOneRecordReportZus(w, dateform, zusSearchingType);
 				if(rz != null)
 					report.add(rz);
 			}
@@ -174,7 +179,7 @@ public class ReportService {
 		return wraper;
 	}
 	
-	private ReportZus getOneRecordReportZus(Worker w, LocalDate dateform) {
+	private ReportZus getOneRecordReportZus(Worker w, LocalDate dateform, String zusSearchingType) {
 		ReportZus rp = new ReportZus();
 
 		WorkerDate wd = workerDateRepo.findById(w.getId()).get();
@@ -182,8 +187,13 @@ public class ReportService {
 		LocalDate endZus = wd.getEndZus();
 		
 		if(startZus == null) return null;
-		if(endZus == null) return null;		
-		if(startZus.isBefore(dateform) && endZus.isBefore(dateform)) return null;
+		if(zusSearchingType.equals("startZus")) {
+			if(startZus.isBefore(dateform)) return null;
+		}else {
+			if(endZus == null) return null;
+			if(endZus.isBefore(dateform)) return null;
+		}
+		
 
 		rp.setStartZus(wd.getStartZus());
 		rp.setEndZus(wd.getEndZus());
@@ -361,6 +371,12 @@ public class ReportService {
 	public ReportWraper<ReportRecruiters> getReportRecruiters(ReportType rtype, Long recruiterid){
 		ReportWraper<ReportRecruiters> wraper = new ReportWraper<>();
 		List<ReportRecruiters> report = new ArrayList<>();
+		wraper.setReportType(rtype.toString());
+		if(recruiterid == null) {
+			wraper.setReport(report);
+			return wraper;
+		}
+		
 		UserInfo user = userInfoRepo.findById(recruiterid).get();
 		List<Worker> workers = workerRepo.findByRecruiter(user.getId());
 		
@@ -377,7 +393,7 @@ public class ReportService {
 		}
 		
 		wraper.setReport(report);
-		wraper.setReportType(rtype.toString());
+		
 		return wraper;
 	}
 	
@@ -450,6 +466,49 @@ public class ReportService {
 			rp.setFactory(factoryRepo.findById(worker.getFactoryid()).get().getShortname());
 		}
 		return rp;
+	}
+	
+/////***************************************************************************
+
+	public ReportWraper<ReportWorkTime> getReportWorkTime(ReportType rtype){
+		ReportWraper<ReportWorkTime> wraper = new ReportWraper<>();
+		List<ReportWorkTime> report = new ArrayList<>();
+		
+		List<Worker> workers = this.workerRepo.findAll();
+		for(Worker w : workers) {
+			ReportWorkTime r = new ReportWorkTime();
+			r.setFirstname(w.getFirstname());
+			r.setLastname(w.getLastname());
+			r.setCompany(this.companyRepo.findById(w.getCompanyid()).get().getShortname());
+			WorkerDate wd = this.workerDateRepo.findById(w.getId()).get();
+			if(wd.getStartZus() == null)
+				r.setMonths("EMPTY");
+			else
+				calculateTime(wd, r);
+			
+			report.add(r);
+		}
+		
+		wraper.setReport(report);
+		wraper.setReportType(rtype.toString());
+		return wraper;
+	}
+
+	private void calculateTime(WorkerDate wd, ReportWorkTime r) {
+		LocalDate now = LocalDate.now(GlobalSettings.zid);
+		LocalDate zus = wd.getStartZus();
+		LocalDate result = now.minusYears(zus.getYear()); 
+		result = result.minusMonths(zus.getMonthValue()); 
+		result = result.minusDays(zus.getDayOfMonth());
+		int mon = 0;
+		if(result.getYear() > 0) {
+			mon = result.getYear() * 12;
+		}
+		mon += result.getMonthValue();
+		r.setMonths(Integer.toString(mon));
+		r.setDays(result.getDayOfMonth());
+		if(mon > 16)
+			r.setGreaterThansixteen(true);
 	}
 	
 	

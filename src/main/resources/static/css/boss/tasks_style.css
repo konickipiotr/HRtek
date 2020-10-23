@@ -23,7 +23,12 @@ label{
 	background-color: #d7adad;
 	width: 50%;
 	border-radius: 5px;
+	padding: 1%;
 	
+}
+
+input[type=text]{
+	padding: 2px;
 }
 
 

@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/form_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/recruitment_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
@@ -18,32 +17,28 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Rekrutacja</h1>
+			<h1 class="header-header" th:text="#{label.recruitment}"></h1>
 		</div>
 		
 		<div class="stage-container">
-			<a class="stage-button" th:href="@{/canditate}">Etap 1</a>
-			<a class="stage-button" th:href="@{/recruitment}">Etap 2</a>
+			<a class="stage-button" th:href="@{/canditate}" th:text="#{button.stage1}"></a>
+			<a class="stage-button" th:href="@{/recruitment}" th:text="#{button.stage2}"></a>
 		</div>
 		
 		<p th:text="${success_msg}" class="success_message"></p>
 		
 		<div class="content">
 			<form th:action="@{/canditate}" method="post" th:object="${candidate}">
-				<div class="section-header"><h3>Kadydat</h3></div>
+				<div class="section-header" ><h2 th:text="#{label.candidate}"></h2></div>
 				<div class="row">
 					<div class="col-a">
-						<div class="label-div">
-							<label for="firstname">Imię</label>
-						</div>
-						<div class="input-div">
-							<input type="text" minlength="2" id="firstname" name="firstname" th:field="*{firstname}" required><br>
-						</div>
+						<label for="firstname" th:text="#{firstname}"></label>
+						<input type="text" minlength="2" id="firstname" name="firstname" th:field="*{firstname}" required>
 					</div>
 					
 					<div class="col-a">
 						<div class="label-div">
-							<label for="lastname">Nazwisko</label>
+							<label for="lastname" th:text="#{lastname}"></label>
 						</div>
 						<div class="input-div">
 							<input type="text" minlength="2" id="lastname" name="lastname" th:field="*{lastname}" required><br>
@@ -51,13 +46,13 @@
 					</div>
 					<div class="col-a">
 						<div class="label-div">
-							<label for="lastname">Płeć</label>
+							<label for="lastname" th:text="#{sex}"></label>
 						</div>
 						<div class="input-div">
-							<label for="sexM">Male</label>
-							<input type="radio" id="sexM" name="sex" value="M" checked>
-							<label for="sexF">Female</label>
-							<input type="radio" id="sexM" name="sex" value="F" >
+							<label for="sexM" th:text="#{male}"></label>
+							<input type="radio" id="sexM" name="sex" value="M" checked required>
+							<label for="sexF" th:text="#{female}"></label>
+							<input type="radio" id="sexM" name="sex" value="F" required>
 						</div>
 					</div>
 				</div>
@@ -69,7 +64,7 @@
 					<div class="row">
 						<div class="col-a">
 							<div class="label-div">
-								<label for="email">email</label>
+								<label for="email" th:text="#{email}"></label>
 							</div>
 							<div class="input-div">
 								<input type="email" id="email" name="email" th:field="*{email}"><br>
@@ -77,7 +72,7 @@
 						</div>
 						<div class="col-a">
 							<div class="label-div">
-								<label for="phone">phone</label>
+								<label for="phone" th:text="#{phone}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" id="phone" name="phone" th:field="*{phone}"><br>
@@ -85,7 +80,7 @@
 						</div>
 						<div class="col-a">
 							<div class="label-div">
-								<label for="recruiter">rekruter</label>
+								<label for="recruiter" th:text="#{recruiter}"></label>
 							</div>
 							<div class="input-div">
 								<select id="recruiter" name="recruiter" required>
@@ -102,7 +97,7 @@
 					</div>
 					<div class="col-a">
 						<div class="label-div">
-							<label for="note">Notatki</label>
+							<label for="note" th:text="#{label.note}"></label>
 						</div>
 						<div class="input-div">
 							<textarea class="note" name="note"></textarea>
@@ -115,10 +110,30 @@
 				<!-- -------------------------------------------------- -->
 
 				<div class="row-buttons">
-					<button class="button" type="submit" id="savebutton" name="action" value="save">Zapis</button>
-					<button class="button"  type="submit" id="saveandnext" name="action" value="saveandnext">Zapis i przejdź dalej</button>
+					<button class="button" type="submit" id="savebutton" name="action" value="save" th:text="#{button.save}"></button>
+					<button class="button"  type="submit" id="saveandnext" name="action" value="saveandnext" th:text="#{button.save.and.next}"></button>
 				</div>
 			</form>
+			<form th:action="@{/canditate/filterold}" method="post">
+				<div class="section-header"><h2 th:text="#{label.archives}"></h2></div>
+				<div class="filter-container">
+					<div>
+						<select id="id" name="id" required>
+							<option th:each="i : ${oldW}" th:value="${i.id}" th:text="${i.name}"></option>
+						</select>
+					</div>
+					<div>
+						<input type="text" minlength="3" name="stext">
+					</div>
+					<div>
+						<button class="button" type="submit" name="action" value="filter" th:text="#{button.filter}"></button>
+					</div>
+					<div>
+						<button class="button" type="submit" name="action" value="fill" th:text="#{button.next}"></button>
+					</div>
+				</div>
+			</form>
+			
 			
 		</div>	
 		
@@ -126,13 +141,13 @@
 			<table>
 				<tr>
 					<th>Lp</th>
-					<th>Imię</th>
-					<th>Nazwisko</th>
-					<th>płeć</th>
-					<th>rekruter</th>
-					<th>email</th>
-					<th>phone</th>
-					<th>uwagi</th>
+					<th th:text="#{firstname}"></th>
+					<th th:text="#{lastname}"></th>
+					<th th:text="#{sex}"></th>
+					<th th:text="#{recruiter}"></th>
+					<th th:text="#{email}"></th>
+					<th th:text="#{phone}"></th>
+					<th th:text="#{remarks}"></th>
 					<th></th>
 				</tr>
 				<tr th:each="i, it : ${candidate_list}">
@@ -145,7 +160,7 @@
 					<td th:text="${i.phone}"></td>
 					<td th:text="${i.note}"></td>
 					<td class="td_short_button">
-						<a th:href="@{'/recruitment/' + ${i.id}}" class="tdbutton">usuń</a>
+						<a th:href="@{'/canditate/' + ${i.id}}" class="aButton" onclick="return confirm('Are you sure you want to delete this candidate?')" th:text="#{button.delete}"></a>
 					</td>
 				</tr>
 				

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" media="all" href="/css/NewFile.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/login_style.css" />
@@ -10,7 +10,7 @@
 </head>
 <body>
 	<footer class="footer_container" th:fragment="footer">
-		<p> Copyright Piotr Konicki. Wszelkie prawa zastrzeżone. </p>	
+		<p> Copyright Piotr Konicki</p>	
 	</footer>
 </body>
 </html>

@@ -8,17 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hrtek.user.display.filters.BasicFilters;
 import com.hrtek.user.display.filters.FilterProcess;
-import com.hrtek.user.display.filters.OtherFilterOperation;
 import com.hrtek.user.display.filters.basic.DateBasicOperation;
 import com.hrtek.user.display.filters.basic.OtherBasicOperation;
 import com.hrtek.user.display.filters.basic.TextBasicOperation;
-import com.hrtek.user.display.filters.BasicFilters;
 import com.hrtek.user.display.service.BasicService;
 import com.hrtek.user.display.service.SortViewService;
 import com.hrtek.user.display.views.BasicShowedField;
@@ -99,7 +97,6 @@ public class BasicController {
 	@PostMapping(path = "/filter", params = "filter=new")
 	public String filterNew(BasicFilters bf,  HttpSession session, Model model) {
 		List<BasicView> basicViewList = basicService.getBasicViewList();
-		session.setAttribute("basicViewList", basicViewList);
 		basicViewList = new FilterProcess<BasicView, BasicFilters>( bf)
 				.setTextOpertation(new TextBasicOperation())
 				.setDateOperation(new DateBasicOperation())

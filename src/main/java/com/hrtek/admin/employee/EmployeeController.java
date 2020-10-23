@@ -1,5 +1,7 @@
 package com.hrtek.admin.employee;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,19 +33,21 @@ public class EmployeeController {
 		model.addAttribute("emp",emp);
 		model.addAttribute("edit","E");
 		model.addAttribute("employeeList",employeeService.getEmployeeViewList());
-		model.addAttribute("positons_list", employeeService.getEmployeePositions());
+		model.addAttribute("positons_list", employeeService.getEmployeePositions(id));
 		return "admin/employees";
 	}
 	
 	@GetMapping("/admin/employees/delete/{id}")
-	public String deleteEmployee(@PathVariable("id") Long id, Model model) {
-		employeeService.deleteEmployeeById(id);
+	public String deleteEmployee(@PathVariable("id") Long id, Model model, HttpSession session) {
+		UserInfo ui = (UserInfo) session.getAttribute("user");
+		employeeService.deleteEmployeeById(id, ui);
 		return "redirect:/admin/employees";
 	}
 	
 	@PostMapping("admin/employees/modify")
-	public String modifyEmployee(UserInfo employee) {
-		employeeService.updateUser(employee);
+	public String modifyEmployee(UserInfo employee, HttpSession session) {
+		UserInfo ui = (UserInfo) session.getAttribute("user");
+		employeeService.updateUser(employee, ui);
 		return "redirect:/admin/employees";
 	}
 }

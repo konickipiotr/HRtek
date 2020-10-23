@@ -58,9 +58,14 @@ public class WorkerProfilController {
 	
 	@GetMapping("/download/{id}")
 	public String downloadFile(@PathVariable("id") Long id, RedirectAttributes ra) {
-		System.out.println(id);
 		String path = filesService.getFilepath(id);
 		ra.addAttribute("filename", path);
 		return "redirect:/download";
+	}
+	
+	@PostMapping("/updatenote")
+	public String updateNote(@RequestParam("id")Long id, @RequestParam("workerNote") String note) {
+		profileService.updateNote(id, note);
+		return "redirect:/profil/" + id;		
 	}
 }

@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
-
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/show_style.css" />
+	
+	<script src="https://kit.fontawesome.com/7ccfa6815b.js" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header th:replace="fragments/top :: top"></header>
@@ -18,7 +19,7 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Podstawowe</h1>
+			<h1 class="header-header" th:text="#{label.basic}"></h1>
 		</div>
 		<div th:replace="user/display/fragments/viewbar:: viewbar"></div>
 		
@@ -31,22 +32,22 @@
 				<table id="basic-table">
 					<tr>
 						<th>lp</th>
-						<th>status</th>
-						<th>profil</th>
-						<th>Imię</th>
-						<th>Nazwisko</th>
-						<th th:if="${fd.bDateofbirth == true}" >Data Urodzenia</th>
-						<th th:if="${fd.bSex == true}" >Płeć</th>
-						<th th:if="${fd.bCitizenship == true}">Obywatelstow</th>
-						<th th:if="${fd.bPesel == true}">pesel</th>
-						<th th:if="${fd.bPaszport == true}">paszport</th>
-						<th th:if="${fd.bBbiopaszport == true}">biopasz</th>
-						<th th:if="${fd.bCompany == true}">firma</th>
-						<th th:if="${fd.bFactory == true}">fabryka</th>
-						<th th:if="${fd.bStartWork == true}">Start pracy</th>
-						<th th:if="${fd.bStartZus == true}">Starty Zus</th>
-						<th th:if="${fd.bEndZus == true}">Koniec Zus</th>
-						<th th:if="${fd.bEndWork == true}" >Koniec Pracy</th>
+						<th class="td_small">Status</th>
+						<th >PROFIL</th>
+						<th th:text="#{firstname}"></th>
+						<th th:text="#{lastname}"></th>
+						<th th:if="${fd.bDateofbirth == true}" th:text="#{dateofbirth}" class="td_date"></th>
+						<th th:if="${fd.bSex == true}" th:text="#{sex}" class="td_small"></th>
+						<th th:if="${fd.bCitizenship == true}" th:text="#{citizenship}"></th>
+						<th th:if="${fd.bPesel == true}" th:text="#{pesel}"></th>
+						<th th:if="${fd.bPaszport == true}" th:text="#{passport}"></th>
+						<th th:if="${fd.bBbiopaszport == true}" th:text="#{biopass}"></th>
+						<th th:if="${fd.bCompany == true}" th:text="#{company}"></th>
+						<th th:if="${fd.bFactory == true}" th:text="#{factory}"></th>
+						<th th:if="${fd.bStartWork == true}" th:text="#{start.work}" class="td_date"></th>
+						<th th:if="${fd.bStartZus == true}" th:text="#{start.zus}" class="td_date"></th>
+						<th th:if="${fd.bEndZus == true}" th:text="#{end.zus}" class="td_date"></th>
+						<th th:if="${fd.bEndWork == true}" th:text="#{end.work}" class="td_date"></th>
 					</tr>
 					<tr>
 						<td class="td_noP">
@@ -167,7 +168,9 @@
 							<span th:unless="${i.status == 1}" class="dot"></span>
 						</td>
 						<td>
-							<a th:href="@{'/profil/'+ ${i.id}}">[ico]</a>
+							<div class="i-ico">
+								<a th:href="@{'/profil/'+ ${i.id}}"><i class="fas fa-address-card fa-2x"></i></a>
+							</div>
 						</td>
 						<td th:text="${i.firstname}"></td>
 						<td th:text="${i.lastname}"></td>

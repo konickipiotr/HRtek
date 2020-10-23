@@ -23,3 +23,77 @@
 .postcode{
 	width: 6em;
 }
+
+.button{
+	background-color: #6bc464;
+	color: black;
+}
+
+
+.main-container{
+	width: 50%;
+	margin: auto;
+	background-color: #037135;
+	color: white;
+	font-weight: bold;
+	padding: 2%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.row{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.row-b{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.col{
+	width: 45%;
+	display: flex;
+}
+
+.label-col{
+	width: 30%;
+	
+}
+.input-col{
+	width: 70%;
+}
+
+
+.col input{
+	width: 100%;
+}
+
+.button-accept{
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color:  #7fc7a0;
+}
+
+.button-accept:visited{
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color:  #7fc7a0;
+}
+
+.button-accept:hover{
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color:  #c4a000;
+}

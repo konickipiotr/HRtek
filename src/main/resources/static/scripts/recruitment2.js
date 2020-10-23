@@ -10,6 +10,7 @@ document.getElementById("isOhter").onchange = function(){
 		document.getElementById("plcity").required = true;
 		document.getElementById("bedid").required = false;
 		document.getElementById("bedid").disabled = true;
+		document.getElementById("acomdate").disabled = true;
 	}else{
 		document.getElementById("pladdress").disabled = true;
 		document.getElementById("plpostcode").disabled = true;
@@ -20,12 +21,12 @@ document.getElementById("isOhter").onchange = function(){
 		document.getElementById("plcity").required = false;
 		document.getElementById("bedid").required = true;
 		document.getElementById("bedid").disabled = false;
+		document.getElementById("acomdate").disabled = false;
 	}
 }
 
 function enableReadOnly(){
 	if(status == "success"){
-		console.log("in if")
 		document.getElementById("firstname").readOnly = true;
 		document.getElementById("lastname").readOnly = true;
 		document.getElementById("sexM").readOnly = true;
@@ -49,5 +50,6 @@ function enableReadOnly(){
 		document.getElementById("note").readOnly = true;
 		document.getElementById("startZus").readOnly = true;
 		document.getElementById("endZus").readOnly = true;
+		document.getElementById("acomdate").readOnly = true;
 	}
 }

@@ -1,5 +1,7 @@
 package com.hrtek.model.worker;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
@@ -29,6 +31,8 @@ public class Contact {
 	private String email;
 	@Transient
 	private Boolean isOhter;
+	@Transient
+	private LocalDate acomdate;
 	
 	public Contact() {
 	}
@@ -92,4 +96,12 @@ public class Contact {
 		this.postcode = h.getPostcode();
 		this.plcity = h.getCity();
 	}
+
+	@Override
+	public String toString() {
+		return " [pladdress=" + pladdress + ", plpostcode=" + plpostcode + ", plcity=" + plcity + ", address="
+				+ address + ", postcode=" + postcode + ", city=" + city + ", phone=" + phone + ", email=" + email + "]";
+	}
+	
+	
 }

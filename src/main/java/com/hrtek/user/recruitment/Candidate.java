@@ -38,6 +38,14 @@ public class Candidate {
 	}
 
 	public String getName() {
-		return firstname + " " + lastname;
+		return  lastname + " " + firstname;
 	}
+
+	@Override
+	public String toString() {
+		return "[firstname=" + firstname + ", lastname=" + lastname + ", sex=" + sex + ", email=" + email
+				+ ", phone=" + phone + ", recruiter=" + recruiter + "]";
+	}
+	
+	
 }

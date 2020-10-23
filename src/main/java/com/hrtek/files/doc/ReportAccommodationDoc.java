@@ -95,7 +95,7 @@ public class ReportAccommodationDoc implements Doc<Workbook> {
 
 	@Override
 	public String getFilename() {
-		return "Report_Accommodation.xlsx";
+		return "Report_Accommodation.xls";
 	}
 
 	@Override

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
@@ -14,7 +14,7 @@
 	<nav th:replace="user/fragments/menu :: menu"></nav>
 	<section id="container">
 	<div class="header-container">
-			<h1 class="header-header">Statystyki</h1>
+			<h1 class="header-header" th:text="#{menu.statistics}"></h1>
 		</div>
 	<!-- ************************************************************************* -->
 	
@@ -24,15 +24,15 @@
 					<h3 th:text="${c.shortname}"></h3>
 				</div>
 				<div class="element">
-					<div class="element-label">Liczba pracowników</div>
+					<div class="element-label" th:text="#{msg.numberOfWorkers}"></div>
 					<div class="element-content" th:text="${c.currentnumofworkers}"></div>
 				</div>
 				<div class="element">
-					<div class="element-label">Osoby poniżej 26 roku</div>
+					<div class="element-label" th:text="#{msg.workersOver26}"></div>
 					<div class="element-content" th:text="${c.less26}"></div>
 				</div>
 				<div class="element">
-					<div class="element-label">Osoby powyżej 26 roku</div>
+					<div class="element-label" th:text="#{msg.workersUnder26}"></div>
 					<div class="element-content" th:text="${c.more26}"></div>
 				</div>
 				

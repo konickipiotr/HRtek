@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" /> 
@@ -20,7 +20,7 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Dodaj Pokój</h1>
+			<h1 class="header-header" th:text="#{label.newRoom}"></h1>
 		</div>
 		<div style="display: flex; justify-content: center;">
 			<form th:action="@{/accomoperation/addroom}" method="post">
@@ -28,20 +28,20 @@
 				<div class="min-container">
 					
 					<div>
-						<label for="text">Nazwa</label>
+						<label for="text" th:text="#{label.nameOfRoom}"></label>
 					</div>
 					<div>
 						<input type="text" name="roomname" required>
 					</div>
 					<div>
-						<label for="text">Pojemność</label>
+						<label for="text" th:text="#{label.capacity}"></label>
 					</div>
 					<div>
 						<input type="number" min="1" step="1" name="capacity" required>
 					</div>
 					<div style="display: flex; justify-content: center; margin-top: 20px">
 						<div>
-							<button class="savebutton" type="submit">Dodaj</button>
+							<button class="button" type="submit" th:text="#{button.add}"></button>
 						</div>
 					</div>
 				

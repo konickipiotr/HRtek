@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+input{
+	width: 90%;
+}
 #container{
 	display: flex;
 	flex-direction: column;
@@ -18,12 +21,15 @@
 	display: flex;
 	flex-direction: column;
 	padding: 5px;
-	width: 40%;
+	width: 35%;
+	border: 1px solid black; 
+	border-radius: 10px
 }
 
 form{
 	margin: 0px;
 	padding: 0px;
+	width: 100%;
 }
 
 select{
@@ -36,18 +42,23 @@ select{
 	display: flex;
 	flex-direction: column;
 	width: 30%;
+	border: 1px solid black; 
+	border-radius: 10px
 	
 }
 
 .zus-bpanel{
 	display: flex;
 	flex-direction: column;
-	width: 20%;	
+	width: 25%;	
+	border: 1px solid black; 
+	border-radius: 10px
 }
 
 .row{
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 }
 
 
@@ -57,41 +68,64 @@ button{
 	color: white;
 	font-weight: bold;
 	border-radius: 5px;
+	width: 100%;
+}
+
+button:hover{
+	background-color: #729fcf;
+	color: white;
+	font-weight: bold;
+	border-radius: 5px;
+	width: 100%;
 }
 
 .col{
 	display: flex;
 	flex-direction: column;
+	width: 24%;
+	
 }
 
+.col-b{
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+
+
 .cell{
-	height: 50%;
+	height: 80%;
 	margin: 5px;
 }
 
 .cell button{
-	width: 100%;
+	width: 96%;
 	height: 40px;
 }
 
+.xxx input{
+	margin: 0px;
+	padding: 0px;
+}
+ 
 .tiles{
-	width: 100px;
-	height: 100px;
+	width: 100%;
+	height: 50px;
 }
 
 .tiles button{
-	width: 100px;
-	height: 100px;
+	width: 100%;
+	height: 50px;
 }
 
 .bdownload{
-	width: 300px;
+	width: 100%;
 	height: 40px;
 	background-color: #682727;
 }
 
 .bdownload:disabled{
-	width: 300px;
+	width: 100%;
 	height: 40px;
 	background-color: #babdb6;
 }

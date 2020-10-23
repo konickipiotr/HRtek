@@ -47,7 +47,9 @@ public class AccommodationController {
 	
 	@PostMapping("/saverooms")
 	public String saveRooms(String[] roomname, int[] capacity, String[] remark, Long houseid, HttpSession session) {
-		
+		if(remark.length == 0) {
+			remark = new String[1];
+		}
 		House house = (House)session.getAttribute("house");
 		accommodationService.saveHouse(house);
 		session.removeAttribute("house");

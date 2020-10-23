@@ -3,7 +3,6 @@ package com.hrtek.user.display.filters;
 import java.util.List;
 
 import com.hrtek.settings.GlobalSettings;
-import com.hrtek.user.display.views.BasicView;
 
 public abstract class TextFilterOperaton<T, V> {
 

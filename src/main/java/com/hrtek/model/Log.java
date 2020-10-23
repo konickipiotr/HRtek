@@ -1,61 +1,75 @@
 package com.hrtek.model;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.hrtek.enums.LogType;
+import com.hrtek.settings.GlobalSettings;
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.utils.FieldsComparator;
+
+import lombok.Data;
 
 @Entity
-public class Log {
+@Data
+public class Log implements Comparable<Log>{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private long id;
-	@Column(name = "date", columnDefinition="TIMESTAMP")
-	private Timestamp date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime tstamp;
 	private String who;
 	@Lob
 	private String message;
+	private LogType logtype;
+	@Transient
+	private String date;
+	@Transient
+	private String time;
 	
 	public Log() {
-		this.date = new Timestamp(System.currentTimeMillis());
+		LocalDateTime dd = LocalDateTime.now(GlobalSettings.zid);
+		dd.truncatedTo(ChronoUnit.MINUTES);
+		this.tstamp = dd;
 	}
 	
-	public Log(String who, String message) {
-		this.date = new Timestamp(System.currentTimeMillis());
+	public Log(String who, String message, LogType logtype) {
+		this.tstamp = LocalDateTime.now(GlobalSettings.zid);
 		this.who = who;
 		this.message = message;
+		this.logtype = logtype;
 	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public Timestamp getDate() {
-		return date;
-	}
-	public void setDate(Timestamp date) {
-		this.date = date;
-	}
-	public String getWho() {
-		return who;
-	}
-	public void setWho(String who) {
-		this.who = who;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
+	
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.TIMESTAMP;
+
 	@Override
-	public String toString() {
-		return "Log [id=" + id + ", date=" + date.toString() + ", who=" + who + ", message=" + message + "]";
+	public int compareTo(Log o) {
+		switch (field) {
+		case TIMESTAMP: return FieldsComparator.compareDateTime(this.tstamp, o.getTstamp(), isup);
+		case WHO: return FieldsComparator.compareText(this.who, o.getWho(), isup);
+		case LOGTYPE: return FieldsComparator.compareText(this.logtype.toString(), o.getLogtype().toString(), isup);
+		default:
+			break;
+		}
+		return 0;
 	}
+	
+	public void covert() {
+		this.date = this.tstamp.toLocalDate().toString();
+		this.time = this.tstamp.toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString();
+	}
+	
+	
+
 }

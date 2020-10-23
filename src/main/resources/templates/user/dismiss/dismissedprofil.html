@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title th:text="#{appName}"></title>
+	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/user_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/usercolors_style.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="/css/user/profil_style.css" />
+</head>
+<body>
+	<header th:replace="fragments/top :: top"></header>
+	<nav th:replace="user/fragments/menu :: menu"></nav>
+	<section id="container">
+	<!-- ************************************************************************* -->
+		<div class="header-container">
+			<h1 class="header-header" th:text="#{header.dismissed}"></h1>
+		</div>
+		
+		<p th:text="${error_msg}" class="error_message"></p>
+		<p th:text="${success_msg}" class="succes_message"></p>
+		
+		<section class="content-row">
+			<div class="data-double-block">
+				<div class="data-block">
+					<div class="section-header">
+						<h3 th:text="#{label.basic}"></h3>
+					</div>
+					<div class="border-div">
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{firstname}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.firstname}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{lastname}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.lastname}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{company}"></span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.company}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{factory}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.factory}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{label.recruiter}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.recruiter}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+<!-- 				################ BLOCKA #################  -->
+				<div class="data-block">
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{dateofbirth}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.dateofbirth}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{sex}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.sex}"></span>
+								</div>
+							</div>
+						</div>
+				<!-- 		####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{accountNo}">:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.accountnr}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{pesel}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.pesel}"></span>
+								</div>
+							</div>
+						</div>
+			<!-- 			####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{workerNo}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.workerNo}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{label.department}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.department}"></span>
+								</div>
+							</div>
+						</div>
+			<!-- 			####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{citizenship}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.citizenship}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+				<!-- ################ BLOCKA #################  -->
+				<div class="data-block">
+					<div class="section-header">
+						<h3 th:text="#{label.finance}"></h3>
+					</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{label.wagePerHour}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.hourlyrate}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ################ BLOCKA #################  -->
+			</div>
+			<div class="menu-bar">
+				<div class="menu-inner">
+					<div class="section-header">
+						<h3 th:text="#{menu.menu}"></h3>
+					</div>
+					<div class="center-div">
+						<form th:action="@{/canditate/filterold}" method="post">
+							<input type="hidden" id="id" name="id" th:value="${dis.id}">
+							<div>
+								<button type="submit" class="button" th:text="#{button.hireAgain}"></button>
+							</div>
+						</form>
+					</div>
+					
+					<form action="">
+					<div>
+						<label for="doc" th:text="#{label.documents}"></label>
+					</div>
+					<div class="center-div">
+						<select>
+							<option></option>
+						</select>
+					</div>
+					<div class="center-div">
+						<button class="button" type="submit" th:text="#{label.generate}"></button>
+					</div>
+					</form>
+					
+					<div class="data-block-50">
+						<div class="section-header">
+							<h3 th:text="#{niefiles}"></h3>
+						</div>
+						<div class="border-div">
+						<div id="fileadd">
+							<form th:action="@{/dismiss/addfile}" enctype="multipart/form-data" method="post">
+					            <input class="button" id="fileInput" type="file" name="uploadFiles" onchange="update();" multiple><br>
+								<textarea id="list" disabled="disabled" ></textarea><br>
+								<input type="hidden" name="id" th:value="${dis.id}">	
+								<button class="button" type="submit" th:text="#{button.add}"></button>
+							</form>
+						</div>
+						</div>
+					</div>
+					<div class="data-block-50">
+						<div class="section-header">
+							<h3 th:text="#{files}"></h3>
+						</div>
+						<div class="border-div">
+							<table class="file-table">
+								<tr th:each="f : ${files}">
+									<td th:text="${f.filename}"></td>
+									<td class="td-action">
+										<a class="button" th:href="@{'/dismiss/download/' + ${f.id} }">DOWNLOAD</a>
+									</td>
+									<td class="td-action">
+										<a class="button" th:href="@{'/dismiss/delete/' + ${dis.id} + '/' + ${f.id} }" onclick="return confirm('Are you sure you want to delete this file?')">DELETE</a>
+										
+									</td>
+								</tr>
+							</table>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<!-- ################ DOUBLE BLOCKA #################  -->
+		</section>
+		
+		
+		<section class="content-row">
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3 th:text="#{statement}"></h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{statementType}"> </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.statementType}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{statement}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.statement}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{valid.form}">:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.statementValidFrom}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{valid.to}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.statementValidTo}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+		<!-- 	################ BLOCKA #################  -->
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3 th:text="#{permit}"></h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{permit}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.permit}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{other}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.others}"></span>
+								</div>
+							</div>
+						</div>
+					<!-- 	####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{valid.form}"> : </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.permitValidFrom}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{valid.to}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.permitValidTo}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			<!-- ################ BLOCKA #################  -->
+		</section>
+		
+	
+			<!-- ################ BLOCKA #################  -->
+		<section class="content-row">
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3 th:text="#{label.date}"></h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{start.zus}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.startZus}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{end.zus}">:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.endZus}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{start.zus}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.startWork}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{end.work}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" >???</span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{start.medical.exam}">:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.startMedicalExams}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{end.medical.exam}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.endMedicalExams}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{inSystemFrom}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.addToSystem}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+						</div>
+					</div>
+			</div>
+			<!-- ################ BLOCKA #################  -->
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3 > </h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{biospassport}">:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.biopassport}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{passport}">:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.passport}"></span>
+								</div>
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{visa}">:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.visa}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+						</div>
+						<!-- ####### ROW ######  -->
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{valid.form}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.visaValidFrom}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{valid.to}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.visaValidTo}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			<!-- ################ BLOCK #################  -->
+		</section>
+		
+		<section class="content-row">
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3 th:text="#{label.contact}"></h3>
+				</div>
+					<div class="border-div">
+						<div class="data-row">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{phone}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.phone}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{email}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.email}"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ################ BLOCK #################  -->
+				<div class="data-block-50">
+				<div class="section-header">
+					<h3 th:text="#{address}"> PL</h3>
+				</div>
+					<div class="border-div">
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{address}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.pladdress}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{postcode}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.plpostcode}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{city}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.plcity}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+							</div>
+					</div>
+				</div>
+				<!-- ################ BLOCK #################  -->
+				<div class="data-block-50">
+				<div class="section-header">
+					<h3 th:text="#{address}"></h3>
+				</div>
+					<div class="border-div">
+						<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{address}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.address}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{postcode}">:</span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.postcode}"></span>
+								</div>
+							</div>
+							<div class="data-col">
+								<div class="data-label">
+									<span th:text="#{city}">: </span>
+								</div>
+								<div class="data-content">
+									<span class="data" th:text="${dis.city}"></span>
+								</div>
+							</div>
+					</div>
+				</div>
+				<!-- ################ BLOCK #################  -->
+		</section>
+		<!--
+		<section class="content-row">
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>Pliki</h3>
+				</div>
+				<div class="border-div">
+					<table class="file-table">
+						<tr th:each="f : ${files}">
+							<td th:text="${f.filename}"></td>
+							<td class="td-action">
+								<a th:href="@{'/profil/download/' + ${f.id} }">[DL]</a>
+							</td>
+							<td class="td-action">
+								<a th:href="@{'/profil/delete/' + ${wv.id} + '/' + ${f.id} }">[X]</a>
+								
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+			</div>
+			
+			<div class="data-block-50">
+				<div class="section-header">
+					<h3>Nowe</h3>
+				</div>
+				<div class="border-div">
+				<div id="fileadd">
+					<form th:action="@{/profil}" enctype="multipart/form-data" method="post">
+			            <input class="button" id="fileInput" type="file" name="uploadFiles" onchange="update();" multiple><br>
+						<textarea id="list" disabled="disabled" ></textarea><br>
+						<input type="hidden" name="id" th:value="${wv.id}">	
+						<button class="button" type="submit"> Dodaj</button>
+					</form>
+				</div>
+				</div>
+			</div> -->
+		</section>
+			
+	
+	<!-- ************************************************************************* -->
+	</section>
+	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
+</body>
+<script>
+function update() {
+    document.getElementById("list").value = "";
+	var files = document.getElementById("fileInput").files;
+	for (var i = 0; i < files.length ; i++){
+		document.getElementById("list").value += files[i].name + "\n";
+	}
+}
+</script>
+</html>

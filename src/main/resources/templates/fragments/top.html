@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
@@ -15,18 +15,20 @@
 			<span th:text="${session.user.firstname + ' ' + session.user.lastname}"></span>
 		</div>
 		<div class="role-panel">
-			<a class = "navUserPanel" th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/}">Panel użytkownika</a>
-			<a class = "navUserPanel" th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/admin}">Panel admin</a>
-			<a class = "navUserPanel" th:if="${session.ROLE == 'BOSS'}" th:href="@{/boss}">Panel szefa</a>
+			<a class = "navUserPanel" th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/}" th:text="#{button.userpanel}"></a>
+			<a class = "navUserPanel" th:if="${session.ROLE == 'ADMIN' or session.ROLE == 'BOSS'}" th:href="@{/admin}" th:text="#{button.adminpanel}"></a>
+			<a class = "navUserPanel" th:if="${session.ROLE == 'BOSS'}" th:href="@{/boss}" th:text="#{button.bosspanel}"></a>
 		</div>
-		<div class="top-right-icon">
+<!-- 		<div class="top-right-icon">
 			<a th:href="@{/user/home?lang=pl}"><img class="flag" alt="" th:src="@{/images/poland.png}"></a>
 			<a th:href="@{/user/home?lang=en}"><img class="flag" alt="" th:src="@{/images/wb.png}"></a>
 			<a th:href="@{/user/home?lang=uk}"><img class="flag" alt="" th:src="@{/images/ukraine.png}"></a>
+		</div> -->
+		<div style="display: flex; flex-direction: column; justify-content: center; ">
 			
-		</div>
-		<div style="display: flex; ">
-			<a th:href="@{/logout}"><img src="/images/log.png" width="30" height="30"></a>
+			<div style="display: flex">
+			<span style="color: red;">Logout &nbsp&nbsp</span><a th:href="@{/logout}"><img src="/images/log.png" width="30" height="30"></a>
+			</div>
 		</div>
 	</header>
 

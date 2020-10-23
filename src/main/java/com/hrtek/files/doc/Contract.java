@@ -16,7 +16,6 @@ import com.hrtek.model.worker.Contact;
 import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
-import com.hrtek.utils.CurrencyUtils;
 
 import lombok.Data;
 
@@ -389,7 +388,7 @@ public class Contract implements Doc<XWPFDocument> {
 		r8.setText(Double.toString(wage));
 		r8 = p8.createRun();
 		fontstyle(r8, false);
-		r8.setText(" zł  brutto/godzina, (słownie: " +sWage+  " 74/100 brutto za godzinę");
+		r8.setText(" zł  brutto/godzina, (słownie: " +sWage+  " brutto za godzinę");
 		r8.addBreak();
 		r8 = p8.createRun();
 		fontstyle(r8, false);

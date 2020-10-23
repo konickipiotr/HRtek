@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -17,16 +17,16 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Tickety</h1>
+			<h1 class="header-header" th:text="#{header.tickets}"></h1>
 		</div>
 		
 		<table>
 			<tr>
 				<th class="td_lp">Lp</th>
-				<th>type</th>
-				<th>who</th>
-				<th>remarks</th>
-				<th>Action</th>
+				<th th:text="#{label.type}"></th>
+				<th th:text="#{label.who}"></th>
+				<th th:text="#{remarks}"></th>
+				<th th:text="#{label.action}"></th>
 				<th></th>
 			</tr>
 			<tr th:each="i, it : ${tiket_list}">
@@ -35,10 +35,10 @@
 				<td th:text="${i.login}" class="td_who"></td>
 				<td th:text="${i.remarks}"></td>
 				<td class="td_short_button">
-					<a th:if="${i.event.name() == 'PASSWORDFORGOTTEN'}" th:href="@{'/admin/ticket/action/'+ ${i.event} + '/' + ${i.id}}" class="tdbutton">action</a>
+					<a th:if="${i.event.name() == 'PASSWORDFORGOTTEN'}" th:href="@{'/admin/ticket/action/'+ ${i.event} + '/' + ${i.id}}" class="aButton" th:text="#{button.sovle}"></a>
 				</td>
 				<td class="td_short_button">
-					<a th:href="@{'/admin/ticket/delete/' + ${i.id}}" class="tdbutton">Usuń</a>
+					<a th:href="@{'/admin/ticket/delete/' + ${i.id}}" class="aButton" th:text="#{button.delete}"></a>
 				</td>
 			</tr>
 		</table>

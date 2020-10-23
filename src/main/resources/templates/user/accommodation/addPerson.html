@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 	<link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" /> 
@@ -20,7 +20,7 @@
 	<section id="container">
 	<!-- ************************************************************************* -->
 		<div class="header-container">
-			<h1 class="header-header">Dodaj Pokój</h1>
+			<h1 class="header-header" th:text="#{label.assign}"></h1>
 		</div>
 		<div style="display: flex; justify-content: center;">
 			<form th:action="@{/accomoperation/addPerson}" method="post">
@@ -29,22 +29,22 @@
 					
 	
 					<div>
-						<label for="workerid">Osoba</label>
+						<label for="workerid" th:text="#{label.person}"></label>
 					</div>
 					<div>
-						<select id="workerid" name="workerid">
+						<select id="workerid" name="workerid" required>
 							<option th:each="i : ${list}" th:value="${i.id}" th:text="${i.value}"></option>
 						</select>
 					</div>
 					<div>
-						<label for="expire">Do</label>
+						<label for="expire" th:text="#{label.until}"></label>
 					</div>
 					<div>
 						<input type="date" name="expire" id="expire" required>
 					</div>
 					<div style="display: flex; justify-content: center; margin-top: 20px">
 						<div>
-							<button class="savebutton" type="submit">Dodaj</button>
+							<button class="button" type="submit" th:text="#{button.add}"></button>
 						</div>
 					</div>
 				

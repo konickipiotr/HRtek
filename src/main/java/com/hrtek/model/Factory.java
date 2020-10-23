@@ -49,4 +49,13 @@ public class Factory {
 		this.numberofwokers = numberofwokers;
 		this.hourlyrate = hourlyrate;
 	}
+
+	@Override
+	public String toString() {
+		return "[pkd=" + pkd + ", nip=" + nip + ", krs=" + krs + ", shortname="
+				+ shortname + ", fullname=" + fullname + ", address=" + address + ", postcode=" + postcode + ", city="
+				+ city + ", numberofwokers=" + numberofwokers + ", hourlyrate=" + hourlyrate + "]";
+	}
+	
+	
 }

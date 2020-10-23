@@ -2,44 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title> HRtek</title>
+<title th:text="#{appName}"></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" media="all" href="/css/login_style.css" />
 
 </head>
 <body>
-	
 	<div class="row">
-	
-		<div id="flags">
+<!-- 		<div id="flags">
 			<a th:href="@{/?lang=pl}"><img class="flag" alt="" th:src="@{/images/poland.png}"></a>
 			<a th:href="@{/?lang=en}"><img class="flag" alt="" th:src="@{/images/wb.png}"></a>
 			<a th:href="@{/?lang=uk}"><img class="flag" alt="" th:src="@{/images/ukraine.png}"></a>
-		</div>
+		</div> -->
 		
 		<form class="login_form" th:action="@{/login}" method="post">
-		    <h1>HRtek Login</h1>
+		    <h1 th:text="#{msg.hrSingIn}"></h1>
 		    <p th:text="${success_msg}" class="success_message">
-		    <div th:if="${param.error}" class="error_message">Błędne dane logowania</div>
+		    <div th:if="${param.error}" class="error_message" th:text="#{msg.wrongLoginOrPassword}"></div>
 			<div class="form-group">
-				<label for="username">username</label><br>
-				<input type="text" id="username" name="username" value="superadmin"><br>
+				<label for="username" th:text="#{username}"></label><br>
+				<input type="text" id="username" name="username"><br>
 			</div> 
 			<div class="form-group">
-				<label for="passowrd">hasło</label><br>
-				<input type="password" id="passowrd" name="password" value="123"><br><br>
+				<label for="passowrd" th:text="#{password}"></label><br>
+				<input type="password" id="passowrd" name="password"><br><br>
 			</div>
 			<div class="form-group">
 				<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"/> -->
-				<button type="submit" class="btn btn-success btn-block">Zaloguj</button><br>
-				<input type="checkbox" id="remember-me" name="remember-me">
-				<label for="remember-me">Zapamiętaj mnie</label><br>
-	 			<a th:href="@{/forgotpass}">Zapomniałem hasło</a> 
+				<button type="submit" class="btn btn-success btn-block" th:text="#{button.signin}"></button><br>
+	 			<a th:href="@{/forgotpass}" th:text="#{msg.forgotpassword}"></a> 
 			</div>
 		</form>
 	  </div>
-
-  
-
 </body>
 </html>

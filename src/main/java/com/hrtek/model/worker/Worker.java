@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import com.hrtek.user.recruitment.NewWorker;
+import com.hrtek.user.recruitment.WorkerAll;
 
 import lombok.Data;
 
@@ -42,6 +43,20 @@ public class Worker {
 		this.companyid = nw.getCompanyid();
 		this.recruiter = nw.getRecruiter();
 	}
+	
+	public Worker(WorkerAll nw) {
+		this.firstname = nw.getFirstname();
+		this.lastname = nw.getLastname();
+		
+		if(nw.getStartZus() == null)
+			status = StatusWorker.INACTIVE;
+		else 
+			status = StatusWorker.ACTIVE;
+		
+		this.factoryid = nw.getFactoryid();
+		this.companyid = nw.getCompanyid();
+		this.recruiter = nw.getRecruiter();
+	}
 
 	public Worker(Long id, String firstname, String lastname, StatusWorker status, Long factoryid, Long company,
 			Long recruiter) {
@@ -57,4 +72,12 @@ public class Worker {
 	public String getName() {
 		return firstname + " " + lastname;
 	}
+
+	@Override
+	public String toString() {
+		return "[firstname=" + firstname + ", lastname=" + lastname + ", status=" + status + ", factoryid="
+				+ factoryid + ", companyid=" + companyid + ", recruiter=" + recruiter + "]";
+	}
+	
+	
 }

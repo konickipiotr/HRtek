@@ -18,65 +18,49 @@
 	padding: 1%;
 	background-color: #a7bfd9;
 	border-radius: 5px;
-	overflow: auto;
-}
-
-
-
-.button{
-	background-color: #204a87;
-	margin-right: 5px;
-	min-width: 100px;
-	color: white;
-	font-weight: bold;
-	font-size: 1.2em;
-	border: 1px solid white;
-	border-radius: 5px;
-	padding: 5px;
-}
-
-.button:disabled{
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
+	display: flex;
+	flex-direction: column;
 }
 
 
 .section-header{
 	width: 100%;
-	/* background-color: #204a87; */
+	display: flex;
+	justify-content: center;
 	background-color: #204a87;
 	color: white;
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1em;
 	margin-bottom: 15px;
 }
 
+
+
 .row{
-	margin-bottom: 20px;
-	overflow: auto;
-	clear: both;	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-bottom: 1%;
+	flex-wrap: wrap;
 }
 
 .row-buttons{
-	margin: auto;
 	margin-bottom: 10px;
-	margin-top: 40px;
+	margin-top: 30px;
 	display: flex; 
 	justify-content: center;
-	overflow: auto;
-	clear: both;	
 }
 
 .col{
-	width: 25%;
-	float: left;
+	display: flex;
+	flex-direction: column;
+	width: 20%;
 }
 
 .col-a{
-	width: 33%;
-	float: left;
-	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	width: 30%;
 }
 
 .col-b{
@@ -91,33 +75,10 @@ label{
 	font-weight: bold;
 }
 
-h3{
-	margin-top: 0px;
-	text-align:center;
-	font-size: 24px;
-	color: white;
-}
-
-h2{
-	margin-top: 0px;
-	text-align:center;
-	font-size: 0.8em;
-	color: white;
-}
-select{
-	padding: 5px;
-	border-radius: 3px;
-}
-select:hover{
-	padding: 5px;
-	border: 1px solid #204a87;
-	border-radius: 3px;
-}
-
 
 textarea{
-	width: 50%;
-	min-height: 40px;
+	width: 95%;
+	min-height: 50px;
 }
 
 .note-80{
@@ -131,11 +92,6 @@ textarea{
 	min-height: 60px;
 }
 
-/* .note-div{
-	width: 78%;
-	margin: auto;
-	padding: 2%;
-} */
 
 /*  ----- Stage -------- */
 .stage-container{
@@ -149,55 +105,9 @@ textarea{
 }
 
 
-a:link.stage-button{
-	width: 49%;
-	text-align: center;
-	margin-right: 2px;
-	color: white;
-	font-size: 18px;
-	font-weight: bold;
-	
-	padding: 8px;
-	text-decoration: none;
-	border-radius: 2px;
-	overflow: auto;
-	background-color: #204a87;
-	border: 3px solid #204a87;
-	float: left;
-	
-
-}
-a:visited.stage-button{
-	width: 49%;
-	text-align: center;
-	color: white;
-	font-size: 18px;
-	font-weight: bold;
-	text-decoration: none;
-	margin-right: 2px;
-
-	border-radius: 2px;
-	padding: 8px;
-	overflow: auto;
-	background-color: #204a87;
-	float: left;
-	border: 3px solid #204a87;
-}
-
-a:hover.stage-button{
-	width: 49%;
-	text-align: center;
-	color: white;
-	font-size: 18px;
-	display: inline-block;
-	margin-right: 2px;
-	font-weight: bold;
-	text-decoration: none;
-	padding: 8px;
-	border-radius: 2px;
-	overflow: auto;
-	background-color: #3465a4;
-	float: left;
-	border: 3px solid black;
+.filter-container{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
 }
 

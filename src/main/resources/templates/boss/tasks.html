@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title th:text="#{appName}"></title>
 <link rel="stylesheet" type="text/css" media="all" href="/css/main_style.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/menu_bar.css" />
 <link rel="stylesheet" type="text/css" media="all" href="/css/table_style.css" />
@@ -16,14 +16,14 @@
 	<nav th:replace="boss/fragments/menu :: menu"></nav>
 	<section id="container">
 		<div class="header-container">
-			<h1 class="header-header">Zadania</h1>
+			<h1 class="header-header" th:text="#{header.tasks}"></h1>
 		</div>
 	<!-- ************************************************************************* -->
 		<!--  *************** NEW TASK START ******************  -->
 		<div class="new-task">
 			
 				<div class="new-task-header">
-					<h2 style="text-align: center; margin: 0px;">Nowe zadanie</h2>
+					<h2 style="text-align: center; margin: 0px;" th:text="#{button.newTask}"></h2>
 				</div>
 				
 				<form th:action="@{/boss/tasks}" method="post" th:object="${task}">
@@ -32,13 +32,13 @@
 				<div class="newtask-content">
 					<div class="task-coll">
 						<div class="t-label">
-							<label for="taskname">Zadanie</label>
+							<label for="taskname" th:text="#{label.task}"></label>
 						</div>
 						<div>
 							<input type="text" name="taskname" id="taskname" required>
 						</div>
 						<div class="t-label">
-							<label for="description">Opis</label>
+							<label for="description" th:text="#{label.description}"></label>
 						</div>
 						<div>
 							<textarea id="description" name="description"></textarea>
@@ -46,7 +46,7 @@
 					</div>
 					<div class="task-coll">
 						<div class="t-label">
-							<label for="employeeid">Pracownik</label>
+							<label for="employeeid" th:text="#{employee}"></label>
 						</div>
 						<div>
 							<select name="employeeid" id="employeeid" required>
@@ -54,47 +54,48 @@
 							</select>
 						</div>
 						<div class="t-label">
-							<label for="priority">Priorytet</label>
+							<label for="priority" th:text="#{label.priority}"></label>
 						</div>
 						<div class="radio-buttons">
 							<div>
-								<label for="priorityN">Normal</label>
+								<label for="priorityN" th:text="#{status.priority.normal}"></label>
 								<input type="radio" name="priority" id="priorityN" value="NORMAL" checked>
 							</div>
 							<div>
-								<label for="priorityH">High</label>
+								<label for="priorityH" th:text="#{status.priority.high}"></label>
 								<input type="radio" name="priority" id="priorityH" value="HIGH">
 							</div>
 							<div>
-								<label for="priorityL">Low</label>
+								<label for="priorityL" th:text="#{status.priority.low}"></label>
 								<input type="radio" name="priority" id="priorityL" value="LOW">
 							</div>
 						</div>
 						
 						<div class="t-label">
-							<label for="deadline">Termin</label>
+							<label for="deadline" th:text="#{label.deadline}"></label>
+						</div>
+						<div>
+							<label for="deadlineNone" th:text="#{status.none}"></label>
+							<input type="radio" name="deadline" id="deadlineNone" value="NONE" checked>
 						</div>
 						<div class="radio-buttons">
+							
 							<div>
-								<label for="deadlineNone">Brak</label>
-								<input type="radio" name="deadline" id="deadlineNone" value="NONE" checked>
-							</div>
-							<div>
-								<label for="deadlineToday">Dziś</label>
+								<label for="deadlineToday" th:text="#{status.today}"></label>
 								<input type="radio" name="deadline" id="deadlineToday" value="TODAY">
 							</div>
 							<div>
-								<label for="deadlineTomorrow">Jutro</label>
+								<label for="deadlineTomorrow" th:text="#{status.tomorrow}"></label>
 								<input type="radio" name="deadline" id="deadlineTomorrow" value="TOMORROW">
 							</div>
 							<div>
-								<label for="deadlineOther">Inna</label>
+								<label for="deadlineOther" th:text="#{status.ohterdate}"></label>
 								<input type="radio" name="deadline" id="deadlineOther" value="OTHER">
 							</div>
 						</div>
 						
 						<div>
-							<label for="deadlinedate">Inna Data</label>
+							<!-- <label for="deadlinedate" th:text="#{status.ohterdate}"></label> -->
 						</div>
 						<div>
 							<input type="date" name="deadlinedate" id="deadlinedate" required disabled>
@@ -102,7 +103,7 @@
 					</div>
 				</div>
 				<div class="newtask-buttons">
-					<button class="savebutton" type="submit">Dodaj</button>
+					<button class="button" type="submit" th:text="#{button.add}"></button>
 				</div>
 			</form>
 		</div>
@@ -113,11 +114,11 @@
 			<table>
 				<tr>
 					<th style="width: 30px"></th>
-					<th style="width: 170px">Pracownik</th>
-					<th>Zadaie</th>
-					<th>Opis</th>
-					<th style="width: 100px" >Priorytet</th>
-					<th style="width: 110px" >Deadline</th>
+					<th style="width: 170px" th:text="#{employee}"></th>
+					<th th:text="#{label.task}"></th>
+					<th th:text="#{label.description}"></th>
+					<th style="width: 100px" th:text="#{label.priority}"></th>
+					<th style="width: 110px" th:text="#{label.deadline}"></th>
 					<th style="width: 70px">Status</th>
 					<th style="width: 70px"></th>
 				</tr>
@@ -130,7 +131,7 @@
 					<td style="width: 110px" th:text="${t.deadlinedate}"></td>
 					<td style="width: 70px" th:text="${t.status}"></td>
 					<td style="width: 70px">
-						<a th:href="@{'/boss/tasks/del/' + ${t.id}}">[del]</a>
+						<a th:href="@{'/boss/tasks/del/' + ${t.id}}" class="aButton">Delete</a>
 					</td>
 				</tr>
 			</table>

@@ -1,6 +1,6 @@
 package com.hrtek.db;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +13,7 @@ import com.hrtek.user.worker.UsedTable;
 public interface InUseRepository extends JpaRepository<InUse, Long> {
 
 	List<InUse> findByWorkerid(Long id);
-	void deleteByExpiredBefore(Timestamp newTime);
+	void deleteByExpiredBefore(LocalDateTime newTime);
 	void deleteByWorkeridAndUsedTableAndUserid(Long id, UsedTable ut, Long userid);
 	
 	InUse findByWorkeridAndUsedTable(Long id, UsedTable ut);
