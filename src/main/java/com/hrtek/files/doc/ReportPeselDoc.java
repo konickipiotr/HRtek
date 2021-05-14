@@ -14,9 +14,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.hrtek.user.report.views.ReportPesel;
 
-import lombok.Data;
 
-@Data
 public class ReportPeselDoc implements Doc<Workbook> {
 	
 	private Workbook wb = new HSSFWorkbook();  
@@ -109,5 +107,29 @@ public class ReportPeselDoc implements Doc<Workbook> {
 	@Override
 	public DocType getType() {
 		return this.doctype;
+	}
+
+	public Workbook getWb() {
+		return wb;
+	}
+
+	public void setWb(Workbook wb) {
+		this.wb = wb;
+	}
+
+	public DocType getDoctype() {
+		return doctype;
+	}
+
+	public void setDoctype(DocType doctype) {
+		this.doctype = doctype;
+	}
+
+	public List<ReportPesel> getRp_list() {
+		return rp_list;
+	}
+
+	public void setRp_list(List<ReportPesel> rp_list) {
+		this.rp_list = rp_list;
 	} 
 }

@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hrtek.enums.LogType;
-import com.hrtek.model.Log;
-import com.hrtek.model.UserInfo;
-import com.hrtek.settings.Msg;
 import com.hrtek.user.display.filters.FilterProcess;
 import com.hrtek.user.display.service.SortViewService;
 import com.hrtek.user.display.views.ViewFields;

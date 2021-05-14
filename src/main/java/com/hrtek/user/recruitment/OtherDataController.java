@@ -81,8 +81,4 @@ public class OtherDataController {
 			return "redirect:/profil/" + worker.getId();
 		}
 	}
-	
-	
-
-	
 }

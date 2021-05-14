@@ -16,16 +16,14 @@ import com.hrtek.model.worker.Contact;
 import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
+import com.hrtek.user.recruitment.NewWorker;
 
-import lombok.Data;
 
-@Data
 public class Contract implements Doc<XWPFDocument> {
 
 	private XWPFDocument doc = new XWPFDocument();
 	private DocType doctype = DocType.TEXTUSERDOC;
-	private double wage;
-	private String sWage;
+	private NewWorker nw;
 	
 	private Company company;
 	private Worker worker;
@@ -160,10 +158,10 @@ public class Contract implements Doc<XWPFDocument> {
 
 		r8 = p8.createRun();
 		fontstyle(r8, true);
-		r8.setText(String.valueOf(Double.toString(wage)) + " zł");
+		r8.setText(String.valueOf(Double.toString(nw.getWage())) + " zł");
 		r8 = p8.createRun();
 		fontstyle(r8, false);
-		r8.setText(" злотых брутто в час (" + sWage + ").");
+		r8.setText(" злотых брутто в час (" + nw.getsCWage() + ").");
 		
 		r8.addBreak();
 		r8 = p8.createRun();
@@ -385,10 +383,10 @@ public class Contract implements Doc<XWPFDocument> {
 		r8.setText("1. Za wykonanie prac określonych w § 1 Zleceniobiorca otrzyma po ich wykonaniu wynagrodzenie w wysokości ");
 		r8 = p8.createRun();
 		fontstyle(r8, true);
-		r8.setText(Double.toString(wage));
+		r8.setText(Double.toString(nw.getWage()));
 		r8 = p8.createRun();
 		fontstyle(r8, false);
-		r8.setText(" zł  brutto/godzina, (słownie: " +sWage+  " brutto za godzinę");
+		r8.setText(" zł  brutto/godzina, (słownie: " +nw.getsCWage()+  " brutto za godzinę");
 		r8.addBreak();
 		r8 = p8.createRun();
 		fontstyle(r8, false);
@@ -536,16 +534,89 @@ public class Contract implements Doc<XWPFDocument> {
 
 	@Autowired
 	public Contract(Company company, Worker worker, Residency residency, Contact contact,
-			Factory factory, WorkerBasic wb, double wage, String sWage) {
+			Factory factory, WorkerBasic wb, NewWorker nw) {
 		this.company = company;
 		this.worker = worker;
 		this.residency = residency;
 		this.contact = contact;
 		this.factory = factory;
 		this.wb = wb;
-		this.wage = wage;
-		this.sWage = sWage;
+		this.nw = nw;
 	}
-	
-	
+
+	public DocType getDoctype() {
+		return doctype;
+	}
+
+	public void setDoctype(DocType doctype) {
+		this.doctype = doctype;
+	}
+
+	public NewWorker getNw() {
+		return nw;
+	}
+
+	public void setNw(NewWorker nw) {
+		this.nw = nw;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Worker getWorker() {
+		return worker;
+	}
+
+	public void setWorker(Worker worker) {
+		this.worker = worker;
+	}
+
+	public Residency getResidency() {
+		return residency;
+	}
+
+	public void setResidency(Residency residency) {
+		this.residency = residency;
+	}
+
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
+	}
+
+	public Factory getFactory() {
+		return factory;
+	}
+
+	public void setFactory(Factory factory) {
+		this.factory = factory;
+	}
+
+	public WorkerBasic getWb() {
+		return wb;
+	}
+
+	public void setWb(WorkerBasic wb) {
+		this.wb = wb;
+	}
+
+	public static String getFont() {
+		return font;
+	}
+
+	public static void setFont(String font) {
+		Contract.font = font;
+	}
+
+	public void setDoc(XWPFDocument doc) {
+		this.doc = doc;
+	}	
 }

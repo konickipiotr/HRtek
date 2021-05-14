@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.hrtek.model.Log;
 import com.hrtek.user.display.filters.OtherFilterOperation;
-import com.hrtek.user.display.views.BasicView;
 
 public class OtherLogOperation extends  OtherFilterOperation<Log, LogFilter>{
 

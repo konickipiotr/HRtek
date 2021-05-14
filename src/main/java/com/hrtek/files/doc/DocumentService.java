@@ -20,6 +20,7 @@ import com.hrtek.model.worker.Residency;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
 import com.hrtek.model.worker.WorkerFiles;
+import com.hrtek.user.recruitment.NewWorker;
 
 @Service
 public class DocumentService {
@@ -46,7 +47,7 @@ public class DocumentService {
 		this.workerBasicRepo = workerBasicRepo;
 	}
 
-	public String prepareContract(Long id, double wage, String sWage) {
+	public String prepareContract(Long id, NewWorker nw) {
 		Optional<Worker> oWorker = workerRepo.findById(id);
 		if(oWorker.isEmpty()) {
 			//TODO
@@ -59,7 +60,7 @@ public class DocumentService {
 		Contact contact = contactRepo.findById(worker.getId()).get();
 		WorkerBasic wb = workerBasicRepo.findById(worker.getId()).get();
 		
-		Doc<XWPFDocument> contract = new Contract(company, worker, residency, contact, factory, wb, wage, sWage);
+		Doc<XWPFDocument> contract = new Contract(company, worker, residency, contact, factory, wb, nw);
 		contract.prepareDoc();
 		
 		this.workerFileRepo.save(new WorkerFiles(worker.getId(), contract.getFilename(), contract.getFilepath(), 1));

@@ -30,8 +30,8 @@ public class RecruitmentValidator implements Validator {
 			errors.rejectValue("dateofbirth", "valid.agebeloweighteen");
 		}
 		
-		LocalDate form = nw.getStartZus();
-		LocalDate to = nw.getEndZus();
+		LocalDate form = nw.getAgreementFrom();
+		LocalDate to = nw.getAgreementTo();
 		
 		if(form != null && to != null) {
 			if(to.isBefore(form)) {

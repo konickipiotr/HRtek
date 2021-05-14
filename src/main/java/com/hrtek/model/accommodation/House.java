@@ -5,10 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import lombok.Data;
 
 @Entity
-@Data
 public class House {
 	
 	@Id
@@ -87,4 +85,139 @@ public class House {
 		this.costType = ff.getCostType();
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public int getNoofrooms() {
+		return noofrooms;
+	}
+
+	public void setNoofrooms(int noofrooms) {
+		this.noofrooms = noofrooms;
+	}
+
+	public int getOccupied() {
+		return occupied;
+	}
+
+	public void setOccupied(int occupied) {
+		this.occupied = occupied;
+	}
+
+	public Long getLiderid() {
+		return liderid;
+	}
+
+	public void setLiderid(Long liderid) {
+		this.liderid = liderid;
+	}
+
+	public String getLidername() {
+		return lidername;
+	}
+
+	public void setLidername(String lidername) {
+		this.lidername = lidername;
+	}
+
+	public double getLiderbonus() {
+		return liderbonus;
+	}
+
+	public void setLiderbonus(double liderbonus) {
+		this.liderbonus = liderbonus;
+	}
+
+	public double getRent() {
+		return rent;
+	}
+
+	public void setRent(double rent) {
+		this.rent = rent;
+	}
+
+	public double getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(double deposit) {
+		this.deposit = deposit;
+	}
+
+	public double getMedia() {
+		return media;
+	}
+
+	public void setMedia(double media) {
+		this.media = media;
+	}
+
+	public double getPerperson() {
+		return perperson;
+	}
+
+	public void setPerperson(double perperson) {
+		this.perperson = perperson;
+	}
+
+	public CostType getCostType() {
+		return costType;
+	}
+
+	public void setCostType(CostType costType) {
+		this.costType = costType;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public int getPeriodofnotice() {
+		return periodofnotice;
+	}
+
+	public void setPeriodofnotice(int periodofnotice) {
+		this.periodofnotice = periodofnotice;
+	}
 }

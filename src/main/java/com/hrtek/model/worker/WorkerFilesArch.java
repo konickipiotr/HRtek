@@ -4,11 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import lombok.Data;
 
 @Entity
-@Data
 public class WorkerFilesArch {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -32,5 +31,45 @@ public class WorkerFilesArch {
 		this.filename = wf.getFilename();
 		this.path = wf.getPath();
 		this.type = wf.getType();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getWorkerid() {
+		return workerid;
+	}
+
+	public void setWorkerid(Long workerid) {
+		this.workerid = workerid;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 }

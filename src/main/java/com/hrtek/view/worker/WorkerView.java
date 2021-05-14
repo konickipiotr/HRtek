@@ -6,11 +6,7 @@ import javax.persistence.Enumerated;
 import com.hrtek.model.worker.StatusWorker;
 import com.hrtek.model.worker.Worker;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
 public class WorkerView {
 	private Long id;
 	private String firstname;
@@ -28,4 +24,62 @@ public class WorkerView {
 		this.status = w.getStatus();
 	}
 
+	public WorkerView() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public StatusWorker getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusWorker status) {
+		this.status = status;
+	}
+
+	public String getFactory() {
+		return factory;
+	}
+
+	public void setFactory(String factory) {
+		this.factory = factory;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getRecruiter() {
+		return recruiter;
+	}
+
+	public void setRecruiter(String recruiter) {
+		this.recruiter = recruiter;
+	}
 }

@@ -9,9 +9,7 @@ import com.hrtek.model.worker.StatusWorker;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.utils.FieldsComparator;
 
-import lombok.Data;
 
-@Data
 public class ResidencyView implements Comparable<ResidencyView>{
 	
 	private int status;
@@ -73,4 +71,119 @@ public class ResidencyView implements Comparable<ResidencyView>{
 		}
 		return 0;
 	}
+
+	public ResidencyView() {
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public LocalDate getDateofbirth() {
+		return dateofbirth;
+	}
+
+	public void setDateofbirth(LocalDate dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+
+	public String getPaszport() {
+		return paszport;
+	}
+
+	public void setPaszport(String paszport) {
+		this.paszport = paszport;
+	}
+
+	public String getBiopaszport() {
+		return biopaszport;
+	}
+
+	public void setBiopaszport(String biopaszport) {
+		this.biopaszport = biopaszport;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getFactory() {
+		return factory;
+	}
+
+	public void setFactory(String factory) {
+		this.factory = factory;
+	}
+
+	public String getVisa() {
+		return visa;
+	}
+
+	public void setVisa(String visa) {
+		this.visa = visa;
+	}
+
+	public LocalDate getVisaValidFrom() {
+		return visaValidFrom;
+	}
+
+	public void setVisaValidFrom(LocalDate visaValidFrom) {
+		this.visaValidFrom = visaValidFrom;
+	}
+
+	public LocalDate getVisaValidTo() {
+		return visaValidTo;
+	}
+
+	public void setVisaValidTo(LocalDate visaValidTo) {
+		this.visaValidTo = visaValidTo;
+	}
+
+	public static boolean isIsup() {
+		return isup;
+	}
+
+	public static void setIsup(boolean isup) {
+		ResidencyView.isup = isup;
+	}
+
+	public static ViewFields getField() {
+		return field;
+	}
+
+	public static void setField(ViewFields field) {
+		ResidencyView.field = field;
+	}	
 }

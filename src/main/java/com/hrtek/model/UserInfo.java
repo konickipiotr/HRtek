@@ -7,10 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.hrtek.admin.employee.NewEmployeeModel;
 
-import lombok.Data;
-
 @Entity
-@Data
 public class UserInfo {
 	
 	@Id
@@ -66,6 +63,60 @@ public class UserInfo {
 		return "[firstname=" + firstname + ", lastname=" + lastname + ", position=" + position
 				+ ", email=" + email + ", phone=" + phone + ", sex=" + sex + "]";
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
+	}	
 }

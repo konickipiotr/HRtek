@@ -22,6 +22,9 @@ public class Bed {
 	private Long roomid;
 	private Long houseid;
 	private Long workerid;
+	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate occupyFrom;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate expire;
 	@Enumerated(EnumType.STRING)
@@ -82,6 +85,14 @@ public class Bed {
 		this.workerid = workerid;
 	}
 
+	public LocalDate getOccupyFrom() {
+		return occupyFrom;
+	}
+
+	public void setOccupyFrom(LocalDate occupyFrom) {
+		this.occupyFrom = occupyFrom;
+	}
+
 	public LocalDate getExpire() {
 		return expire;
 	}
@@ -94,13 +105,7 @@ public class Bed {
 		return bedstatus;
 	}
 
-	public void setBedstatus(Bedstatus bedStatus) {
-		this.bedstatus = bedStatus;
-	}
-
-	@Override
-	public String toString() {
-		return "BedModel [id=" + id + ", roomid=" + roomid + ", houseid=" + houseid + ", workerid=" + workerid
-				+ ", expire=" + expire + ", bedstatus=" + bedstatus + "]";
+	public void setBedstatus(Bedstatus bedstatus) {
+		this.bedstatus = bedstatus;
 	}
 }

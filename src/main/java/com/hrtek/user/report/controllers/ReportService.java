@@ -510,8 +510,4 @@ public class ReportService {
 		if(mon > 16)
 			r.setGreaterThansixteen(true);
 	}
-	
-	
-
-
 }

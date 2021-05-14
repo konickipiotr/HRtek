@@ -10,10 +10,8 @@ import com.hrtek.model.accommodation.House;
 import com.hrtek.user.recruitment.NewWorker;
 import com.hrtek.user.recruitment.WorkerAll;
 
-import lombok.Data;
 
 @Entity
-@Data
 public class Contact {
 
 	@Id
@@ -102,6 +100,116 @@ public class Contact {
 		return " [pladdress=" + pladdress + ", plpostcode=" + plpostcode + ", plcity=" + plcity + ", address="
 				+ address + ", postcode=" + postcode + ", city=" + city + ", phone=" + phone + ", email=" + email + "]";
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getHouseid() {
+		return houseid;
+	}
+
+	public void setHouseid(Long houseid) {
+		this.houseid = houseid;
+	}
+
+	public Long getRoomid() {
+		return roomid;
+	}
+
+	public void setRoomid(Long roomid) {
+		this.roomid = roomid;
+	}
+
+	public Long getBedid() {
+		return bedid;
+	}
+
+	public void setBedid(Long bedid) {
+		this.bedid = bedid;
+	}
+
+	public String getPladdress() {
+		return pladdress;
+	}
+
+	public void setPladdress(String pladdress) {
+		this.pladdress = pladdress;
+	}
+
+	public String getPlpostcode() {
+		return plpostcode;
+	}
+
+	public void setPlpostcode(String plpostcode) {
+		this.plpostcode = plpostcode;
+	}
+
+	public String getPlcity() {
+		return plcity;
+	}
+
+	public void setPlcity(String plcity) {
+		this.plcity = plcity;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Boolean getIsOhter() {
+		return isOhter;
+	}
+
+	public void setIsOhter(Boolean isOhter) {
+		this.isOhter = isOhter;
+	}
+
+	public LocalDate getAcomdate() {
+		return acomdate;
+	}
+
+	public void setAcomdate(LocalDate acomdate) {
+		this.acomdate = acomdate;
+	}	
 }

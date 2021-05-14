@@ -8,12 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@NoArgsConstructor	
 public class InUse {
 
 	@Id
@@ -34,6 +30,52 @@ public class InUse {
 		this.expired = expired;
 		this.username = username;
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getWorkerid() {
+		return workerid;
+	}
+
+	public void setWorkerid(Long workerid) {
+		this.workerid = workerid;
+	}
+
+	public Long getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Long userid) {
+		this.userid = userid;
+	}
+
+	public UsedTable getUsedTable() {
+		return usedTable;
+	}
+
+	public void setUsedTable(UsedTable usedTable) {
+		this.usedTable = usedTable;
+	}
+
+	public LocalDateTime getExpired() {
+		return expired;
+	}
+
+	public void setExpired(LocalDateTime expired) {
+		this.expired = expired;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}	
 }

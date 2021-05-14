@@ -265,19 +265,19 @@
 						<div class="col"> &nbsp;</div>
 						<div class="col">
 							<div class="lab-div">
-								<label for="startZus" th:text="#{label.agreement.from}"></label>
+								<label for="agreementFrom" th:text="#{label.agreement.from}"></label>
 							</div>
 							<div class="input-div">
-								<input type="date" id="startZus" name="startZus" th:field="*{startZus}">
+								<input type="date" id="agreementFrom" name="agreementFrom" th:field="*{agreementFrom}">
 							</div>
 						</div>
 						<div class="col">
 							<div class="lab-div">
-								<p class="wronginput" th:if="${#fields.hasErrors('endZus')}" th:errors="*{endZus}" ></p>
-								<label for="endZus" th:text="#{lable.agreement.to}"></label>
+								<p class="wronginput" th:if="${#fields.hasErrors('agreementTo')}" th:errors="*{agreementTo}" ></p>
+								<label for="agreementTo" th:text="#{lable.agreement.to}"></label>
 							</div>
 							<div class="input-div">
-								<input type="date" id="endZus" name="endZus" th:field="*{endZus}">
+								<input type="date" id="agreementTo" name="agreementTo" th:field="*{agreementTo}">
 							</div>
 						</div>
 						<div class="col"> &nbsp;</div>
@@ -286,8 +286,8 @@
 					<div class="section-header"><h2 th:text="#{lable.wage}"></h2></div>
 					<div class="row">
 						
-						<div class="col"> &nbsp;</div>
-						<div class="col">
+						
+						<div class="col-a">
 							<div class="lab-div">
 								<label for="wage" th:text="#{label.wagePerHour}"></label>
 							</div>
@@ -295,7 +295,7 @@
 								<input type="number" min="0" step="0.01" id="wage" name="wage" th:field="*{wage}">
 							</div>
 						</div>
-						<div class="col">
+						<div class="col-a">
 							<div class="lab-div">
 								<label for="sWage" th:text="#{label.wage.in.words}"></label>
 							</div>
@@ -303,7 +303,14 @@
 								<input type="text" id="sWage" name="sWage" th:field="*{sWage}">
 							</div>
 						</div>
-						<div class="col"> &nbsp;</div>
+						<div class="col-a">
+							<div class="lab-div">
+								<label for="sCWage" th:text="#{label.wage.in.words } + ' (Cyrillic)'"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" id="sCWage" name="sCWage" th:field="*{sCWage}">
+							</div>
+						</div>
 					</div>
 					<!-- ***************** ROW ************************ -->	
 					<div class="row-buttons">

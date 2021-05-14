@@ -1,8 +1,6 @@
 package com.hrtek.user.timesheet;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -10,10 +8,8 @@ import org.hibernate.validator.constraints.Length;
 
 import com.hrtek.model.worker.Worker;
 
-import lombok.Data;
 
 @Entity
-@Data
 public class Timesheet {
 
 	@Id
@@ -204,6 +200,142 @@ public class Timesheet {
 //		case "y2039": this.setY2039(value);
 //		case "y2040": this.setY2040(value);
 		}
+	}
+
+	public Long getWorkerid() {
+		return workerid;
+	}
+
+	public void setWorkerid(Long workerid) {
+		this.workerid = workerid;
+	}
+
+	public Long getFactoryid() {
+		return factoryid;
+	}
+
+	public void setFactoryid(Long factoryid) {
+		this.factoryid = factoryid;
+	}
+
+	public String getY2020() {
+		return y2020;
+	}
+
+	public void setY2020(String y2020) {
+		this.y2020 = y2020;
+	}
+
+	public String getY2021() {
+		return y2021;
+	}
+
+	public void setY2021(String y2021) {
+		this.y2021 = y2021;
+	}
+
+	public String getY2022() {
+		return y2022;
+	}
+
+	public void setY2022(String y2022) {
+		this.y2022 = y2022;
+	}
+
+	public String getY2023() {
+		return y2023;
+	}
+
+	public void setY2023(String y2023) {
+		this.y2023 = y2023;
+	}
+
+	public String getY2024() {
+		return y2024;
+	}
+
+	public void setY2024(String y2024) {
+		this.y2024 = y2024;
+	}
+
+	public String getY2025() {
+		return y2025;
+	}
+
+	public void setY2025(String y2025) {
+		this.y2025 = y2025;
+	}
+
+	public String getY2026() {
+		return y2026;
+	}
+
+	public void setY2026(String y2026) {
+		this.y2026 = y2026;
+	}
+
+	public String getY2027() {
+		return y2027;
+	}
+
+	public void setY2027(String y2027) {
+		this.y2027 = y2027;
+	}
+
+	public String getY2028() {
+		return y2028;
+	}
+
+	public void setY2028(String y2028) {
+		this.y2028 = y2028;
+	}
+
+	public String getY2029() {
+		return y2029;
+	}
+
+	public void setY2029(String y2029) {
+		this.y2029 = y2029;
+	}
+
+	public String getY2030() {
+		return y2030;
+	}
+
+	public void setY2030(String y2030) {
+		this.y2030 = y2030;
+	}
+
+	public String getY2031() {
+		return y2031;
+	}
+
+	public void setY2031(String y2031) {
+		this.y2031 = y2031;
+	}
+
+	public String getY2032() {
+		return y2032;
+	}
+
+	public void setY2032(String y2032) {
+		this.y2032 = y2032;
+	}
+
+	public String getY2033() {
+		return y2033;
+	}
+
+	public void setY2033(String y2033) {
+		this.y2033 = y2033;
+	}
+
+	public String getY2034() {
+		return y2034;
+	}
+
+	public void setY2034(String y2034) {
+		this.y2034 = y2034;
 	}
 }
 

@@ -4,9 +4,7 @@ import java.time.LocalDate;
 
 import com.hrtek.user.dismissed.Dismissed;
 
-import lombok.Data;
 
-@Data
 public class OldWorker implements Comparable<OldWorker> {
 	private Long id;
 	private String name;
@@ -37,6 +35,28 @@ public class OldWorker implements Comparable<OldWorker> {
 			return 1;
 		}
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public LocalDate getEndWork() {
+		return endWork;
+	}
+
+	public void setEndWork(LocalDate endWork) {
+		this.endWork = endWork;
+	}	
 }

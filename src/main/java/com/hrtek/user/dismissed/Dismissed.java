@@ -17,10 +17,8 @@ import com.hrtek.model.worker.WorkerBasic;
 import com.hrtek.model.worker.WorkerDate;
 import com.hrtek.model.worker.WorkerFinance;
 
-import lombok.Data;
 
 @Entity
-@Data
 public class Dismissed {
 	
 	@Id
@@ -152,4 +150,363 @@ public class Dismissed {
 		this.phone = c.getPhone();
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getWorkerNo() {
+		return workerNo;
+	}
+
+	public void setWorkerNo(String workerNo) {
+		this.workerNo = workerNo;
+	}
+
+	public String getFactory() {
+		return factory;
+	}
+
+	public void setFactory(String factory) {
+		this.factory = factory;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public LocalDate getDateofbirth() {
+		return dateofbirth;
+	}
+
+	public void setDateofbirth(LocalDate dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+
+	public String getCitizenship() {
+		return citizenship;
+	}
+
+	public void setCitizenship(String citizenship) {
+		this.citizenship = citizenship;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getRecruiter() {
+		return recruiter;
+	}
+
+	public void setRecruiter(String recruiter) {
+		this.recruiter = recruiter;
+	}
+
+	public String getPesel() {
+		return pesel;
+	}
+
+	public void setPesel(String pesel) {
+		this.pesel = pesel;
+	}
+
+	public String getAccountnr() {
+		return accountnr;
+	}
+
+	public void setAccountnr(String accountnr) {
+		this.accountnr = accountnr;
+	}
+
+	public double getHourlyrate() {
+		return hourlyrate;
+	}
+
+	public void setHourlyrate(double hourlyrate) {
+		this.hourlyrate = hourlyrate;
+	}
+
+	public double getWage() {
+		return wage;
+	}
+
+	public void setWage(double wage) {
+		this.wage = wage;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public LocalDate getStartZus() {
+		return startZus;
+	}
+
+	public void setStartZus(LocalDate startZus) {
+		this.startZus = startZus;
+	}
+
+	public LocalDate getEndZus() {
+		return endZus;
+	}
+
+	public void setEndZus(LocalDate endZus) {
+		this.endZus = endZus;
+	}
+
+	public LocalDate getStartWork() {
+		return startWork;
+	}
+
+	public void setStartWork(LocalDate startWork) {
+		this.startWork = startWork;
+	}
+
+	public LocalDate getEndWork() {
+		return endWork;
+	}
+
+	public void setEndWork(LocalDate endWork) {
+		this.endWork = endWork;
+	}
+
+	public LocalDate getStartMedicalExams() {
+		return startMedicalExams;
+	}
+
+	public void setStartMedicalExams(LocalDate startMedicalExams) {
+		this.startMedicalExams = startMedicalExams;
+	}
+
+	public LocalDate getEndMedicalExams() {
+		return endMedicalExams;
+	}
+
+	public void setEndMedicalExams(LocalDate endMedicalExams) {
+		this.endMedicalExams = endMedicalExams;
+	}
+
+	public LocalDate getAddToSystem() {
+		return addToSystem;
+	}
+
+	public void setAddToSystem(LocalDate addToSystem) {
+		this.addToSystem = addToSystem;
+	}
+
+	public LocalDate getDismisseddate() {
+		return dismisseddate;
+	}
+
+	public void setDismisseddate(LocalDate dismisseddate) {
+		this.dismisseddate = dismisseddate;
+	}
+
+	public String getPassport() {
+		return passport;
+	}
+
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
+	public String getBiopassport() {
+		return biopassport;
+	}
+
+	public void setBiopassport(String biopassport) {
+		this.biopassport = biopassport;
+	}
+
+	public String getStatementType() {
+		return statementType;
+	}
+
+	public void setStatementType(String statementType) {
+		this.statementType = statementType;
+	}
+
+	public String getStatement() {
+		return statement;
+	}
+
+	public void setStatement(String statement) {
+		this.statement = statement;
+	}
+
+	public LocalDate getStatementValidFrom() {
+		return statementValidFrom;
+	}
+
+	public void setStatementValidFrom(LocalDate statementValidFrom) {
+		this.statementValidFrom = statementValidFrom;
+	}
+
+	public LocalDate getStatementValidTo() {
+		return statementValidTo;
+	}
+
+	public void setStatementValidTo(LocalDate statementValidTo) {
+		this.statementValidTo = statementValidTo;
+	}
+
+	public String getPermit() {
+		return permit;
+	}
+
+	public void setPermit(String permit) {
+		this.permit = permit;
+	}
+
+	public LocalDate getPermitValidFrom() {
+		return permitValidFrom;
+	}
+
+	public void setPermitValidFrom(LocalDate permitValidFrom) {
+		this.permitValidFrom = permitValidFrom;
+	}
+
+	public LocalDate getPermitValidTo() {
+		return permitValidTo;
+	}
+
+	public void setPermitValidTo(LocalDate permitValidTo) {
+		this.permitValidTo = permitValidTo;
+	}
+
+	public String getOthers() {
+		return others;
+	}
+
+	public void setOthers(String others) {
+		this.others = others;
+	}
+
+	public String getVisa() {
+		return visa;
+	}
+
+	public void setVisa(String visa) {
+		this.visa = visa;
+	}
+
+	public LocalDate getVisaValidFrom() {
+		return visaValidFrom;
+	}
+
+	public void setVisaValidFrom(LocalDate visaValidFrom) {
+		this.visaValidFrom = visaValidFrom;
+	}
+
+	public LocalDate getVisaValidTo() {
+		return visaValidTo;
+	}
+
+	public void setVisaValidTo(LocalDate visaValidTo) {
+		this.visaValidTo = visaValidTo;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPladdress() {
+		return pladdress;
+	}
+
+	public void setPladdress(String pladdress) {
+		this.pladdress = pladdress;
+	}
+
+	public String getPlpostcode() {
+		return plpostcode;
+	}
+
+	public void setPlpostcode(String plpostcode) {
+		this.plpostcode = plpostcode;
+	}
+
+	public String getPlcity() {
+		return plcity;
+	}
+
+	public void setPlcity(String plcity) {
+		this.plcity = plcity;
+	}
 }

@@ -3,6 +3,7 @@ package com.hrtek.user.timesheet;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.hrtek.db.CompanyRepository;
 import com.hrtek.db.DepartmentRepository;
 import com.hrtek.db.FactoryRepository;
 import com.hrtek.db.worker.TimesheetRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerFinanceRepository;
 import com.hrtek.db.worker.WorkerRepository;
+import com.hrtek.model.Company;
 import com.hrtek.model.Department;
 import com.hrtek.model.Factory;
 import com.hrtek.model.ListModel;
@@ -33,18 +36,20 @@ public class TimesheetService {
 	private WorkerRepository workerRepo;
 	private WorkerBasicRepository workerBacicRepo;
 	private DepartmentRepository departmentRepo;
-	private WorkerFinanceRepository workerFinanceRepo; //  ???TO
+	private WorkerFinanceRepository workerFinanceRepo; //  ???TO'
+	private CompanyRepository companyRepo;
 	
 	@Autowired
 	public TimesheetService(FactoryRepository factoryRepo, TimesheetRepository timesheetRepo,
 			WorkerRepository workerRepo, WorkerBasicRepository workerBacicRepo, DepartmentRepository departmentRepo,
-			WorkerFinanceRepository workerFinanceRepo) {
+			WorkerFinanceRepository workerFinanceRepo, CompanyRepository companyRepo) {
 		this.factoryRepo = factoryRepo;
 		this.timesheetRepo = timesheetRepo;
 		this.workerRepo = workerRepo;
 		this.workerBacicRepo = workerBacicRepo;
 		this.departmentRepo = departmentRepo;
 		this.workerFinanceRepo = workerFinanceRepo;
+		this.companyRepo = companyRepo;
 	}
 
 	public void setModel(Model model) {
@@ -88,8 +93,11 @@ public class TimesheetService {
 			wts.setTotal(BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP).doubleValue());
 			
 			wts.setWorkernr(wb.getWorkerNo());
+			Company company = this.companyRepo.findById(w.getCompanyid()).get();
+			wts.setCompanyname(company.getShortname());
 			wts_list.add(wts);
 		}
+		Collections.sort(wts_list);
 		
 		fw.setWts(wts_list);
 		return fw;

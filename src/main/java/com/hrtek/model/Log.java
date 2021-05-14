@@ -1,7 +1,6 @@
 package com.hrtek.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 import javax.persistence.Entity;
@@ -17,10 +16,8 @@ import com.hrtek.settings.GlobalSettings;
 import com.hrtek.user.display.views.ViewFields;
 import com.hrtek.utils.FieldsComparator;
 
-import lombok.Data;
 
 @Entity
-@Data
 public class Log implements Comparable<Log>{
 	
 	@Id
@@ -69,7 +66,76 @@ public class Log implements Comparable<Log>{
 		this.date = this.tstamp.toLocalDate().toString();
 		this.time = this.tstamp.toLocalTime().truncatedTo(ChronoUnit.MINUTES).toString();
 	}
-	
-	
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getTstamp() {
+		return tstamp;
+	}
+
+	public void setTstamp(LocalDateTime tstamp) {
+		this.tstamp = tstamp;
+	}
+
+	public String getWho() {
+		return who;
+	}
+
+	public void setWho(String who) {
+		this.who = who;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public LogType getLogtype() {
+		return logtype;
+	}
+
+	public void setLogtype(LogType logtype) {
+		this.logtype = logtype;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public static boolean isIsup() {
+		return isup;
+	}
+
+	public static void setIsup(boolean isup) {
+		Log.isup = isup;
+	}
+
+	public static ViewFields getField() {
+		return field;
+	}
+
+	public static void setField(ViewFields field) {
+		Log.field = field;
+	}
 }

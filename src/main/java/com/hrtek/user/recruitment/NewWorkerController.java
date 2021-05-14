@@ -37,7 +37,7 @@ public class NewWorkerController {
 		recruitmentService.setModel(model, newWorker);
 		
 		newWorker.setWage(17.34);
-		newWorker.setSWage("siedemnaście złotych, trzydzieści cztery grosze");
+		newWorker.setsWage("siedemnaście złotych, trzydzieści cztery grosze");
 		model.addAttribute("newWorker", newWorker);
 		model.addAttribute("status", "");
 		return "user/hire/recruitment2";
@@ -47,7 +47,7 @@ public class NewWorkerController {
 	public String selectCanditate(@RequestParam("candidateid") Long id, Model model) {
 		NewWorker nw = recruitmentService.selectCandidatAsNewWorker(id);
 		nw.setWage(17.34);
-		nw.setSWage("siedemnaście złotych, trzydzieści cztery grosze");
+		nw.setsWage("siedemnaście złotych, trzydzieści cztery grosze");
 		recruitmentService.setModel(model, nw);
 		model.addAttribute("newWorker", nw);
 		return "user/hire/recruitment2";
@@ -75,7 +75,7 @@ public class NewWorkerController {
 		recruitmentService.setModel(model, nw);
 		model.addAttribute("newWorker", nw);
 		
-		String path = docService.prepareContract(nw.getId(), nw.getWage(), nw.getSWage());
+		String path = docService.prepareContract(nw.getId(), nw);
 		ra.addAttribute("filename", path);
 		return "redirect:/download";
 	}

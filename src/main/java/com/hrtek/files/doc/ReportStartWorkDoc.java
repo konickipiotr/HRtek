@@ -15,9 +15,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.hrtek.user.report.views.ReportStartWork;
 
-import lombok.Data;
 
-@Data
 public class ReportStartWorkDoc implements Doc<Workbook> {
 	
 	private Workbook wb = new HSSFWorkbook();  
@@ -67,9 +65,6 @@ public class ReportStartWorkDoc implements Doc<Workbook> {
 		Cell cell5 = row.createCell(4);
 		cell5.setCellStyle(datestyle);
 		cell5.setCellValue(rp.getEndWork());
-		
-		
-
 	}
 	
 	private void prepareHeader(Row row) {
@@ -122,5 +117,29 @@ public class ReportStartWorkDoc implements Doc<Workbook> {
 	}
 
 	public ReportStartWorkDoc() {
+	}
+
+	public Workbook getWb() {
+		return wb;
+	}
+
+	public void setWb(Workbook wb) {
+		this.wb = wb;
+	}
+
+	public DocType getDoctype() {
+		return doctype;
+	}
+
+	public void setDoctype(DocType doctype) {
+		this.doctype = doctype;
+	}
+
+	public List<ReportStartWork> getRp_list() {
+		return rp_list;
+	}
+
+	public void setRp_list(List<ReportStartWork> rp_list) {
+		this.rp_list = rp_list;
 	}
 }

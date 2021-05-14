@@ -4,9 +4,6 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
-
-@Data
 public class NewWorker {
 	
 	private Long id;
@@ -40,11 +37,12 @@ public class NewWorker {
 	
 	private double wage;
 	private String sWage;
+	private String sCWage;
 	
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate startZus;
+	private LocalDate agreementFrom;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate endZus;
+	private LocalDate agreementTo;
 	
 	public NewWorker() {	
 		this.sex = "M";
@@ -65,4 +63,219 @@ public class NewWorker {
 		this.note = c.getNote();
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Long getRecruiter() {
+		return recruiter;
+	}
+
+	public void setRecruiter(Long recruiter) {
+		this.recruiter = recruiter;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public Boolean getIsBiopass() {
+		return isBiopass;
+	}
+
+	public void setIsBiopass(Boolean isBiopass) {
+		this.isBiopass = isBiopass;
+	}
+
+	public String getPassport() {
+		return passport;
+	}
+
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
+	public LocalDate getDateofbirth() {
+		return dateofbirth;
+	}
+
+	public void setDateofbirth(LocalDate dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+
+	public Long getFactoryid() {
+		return factoryid;
+	}
+
+	public void setFactoryid(Long factoryid) {
+		this.factoryid = factoryid;
+	}
+
+	public Long getCompanyid() {
+		return companyid;
+	}
+
+	public void setCompanyid(Long companyid) {
+		this.companyid = companyid;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Long getBedid() {
+		return bedid;
+	}
+
+	public void setBedid(Long bedid) {
+		this.bedid = bedid;
+	}
+
+	public Boolean getIsOhter() {
+		return isOhter;
+	}
+
+	public void setIsOhter(Boolean isOhter) {
+		this.isOhter = isOhter;
+	}
+
+	public String getPladdress() {
+		return pladdress;
+	}
+
+	public void setPladdress(String pladdress) {
+		this.pladdress = pladdress;
+	}
+
+	public String getPlpostcode() {
+		return plpostcode;
+	}
+
+	public void setPlpostcode(String plpostcode) {
+		this.plpostcode = plpostcode;
+	}
+
+	public String getPlcity() {
+		return plcity;
+	}
+
+	public void setPlcity(String plcity) {
+		this.plcity = plcity;
+	}
+
+	public LocalDate getAcomdate() {
+		return acomdate;
+	}
+
+	public void setAcomdate(LocalDate acomdate) {
+		this.acomdate = acomdate;
+	}
+
+	public double getWage() {
+		return wage;
+	}
+
+	public void setWage(double wage) {
+		this.wage = wage;
+	}
+
+	public String getsWage() {
+		return sWage;
+	}
+
+	public void setsWage(String sWage) {
+		this.sWage = sWage;
+	}
+
+	public String getsCWage() {
+		return sCWage;
+	}
+
+	public void setsCWage(String sCWage) {
+		this.sCWage = sCWage;
+	}
+
+	public LocalDate getAgreementFrom() {
+		return agreementFrom;
+	}
+
+	public void setAgreementFrom(LocalDate agreementFrom) {
+		this.agreementFrom = agreementFrom;
+	}
+
+	public LocalDate getAgreementTo() {
+		return agreementTo;
+	}
+
+	public void setAgreementTo(LocalDate agreementTo) {
+		this.agreementTo = agreementTo;
+	}
 }

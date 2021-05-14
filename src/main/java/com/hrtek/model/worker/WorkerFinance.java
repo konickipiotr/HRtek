@@ -3,12 +3,8 @@ package com.hrtek.model.worker;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
-@Data
 public class WorkerFinance {
 
 	@Id
@@ -21,5 +17,40 @@ public class WorkerFinance {
 		this.id = id;
 		this.hourlyrate = hourlyrate;
 		this.wage = wage;
+	}
+	
+	public WorkerFinance() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public double getHourlyrate() {
+		return hourlyrate;
+	}
+
+	public void setHourlyrate(double hourlyrate) {
+		this.hourlyrate = hourlyrate;
+	}
+
+	public double getWage() {
+		return wage;
+	}
+
+	public void setWage(double wage) {
+		this.wage = wage;
+	}
+
+	public double getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(double bonus) {
+		this.bonus = bonus;
 	}
 }

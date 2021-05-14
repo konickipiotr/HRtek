@@ -10,10 +10,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.hrtek.user.recruitment.NewWorker;
 import com.hrtek.user.recruitment.WorkerAll;
 
-import lombok.Data;
 
 @Entity
-@Data
 public class WorkerDate {
 
 	@Id
@@ -58,6 +56,7 @@ public class WorkerDate {
 		this.startZus = w.getStartZus();
 		this.endZus = w.getEndZus();
 		this.startWork = w.getStartWork();
+		this.endWork = w.getEndWork();
 		this.startMedicalExams = w.getStartMedicalExams();
 		this.endMedicalExams = w.getEndMedicalExams();
 	}
@@ -68,4 +67,70 @@ public class WorkerDate {
 				+ endWork + ", startMedicalExams=" + startMedicalExams + ", endMedicalExams=" + endMedicalExams
 				+ ", addToSystem=" + addToSystem + "]";
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalDate getStartZus() {
+		return startZus;
+	}
+
+	public void setStartZus(LocalDate startZus) {
+		this.startZus = startZus;
+	}
+
+	public LocalDate getEndZus() {
+		return endZus;
+	}
+
+	public void setEndZus(LocalDate endZus) {
+		this.endZus = endZus;
+	}
+
+	public LocalDate getStartWork() {
+		return startWork;
+	}
+
+	public void setStartWork(LocalDate startWork) {
+		this.startWork = startWork;
+	}
+
+	public LocalDate getEndWork() {
+		return endWork;
+	}
+
+	public void setEndWork(LocalDate endWork) {
+		this.endWork = endWork;
+	}
+
+	public LocalDate getStartMedicalExams() {
+		return startMedicalExams;
+	}
+
+	public void setStartMedicalExams(LocalDate startMedicalExams) {
+		this.startMedicalExams = startMedicalExams;
+	}
+
+	public LocalDate getEndMedicalExams() {
+		return endMedicalExams;
+	}
+
+	public void setEndMedicalExams(LocalDate endMedicalExams) {
+		this.endMedicalExams = endMedicalExams;
+	}
+
+	public LocalDate getAddToSystem() {
+		return addToSystem;
+	}
+
+	public void setAddToSystem(LocalDate addToSystem) {
+		this.addToSystem = addToSystem;
+	}
+	
+	
 }

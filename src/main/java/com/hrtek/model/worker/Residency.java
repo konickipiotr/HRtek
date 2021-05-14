@@ -10,10 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.hrtek.user.recruitment.NewWorker;
 import com.hrtek.user.recruitment.WorkerAll;
 
-import lombok.Data;
-
 @Entity
-@Data
 public class Residency {
 
 	@Id
@@ -60,8 +57,54 @@ public class Residency {
 		return " [biopassport=" + biopassport + ", passport=" + passport + ", visa=" + visa
 				+ ", visaValidFrom=" + visaValidFrom + ", visaValidTo=" + visaValidTo + "]";
 	}
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getBiopassport() {
+		return biopassport;
+	}
+
+	public void setBiopassport(String biopassport) {
+		this.biopassport = biopassport;
+	}
+
+	public String getPassport() {
+		return passport;
+	}
+
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
+	public String getVisa() {
+		return visa;
+	}
+
+	public void setVisa(String visa) {
+		this.visa = visa;
+	}
+
+	public LocalDate getVisaValidFrom() {
+		return visaValidFrom;
+	}
+
+	public void setVisaValidFrom(LocalDate visaValidFrom) {
+		this.visaValidFrom = visaValidFrom;
+	}
+
+	public LocalDate getVisaValidTo() {
+		return visaValidTo;
+	}
+
+	public void setVisaValidTo(LocalDate visaValidTo) {
+		this.visaValidTo = visaValidTo;
+	}	
 }
 
 	

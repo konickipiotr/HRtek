@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.hrtek.model.Factory;
 
-import lombok.Data;
 
-@Data
 public class FactoryView {
 
 	private Long id;
@@ -27,5 +25,48 @@ public class FactoryView {
 		this.shortname = f.getShortname();
 		this.numberofwokers = f.getNumberofwokers();
 		this.hourlyrate = f.getHourlyrate();
-	}	
+	}
+
+	public FactoryView() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getShortname() {
+		return shortname;
+	}
+
+	public void setShortname(String shortname) {
+		this.shortname = shortname;
+	}
+
+	public int getNumberofwokers() {
+		return numberofwokers;
+	}
+
+	public void setNumberofwokers(int numberofwokers) {
+		this.numberofwokers = numberofwokers;
+	}
+
+	public double getHourlyrate() {
+		return hourlyrate;
+	}
+
+	public void setHourlyrate(double hourlyrate) {
+		this.hourlyrate = hourlyrate;
+	}
+
+	public List<WorkerTimesheet> getWts() {
+		return wts;
+	}
+
+	public void setWts(List<WorkerTimesheet> wts) {
+		this.wts = wts;
+	}		
 }

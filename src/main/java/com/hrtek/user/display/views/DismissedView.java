@@ -7,13 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.hrtek.user.dismissed.Dismissed;
 import com.hrtek.utils.FieldsComparator;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class DismissedView implements Comparable<DismissedView> {
 
 	private Long id;
@@ -99,4 +93,208 @@ public class DismissedView implements Comparable<DismissedView> {
 		}
 		return 0;
 	}
+
+
+	public DismissedView() {
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+
+	public String getLastname() {
+		return lastname;
+	}
+
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+
+	public LocalDate getDateofbirth() {
+		return dateofbirth;
+	}
+
+
+	public void setDateofbirth(LocalDate dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+
+
+	public String getCitizenship() {
+		return citizenship;
+	}
+
+
+	public void setCitizenship(String citizenship) {
+		this.citizenship = citizenship;
+	}
+
+
+	public String getCompany() {
+		return company;
+	}
+
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+
+	public String getFactory() {
+		return factory;
+	}
+
+
+	public void setFactory(String factory) {
+		this.factory = factory;
+	}
+
+
+	public String getRecruiter() {
+		return recruiter;
+	}
+
+
+	public void setRecruiter(String recruiter) {
+		this.recruiter = recruiter;
+	}
+
+
+	public LocalDate getStartWork() {
+		return startWork;
+	}
+
+
+	public void setStartWork(LocalDate startWork) {
+		this.startWork = startWork;
+	}
+
+
+	public LocalDate getStartZus() {
+		return startZus;
+	}
+
+
+	public void setStartZus(LocalDate startZus) {
+		this.startZus = startZus;
+	}
+
+
+	public LocalDate getEndWork() {
+		return endWork;
+	}
+
+
+	public void setEndWork(LocalDate endWork) {
+		this.endWork = endWork;
+	}
+
+
+	public LocalDate getEndZus() {
+		return endZus;
+	}
+
+
+	public void setEndZus(LocalDate endZus) {
+		this.endZus = endZus;
+	}
+
+
+	public String getPesel() {
+		return pesel;
+	}
+
+
+	public void setPesel(String pesel) {
+		this.pesel = pesel;
+	}
+
+
+	public String getPassport() {
+		return passport;
+	}
+
+
+	public void setPassport(String passport) {
+		this.passport = passport;
+	}
+
+
+	public String getBiopassport() {
+		return biopassport;
+	}
+
+
+	public void setBiopassport(String biopassport) {
+		this.biopassport = biopassport;
+	}
+
+
+	public String getStatement() {
+		return statement;
+	}
+
+
+	public void setStatement(String statement) {
+		this.statement = statement;
+	}
+
+
+	public String getPermit() {
+		return permit;
+	}
+
+
+	public void setPermit(String permit) {
+		this.permit = permit;
+	}
+
+
+	public String getOther() {
+		return other;
+	}
+
+
+	public void setOther(String other) {
+		this.other = other;
+	}
+
+
+	public static boolean isIsup() {
+		return isup;
+	}
+
+
+	public static void setIsup(boolean isup) {
+		DismissedView.isup = isup;
+	}
+
+
+	public static ViewFields getField() {
+		return field;
+	}
+
+
+	public static void setField(ViewFields field) {
+		DismissedView.field = field;
+	}	
 }

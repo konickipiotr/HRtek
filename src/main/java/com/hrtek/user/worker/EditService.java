@@ -17,6 +17,7 @@ import com.hrtek.db.accommodation.BedRepository;
 import com.hrtek.db.accommodation.HouseRepository;
 import com.hrtek.db.accommodation.RoomRepository;
 import com.hrtek.db.worker.ResidencyRepository;
+import com.hrtek.db.worker.TimesheetRepository;
 import com.hrtek.db.worker.WorkerBasicRepository;
 import com.hrtek.db.worker.WorkerContactRepository;
 import com.hrtek.db.worker.WorkerDateRepository;
@@ -34,11 +35,13 @@ import com.hrtek.model.accommodation.Room;
 import com.hrtek.model.worker.Contact;
 import com.hrtek.model.worker.PermitStatement;
 import com.hrtek.model.worker.Residency;
+import com.hrtek.model.worker.StatusWorker;
 import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerBasic;
 import com.hrtek.model.worker.WorkerDate;
 import com.hrtek.model.worker.WorkerFinance;
 import com.hrtek.user.recruitment.WorkerAll;
+import com.hrtek.user.timesheet.Timesheet;
 import com.hrtek.utils.SortFields;
 
 @Service
@@ -62,6 +65,7 @@ public class EditService {
 	private FactoryRepository factoryRepo;
 	private WorkerFinanceRepository workerFinanceRepo;
 	private LogRepository logRepo;
+	private TimesheetRepository timesheetRepo;
 
 	@Autowired
 	public EditService(CitizenshipRepository citizenshipRepo, DepartmentRepository departmentRepo,
@@ -70,8 +74,7 @@ public class EditService {
 			BedRepository bedRepo, WorkerRepository workerRepo, WorkerBasicRepository workerBasicRepo,
 			WorkerDateRepository workerDateRepo, WorkerContactRepository workerContactRepo,
 			WorkerPermintRepository workerPermintRepo, ResidencyRepository residencyRepo, FactoryRepository factoryRepo,
-			WorkerFinanceRepository workerFinanceRepo, LogRepository logRepo) {
-		super();
+			WorkerFinanceRepository workerFinanceRepo, LogRepository logRepo, TimesheetRepository timesheetRepo) {
 		this.citizenshipRepo = citizenshipRepo;
 		this.departmentRepo = departmentRepo;
 		this.factroryRepo = factroryRepo;
@@ -90,8 +93,9 @@ public class EditService {
 		this.factoryRepo = factoryRepo;
 		this.workerFinanceRepo = workerFinanceRepo;
 		this.logRepo = logRepo;
+		this.timesheetRepo = timesheetRepo;
 	}
-	
+
 	public Worker getWorker(Long id) {
 		Optional<Worker> oWorker = this.workerRepo.findById(id);
 		if(oWorker.isEmpty())
@@ -367,6 +371,12 @@ public class EditService {
 		sb.append("Modify: <br />" + wd.toString() + "<br /> to: <br />");
 		
 		wd.update(all);
+		Worker worker = this.workerRepo.findById(all.getId()).get();
+		if(all.getStartZus() != null && all.getEndZus() == null) 
+			worker.setStatus(StatusWorker.ACTIVE);
+		else
+			worker.setStatus(StatusWorker.INACTIVE);
+		
 		this.workerDateRepo.save(wd);
 		
 		sb.append(wd.toString());
@@ -453,6 +463,9 @@ public class EditService {
 				this.factoryRepo.save(old);
 			}
 			w.setFactoryid(newF.getId());
+			Timesheet ts = this.timesheetRepo.findById(w.getId()).get();
+			ts.setFactoryid(newF.getId());
+			this.timesheetRepo.save(ts);
 		}
 		
 		if(!w.getCompanyid().equals(all.getCompanyid())) {

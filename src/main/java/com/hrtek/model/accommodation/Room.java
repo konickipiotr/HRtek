@@ -12,10 +12,8 @@ import javax.persistence.Transient;
 
 import com.hrtek.user.accommodation.BedView;
 
-import lombok.Data;
 
 @Entity
-@Data
 public class Room {
 	
 	@Id
@@ -53,5 +51,69 @@ public class Room {
 	
 	public void removeBed() {
 		this.capacity--;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getHouseid() {
+		return houseid;
+	}
+
+	public void setHouseid(Long houseid) {
+		this.houseid = houseid;
+	}
+
+	public String getRoomname() {
+		return roomname;
+	}
+
+	public void setRoomname(String roomname) {
+		this.roomname = roomname;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public int getOccupied() {
+		return occupied;
+	}
+
+	public void setOccupied(int occupied) {
+		this.occupied = occupied;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public List<Bed> getBedlist() {
+		return bedlist;
+	}
+
+	public void setBedlist(List<Bed> bedlist) {
+		this.bedlist = bedlist;
+	}
+
+	public List<BedView> getBedViewList() {
+		return bedViewList;
+	}
+
+	public void setBedViewList(List<BedView> bedViewList) {
+		this.bedViewList = bedViewList;
 	}
 }

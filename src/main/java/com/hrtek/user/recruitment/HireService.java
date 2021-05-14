@@ -326,10 +326,10 @@ public class HireService {
 	private void uWorker(WorkerAll all,Worker worker) {
 		worker.setFirstname(all.getFirstname());
 		worker.setLastname(all.getLastname());
-		if(all.getStartZus() == null)
-			worker.setStatus(StatusWorker.INACTIVE);
-		else
+		if(all.getStartZus() != null && all.getEndZus() == null)
 			worker.setStatus(StatusWorker.ACTIVE);
+		else
+			worker.setStatus(StatusWorker.INACTIVE);
 		
 		if(!worker.getFactoryid().equals(all.getFactoryid())) {
 			Optional<Factory> oold = factoryRepo.findById(worker.getFactoryid());

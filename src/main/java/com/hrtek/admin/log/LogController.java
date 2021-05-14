@@ -12,16 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.hrtek.db.LogRepository;
 import com.hrtek.model.Log;
-import com.hrtek.user.display.filters.BasicFilters;
 import com.hrtek.user.display.filters.FilterProcess;
-import com.hrtek.user.display.filters.basic.DateBasicOperation;
-import com.hrtek.user.display.filters.basic.OtherBasicOperation;
-import com.hrtek.user.display.filters.basic.TextBasicOperation;
 import com.hrtek.user.display.service.SortViewService;
-import com.hrtek.user.display.views.BasicShowedField;
-import com.hrtek.user.display.views.BasicView;
 import com.hrtek.user.display.views.ViewFields;
 
 @Controller

@@ -65,9 +65,6 @@ public class ReportVisaWorkDoc implements Doc<Workbook> {
 		Cell cell5 = row.createCell(4);
 		cell5.setCellStyle(datestyle);
 		cell5.setCellValue(rp.getStartStatement());
-		
-		
-
 	}
 	
 	private void prepareHeader(Row row) {

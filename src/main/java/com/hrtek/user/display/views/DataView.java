@@ -9,9 +9,7 @@ import com.hrtek.model.worker.Worker;
 import com.hrtek.model.worker.WorkerDate;
 import com.hrtek.utils.FieldsComparator;
 
-import lombok.Data;
 
-@Data
 public class DataView implements Comparable<DataView> {
 	
 	private int status;
@@ -68,7 +66,108 @@ public class DataView implements Comparable<DataView> {
 		}
 		return 0;
 	}
-	
-	
-	
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public LocalDate getDateofbirth() {
+		return dateofbirth;
+	}
+
+	public void setDateofbirth(LocalDate dateofbirth) {
+		this.dateofbirth = dateofbirth;
+	}
+
+	public String getRecruiter() {
+		return recruiter;
+	}
+
+	public void setRecruiter(String recruiter) {
+		this.recruiter = recruiter;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getFactory() {
+		return factory;
+	}
+
+	public void setFactory(String factory) {
+		this.factory = factory;
+	}
+
+	public LocalDate getStartMedicalExams() {
+		return startMedicalExams;
+	}
+
+	public void setStartMedicalExams(LocalDate startMedicalExams) {
+		this.startMedicalExams = startMedicalExams;
+	}
+
+	public LocalDate getEndMedicalExams() {
+		return endMedicalExams;
+	}
+
+	public void setEndMedicalExams(LocalDate endMedicalExams) {
+		this.endMedicalExams = endMedicalExams;
+	}
+
+	public LocalDate getAddToSystem() {
+		return addToSystem;
+	}
+
+	public void setAddToSystem(LocalDate addToSystem) {
+		this.addToSystem = addToSystem;
+	}
+
+	public static boolean isIsup() {
+		return isup;
+	}
+
+	public static void setIsup(boolean isup) {
+		DataView.isup = isup;
+	}
+
+	public static ViewFields getField() {
+		return field;
+	}
+
+	public static void setField(ViewFields field) {
+		DataView.field = field;
+	}	
 }

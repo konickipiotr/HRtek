@@ -54,7 +54,8 @@
 					<span class="td" >
 						<b><span th:text="${v.name}"></span></b><br>
 						<span th:text="${v.workernr}"></span><br>
-						<span th:text="${v.department}"></span>
+						<span th:text="${v.department}"></span><br>
+						<span th:text="${v.companyname}"></span>
 					</span>
 					<span class="td" th:each="h : ${v.hourlList}">
 							<select name="hour">
