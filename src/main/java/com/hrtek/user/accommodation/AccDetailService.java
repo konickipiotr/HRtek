@@ -1,5 +1,7 @@
 package com.hrtek.user.accommodation;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -81,9 +83,9 @@ public class AccDetailService {
 		House house = houseRepo.findById(ff.getId()).get();
 		CostType type = ff.getCostType();
 		if(type.equals(CostType.RENT)) {
-			ff.setPerperson(ff.getRent()/house.getCapacity());
+			ff.setPerperson(ff.getRent().divide(BigDecimal.valueOf(house.getCapacity()), 2, RoundingMode.HALF_UP));
 		}else if(type.equals(CostType.MEDIARENT)) {
-			double result = (ff.getRent() + ff.getMedia()) / house.getCapacity();
+			BigDecimal result = (ff.getRent().add(ff.getMedia())).divide(BigDecimal.valueOf(house.getCapacity()) , 2, RoundingMode.HALF_UP);
 			ff.setPerperson(result);
 		}
 		house.changeFinance(ff);
@@ -117,7 +119,7 @@ public class AccDetailService {
 		
 		if(h.getLiderid() != null) {
 			WorkerFinance oldwf = workerFinanceRepo.findById(h.getLiderid()).get();
-			oldwf.setBonus(0);
+			oldwf.setBonus( new BigDecimal("0"));
 			this.workerFinanceRepo.save(oldwf);
 		}
 		

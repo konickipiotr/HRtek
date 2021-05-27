@@ -17,7 +17,7 @@ public class TimesheetController {
 	@Autowired
 	private TimesheetService timesheetService;
 	
-	private static final String[] hoursV = {"12","08","00","NW", "HO","11","10","09","08","07","06","05","04","03","02","01","24","23","22","21","20","19","18","17","16","15","14","13"};
+	private static final String[] hoursV = {"12","08","NW", "HO","11","10","09","08","07","06","05","04","03","02","01","24","23","22","21","20","19","18","17","16","15","14","13"};
 
 	@GetMapping
 	public String totimesheets(Model model) {
@@ -39,13 +39,13 @@ public class TimesheetController {
 	}
 	
 	@PostMapping(params = "save")
-	public String saveRecord(MonthFrom mf, Model model, HttpSession session) {
+	public String saveRecord(MonthFrom mf, Model model) {
 		WorkerMonthValidator validator = new WorkerMonthValidator(mf);
 	
 		if(!validator.validate()) {
 			model.addAttribute("message", "Wrong value");
 		}else {
-			timesheetService.saveTimesheet(mf, session);
+			timesheetService.saveTimesheet(mf);
 		}
 	
 		

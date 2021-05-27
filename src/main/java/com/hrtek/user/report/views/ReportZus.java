@@ -1,9 +1,12 @@
 package com.hrtek.user.report.views;
 
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.utils.FieldsComparator;
+
 import java.time.LocalDate;
 
 
-public class ReportZus {
+public class ReportZus implements Comparable<ReportZus> {
 
 	private String firstname;
 	private String lastname;
@@ -124,5 +127,31 @@ public class ReportZus {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}	
+	}
+
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.FIRSTNAME;
+
+	@Override
+	public int compareTo(ReportZus o) {
+		switch (field) {
+			case FIRSTNAME: return FieldsComparator.compareText(this.firstname, o.getFirstname(), isup);
+			case LASTNAME: return FieldsComparator.compareText(this.lastname, o.getLastname(), isup);
+			case DATEOFBIRTH: return FieldsComparator.compareDate(this.dateofbirth, o.getDateofbirth(), isup);
+			case SEX: return FieldsComparator.compareText(this.sex, o.getSex(), isup);
+			case PESEL: return FieldsComparator.compareText(this.pesel, o.getPesel(), isup);
+			case CITIZENSHIP: return FieldsComparator.compareText(this.citizenship, o.getCitizenship(), isup);
+			case FACTORY: return FieldsComparator.compareText(this.facotry, o.getFacotry(), isup);
+			case COMPANY: return FieldsComparator.compareText(this.company, o.getCompany(), isup);
+			case PASZPORT: return FieldsComparator.compareText(this.passport, o.getPassport(), isup);
+			case TYPE: return FieldsComparator.compareText(this.type, o.getType(), isup);
+			case STARTZUS: return FieldsComparator.compareDate(this.startZus, o.getStartZus(), isup);
+			case ENDZUS: return FieldsComparator.compareDate(this.endZus, o.getEndZus(), isup);
+			case ADDRESS: return FieldsComparator.compareText(this.address, o.getAddress(), isup);
+
+			default:
+				break;
+		}
+		return 0;
+	}
 }

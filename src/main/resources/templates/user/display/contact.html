@@ -167,7 +167,7 @@
 						<td>
 							<span th:if="${i.houseid == null and i.pladdress == ''}" th:text="#{label.none}"></span>
 							<span th:if="${i.houseid == null and i.pladdress != ''}" th:text="#{label.own}"></span>
-							<a th:if="${i.houseid != null}" th:href="@{'/accdetail/' + ${i.houseid}}" th:text="#{label.companys}"></a> 
+							<a th:if="${i.houseid != null}" th:href="@{'/accdetail/' + ${i.houseid}}">Our</a> 
 						</td>
 						<td th:if="${fd.bPladdress == true}"  th:text="${i.pladdress}"></td>
 						<td th:if="${fd.bPlpostcode == true}"  th:text="${i.plpostcode}"></td>

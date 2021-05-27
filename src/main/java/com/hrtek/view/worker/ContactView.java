@@ -18,6 +18,7 @@ public class ContactView {
 	private String address;
 	private String postcode;
 	private String city;
+	private String country;
 	private String phone;
 	private String email;
 
@@ -27,6 +28,7 @@ public class ContactView {
 		this.address = c.getAddress();
 		this.postcode = c.getPostcode();
 		this.city = c.getCity();
+		this.country = c.getCountry();
 		this.pladdress = c.getPladdress();
 		this.plcity = c.getPlcity();
 		this.plpostcode = c.getPlpostcode();
@@ -137,5 +139,13 @@ public class ContactView {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 }

@@ -1,5 +1,7 @@
 package com.hrtek.user.timesheet;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 
@@ -9,7 +11,7 @@ public class WorkerTimesheet implements Comparable<WorkerTimesheet> {
 	private String name;
 	private String workernr;
 	private String department;
-	private double total;
+	private BigDecimal total;
 	private int hsum;
 	private String companyname;
 	
@@ -57,12 +59,12 @@ public class WorkerTimesheet implements Comparable<WorkerTimesheet> {
 		this.department = department;
 	}
 
-	public double getTotal() {
-		return total;
+	public BigDecimal getTotal() {
+		return total.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public void setTotal(double total) {
-		this.total = total;
+	public void setTotal(BigDecimal total) {
+		this.total = total.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public int getHsum() {

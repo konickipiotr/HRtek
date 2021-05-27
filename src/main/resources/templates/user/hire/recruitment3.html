@@ -147,8 +147,12 @@
 								<input type="date" id="acomdate" name="acomdate" th:field="*{acomdate}" disabled>
 							</div>
 							<div class="input-div" th:unless="${workerAll.isOhter == true}">
-								<label for="acomdate" th:text="#{to}"></label>
-								<input type="date" id="acomdate" name="acomdate" th:field="*{acomdate}">
+								<label for="acomdatefrom" th:text="#{from}"></label>
+								<input type="date" id="acomdatefrom" name="acomdatefrom" th:field="*{acomdatefrom}">
+							</div>
+							<div class="input-div" th:unless="${workerAll.isOhter == true}">
+								<label for="acomdateTo" th:text="#{to}"></label>
+								<input type="date" id="acomdateTo" name="acomdateTo" th:field="*{acomdateTo}">
 							</div>
 						</div>
 						<!-- ---------------------  -->
@@ -186,7 +190,7 @@
 					<!-- ***************** ROW ************************ -->
 					<div class="row">
 						<div class="section-header"><h2 th:text="#{label.addressabroad}"></h2></div>
-						<div class="col-a">
+						<div class="col">
 							<div class="lab-div">
 								<label for="address" th:text="#{address}"></label>
 							</div>
@@ -195,7 +199,7 @@
 							</div>
 						</div>
 						<!-- ---------------------  -->
-						<div class="col-a">
+						<div class="col">
 							<div class="lab-div">
 								<label for="postcode" th:text="#{postcode}"></label>
 							</div>
@@ -204,12 +208,21 @@
 							</div>
 						</div>
 						<!-- ---------------------  -->
-						<div class="col-a">
+						<div class="col">
 							<div class="lab-div">
 								<label for="city" th:text="#{city}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" name="city" id="city" th:field="*{city}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="city" th:text="#{country}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="country" id="country" th:field="*{country}">
 							</div>
 						</div>
 					</div>
@@ -531,8 +544,8 @@
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
-<!-- <script type="text/javascript" src="/scripts/recruitment2.js"> 
-</script>-->
+<script type="text/javascript" src="/scripts/recruitment2.js"> 
+</script>
 <script>
 function update() {
     document.getElementById("filelist").value = "";

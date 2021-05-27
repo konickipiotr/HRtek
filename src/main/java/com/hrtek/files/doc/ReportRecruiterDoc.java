@@ -53,18 +53,15 @@ public class ReportRecruiterDoc implements Doc<Workbook> {
 		cell0.setCellValue(i);
 		
 		Cell cell1 = row.createCell(1);
-		cell1.setCellValue(rp.getRfirstname());
+		cell1.setCellValue(rp.getrName());
 		
-		Cell cell2 = row.createCell(2);
-		cell2.setCellValue(rp.getRlastname());
-		
-		Cell cell3 = row.createCell(3);
+		Cell cell3 = row.createCell(2);
 		cell3.setCellValue(rp.getWfirstname());
 		
-		Cell cell4 = row.createCell(4);
+		Cell cell4 = row.createCell(3);
 		cell4.setCellValue(rp.getWlastname());
 		
-		Cell cell5 = row.createCell(5);
+		Cell cell5 = row.createCell(4);
 		cell5.setCellStyle(datestyle);
 		cell5.setCellValue(rp.getAddtosystem());
 		
@@ -83,7 +80,7 @@ public class ReportRecruiterDoc implements Doc<Workbook> {
 		
 		
 		
-		String headers[] = {"Lp.", "Recruiter name", "Recruiter surname", "Worker name", "Worker surename", "date" };
+		String headers[] = {"Lp.", "Recruiter name", "Worker name", "Worker surename", "date" };
 		Cell cells[] = new Cell[headers.length];
 		
 		for(int i = 0; i < cells.length; i++) {

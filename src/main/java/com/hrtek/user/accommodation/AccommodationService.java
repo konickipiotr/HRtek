@@ -1,5 +1,7 @@
 package com.hrtek.user.accommodation;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +37,10 @@ public class AccommodationService {
 	public void saveHouse(House house){
 		CostType type = house.getCostType();
 		if(type.equals(CostType.RENT)) {
-			house.setPerperson(house.getRent()/house.getCapacity());
+			house.setPerperson(house.getRent().divide(BigDecimal.valueOf(house.getCapacity()), 2, RoundingMode.HALF_UP));
 		}else if(type.equals(CostType.MEDIARENT)) {
-			double result = (house.getRent() + house.getMedia()) / house.getCapacity();
+			BigDecimal result = (house.getRent().add(house.getMedia()))
+					.divide(BigDecimal.valueOf(house.getCapacity()), 2, RoundingMode.HALF_UP);
 			house.setPerperson(result);
 		}
 		this.houseRepo.save(house);

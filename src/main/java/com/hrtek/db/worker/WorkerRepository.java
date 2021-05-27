@@ -12,6 +12,8 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
 	List<Worker> findByCompanyid(Long id);
 	List<Worker> findByRecruiter(Long id);
 	List<Worker> findByCompanyidAndFactoryid(Long companyid, Long factoryid);
+	List<Worker> findByFactoryid(Long factoryid);
+	List<Worker> findByCompanyidAndFactoryidOrderByLastnameAsc(Long companyid, Long factoryid);
 	int countByCompanyidAndFactoryid(Long companyid, Long factoryid);
 	
 	int countByFactoryid(Long factoryid);

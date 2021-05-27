@@ -1,7 +1,10 @@
 package com.hrtek.user.report.views;
 
 
-public class ReportAccommodation {
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.utils.FieldsComparator;
+
+public class ReportAccommodation implements Comparable<ReportAccommodation> {
 	
 	private String address;
 	private int capacity;
@@ -32,5 +35,20 @@ public class ReportAccommodation {
 
 	public void setFree(int free) {
 		this.free = free;
+	}
+
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.ADDRESS;
+
+	@Override
+	public int compareTo(ReportAccommodation o) {
+		switch (field) {
+			case ADDRESS: return FieldsComparator.compareText(this.address, o.getAddress(), isup);
+			case NUMOFBEDS: return FieldsComparator.compareNumber(this.capacity, o.getCapacity(), isup);
+			case FREEBEDS: return FieldsComparator.compareNumber(this.free, o.getFree(), isup);
+			default:
+				break;
+		}
+		return 0;
 	}
 }

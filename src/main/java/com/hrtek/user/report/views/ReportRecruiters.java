@@ -1,12 +1,14 @@
 package com.hrtek.user.report.views;
 
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.utils.FieldsComparator;
+
 import java.time.LocalDate;
 
 
-public class ReportRecruiters {
+public class ReportRecruiters implements Comparable<ReportRecruiters> {
 	
-	private String rfirstname;
-	private String rlastname;
+	private String rName;
 	private String wfirstname;
 	private String wlastname;
 	private LocalDate addtosystem;
@@ -14,20 +16,12 @@ public class ReportRecruiters {
 	public ReportRecruiters() {
 	}
 
-	public String getRfirstname() {
-		return rfirstname;
+	public String getrName() {
+		return rName;
 	}
 
-	public void setRfirstname(String rfirstname) {
-		this.rfirstname = rfirstname;
-	}
-
-	public String getRlastname() {
-		return rlastname;
-	}
-
-	public void setRlastname(String rlastname) {
-		this.rlastname = rlastname;
+	public void setrName(String rName) {
+		this.rName = rName;
 	}
 
 	public String getWfirstname() {
@@ -52,5 +46,21 @@ public class ReportRecruiters {
 
 	public void setAddtosystem(LocalDate addtosystem) {
 		this.addtosystem = addtosystem;
-	}	
+	}
+
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.RECRUITER;
+
+	@Override
+	public int compareTo(ReportRecruiters o) {
+		switch (field) {
+			case RECRUITER: return FieldsComparator.compareText(this.rName, o.getrName(), isup);
+			case FIRSTNAME: return FieldsComparator.compareText(this.wfirstname, o.getWfirstname(), isup);
+			case LASTNAME: return FieldsComparator.compareText(this.wlastname, o.getWlastname(), isup);
+			case ADDTOSYSTEM: return FieldsComparator.compareDate(this.addtosystem, o.getAddtosystem(), isup);
+			default:
+				break;
+		}
+		return 0;
+	}
 }

@@ -1,9 +1,12 @@
 package com.hrtek.user.report.views;
 
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.utils.FieldsComparator;
+
 import java.time.LocalDate;
 
 
-public class ReportVisaWork {
+public class ReportVisaWork implements Comparable<ReportVisaWork>{
 	
 	private String firstname;
 	private String lastname;
@@ -43,5 +46,22 @@ public class ReportVisaWork {
 	}
 	public void setStartStatement(LocalDate startStatement) {
 		this.startStatement = startStatement;
+	}
+
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.FIRSTNAME;
+
+	@Override
+	public int compareTo(ReportVisaWork o) {
+		switch (field) {
+			case FIRSTNAME: return FieldsComparator.compareText(this.firstname, o.getFirstname(), isup);
+			case LASTNAME: return FieldsComparator.compareText(this.lastname, o.getLastname(), isup);
+			case STARTWORK: return FieldsComparator.compareDate(this.startWork, o.getStartWork(), isup);
+			case STATEMENTTYPE: return FieldsComparator.compareText(this.type, o.getType(), isup);
+			case STATEMENTFROM: return FieldsComparator.compareDate(this.startStatement, o.getStartStatement(), isup);
+			default:
+				break;
+		}
+		return 0;
 	}
 }

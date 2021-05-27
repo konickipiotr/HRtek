@@ -269,7 +269,7 @@ public class EditService {
 		this.houseRepo.save(h);
 		r.addPerson();
 		this.roomRepo.save(r);
-		b.setOccupied(c.getId(), all.getAcomdate());
+		b.setOccupied(c.getId(), all.getAcomdateTo());
 		this.bedRepo.save(b);
 		
 		c.setPladdress(h.getAddress());

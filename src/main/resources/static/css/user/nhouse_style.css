@@ -8,6 +8,7 @@ h2{
 
 .main-content{
 	margin: auto;
+	padding-top: 20px;
 	width: 90%;
 	display: flex;
 	flex-direction: column;
@@ -89,4 +90,16 @@ h2{
 textarea{
 	height: 80px;
 	width: 400px;
+}
+
+.aButton{
+	background-color:  #204a87;
+	margin-right: 5px;
+    min-width: 100px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px;
 }

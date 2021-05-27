@@ -41,6 +41,7 @@ select{
 .mont-bpanel{
 	display: flex;
 	flex-direction: column;
+	justify-content: space-around;
 	width: 30%;
 	border: 1px solid black; 
 	border-radius: 10px
@@ -77,6 +78,7 @@ button:hover{
 	font-weight: bold;
 	border-radius: 5px;
 	width: 100%;
+	cursor: pointer;
 }
 
 .col{
@@ -135,3 +137,11 @@ button:hover{
 	width: 100%;
 }
 
+.sort-button{
+	width: 50%;
+}
+
+.sort-button:hover{
+	width: 50%;
+	cursor: pointer;
+}

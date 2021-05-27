@@ -1,5 +1,7 @@
 package com.hrtek.user.recruitment;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,6 +28,7 @@ public class NewWorker {
 	private String address;
 	private String postcode;
 	private String city;
+	private String country;
 	
 	private Long bedid;
 	private Boolean isOhter;
@@ -33,9 +36,11 @@ public class NewWorker {
 	private String plpostcode;
 	private String plcity;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate acomdate;
+	private LocalDate acomdatefrom;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate acomdateTo;
 	
-	private double wage;
+	private BigDecimal wage;
 	private String sWage;
 	private String sCWage;
 	
@@ -231,20 +236,28 @@ public class NewWorker {
 		this.plcity = plcity;
 	}
 
-	public LocalDate getAcomdate() {
-		return acomdate;
+	public LocalDate getAcomdatefrom() {
+		return acomdatefrom;
 	}
 
-	public void setAcomdate(LocalDate acomdate) {
-		this.acomdate = acomdate;
+	public void setAcomdatefrom(LocalDate acomdatefrom) {
+		this.acomdatefrom = acomdatefrom;
 	}
 
-	public double getWage() {
-		return wage;
+	public LocalDate getAcomdateTo() {
+		return acomdateTo;
 	}
 
-	public void setWage(double wage) {
-		this.wage = wage;
+	public void setAcomdateTo(LocalDate acomdateTo) {
+		this.acomdateTo = acomdateTo;
+	}
+
+	public BigDecimal getWage() {
+		return wage.setScale(2, RoundingMode.HALF_UP);
+	}
+
+	public void setWage(BigDecimal wage) {
+		this.wage = wage.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public String getsWage() {
@@ -277,5 +290,29 @@ public class NewWorker {
 
 	public void setAgreementTo(LocalDate agreementTo) {
 		this.agreementTo = agreementTo;
+	}
+
+	public Boolean getBiopass() {
+		return isBiopass;
+	}
+
+	public void setBiopass(Boolean biopass) {
+		isBiopass = biopass;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Boolean getOhter() {
+		return isOhter;
+	}
+
+	public void setOhter(Boolean ohter) {
+		isOhter = ohter;
 	}
 }

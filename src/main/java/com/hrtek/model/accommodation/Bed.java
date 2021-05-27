@@ -52,6 +52,13 @@ public class Bed {
 		this.expire = expire;
 		this.bedstatus = Bedstatus.OCCUPIED;
 	}
+	
+	public void setOccupied(Long id, LocalDate expire, LocalDate occupyFrom) {
+		this.workerid = id;
+		this.expire = expire;
+		this.occupyFrom = occupyFrom;
+		this.bedstatus = Bedstatus.OCCUPIED;
+	}
 
 	public Long getId() {
 		return id;

@@ -87,4 +87,12 @@ function httpGetAsync(theUrl, callback)
     xmlHttp.send(null);
 }
 
+function changeTypeOfCalculation(self){
+	if(self.id == 'typecostperperson' && self.checked == true){
+		document.getElementById("perperson").disabled = false;
+	}else{
+		document.getElementById("perperson").disabled = true;
+		document.getElementById("perperson").value = "0";
+	}
+}
 

@@ -111,6 +111,7 @@ public class Timesheet {
 		case 2032: y2032 = perpare(now, 2032);
 		case 2033: y2033 = perpare(now, 2033);
 		case 2034: y2034 = perpare(now, 2034);
+
 		
 //		case 2035: y2035 = perpare(now, 2035);
 //		case 2036: y2036 = perpare(now, 2036);
@@ -122,7 +123,6 @@ public class Timesheet {
 		default:
 			break;
 		}
-
 	}
 	
 	private String perpare(LocalDate now, int year) {
@@ -134,8 +134,9 @@ public class Timesheet {
 		
 		String syear = "y" + year;
 		StringBuilder currentYear = new StringBuilder(getCurrentYear(syear));
-		for(int i = dayOfYear; i < currentYear.length(); i++) {
-			currentYear.setCharAt(i, '0');			
+		for(int i = dayOfYear; i < currentYear.length(); i+=2) {
+			currentYear.setCharAt(i, 'N');
+			currentYear.setCharAt(i+1, 'W');
 		}
 		return currentYear.toString();
 	}

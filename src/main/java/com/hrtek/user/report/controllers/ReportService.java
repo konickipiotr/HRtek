@@ -3,8 +3,19 @@ package com.hrtek.user.report.controllers;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.hrtek.db.worker.*;
+import com.hrtek.files.doc.*;
+import com.hrtek.model.worker.*;
+import com.hrtek.user.display.service.SortViewService;
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.user.managingfile.ListWrapper;
+import com.hrtek.user.recruitment.CandidateService;
+import com.hrtek.user.report.views.*;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,41 +27,14 @@ import com.hrtek.db.FactoryRepository;
 import com.hrtek.db.UserInfoRepository;
 import com.hrtek.db.UserPositonsRepository;
 import com.hrtek.db.accommodation.HouseRepository;
-import com.hrtek.db.worker.ResidencyRepository;
-import com.hrtek.db.worker.WorkerBasicRepository;
-import com.hrtek.db.worker.WorkerContactRepository;
-import com.hrtek.db.worker.WorkerDateRepository;
-import com.hrtek.db.worker.WorkerPermintRepository;
-import com.hrtek.db.worker.WorkerRepository;
-import com.hrtek.files.doc.Doc;
-import com.hrtek.files.doc.ReportAccommodationDoc;
-import com.hrtek.files.doc.ReportMedicalDoc;
-import com.hrtek.files.doc.ReportPeselDoc;
-import com.hrtek.files.doc.ReportRecruiterDoc;
-import com.hrtek.files.doc.ReportStartWorkDoc;
-import com.hrtek.files.doc.ReportVisaWorkDoc;
-import com.hrtek.files.doc.ReportZusDoc;
-import com.hrtek.files.doc.SaveFile;
 import com.hrtek.model.Citizenship;
 import com.hrtek.model.Company;
 import com.hrtek.model.Factory;
 import com.hrtek.model.UserInfo;
 import com.hrtek.model.accommodation.House;
-import com.hrtek.model.worker.Contact;
-import com.hrtek.model.worker.PermitStatement;
-import com.hrtek.model.worker.Residency;
-import com.hrtek.model.worker.Worker;
-import com.hrtek.model.worker.WorkerBasic;
-import com.hrtek.model.worker.WorkerDate;
 import com.hrtek.settings.GlobalSettings;
-import com.hrtek.user.report.views.ReportAccommodation;
-import com.hrtek.user.report.views.ReportMedical;
-import com.hrtek.user.report.views.ReportPesel;
-import com.hrtek.user.report.views.ReportRecruiters;
-import com.hrtek.user.report.views.ReportStartWork;
-import com.hrtek.user.report.views.ReportVisaWork;
-import com.hrtek.user.report.views.ReportWorkTime;
-import com.hrtek.user.report.views.ReportZus;
+
+import javax.swing.text.FieldView;
 
 @Service
 public class ReportService {
@@ -61,6 +45,8 @@ public class ReportService {
 	private WorkerPermintRepository permitSRepo;
 	private ResidencyRepository residencyRepo;
 	private WorkerContactRepository contactRepo;
+	private WorkerNoteRepository workerNoteRepository;
+	private CandidateService candidateService;
 	
 	private UserInfoRepository userInfoRepo;
 	private UserPositonsRepository userPositionRepo;
@@ -68,27 +54,67 @@ public class ReportService {
 	private CompanyRepository companyRepo;
 	private CitizenshipRepository citizenshipRepository;
 	private HouseRepository houseRepo;
+	private SortViewService sortViewService;
 
 	@Autowired
-	public ReportService(WorkerRepository workerRepo, WorkerBasicRepository workerBasicRepo,
-			WorkerDateRepository workerDateRepo, WorkerPermintRepository permitSRepo, ResidencyRepository residencyRepo,
-			WorkerContactRepository contactRepo, UserInfoRepository userInfoRepo,
-			UserPositonsRepository userPositionRepo, FactoryRepository factoryRepo, CompanyRepository companyRepo,
-			CitizenshipRepository citizenshipRepository, HouseRepository houseRepo) {
+	public ReportService(WorkerRepository workerRepo, WorkerBasicRepository workerBasicRepo, WorkerDateRepository workerDateRepo, WorkerPermintRepository permitSRepo, ResidencyRepository residencyRepo, WorkerContactRepository contactRepo, WorkerNoteRepository workerNoteRepository, CandidateService candidateService, UserInfoRepository userInfoRepo, UserPositonsRepository userPositionRepo, FactoryRepository factoryRepo, CompanyRepository companyRepo, CitizenshipRepository citizenshipRepository, HouseRepository houseRepo, SortViewService sortViewService) {
 		this.workerRepo = workerRepo;
 		this.workerBasicRepo = workerBasicRepo;
 		this.workerDateRepo = workerDateRepo;
 		this.permitSRepo = permitSRepo;
 		this.residencyRepo = residencyRepo;
 		this.contactRepo = contactRepo;
+		this.workerNoteRepository = workerNoteRepository;
+		this.candidateService = candidateService;
 		this.userInfoRepo = userInfoRepo;
 		this.userPositionRepo = userPositionRepo;
 		this.factoryRepo = factoryRepo;
 		this.companyRepo = companyRepo;
 		this.citizenshipRepository = citizenshipRepository;
 		this.houseRepo = houseRepo;
+		this.sortViewService = sortViewService;
 	}
-	
+
+	public void setModel(Model model, ReportType reportType, ViewFields field, boolean isUp,  Long companyid, Long facotryid){
+		String sortDir = isUp ? "up" : "down";
+		switch (reportType) {
+			case WITHPESEL:
+			case WITHOUTPESEL:
+				ReportWraper<ReportPesel> reportPesel = getReportPesel(reportType, companyid, facotryid);
+				if(field != null ) sortViewService.sortReportPesel( field, sortDir, reportPesel);
+				model.addAttribute("wraper", reportPesel); break;
+			case MEDICALEXAMS:
+				ReportWraper<ReportMedical> reportMedical = getReportMedical(reportType, companyid, facotryid);
+				if(field != null ) sortViewService.sortReportMedical( field, sortDir, reportMedical);
+				model.addAttribute("wraper", reportMedical); break;
+			case STARTWORK_LESS1MON:
+			case STARTWORK_LESS3MON:
+			case STARTWORK_MORE1MON:
+			case STARTWORK_MORE3MON:
+				ReportWraper<ReportStartWork> reportStartWork = getReportStartWork(reportType, companyid, facotryid);
+				if(field != null ) sortViewService.sortReportStartWork( field, sortDir, reportStartWork);
+				model.addAttribute("wraper", reportStartWork);break;
+			case ACCOMMODATION:
+				ReportWraper<ReportAccommodation> reportAccommodation = getReportAccommodation(reportType);
+				if(field != null ) sortViewService.sortReportAccommodation( field, sortDir, reportAccommodation);
+				model.addAttribute("wraper", reportAccommodation);break;
+			case WORKING_TIME:
+				ReportWraper<ReportWorkTime> reportWorkTime = getReportWorkTime(reportType, companyid, facotryid);
+				if(field != null ) sortViewService.sortReportWorkTime( field, sortDir, reportWorkTime);
+				model.addAttribute("wraper", reportWorkTime);break;
+			case WORKER_NOTE:
+				ReportWraper<ReportWorkerNote> reportWorkerNote = getReportWorkerNote(reportType, companyid, facotryid);
+				if(field != null ) sortViewService.sortReportWorkerNote( field, sortDir, reportWorkerNote);
+				model.addAttribute("wraper", reportWorkerNote);break;
+			default:
+				break;
+		}
+
+		model.addAttribute("recruiters", candidateService.getCoordinatorsAndAgents());
+		model.addAttribute("others", true);
+		setCompanyFactoryList(model);
+	}
+
 	public void setCompanyFactoryList(Model model) {
 		model.addAttribute("comapnies", companyRepo.findAll());
 		model.addAttribute("factroies", factoryRepo.findAll());
@@ -112,24 +138,29 @@ public class ReportService {
 		return new SaveFile().saveDoc(doc);
 	}
 	
-	public String downloadFile(ReportType reportType, Long recruiterid) {
+	public String downloadFile(ReportType reportType, Long recruiterid, ViewFields sortBy, boolean sortUp, Long companyid, Long facotryid) {
+
+		String isUp = sortUp ? "up" : "down";
 
 		switch (reportType) {
 		case WITHPESEL:
 		case WITHOUTPESEL:{
-			ReportWraper<ReportPesel> wraper = getReportPesel(reportType);
+			ReportWraper<ReportPesel> wraper = getReportPesel(reportType, companyid, facotryid);
+			sortViewService.sortReportPesel(sortBy, isUp, wraper);
 			Doc<Workbook> doc = new ReportPeselDoc(wraper.getReport());
 			doc.prepareDoc();
 			return new SaveFile().saveDoc(doc);
 		}
 		case MEDICALEXAMS:{
-			ReportWraper<ReportMedical> wraper = getReportMedical(reportType);
+			ReportWraper<ReportMedical> wraper = getReportMedical(reportType, companyid, facotryid);
+			sortViewService.sortReportMedical(sortBy, isUp, wraper);
 			Doc<Workbook> doc = new ReportMedicalDoc(wraper.getReport());
 			doc.prepareDoc();
 			return new SaveFile().saveDoc(doc);
 		}
 		case RECRUITERS:{
 			ReportWraper<ReportRecruiters> wraper = getReportRecruiters(reportType, recruiterid);
+			sortViewService.sortReportRecruiters(sortBy, isUp, wraper);
 			Doc<Workbook> doc = new ReportRecruiterDoc(wraper.getReport());
 			doc.prepareDoc();
 			return new SaveFile().saveDoc(doc);
@@ -138,14 +169,30 @@ public class ReportService {
 		case STARTWORK_LESS3MON:
 		case STARTWORK_MORE1MON:
 		case STARTWORK_MORE3MON:{
-			ReportWraper<ReportStartWork> wraper = getReportStartWork(reportType);
+			ReportWraper<ReportStartWork> wraper = getReportStartWork(reportType, companyid, facotryid);
+			sortViewService.sortReportStartWork(sortBy, isUp, wraper);
 			Doc<Workbook> doc = new ReportStartWorkDoc(wraper.getReport());
 			doc.prepareDoc();
 			return new SaveFile().saveDoc(doc);
 		}
 		case ACCOMMODATION:{
 			ReportWraper<ReportAccommodation> wraper = getReportAccommodation(reportType);
+			sortViewService.sortReportAccommodation(sortBy, isUp, wraper);
 			Doc<Workbook> doc = new ReportAccommodationDoc(wraper.getReport());
+			doc.prepareDoc();
+			return new SaveFile().saveDoc(doc);
+		}
+		case WORKER_NOTE:{
+			ReportWraper<ReportWorkerNote> wraper = getReportWorkerNote(reportType, companyid, facotryid);
+			sortViewService.sortReportWorkerNote(sortBy, isUp, wraper);
+			Doc<Workbook> doc = new ReportWorkerNoteDoc(wraper.getReport());
+			doc.prepareDoc();
+			return new SaveFile().saveDoc(doc);
+		}
+		case WORKING_TIME:{
+			ReportWraper<ReportWorkTime> wraper = getReportWorkTime(reportType, companyid, facotryid);
+			sortViewService.sortReportWorkTime(sortBy, isUp, wraper);
+			Doc<Workbook> doc = new ReportWorkerTimeDoc(wraper.getReport());
 			doc.prepareDoc();
 			return new SaveFile().saveDoc(doc);
 		}
@@ -176,6 +223,12 @@ public class ReportService {
 		
 		wraper.setReport(report);
 		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.FIRSTNAME);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.FIRSTNAME, ViewFields.LASTNAME, ViewFields.DATEOFBIRTH,
+				ViewFields.SEX, ViewFields.CITIZENSHIP, ViewFields.PESEL,
+				ViewFields.FACTORY, ViewFields.COMPANY, ViewFields.PASZPORT,
+				ViewFields.TYPE, ViewFields.STARTZUS, ViewFields.ENDZUS, ViewFields.ADDRESS)));
 		return wraper;
 	}
 	
@@ -254,6 +307,9 @@ public class ReportService {
 		
 		wraper.setReport(report);
 		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.ADDRESS);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.ADDRESS, ViewFields.NUMOFBEDS, ViewFields.FREEBEDS)));
 		return wraper;
 	}
 
@@ -283,6 +339,10 @@ public class ReportService {
 		
 		wraper.setReport(report);
 		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.FIRSTNAME);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.FIRSTNAME, ViewFields.LASTNAME, ViewFields.STARTWORK,
+				ViewFields.STATEMENTTYPE, ViewFields.STATEMENTFROM)));
 		return wraper;
 	}
 	
@@ -304,10 +364,14 @@ public class ReportService {
 /////***************************************************************************	
 
 
-	public ReportWraper<ReportStartWork> getReportStartWork(ReportType rtype){
+	public ReportWraper<ReportStartWork> getReportStartWork(ReportType rtype, Long companyid, Long facotryid){
 		ReportWraper<ReportStartWork> wraper = new ReportWraper<>();
 		List<ReportStartWork> report = new ArrayList<>();
-		List<Worker> workers = workerRepo.findAll();
+		List<Worker> workers = new ArrayList<>();
+
+		RetStatus retStatus = getWorkerList(companyid, facotryid, workers);
+		if(retStatus.equals(RetStatus.BREAK))
+			return wraper;
 		
 		for(Worker w : workers) {
 			ReportStartWork rp = getOneRecordReportStartWork(w, rtype);
@@ -317,6 +381,9 @@ public class ReportService {
 		
 		wraper.setReport(report);
 		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.FIRSTNAME);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.FIRSTNAME, ViewFields.LASTNAME, ViewFields.STARTWORK, ViewFields.ENDWORK)));
 		return wraper;
 	}
 	
@@ -385,14 +452,17 @@ public class ReportService {
 			WorkerDate wd = workerDateRepo.findById(w.getId()).get();
 			
 			record.setAddtosystem(wd.getAddToSystem());
-			record.setRfirstname(user.getFirstname());
-			record.setRlastname(user.getLastname());
+			record.setrName(user.getName());
 			record.setWfirstname(w.getFirstname());
 			record.setWlastname(w.getLastname());
 			report.add(record);
 		}
 		
 		wraper.setReport(report);
+		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.RECRUITER);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.RECRUITER, ViewFields.FIRSTNAME, ViewFields.LASTNAME, ViewFields.ADDTOSYSTEM)));
 		
 		return wraper;
 	}
@@ -400,10 +470,14 @@ public class ReportService {
 	
 	/////***************************************************************************
 
-	public ReportWraper<ReportMedical> getReportMedical(ReportType rtype){
+	public ReportWraper<ReportMedical> getReportMedical(ReportType rtype, Long companyid, Long facotryid){
 		ReportWraper<ReportMedical> wraper = new ReportWraper<>();
 		List<ReportMedical> report = new ArrayList<>();
-		List<Worker> workers = workerRepo.findAll();
+		List<Worker> workers = new ArrayList<>();
+
+		RetStatus retStatus = getWorkerList(companyid, facotryid, workers);
+		if(retStatus.equals(RetStatus.BREAK))
+			return wraper;
 		
 		for(Worker w : workers) {
 			report.add(getOneRecordReportMedical(w));
@@ -411,6 +485,9 @@ public class ReportService {
 		
 		wraper.setReport(report);
 		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.FIRSTNAME);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.FIRSTNAME, ViewFields.LASTNAME, ViewFields.STARTMEDICAL, ViewFields.ENDMEDICAL, ViewFields.FACTORY)));
 		return wraper;
 	}
 	
@@ -430,13 +507,25 @@ public class ReportService {
 	}
 	
 	///////***************************************************************************
+
 	
-	public ReportWraper<ReportPesel> getReportPesel(ReportType rtype){
+	public ReportWraper<ReportPesel> getReportPesel(ReportType rtype, Long companyid, Long facotryid){
 		ReportWraper<ReportPesel> wraper = new ReportWraper<>();
-		
+		List<Worker> workers = new ArrayList<>();
+
+		RetStatus retStatus = getWorkerList(companyid, facotryid, workers);
+		if(retStatus.equals(RetStatus.BREAK))
+			return wraper;
+
+		List<WorkerBasic> wblist = new ArrayList<>();
+		if(retStatus.equals(RetStatus.ALL)){
+			wblist = workerBasicRepo.findAll();
+		}else {
+			List<Long> ids = workers.stream().map(i -> i.getId()).collect(Collectors.toList());
+			wblist = workerBasicRepo.findAllById(ids);
+		}
+
 		List<ReportPesel> report = new ArrayList<>();
-		List<WorkerBasic> wblist = workerBasicRepo.findAll();
-		
 		
 		if(rtype.equals(ReportType.WITHPESEL)) {
 			for(WorkerBasic wb : wblist) {
@@ -452,6 +541,9 @@ public class ReportService {
 		
 		wraper.setReport(report);
 		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.FIRSTNAME);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.FIRSTNAME, ViewFields.LASTNAME, ViewFields.PESEL, ViewFields.FACTORY)));
 		return wraper;
 	}
 	
@@ -470,11 +562,44 @@ public class ReportService {
 	
 /////***************************************************************************
 
-	public ReportWraper<ReportWorkTime> getReportWorkTime(ReportType rtype){
+	public ReportWraper<ReportWorkerNote> getReportWorkerNote(ReportType rtype, Long companyid, Long facotryid){
+		ReportWraper<ReportWorkerNote> wraper = new ReportWraper<>();
+		List<Worker> workers = new ArrayList<>();
+
+		RetStatus retStatus = getWorkerList(companyid, facotryid, workers);
+		if(retStatus.equals(RetStatus.BREAK))
+			return wraper;
+
+		List<ReportWorkerNote> report = new ArrayList<>();
+		for(Worker w : workers) {
+			ReportWorkerNote r = new ReportWorkerNote();
+			r.setFirstname(w.getFirstname());
+			r.setLastname(w.getLastname());
+			Optional<WorkerNote> oNote = this.workerNoteRepository.findById(w.getId());
+			if(oNote.isEmpty())
+				continue;
+
+			r.setNote(oNote.get().getText());
+			report.add(r);
+		}
+
+		wraper.setReport(report);
+		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.FIRSTNAME);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.FIRSTNAME, ViewFields.LASTNAME, ViewFields.NOTE)));
+		return wraper;
+	}
+
+	public ReportWraper<ReportWorkTime> getReportWorkTime(ReportType rtype, Long companyid, Long facotryid){
 		ReportWraper<ReportWorkTime> wraper = new ReportWraper<>();
 		List<ReportWorkTime> report = new ArrayList<>();
-		
-		List<Worker> workers = this.workerRepo.findAll();
+		List<Worker> workers = new ArrayList<>();
+
+		RetStatus retStatus = getWorkerList(companyid, facotryid, workers);
+		if(retStatus.equals(RetStatus.BREAK))
+			return wraper;
+
 		for(Worker w : workers) {
 			ReportWorkTime r = new ReportWorkTime();
 			r.setFirstname(w.getFirstname());
@@ -491,6 +616,10 @@ public class ReportService {
 		
 		wraper.setReport(report);
 		wraper.setReportType(rtype.toString());
+		wraper.setSortBy(ViewFields.FIRSTNAME);
+		wraper.setSortUp(true);
+		wraper.setSortT(new ArrayList<>(Arrays.asList(ViewFields.FIRSTNAME, ViewFields.LASTNAME, ViewFields.COMPANY, ViewFields.GREATERTHANSIXTEEN)));
+
 		return wraper;
 	}
 
@@ -509,5 +638,24 @@ public class ReportService {
 		r.setDays(result.getDayOfMonth());
 		if(mon > 16)
 			r.setGreaterThansixteen(true);
+	}
+
+	private RetStatus getWorkerList(Long companyid, Long factoryid, List<Worker> workers) {
+
+		if (companyid == null || factoryid == null)
+			return RetStatus.BREAK;
+
+		if (companyid.equals(-1l) && factoryid.equals(-1l))
+			workers.addAll(this.workerRepo.findAll());
+		else if (!companyid.equals(-1l) && factoryid.equals(-1l)) {
+			if(!this.companyRepo.existsById(companyid))
+				return RetStatus.BREAK;
+			workers.addAll(this.workerRepo.findByCompanyid(companyid));
+		} else if (companyid.equals(-1l) && !factoryid.equals(-1l)) {
+			workers.addAll(this.workerRepo.findByFactoryid(factoryid));
+		}else {
+			workers.addAll(this.workerRepo.findByCompanyidAndFactoryidOrderByLastnameAsc(companyid, factoryid));
+		}
+		return RetStatus.OK;
 	}
 }

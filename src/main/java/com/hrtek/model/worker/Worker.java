@@ -63,8 +63,20 @@ public class Worker {
 		this.recruiter = recruiter;
 	}
 	
+	public Worker(String firstname, String lastname, StatusWorker status, Long factoryid, Long company) {
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.status = status;
+		this.factoryid = factoryid;
+		this.companyid = company;
+	}
+	
 	public String getName() {
 		return firstname + " " + lastname;
+	}
+	
+	public String getRevName() {
+		return lastname + " " + firstname;
 	}
 
 	@Override

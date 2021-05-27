@@ -1,7 +1,10 @@
 package com.hrtek.user.report.views;
 
 
-public class ReportPesel {
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.utils.FieldsComparator;
+
+public class ReportPesel implements Comparable<ReportPesel> {
 
 	private String firstname;
 	private String lastname;
@@ -41,5 +44,21 @@ public class ReportPesel {
 
 	public void setFactory(String factory) {
 		this.factory = factory;
-	}	
+	}
+
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.FIRSTNAME;
+
+	@Override
+	public int compareTo(ReportPesel o) {
+		switch (field) {
+			case FIRSTNAME: return FieldsComparator.compareText(this.firstname, o.getFirstname(), isup);
+			case LASTNAME: return FieldsComparator.compareText(this.lastname, o.getLastname(), isup);
+			case PESEL: return FieldsComparator.compareText(this.pesel, o.getPesel(), isup);
+			case FACTORY: return FieldsComparator.compareText(this.factory, o.getFactory(), isup);
+			default:
+				break;
+		}
+		return 0;
+	}
 }

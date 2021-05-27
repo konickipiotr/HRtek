@@ -158,7 +158,7 @@ public class HouseManagementService {
 			//TODO
 		}
 		Bed nBed = oBed.get();
-		nBed.setOccupied(b.getWorkerid(), b.getExpire());
+		nBed.setOccupied(b.getWorkerid(), b.getExpire(), b.getOccupyFrom());
 		Room r = roomRepo.findById(nBed.getRoomid()).get();
 		House h = houseRepo.findById(nBed.getHouseid()).get();
 		

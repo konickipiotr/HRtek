@@ -18,6 +18,8 @@ public enum ReportType {
 	ACCOMMODATION,
 	ZUS,
 	
-	WORKING_TIME
+	WORKING_TIME,
+	WORKER_NOTE
+
 
 }

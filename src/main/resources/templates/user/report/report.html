@@ -28,12 +28,16 @@
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">
 						<input type="hidden" name="reportType" value="WITHPESEL">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common" th:text="#{report.withPESEL}"></button>
 					</form>
 				</div>			
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">
 						<input type="hidden" name="reportType" value="WITHOUTPESEL">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common" th:text="#{report.withoutPESEL}"></button>
 					</form>
 				</div>
@@ -45,12 +49,16 @@
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">
 						<input type="hidden" name="reportType" value="MEDICALEXAMS">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common" th:text="#{report.medicalexaminations}"></button>
 					</form>
 				</div>
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">
 						<input type="hidden" name="reportType" value="ACCOMMODATION">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common" th:text="#{report.freeplace}"></button>
 					</form>
 				</div>
@@ -62,12 +70,16 @@
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">
 						<input type="hidden" name="reportType" value="STARTWORK_LESS1MON">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common" th:text="#{report.startWorkless1mon}"></button>
 					</form>
 				</div>
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">
 						<input type="hidden" name="reportType" value="STARTWORK_MORE1MON">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common" th:text="#{report.startWorkmore1mon}"></button>
 					</form>
 				</div>
@@ -79,12 +91,16 @@
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">
 						<input type="hidden" name="reportType" value="STARTWORK_LESS3MON">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common" th:text="#{report.startWorkless3mon}"></button>
 					</form>
 				</div>
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">
 						<input type="hidden" name="reportType" value="STARTWORK_MORE3MON">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common" th:text="#{report.startWorkmore3mon}"></button>
 					</form>
 				</div>
@@ -97,20 +113,47 @@
 				<div class="tiles">
 					<form th:action="@{/reports}" method="post">			
 						<input type="hidden" name="reportType" value="WORKING_TIME">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
 						<button type="submit" name="action" value="common">Work time</button>	
 					</form>
 				</div>
 				
 				<div class="cell">
+					<form>
+						<label for="companieslist" th:text="#{company}"></label>
+						<select name="companies" id="companieslist" onchange="selectCompany(this)">
+							<option>All</option>
+							<option th:each="cc : ${comapnies}" th:value="${cc.id}" th:text="${cc.shortname}"></option>
+						</select>
+					</form>
 				</div>
 				
 			</div>
+
 			
 			<div class="col">
+				<div class="tiles">
+					<form th:action="@{/reports}" method="post">			
+						<input type="hidden" name="reportType" value="WORKER_NOTE">
+						<input type="hidden" name="ccompanyid" value="-1">
+						<input type="hidden" name="ffactoryid" value="-1">
+						<button type="submit" name="action" value="common">Notes</button>	
+					</form>
+				</div>
+
+				<div class="cell">
+					<form>
+						<label for="factroieslist" th:text="#{factory}"></label>
+						<select name="factroies" id="factroieslist" onchange="selectFactory(this)">
+							<option>All</option>
+							<option th:each="ff : ${factroies}" th:value="${ff.id}" th:text="${ff.shortname}"></option>
+						</select>
+					</form>
+				</div>
 			</div>
 			
-			<div class="col">
-			</div>
+			<div class="col"></div>
 			
 			<div class="col" style="border: 1px solid black">
 				<form th:action="@{/reports}" method="post">
@@ -129,6 +172,10 @@
 		
 		<div class="row" style="margin-top: 10px;">
 			<form th:action="@{/reports/download}" method="post">
+				<input type="hidden"  name="sortBy" th:value="${wraper.sortBy}">
+				<input type="hidden"  name="sortUp" th:value="${wraper.sortUp}">
+				<input type="hidden"  name="ccompanyid" th:value="${ccompanyid}">
+				<input type="hidden"  name="ffactoryid" th:value="${ffactoryid}">
 				<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
 				<input th:if="${wraper.reportType == 'RECRUITERS'}" type="hidden" name="recruiterid" th:value="${recruiterid}">
 				<button th:if="${others == true and wraper.report.isEmpty() == false}" class="bdownload" type="submit" th:text="#{button.download}"></button>
@@ -140,13 +187,14 @@
 	</div>
 	
 	<div class="mont-bpanel">
+		
 		<div class="row">
 			<h3 th:text="#{msg.report.howManyPeopelStatement}"></h3>
 		</div>
 		<div class="row">
 			<div class="col-b">
 				<form th:action="@{/reports}" method="post">
-					<div class="cell">
+					<div style="margin: 5px;">
 						<input type="hidden" name="reportType" value="STATEMENTVISA">
 						<input type="month" name="month">
 					</div>
@@ -157,7 +205,7 @@
 			</div>	
 			<div class="col-b">
 				<form th:action="@{/reports}" method="post">
-					<div class="cell">
+					<div style="margin: 5px;">
 						<input type="hidden" name="reportType" value="STATEMENTWORK">
 						<input type="month" name="month">
 					</div>
@@ -176,6 +224,10 @@
 				<button class="bdownload"  th:if="${month != null and wraper.report.isEmpty() == false}"  type="submit" name="action" value="month" th:text="#{button.download}"></button>
 				<button class="bdownload"  th:unless="${month != null and wraper.report.isEmpty() == false}"  type="submit" name="action" value="month" disabled th:text="#{button.download}"> </button>
 			</form>
+		</div>
+
+		<div class="row">
+			<a class="button" th:href="@{/managingfile}" style="text-decoration: none; text-align: center; width: 80%;">Managing file</a>
 		</div>
 	</div>
 		
@@ -258,6 +310,10 @@
 	</div>
 
 	</div>
+
+
+
+
 	
 	<div class="div-switch" th:switch="${wraper.reportType}">	
 		<div th:case="'WITHPESEL'">
@@ -267,6 +323,16 @@
 					<th th:text="#{lastname}"></th>
 					<th th:text="#{pesel}"></th>
 					<th th:text="#{factory}"></th>
+				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
 				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.firstname}"></td>
@@ -286,6 +352,16 @@
 					<th th:text="#{pesel}"></th>
 					<th th:text="#{factory}"></th>
 				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.firstname}"></td>
 					<td th:text="${i.lastname}"></td>
@@ -301,8 +377,18 @@
 				<tr>
 					<th th:text="#{firstname}"></th>
 					<th th:text="#{lastname}"></th>
-					<th th:text="#{start.medical.exam}"></th>
+					<th th:text="#{company}"></th>
 					<th th:text="#{end.medical.exam}"></th>
+				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<input type="hidden" name="field" th:value="${s}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
 				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.firstname}"></td>
@@ -324,6 +410,16 @@
 					<th th:text="#{end.medical.exam}"></th>
 					<th th:text="#{factory}"></th>
 				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.firstname}"></td>
 					<td th:text="${i.lastname}"></td>
@@ -339,14 +435,22 @@
 			<table>
 				<tr>
 					<th th:text="#{report.recruiterName}"></th>
-					<th th:text="#{report.recruiterSurname}"></th>
 					<th th:text="#{report.workerName}"></th>
 					<th th:text="#{report.workerSurame}"></th>
 					<th th:text="#{report.dateAdded}"></th>
 				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.rfirstname}"></td>
-					<td th:text="${i.rlastname}"></td>
 					<td th:text="${i.wfirstname}"></td>
 					<td th:text="${i.wlastname}"></td>
 					<td th:text="${i.addtosystem}"></td>
@@ -364,6 +468,16 @@
 					<th th:text="#{address}"></th>
 					<th th:text="#{report.numberOfBeds}"></th>
 					<th th:text="#{report.freeBeds}"></th>
+				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
 				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.address}"></td>
@@ -390,6 +504,16 @@
 					<th th:text="#{end.zus}"></th>
 					<th th:text="#{statement}"></th>
 				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.company}"></td>
 					<td th:text="${i.facotry}"></td>
@@ -407,11 +531,63 @@
 				
 			</table>
 		</div>
+
+		<!--*************** CASE ************************ -->
+		<div th:case="'WORKER_NOTE'">
+			<table>
+				<tr>
+					<th th:text="#{firstname}" style="width: 20%;"></th>
+					<th th:text="#{lastname}" style="width: 20%;"></th>
+					<th th:text="#{note}" style="width: 60%;"></th>
+				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+				</tr>
+				<tr th:each="i : ${wraper.report}">
+					<td th:text="${i.firstname}"></td>
+					<td th:text="${i.lastname}"></td>
+					<td th:text="${i.note}"></td>
+				</tr>
+				
+			</table>
+		</div>
+	</div>
+
+	<!-- ************************************************************************* -->
 	</div>
 
 	<!-- ************************************************************************* -->
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
+
+<script>
+	function selectCompany(selected){
+		let companyid = selected.value;
+
+		let ccompanyids = document.getElementsByName("ccompanyid");
+
+		for(let company of ccompanyids)
+			company.value = companyid;
+
+	}
+
+	function selectFactory(selected){
+		let factoryid = selected.value;
+
+		let ffactoryids = document.getElementsByName("ffactoryid");
+
+		for(let factory of ffactoryids)
+			factory.value = factoryid;
+
+	}
+</script>
 
 </html>

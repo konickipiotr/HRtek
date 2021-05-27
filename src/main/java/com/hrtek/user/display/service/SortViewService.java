@@ -3,6 +3,10 @@ package com.hrtek.user.display.service;
 import java.util.Collections;
 import java.util.List;
 
+import com.hrtek.user.managingfile.WorkerRecord;
+import com.hrtek.user.report.controllers.ReportWraper;
+import com.hrtek.user.report.views.*;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Service;
 
 import com.hrtek.admin.others.WorkerView;
@@ -74,4 +78,82 @@ public class SortViewService {
 		return loglist;
 	}
 
+	public List<WorkerRecord> sortRecords(ViewFields field, String sortT, List<WorkerRecord> wrList) {
+		WorkerRecord.field = field;
+		WorkerRecord.isup = sortT.equals("up");
+		Collections.sort(wrList);
+		return wrList;
+	}
+
+	public void sortReportPesel(ViewFields field, String sortT, ReportWraper<ReportPesel> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportPesel.field = field;
+		ReportPesel.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
+
+	public void sortReportMedical(ViewFields field, String sortT, ReportWraper<ReportMedical> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportMedical.field = field;
+		ReportMedical.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
+
+	public void sortReportAccommodation(ViewFields field, String sortT, ReportWraper<ReportAccommodation> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportAccommodation.field = field;
+		ReportAccommodation.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
+
+	public void sortReportStartWork(ViewFields field, String sortT, ReportWraper<ReportStartWork> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportStartWork.field = field;
+		ReportStartWork.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
+
+	public void sortReportRecruiters(ViewFields field, String sortT, ReportWraper<ReportRecruiters> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportRecruiters.field = field;
+		ReportRecruiters.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
+
+	public void sortReportVisaWork(ViewFields field, String sortT, ReportWraper<ReportVisaWork> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportVisaWork.field = field;
+		ReportVisaWork.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
+
+	public void sortReportWorkerNote(ViewFields field, String sortT, ReportWraper<ReportWorkerNote> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportWorkerNote.field = field;
+		ReportWorkerNote.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
+
+	public void sortReportWorkTime(ViewFields field, String sortT, ReportWraper<ReportWorkTime> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportWorkTime.field = field;
+		ReportWorkTime.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
+
+	public void sortReportZus(ViewFields field, String sortT, ReportWraper<ReportZus> wrapper) {
+		wrapper.setSortUp(sortT.equals("up") ? true: false);
+		wrapper.setSortBy(field);
+		ReportZus.field = field;
+		ReportZus.isup = sortT.equals("up");
+		Collections.sort(wrapper.getReport());
+	}
 }

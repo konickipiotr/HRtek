@@ -89,8 +89,8 @@ public class TimesheetService {
 			}
 						
 			wts.setName(w.getName());
-			double total = wts.getHsum() * factory.getHourlyrate();
-			wts.setTotal(BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP).doubleValue());
+			BigDecimal total = new BigDecimal(wts.getHsum()).multiply(factory.getHourlyrate()).setScale(2, RoundingMode.HALF_UP);
+			wts.setTotal(total);
 			
 			wts.setWorkernr(wb.getWorkerNo());
 			Company company = this.companyRepo.findById(w.getCompanyid()).get();
@@ -108,7 +108,7 @@ public class TimesheetService {
 	}
 
 	
-	public void saveTimesheet(MonthFrom mf, HttpSession session) {
+	public void saveTimesheet(MonthFrom mf) {
 		Timesheet ts = timesheetRepo.findById(mf.getWorkerid()).get();
 	
 		DateTimesheetOperation dts = new DateTimesheetOperation(mf.getMon());
@@ -159,10 +159,8 @@ public class TimesheetService {
 		wtimeshet.setHsum(sum);
 		
 		WorkerFinance wf = workerFinanceRepo.findById(workerid).get();
-		double total = wf.getWage() * sum;
-		wtimeshet.setTotal(BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP).doubleValue());
-		
-		
+		wtimeshet.setTotal(wf.getWage().multiply(BigDecimal.valueOf(sum)).setScale(2, RoundingMode.HALF_UP));
+
 		wts.get(worker_position).setHourlList(hourlList);
 		fv.setWts(wts);
 		return fv;

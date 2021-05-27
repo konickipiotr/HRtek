@@ -16,4 +16,5 @@ public interface FactoryRepository extends JpaRepository<Factory, Long> {
 	boolean existsByShortname(String shortname);
 	boolean existsByFullname(String fulname);
 	List<Factory> findByStatus(StatusFC status);
+	List<Factory> findByStatusOrderByShortname(StatusFC status);
 }

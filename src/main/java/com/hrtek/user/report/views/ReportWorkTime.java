@@ -1,7 +1,10 @@
 package com.hrtek.user.report.views;
 
 
-public class ReportWorkTime {
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.utils.FieldsComparator;
+
+public class ReportWorkTime implements Comparable<ReportWorkTime>{
 	
 	private String firstname;
 	private String lastname;
@@ -9,6 +12,7 @@ public class ReportWorkTime {
 	private String months;
 	private int days;
 	private boolean greaterThansixteen = false;
+
 	public String getFirstname() {
 		return firstname;
 	}
@@ -44,5 +48,37 @@ public class ReportWorkTime {
 	}
 	public void setGreaterThansixteen(boolean greaterThansixteen) {
 		this.greaterThansixteen = greaterThansixteen;
+	}
+
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.FIRSTNAME;
+
+	@Override
+	public int compareTo(ReportWorkTime o) {
+		switch (field) {
+			case FIRSTNAME: return FieldsComparator.compareText(this.firstname, o.getFirstname(), isup);
+			case LASTNAME: return FieldsComparator.compareText(this.lastname, o.getLastname(), isup);
+			case COMPANY: return FieldsComparator.compareText(this.company, o.getCompany(), isup);
+			case DAY: return FieldsComparator.compareNumber(this.days, o.getDays(), isup);
+			case GREATERTHANSIXTEEN: {
+				if(this.months.equals("EMPTY") && o.getMonths().equals("EMPTY"))
+					return 0;
+				if(isup) {
+					if (this.months.equals("EMPTY"))
+						return 1;
+					if (o.getMonths().equals("EMPTY"))
+						return -1;
+				}else {
+					if (this.months.equals("EMPTY"))
+						return -1;
+					if (o.getMonths().equals("EMPTY"))
+						return 1;
+				}
+				return FieldsComparator.compareNumber( ( Integer.valueOf(this.months) * 30 + this.days), ( Integer.valueOf(o.months) * 30 + o.days), isup);
+			}
+			default:
+				break;
+		}
+		return 0;
 	}
 }

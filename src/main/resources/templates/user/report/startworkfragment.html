@@ -18,6 +18,16 @@
 					<th th:text="#{end.work}"></th>
 					
 				</tr>
+
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.firstname}"></td>
 					<td th:text="${i.lastname}"></td>
@@ -36,6 +46,16 @@
 					<th th:text="#{start.work}"></th>
 					<th th:text="#{end.work}"></th>
 					
+				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
 				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.firstname}"></td>
@@ -56,6 +76,16 @@
 					<th th:text="#{end.work}"></th>
 
 				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
+				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.firstname}"></td>
 					<td th:text="${i.lastname}"></td>
@@ -74,6 +104,16 @@
 					<th th:text="#{start.work}"></th>
 					<th th:text="#{end.work}"></th>
 					
+				</tr>
+				<tr>
+					<td th:each="s : ${wraper.sortT}">
+						<form th:action="@{/reports/sort}" method="post">
+							<input type="hidden" name="field" th:value="${s}">
+							<input type="hidden"  name="reportType" th:value="${wraper.reportType}">
+							<button class="sort-button" name="sortT" value="down">&#8659;</button>
+							<button class="sort-button" name="sortT" value="up">&#8657;</button>
+						</form>
+					</td>
 				</tr>
 				<tr th:each="i : ${wraper.report}">
 					<td th:text="${i.firstname}"></td>

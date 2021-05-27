@@ -15,6 +15,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrtek.files.doc.DocumentService;
 
+import java.math.BigDecimal;
+
 @Controller
 @RequestMapping("/recruitment")
 public class NewWorkerController {
@@ -36,7 +38,7 @@ public class NewWorkerController {
 		NewWorker newWorker = new NewWorker();
 		recruitmentService.setModel(model, newWorker);
 		
-		newWorker.setWage(17.34);
+		newWorker.setWage(new BigDecimal("17.34"));
 		newWorker.setsWage("siedemnaście złotych, trzydzieści cztery grosze");
 		model.addAttribute("newWorker", newWorker);
 		model.addAttribute("status", "");
@@ -46,7 +48,7 @@ public class NewWorkerController {
 	@PostMapping("/select")
 	public String selectCanditate(@RequestParam("candidateid") Long id, Model model) {
 		NewWorker nw = recruitmentService.selectCandidatAsNewWorker(id);
-		nw.setWage(17.34);
+		nw.setWage(new BigDecimal("17.34"));
 		nw.setsWage("siedemnaście złotych, trzydzieści cztery grosze");
 		recruitmentService.setModel(model, nw);
 		model.addAttribute("newWorker", nw);
@@ -62,7 +64,7 @@ public class NewWorkerController {
 		}else {
 			hireService.hire(nw, session);
 			model.addAttribute("status", "success");
-			model.addAttribute("success_msg", "Pomyslnie zatrudniono "+ nw.getFirstname() +" " + nw.getLastname());
+			model.addAttribute("success_msg", "Pomyślnie zatrudniono "+ nw.getFirstname() +" " + nw.getLastname());
 		}
 		
 		recruitmentService.setModel(model, nw);

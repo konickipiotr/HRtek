@@ -1,5 +1,7 @@
 package com.hrtek.user.recruitment;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,6 +37,7 @@ public class WorkerAll {
 	private String address;
 	private String postcode;
 	private String city;
+	private String country;
 	
 	private Long bedid;
 	private Boolean isOhter;
@@ -42,7 +45,9 @@ public class WorkerAll {
 	private String plpostcode;
 	private String plcity;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate acomdate;
+	private LocalDate acomdatefrom;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate acomdateTo;
 	
 	private Integer citizenship;
 	private Long department;
@@ -87,8 +92,8 @@ public class WorkerAll {
 	private String pesel;
 	private String other;
 	private String accountnr;
-	private double bonus;
-	private double wage;
+	private BigDecimal bonus;
+	private BigDecimal wage;
 	private String sWage;
 	
 	public void setWorker(Worker w) {
@@ -127,6 +132,7 @@ public class WorkerAll {
 		this.address = c.getAddress();
 		this.city = c.getCity();
 		this.postcode = c.getPostcode();
+		this.country = c.getCountry();
 		this.phone = c.getPhone();
 		this.email = c.getEmail();
 		this.bedid = c.getBedid();	
@@ -355,12 +361,20 @@ public class WorkerAll {
 		this.plcity = plcity;
 	}
 
-	public LocalDate getAcomdate() {
-		return acomdate;
+	public LocalDate getAcomdatefrom() {
+		return acomdatefrom;
 	}
 
-	public void setAcomdate(LocalDate acomdate) {
-		this.acomdate = acomdate;
+	public void setAcomdatefrom(LocalDate acomdatefrom) {
+		this.acomdatefrom = acomdatefrom;
+	}
+
+	public LocalDate getAcomdateTo() {
+		return acomdateTo;
+	}
+
+	public void setAcomdateTo(LocalDate acomdateTo) {
+		this.acomdateTo = acomdateTo;
 	}
 
 	public Integer getCitizenship() {
@@ -547,20 +561,20 @@ public class WorkerAll {
 		this.accountnr = accountnr;
 	}
 
-	public double getBonus() {
-		return bonus;
+	public BigDecimal getBonus() {
+		return bonus.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public void setBonus(double bonus) {
-		this.bonus = bonus;
+	public void setBonus(BigDecimal bonus) {
+		this.bonus = bonus.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public double getWage() {
-		return wage;
+	public BigDecimal getWage() {
+		return wage.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public void setWage(double wage) {
-		this.wage = wage;
+	public void setWage(BigDecimal wage) {
+		this.wage = wage.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public String getsWage() {
@@ -569,5 +583,29 @@ public class WorkerAll {
 
 	public void setsWage(String sWage) {
 		this.sWage = sWage;
+	}
+
+	public Boolean getBiopass() {
+		return isBiopass;
+	}
+
+	public void setBiopass(Boolean biopass) {
+		isBiopass = biopass;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Boolean getOhter() {
+		return isOhter;
+	}
+
+	public void setOhter(Boolean ohter) {
+		isOhter = ohter;
 	}
 }

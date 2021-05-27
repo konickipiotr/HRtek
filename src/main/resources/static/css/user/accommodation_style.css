@@ -113,8 +113,8 @@ label{
 }
 
 #remark{
-	width: 100%;
-	min-height: 50px;
+	width: calc(100% - 10px);
+	min-height: 70px;
 }
 
 .stat{
@@ -135,7 +135,7 @@ label{
 	background-color: #f7edb0;
 	display: flex;
 	flex-direction: column;
-	flex-basis: 500px;
+	flex-basis: 700px;
 	margin: 5px;
 	
 }

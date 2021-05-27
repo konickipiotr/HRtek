@@ -16,5 +16,8 @@ public class GlobalSettings {
 	
 	public static int lockupminue = 5; //zablokowana edycja danych an tyle minut
 	public static int numoffirstletters = 3; //filtrowanie po x pierwszych literach
-	
+
+	public static String lightGreenCellColor = "#add4a3";
+	public static String lightRedCellColor = "#e3acac";
+
 }

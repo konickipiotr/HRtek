@@ -10,7 +10,8 @@ document.getElementById("isOhter").onchange = function(){
 		document.getElementById("plcity").required = true;
 		document.getElementById("bedid").required = false;
 		document.getElementById("bedid").disabled = true;
-		document.getElementById("acomdate").disabled = true;
+		document.getElementById("acomdatefrom").disabled = true;
+		document.getElementById("acomdateTo").disabled = true;
 	}else{
 		document.getElementById("pladdress").disabled = true;
 		document.getElementById("plpostcode").disabled = true;
@@ -21,7 +22,8 @@ document.getElementById("isOhter").onchange = function(){
 		document.getElementById("plcity").required = false;
 		document.getElementById("bedid").required = true;
 		document.getElementById("bedid").disabled = false;
-		document.getElementById("acomdate").disabled = false;
+		document.getElementById("acomdatefrom").disabled = false;
+		document.getElementById("acomdateTo").disabled = false;
 	}
 }
 

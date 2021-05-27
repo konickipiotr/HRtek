@@ -1,6 +1,7 @@
 package com.hrtek.user.recruitment;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Optional;
@@ -159,8 +160,8 @@ public class HireService {
 			this.roomRepo.save(room);
 			bed.setBedstatus(Bedstatus.OCCUPIED);
 			bed.setWorkerid(w.getId());
-			System.out.println(nw.getAcomdate());
-			bed.setExpire(nw.getAcomdate());
+			bed.setExpire(nw.getAcomdateTo());
+			bed.setOccupyFrom(nw.getAcomdateTo());
 			this.bedRepo.save(bed);
 			logmsg.append("<br />assigned to: house - " + house.getAddress() + " : room - " +  room.getRoomname()); 
 		}else{
@@ -193,7 +194,8 @@ public class HireService {
 			this.roomRepo.save(room);
 			bed.setBedstatus(Bedstatus.OCCUPIED);
 			bed.setWorkerid(w.getId());
-			bed.setExpire(nw.getAcomdate());
+			bed.setExpire(nw.getAcomdateTo());
+			bed.setOccupyFrom(nw.getAcomdatefrom());
 			this.bedRepo.save(bed);
 			logmsg.append("<br />assigned to: house - " + house.getAddress() + " : room - " +  room.getRoomname()); 
 		}else{
@@ -204,7 +206,7 @@ public class HireService {
 	
 
 	
-	private void increasNumberOfWorker(Worker w, double wage) {
+	private void increasNumberOfWorker(Worker w, BigDecimal wage) {
 		Factory factory = factoryRepo.findById(w.getFactoryid()).get();
 		factory.addPerson();
 		this.workerFinanceRepo.save(new WorkerFinance(w.getId(), factory.getHourlyrate(), wage));
@@ -241,7 +243,7 @@ public class HireService {
 		
 		if(c.getBedid() != null) {
 			Bed bed = bedRepo.findById(c.getBedid()).get();
-			w.setAcomdate(bed.getExpire());
+			w.setAcomdateTo(bed.getExpire());
 		}
 		
 
@@ -375,7 +377,7 @@ public class HireService {
 		this.houseRepo.save(h);
 		r.addPerson();
 		this.roomRepo.save(r);
-		b.setOccupied(c.getId(), all.getAcomdate());
+		b.setOccupied(c.getId(), all.getAcomdateTo());
 		this.bedRepo.save(b);
 		
 		c.setPladdress(h.getAddress());

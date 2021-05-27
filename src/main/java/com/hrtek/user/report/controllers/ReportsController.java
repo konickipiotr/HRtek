@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.hrtek.user.display.service.SortViewService;
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.user.report.views.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -15,17 +18,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hrtek.user.recruitment.CandidateService;
-import com.hrtek.user.report.views.ReportPesel;
-import com.hrtek.user.report.views.ReportZus;
 
 @Controller
 @RequestMapping("/reports")
 public class ReportsController {
-	
-	@Autowired
+
 	private ReportService reportService;
-	@Autowired
 	private CandidateService candidateService;
+	private SortViewService sortViewService;
+
+	@Autowired
+	public ReportsController(ReportService reportService, CandidateService candidateService, SortViewService sortViewService) {
+		this.reportService = reportService;
+		this.candidateService = candidateService;
+		this.sortViewService = sortViewService;
+	}
 
 	@GetMapping
 	public String toreports(Model model) {
@@ -37,25 +44,10 @@ public class ReportsController {
 	}
 	
 	@PostMapping(params = "action=common")
-	public String reports(ReportType reportType, Model model) {
-
-		switch (reportType) {
-		case WITHPESEL:
-		case WITHOUTPESEL: model.addAttribute("wraper", reportService.getReportPesel(reportType)); break;
-		case MEDICALEXAMS: model.addAttribute("wraper", reportService.getReportMedical(reportType)); break;
-		case STARTWORK_LESS1MON:
-		case STARTWORK_LESS3MON: 
-		case STARTWORK_MORE1MON: 
-		case STARTWORK_MORE3MON: model.addAttribute("wraper", reportService.getReportStartWork(reportType)); break;
-		case ACCOMMODATION: model.addAttribute("wraper", reportService.getReportAccommodation(reportType)); break;
-		case WORKING_TIME: model.addAttribute("wraper", reportService.getReportWorkTime(reportType)); break;
-
-		default:
-			break;
-		}
-		model.addAttribute("recruiters", candidateService.getCoordinatorsAndAgents());
-		model.addAttribute("others", true);
-		reportService.setCompanyFactoryList(model);
+	public String reports(ReportType reportType, Model model, Long ccompanyid, Long ffactoryid) {
+		reportService.setModel(model, reportType, null, true, ccompanyid, ffactoryid);
+		model.addAttribute("ccompanyid", ccompanyid);
+		model.addAttribute("ffactoryid", ffactoryid);
 		return "user/report/report";
 	}
 	
@@ -116,9 +108,9 @@ public class ReportsController {
 	}
 	
 	@PostMapping("/download")
-	public String downloadFile(ReportType reportType, Long recruiterid, RedirectAttributes ra) {
+	public String downloadFile(ReportType reportType, Long recruiterid, ViewFields sortBy, boolean sortUp, Long ccompanyid, Long ffactoryid, RedirectAttributes ra) {
 
-		String path = reportService.downloadFile(reportType, recruiterid);
+		String path = reportService.downloadFile(reportType, recruiterid, sortBy, sortUp, ccompanyid, ffactoryid);
 		ra.addAttribute("filename", path);
 		return "redirect:/download";
 	}
@@ -138,5 +130,18 @@ public class ReportsController {
 			reportService.setCompanyFactoryList(model);
 			return "user/report/report";
 		}
+	}
+
+
+	@PostMapping(path = "/sort", params = "sortT=up")
+	public String sortUp(ReportType reportType, ViewFields field, Model model, Long ccompanyid, Long ffactoryid) {
+		reportService.setModel(model, reportType, field, true, ccompanyid, ffactoryid);
+		return "user/report/report";
+	}
+
+	@PostMapping(path = "/sort", params = "sortT=down")
+	public String sortDown(ReportType reportType, ViewFields field, Model model, Long ccompanyid, Long ffactoryid) {
+		reportService.setModel(model, reportType, field, false, ccompanyid, ffactoryid);
+		return "user/report/report";
 	}
 }

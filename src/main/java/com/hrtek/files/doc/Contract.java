@@ -158,7 +158,7 @@ public class Contract implements Doc<XWPFDocument> {
 
 		r8 = p8.createRun();
 		fontstyle(r8, true);
-		r8.setText(String.valueOf(Double.toString(nw.getWage())) + " zł");
+		r8.setText(String.valueOf(nw.getWage().toString()) + " zł");
 		r8 = p8.createRun();
 		fontstyle(r8, false);
 		r8.setText(" злотых брутто в час (" + nw.getsCWage() + ").");
@@ -383,7 +383,7 @@ public class Contract implements Doc<XWPFDocument> {
 		r8.setText("1. Za wykonanie prac określonych w § 1 Zleceniobiorca otrzyma po ich wykonaniu wynagrodzenie w wysokości ");
 		r8 = p8.createRun();
 		fontstyle(r8, true);
-		r8.setText(Double.toString(nw.getWage()));
+		r8.setText(nw.getWage().toString());
 		r8 = p8.createRun();
 		fontstyle(r8, false);
 		r8.setText(" zł  brutto/godzina, (słownie: " +nw.getsCWage()+  " brutto za godzinę");

@@ -25,7 +25,7 @@
 	
 	 	<form th:action="@{/accommodation/rooms}" method="post" th:object="${house}"> 
 	 	<div class="main-content">
-	 		<div class="group">
+	 		<div class="group" style="padding-top: 20px;">
 		 		<div class="item-30">
 			 		<label for="address" th:text="#{address}"></label>
 			 		<input type="text" name="address" id="address" th:field="*{address}" required>
@@ -60,15 +60,15 @@
 	 		<div class="group">
 	 			<div class="item-30">
 	 				<label for="rent" th:text="#{label.rent}"></label>
-	 				<input type="number" min="0" step="0.01" name="rent" id="rent" th:field="*{rent}">
+	 				<input type="number" min="0" step="0.01" name="rent" id="rent" th:field="*{rent}" required>
 	 			</div>
 	 			<div class="item-30">
 	 				<label for="media" th:text="#{label.media}"></label>
-	 				<input type="number" min="0" step="0.01"  name="media" id="media" th:field="*{media}">
+	 				<input type="number" min="0" step="0.01"  name="media" id="media" th:field="*{media}" required>
 	 			</div>
 	 			<div class="item-30">
 	 				<label for="deposit" th:text="#{label.deposit}"></label>
-	 				<input type="text" min="0" step="0.01" name="deposit" id="deposit" th:field="*{deposit}">
+	 				<input type="number" min="0" step="0.01" name="deposit" id="deposit" th:field="*{deposit}" required>
 	 			</div>
 	 		</div>
 	 		
@@ -77,40 +77,39 @@
 	 			<div class="item-20">
 	 				<span th:text="#{label.typeOfCalculation}"></span>
 	 				<div>
-	 					<input type="radio" id="typecostrent" name="costType" value="RENT" checked>
+	 					<input type="radio" id="typecostrent" name="costType" onchange="changeTypeOfCalculation(this)" value="RENT" checked>
 				 		<label for="typecostrent" th:text="#{label.rent}"></label>				 		
 			 		</div>
 			 		<div>
-			 			<input type="radio" id="typecostrentmedia" name="costType" value="MEDIARENT">
+			 			<input type="radio" id="typecostrentmedia" name="costType" onchange="changeTypeOfCalculation(this)" value="MEDIARENT">
 			 			<label for="typecostrentmedia" th:text="#{label.rentMedia}"></label>
 			 		</div>
 			 		<div>
-			 			<input type="radio" id="typecostperperson" name="costType" value="PERPERSON">
-			 			<label for="typecostrentmedia" th:text="#{label.perPerson}"></label>
+			 			<input type="radio" id="typecostperperson" name="costType" onchange="changeTypeOfCalculation(this)" value="PERPERSON">
+			 			<label for="typecostperperson" th:text="#{label.perPerson}"></label>
 			 		</div>			 		
 	 			</div>
 	 			<div class="item-20">
 	 				<label for="perperson" th:text="#{label.costPerPerson}"></label>
-	 				<input type="number" min="0" step="0.01"  name="perperson" id="perperson" th:field="*{perperson}" disabled>
+	 				<input type="number" min="0" step="0.01"  name="perperson" id="perperson" th:field="*{perperson}" disabled required>
 	 			</div>
 	 			<div class="item-20">&nbsp;	</div>
 	 		</div>
 	 			 	
 	 		<div class="group">
-	 			<div class="item-30">&nbsp;</div>
-	 			<div class="item-30">
+	 			<div class="item-20">
 	 				<label for="periodofnotice" th:text="#{label.periodOfNotice}"></label>
-	 				<input type="number" min="0" step="1" name="periodofnotice" id="periodofnotice" th:field="*{periodofnotice}">
+	 				<input type="number" min="0" step="1" name="periodofnotice" id="periodofnotice" th:field="*{periodofnotice}" required>
 	 			</div>
-	 			<div class="item-30">&nbsp;</div>
-	 		</div>	
-	 		
-
-	 		 <label for="remark" th:text="#{remarks}"></label>
-	 		 <textarea id="remark" name="remark" rows="" cols=""></textarea>
-	 		 <div class="button_container">
-	 		 	<button class="button" type="submit" th:text="#{button.next}"></button>
-	 		 </div>
+	 			<div class="item-20">
+					<label for="remark" th:text="#{remarks}"></label>
+					<textarea id="remark" name="remark" rows="" cols=""></textarea>
+				 </div>
+	 		</div>
+	 		 
+	 		<div class="button_container">
+	 			<button class="button" type="submit" th:text="#{button.next}"></button>
+	 		</div>
 	 	</div>
 	 	</form>
 	 
@@ -119,15 +118,5 @@
 	</section>
 	<footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
-<script type="text/javascript">
-
-document.getElementById("typecostperperson").onchange = function(){
-	if(document.getElementById("typecostperperson").checked == true){
-		document.getElementById("perperson").disabled = false;
-	}else{
-		document.getElementById("perperson").disabled = true;
-	}
-}
-
-</script>
+<script type="text/javascript" src="/scripts/housedetils.js"></script>
 </html>

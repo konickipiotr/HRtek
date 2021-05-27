@@ -117,15 +117,15 @@
 	 				</div>
 	 				<div class="input-div">
 	 					<label for="typecostrent" th:text="#{label.rent}"></label>
-				 		<input th:if="${house.costType.name() == 'RENT'}" type="radio" id="typecostrent" name="costType" value="RENT" disabled checked>
-				 		<input th:unless="${house.costType.name() == 'RENT'}" type="radio" id="typecostrent" name="costType" value="RENT" disabled>
+				 		<input th:if="${house.costType.name() == 'RENT'}" type="radio" id="typecostrent" name="costType" onchange="changeTypeOfCalculation(this)" value="RENT" disabled checked>
+				 		<input th:unless="${house.costType.name() == 'RENT'}" type="radio" id="typecostrent" name="costType" onchange="changeTypeOfCalculation(this)" value="RENT" disabled>
 				 		
 				 		<label for="typecostrentmedia" th:text="#{label.rentMedia}"></label>
-				 		<input th:if="${house.costType.name() == 'MEDIARENT'}" type="radio" id="typecostrentmedia" name="costType" value="MEDIARENT" disabled checked>
-				 		<input th:unless="${house.costType.name() == 'MEDIARENT'}" type="radio" id="typecostrentmedia" name="costType" value="MEDIARENT" disabled>
-				 		<label for="typecostrentmedia" th:text="#{label.perPerson}"></label>
-				 		<input th:if="${house.costType.name() == 'PERPERSON'}" type="radio" id="typecostperperson" name="costType" value="PERPERSON" disabled checked>
-				 		<input th:unless="${house.costType.name() == 'PERPERSON'}" type="radio" id="typecostperperson" name="costType" value="PERPERSON" disabled>
+				 		<input th:if="${house.costType.name() == 'MEDIARENT'}" type="radio" id="typecostrentmedia" name="costType" onchange="changeTypeOfCalculation(this)" value="MEDIARENT" disabled checked>
+				 		<input th:unless="${house.costType.name() == 'MEDIARENT'}" type="radio" id="typecostrentmedia" name="costType" onchange="changeTypeOfCalculation(this)" value="MEDIARENT" disabled>
+				 		<label for="typecostperperson" th:text="#{label.perPerson}"></label>
+				 		<input th:if="${house.costType.name() == 'PERPERSON'}" type="radio" id="typecostperperson" name="costType" onchange="changeTypeOfCalculation(this)" value="PERPERSON" disabled checked>
+				 		<input th:unless="${house.costType.name() == 'PERPERSON'}" type="radio" id="typecostperperson" name="costType" onchange="changeTypeOfCalculation(this)" value="PERPERSON" disabled>
 	 				</div>
 	 			</div>
 	 		</div>
@@ -254,13 +254,15 @@
 				<table>
 					<tr>
 						<th th:text="#{label.person}"></th>
-						<th th:text="#{label.date}"></th>
+						<th th:text="#{label.occupatedsince}"></th>
+						<th th:text="#{label.occupatedExpire}"></th>
 						<th></th>
 						<th></th>
 					</tr>
 					<tr th:each="b : ${r.bedViewList}">
 						<td th:if="${b.bedstatus.name() == 'FREE'}">FREE</td>
 						<td th:unless="${b.bedstatus.name() == 'FREE'}" th:text="${b.workername}"></td>
+						<td th:text="${b.occupyFrom}"></td>
 						<td th:text="${b.expire}"></td>
 						<td class="ico-td" th:if="${b.bedstatus.name() == 'FREE'}">
 							<a th:href="@{'/accomoperation/addPerson/' + ${b.id}}"><i class="fas fa-user-plus"></i></a>

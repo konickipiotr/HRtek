@@ -41,4 +41,12 @@ public class DateTimesheetOperation {
 	public boolean nextIsPossible() {
 		return selected.isBefore(lastNext);
 	}
+
+	public LocalDate getSelected() {
+		return selected;
+	}
+
+	public void setSelected(LocalDate selected) {
+		this.selected = selected;
+	}
 }

@@ -53,6 +53,20 @@ public class WorkerBasic {
 		this.department = wall.getDepartment();
 		this.citizenship = wall.getCitizenship();
 	}
+	
+	
+
+	public WorkerBasic(Long id, Long department, Integer citizenship, LocalDate dateofbirth, String sex,
+			String accountnr, String pesel, String workerNo) {
+		this.id = id;
+		this.department = department;
+		this.citizenship = citizenship;
+		this.dateofbirth = dateofbirth;
+		this.sex = sex;
+		this.accountnr = accountnr;
+		this.pesel = pesel;
+		this.workerNo = workerNo;
+	}
 
 	@Override
 	public String toString() {

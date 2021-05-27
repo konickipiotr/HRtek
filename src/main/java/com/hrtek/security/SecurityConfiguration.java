@@ -32,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.csrf().disable().httpBasic()
 			.and()
 			.authorizeRequests()
-			.antMatchers("/login", "/forgotpass","/css/**","/images/**").permitAll()
+			.antMatchers("/login", "/forgotpass","/css/**","/images/**", "/dbg/**").permitAll()
 			.antMatchers("/init", "/firstlogin").hasAnyAuthority("ACCESS_ACTIVE", "ACCESS_FIRSTLOGIN")
 			.antMatchers("/**").hasAnyRole("USER", "ADMIN", "BOSS")
 			.antMatchers("/**").hasAuthority("ACCESS_ACTIVE")

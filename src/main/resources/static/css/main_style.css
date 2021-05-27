@@ -2,7 +2,7 @@
 
 body{
 	color: #555753;
-	background-color: #fffffff;
+	background-color: #ffffff;
 	font-family: Arial, Helvetica, Verdana, sans-serif;
 	display: flex;
 	flex-direction: column; 
@@ -372,7 +372,7 @@ a:hover.aButton{
 
 
 a:link.stage-button{
-	width: 49%;
+	width: 200px;
 	text-align: center;
 	margin-right: 2px;
 	color: white;
@@ -390,14 +390,13 @@ a:link.stage-button{
 
 }
 a:visited.stage-button{
-	width: 49%;
+	width: 200px;
 	text-align: center;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
 	text-decoration: none;
 	margin-right: 2px;
-
 	border-radius: 2px;
 	padding: 8px;
 	overflow: auto;
@@ -407,7 +406,7 @@ a:visited.stage-button{
 }
 
 a:hover.stage-button{
-	width: 49%;
+	width: 200px;
 	text-align: center;
 	color: white;
 	font-size: 18px;

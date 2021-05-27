@@ -1,8 +1,12 @@
 package com.hrtek.model;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Entity
 public class Factory {
@@ -19,9 +23,11 @@ public class Factory {
 	private String postcode;
 	private String city;
 	private int numberofwokers;
-	private double hourlyrate;
+	@NumberFormat(style = NumberFormat.Style.CURRENCY)
+	private BigDecimal hourlyrate;
 	
 	public Factory() {
+		this.hourlyrate = new BigDecimal("0");
 	}
 
 	public void addPerson() {
@@ -31,9 +37,15 @@ public class Factory {
 	public void removePerson() {
 		this.numberofwokers--;
 	}
+	
+	//for testing
+	public Factory(String shortname) {
+		this.shortname = shortname;
+		this.status = StatusFC.ENABLED;
+	}
 
 	public Factory(StatusFC status, String pkd, String nip, String krs, String shortname, String fullname,
-			String address, String postcode, String city, int numberofwokers, double hourlyrate) {
+			String address, String postcode, String city, int numberofwokers, BigDecimal hourlyrate) {
 		this.status = status;
 		this.pkd = pkd;
 		this.nip = nip;
@@ -142,11 +154,11 @@ public class Factory {
 		this.numberofwokers = numberofwokers;
 	}
 
-	public double getHourlyrate() {
-		return hourlyrate;
+	public BigDecimal getHourlyrate() {
+		return hourlyrate.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public void setHourlyrate(double hourlyrate) {
-		this.hourlyrate = hourlyrate;
+	public void setHourlyrate(BigDecimal hourlyrate) {
+		this.hourlyrate = hourlyrate.setScale(2, RoundingMode.HALF_UP);
 	}	
 }

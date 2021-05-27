@@ -20,7 +20,8 @@ public class TimesheetOperation {
 		
 		List<String> slist = getStringHourList(currentMonth);
 		List<Integer> ilist = getIntegerHourList(slist);
-		if(ilist.size() == 0)
+
+		if(slist.stream().allMatch(i -> i.equals("XX")))
 			return null;
 		
 		WorkerTimesheet workerTs = new WorkerTimesheet();

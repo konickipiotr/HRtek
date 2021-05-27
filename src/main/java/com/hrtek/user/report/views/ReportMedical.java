@@ -1,9 +1,12 @@
 package com.hrtek.user.report.views;
 
+import com.hrtek.user.display.views.ViewFields;
+import com.hrtek.utils.FieldsComparator;
+
 import java.time.LocalDate;
 
 
-public class ReportMedical {
+public class ReportMedical implements Comparable<ReportMedical> {
 
 	private String firstname;
 	private String lastname;
@@ -52,5 +55,22 @@ public class ReportMedical {
 
 	public void setFactory(String factory) {
 		this.factory = factory;
-	}	
+	}
+
+	public static boolean isup = false;
+	public static ViewFields field = ViewFields.FIRSTNAME;
+
+	@Override
+	public int compareTo(ReportMedical o) {
+		switch (field) {
+			case FIRSTNAME: return FieldsComparator.compareText(this.firstname, o.getFirstname(), isup);
+			case LASTNAME: return FieldsComparator.compareText(this.lastname, o.getLastname(), isup);
+			case STARTMEDICAL: return FieldsComparator.compareDate(this.statrtMedical, o.getStatrtMedical(), isup);
+			case ENDMEDICAL: return FieldsComparator.compareDate(this.endMedical, o.getEndMedical(), isup);
+			case FACTORY: return FieldsComparator.compareText(this.factory, o.getFactory(), isup);
+			default:
+				break;
+		}
+		return 0;
+	}
 }

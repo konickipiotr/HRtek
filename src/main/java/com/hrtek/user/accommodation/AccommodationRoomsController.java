@@ -72,7 +72,6 @@ public class AccommodationRoomsController {
 	
 	@PostMapping("/addPerson")
 	public String addPerson(Bed bed) {
-		System.out.println("tuuuuu -> " + bed);
 		Long houseid = houseMenagment.addPerson(bed);
 		return "redirect:/accdetail/" + houseid;
 	}

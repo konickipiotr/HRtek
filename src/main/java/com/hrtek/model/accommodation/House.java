@@ -1,9 +1,13 @@
 package com.hrtek.model.accommodation;
 
+import org.springframework.format.annotation.NumberFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 @Entity
@@ -17,11 +21,16 @@ public class House {
 	private int occupied;
 	private Long liderid;
 	private String lidername;
-	private double liderbonus;
-	private double rent;
-	private double deposit;
-	private double media;
-	private double perperson;
+	@NumberFormat(style = NumberFormat.Style.CURRENCY)
+	private BigDecimal liderbonus;
+	@NumberFormat(style = NumberFormat.Style.CURRENCY)
+	private BigDecimal rent;
+	@NumberFormat(style = NumberFormat.Style.CURRENCY)
+	private BigDecimal deposit;
+	@NumberFormat(style = NumberFormat.Style.CURRENCY)
+	private BigDecimal media;
+	@NumberFormat(style = NumberFormat.Style.CURRENCY)
+	private BigDecimal perperson;
 	private CostType costType;
 	private String address;
 	private String postcode;
@@ -31,6 +40,11 @@ public class House {
 	private int periodofnotice;
 	
 	public House() {
+		this.liderbonus = new BigDecimal("0");
+		this.rent = new BigDecimal("0");
+		this.deposit = new BigDecimal("0");
+		this.media = new BigDecimal("0");
+		this.perperson = new BigDecimal("0");
 	}
 	
 	public void removeRoom(Room r) {
@@ -66,9 +80,11 @@ public class House {
 	
 	private void calculateCostPerPerson() {
 		if(costType.equals(CostType.RENT))
-			this.perperson = rent/capacity;
+			this.perperson = rent.divide(BigDecimal.valueOf(capacity), 2, RoundingMode.HALF_UP);
 		else if(costType.equals(CostType.MEDIARENT))
-			this.perperson = (rent + media)/capacity;
+			this.perperson = (rent.add(media))
+					.divide(BigDecimal.valueOf(capacity))
+					.setScale(2, RoundingMode.HALF_UP);
 	}
 	
 	public void changeAddress(AddressForm af) {
@@ -133,44 +149,44 @@ public class House {
 		this.lidername = lidername;
 	}
 
-	public double getLiderbonus() {
+	public BigDecimal getLiderbonus() {
 		return liderbonus;
 	}
 
-	public void setLiderbonus(double liderbonus) {
-		this.liderbonus = liderbonus;
+	public void setLiderbonus(BigDecimal liderbonus) {
+		this.liderbonus = liderbonus.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public double getRent() {
+	public BigDecimal getRent() {
 		return rent;
 	}
 
-	public void setRent(double rent) {
-		this.rent = rent;
+	public void setRent(BigDecimal rent) {
+		this.rent = rent.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public double getDeposit() {
+	public BigDecimal getDeposit() {
 		return deposit;
 	}
 
-	public void setDeposit(double deposit) {
-		this.deposit = deposit;
+	public void setDeposit(BigDecimal deposit) {
+		this.deposit = deposit.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public double getMedia() {
+	public BigDecimal getMedia() {
 		return media;
 	}
 
-	public void setMedia(double media) {
-		this.media = media;
+	public void setMedia(BigDecimal media) {
+		this.media = media.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public double getPerperson() {
+	public BigDecimal getPerperson() {
 		return perperson;
 	}
 
-	public void setPerperson(double perperson) {
-		this.perperson = perperson;
+	public void setPerperson(BigDecimal perperson) {
+		this.perperson = perperson.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public CostType getCostType() {

@@ -1,5 +1,7 @@
 package com.hrtek.user.dismissed;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -39,8 +41,8 @@ public class Dismissed {
 	private String recruiter;
 	private String pesel;
 	private String accountnr;
-	private double hourlyrate;
-	private double wage;
+	private BigDecimal hourlyrate;
+	private BigDecimal wage;
 	@Lob
 	private String note;
 	
@@ -91,7 +93,12 @@ public class Dismissed {
 	private String pladdress;
 	private String plpostcode;
 	private String plcity;
-	
+
+	public Dismissed() {
+		this.hourlyrate = new BigDecimal("0");
+		this.wage = new BigDecimal("0");
+	}
+
 	public void fromWorker(Worker w) {
 		this.firstname = w.getFirstname();
 		this.lastname = w.getLastname();
@@ -270,20 +277,20 @@ public class Dismissed {
 		this.accountnr = accountnr;
 	}
 
-	public double getHourlyrate() {
-		return hourlyrate;
+	public BigDecimal getHourlyrate() {
+		return hourlyrate.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public void setHourlyrate(double hourlyrate) {
-		this.hourlyrate = hourlyrate;
+	public void setHourlyrate(BigDecimal hourlyrate) {
+		this.hourlyrate = hourlyrate.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public double getWage() {
-		return wage;
+	public BigDecimal getWage() {
+		return wage.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public void setWage(double wage) {
-		this.wage = wage;
+	public void setWage(BigDecimal wage) {
+		this.wage = wage.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public String getNote() {

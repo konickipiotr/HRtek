@@ -1,6 +1,5 @@
 package com.hrtek.model;
 
-import com.hrtek.user.display.views.BasicView;
 
 public class ListModel implements Comparable<ListModel> {
 

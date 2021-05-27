@@ -22,6 +22,7 @@ public class Contact {
 	private String pladdress;
 	private String plpostcode;
 	private String plcity;
+	private String country;
 	private String address;
 	private String postcode;
 	private String city;
@@ -55,12 +56,14 @@ public class Contact {
 		this.address = n.getAddress() != null ? n.getAddress() : "";
 		this.postcode = n.getPostcode() != null ? n.getPostcode() : "";
 		this.city = n.getCity() != null ? n.getCity() : "";
+		this.country = n.getCountry() != null ? n.getCountry() : "";
 	}
 	
 	public void setAddressAbroad(WorkerAll n) {
 		this.address = n.getAddress() != null ? n.getAddress() : "";
 		this.postcode = n.getPostcode() != null ? n.getPostcode() : "";
 		this.city = n.getCity() != null ? n.getCity() : "";
+		this.country = n.getCountry() != null ? n.getCountry() : "";
 	}
 	
 	public void setAddressPl(NewWorker nw) {
@@ -211,5 +214,21 @@ public class Contact {
 
 	public void setAcomdate(LocalDate acomdate) {
 		this.acomdate = acomdate;
-	}	
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Boolean getOhter() {
+		return isOhter;
+	}
+
+	public void setOhter(Boolean ohter) {
+		isOhter = ohter;
+	}
 }

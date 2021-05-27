@@ -154,13 +154,14 @@
 									<option th:each="b : ${beds}" th:value="${b.id}" th:text="${b.value}" ></option>
 								</select>
 							</div>
-							<div class="input-div" th:if="${newWorker.isOhter == true}">
-								<label for="acomdate" th:text="#{from}"></label>
-								<input type="date" id="acomdate" name="acomdate" disabled>
+
+							<div class="input-div" th:unless="${newWorker.isOhter == true}">
+								<label for="acomdatefrom" th:text="#{from}"></label>
+								<input type="date" id="acomdatefrom" name="acomdatefrom">
 							</div>
 							<div class="input-div" th:unless="${newWorker.isOhter == true}">
-								<label for="acomdate" th:text="#{to}"></label>
-								<input type="date" id="acomdate" name="acomdate">
+								<label for="acomdateTo" th:text="#{to}"></label>
+								<input type="date" id="acomdateTo" name="acomdateTo">
 							</div>
 						</div>
 						<!-- ---------------------  -->
@@ -198,7 +199,7 @@
 					<!-- ***************** ROW ************************ -->
 					<div class="row">
 						<div class="section-header" ><h2 th:text="#{label.addressabroad}"></h2></div>
-						<div class="col-a">
+						<div class="col">
 							<div class="lab-div">
 								<label for="address" th:text="#{address}"></label>
 							</div>
@@ -207,7 +208,7 @@
 							</div>
 						</div>
 						<!-- ---------------------  -->
-						<div class="col-a">
+						<div class="col">
 							<div class="lab-div">
 								<label for="postcode" th:text="#{postcode}"></label>
 							</div>
@@ -216,12 +217,21 @@
 							</div>
 						</div>
 						<!-- ---------------------  -->
-						<div class="col-a">
+						<div class="col">
 							<div class="lab-div">
 								<label for="city" th:text="#{city}"></label>
 							</div>
 							<div class="input-div">
 								<input type="text" name="city" id="city" th:field="*{city}">
+							</div>
+						</div>
+						<!-- ---------------------  -->
+						<div class="col">
+							<div class="lab-div">
+								<label for="city" th:text="#{country}"></label>
+							</div>
+							<div class="input-div">
+								<input type="text" name="country" id="country" th:field="*{country}">
 							</div>
 						</div>
 					</div>

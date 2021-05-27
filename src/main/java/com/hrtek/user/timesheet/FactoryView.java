@@ -1,5 +1,7 @@
 package com.hrtek.user.timesheet;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import com.hrtek.model.Factory;
@@ -10,10 +12,10 @@ public class FactoryView {
 	private Long id;
 	private String shortname;
 	private int numberofwokers;
-	private double hourlyrate;
+	private BigDecimal hourlyrate;
 	private List<WorkerTimesheet> wts;
 	
-	public FactoryView(Long id, String shortname, int numberofwokers, double hourlyrate) {
+	public FactoryView(Long id, String shortname, int numberofwokers, BigDecimal hourlyrate) {
 		this.id = id;
 		this.shortname = shortname;
 		this.numberofwokers = numberofwokers;
@@ -54,12 +56,12 @@ public class FactoryView {
 		this.numberofwokers = numberofwokers;
 	}
 
-	public double getHourlyrate() {
-		return hourlyrate;
+	public BigDecimal getHourlyrate() {
+		return hourlyrate.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public void setHourlyrate(double hourlyrate) {
-		this.hourlyrate = hourlyrate;
+	public void setHourlyrate(BigDecimal hourlyrate) {
+		this.hourlyrate = hourlyrate.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	public List<WorkerTimesheet> getWts() {

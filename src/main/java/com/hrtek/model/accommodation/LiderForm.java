@@ -1,15 +1,22 @@
 package com.hrtek.model.accommodation;
 
+import org.springframework.format.annotation.NumberFormat;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class LiderForm {
 	private Long id;
 	private Long liderid;
 	private String lidername;
-	private double liderbonus;
+	@NumberFormat(style = NumberFormat.Style.CURRENCY)
+	private BigDecimal liderbonus;
 	
 	public LiderForm() {
+		this.liderbonus = new BigDecimal("0");
 	}
 
-	public LiderForm(Long id, Long liderid, String lidername, double liderbonus) {
+	public LiderForm(Long id, Long liderid, String lidername, BigDecimal liderbonus) {
 		this.id = id;
 		this.liderid = liderid;
 		this.lidername = lidername;
@@ -41,12 +48,12 @@ public class LiderForm {
 		this.lidername = lidername;
 	}
 
-	public double getLiderbonus() {
-		return liderbonus;
+	public BigDecimal getLiderbonus() {
+		return liderbonus.setScale(2, RoundingMode.HALF_UP);
 	}
 
-	public void setLiderbonus(double liderbonus) {
-		this.liderbonus = liderbonus;
+	public void setLiderbonus(BigDecimal liderbonus) {
+		this.liderbonus = liderbonus.setScale(2, RoundingMode.HALF_UP);
 	}
 
 	@Override
